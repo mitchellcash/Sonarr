@@ -5,6 +5,7 @@ using NzbDrone.Common.Composition;
 using NzbDrone.Common.EnvironmentInfo;
 using NzbDrone.Common.Http.Dispatchers;
 using NzbDrone.SignalR;
+using Sonarr.Http;
 
 namespace NzbDrone.Host
 {
@@ -17,18 +18,21 @@ namespace NzbDrone.Host
                                  "NzbDrone.Host",
                                  "NzbDrone.Core",
                                  "NzbDrone.Api",
-                                 "NzbDrone.SignalR"
+                                 "NzbDrone.SignalR",
+                                 "Sonarr.Api.V3"
                              };
 
             return new MainAppContainerBuilder(args, assemblies).Container;
+            assemblies.Add(OsInfo.IsWindows ? "NzbDrone.Windows" : "NzbDrone.Mono");
         }
 
         private MainAppContainerBuilder(StartupContext args, List<string> assemblies)
+        private MainAppContainerBuilder(IStartupContext args, string[] assemblies)
             : base(args, assemblies)
         {
             AutoRegisterImplementations<NzbDronePersistentConnection>();
 
-            Container.Register<INancyBootstrapper, NancyBootstrapper>();
+            Container.Register<INancyBootstrapper, SonarrBootstrapper>();
             Container.Register<IHttpDispatcher, FallbackHttpDispatcher>();
         }
     }

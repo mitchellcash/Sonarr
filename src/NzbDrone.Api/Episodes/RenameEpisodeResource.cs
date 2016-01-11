@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
-using NzbDrone.Api.REST;
+using Sonarr.Http.REST;
 
 namespace NzbDrone.Api.Episodes
 {
