@@ -11,6 +11,7 @@ namespace NzbDrone.Common.EnvironmentInfo
     public class RuntimeInfo : IRuntimeInfo
     {
         private readonly Logger _logger;
+        private readonly DateTime _startTime = DateTime.UtcNow;
 
         public RuntimeInfo(IServiceProvider serviceProvider, Logger logger)
         {
@@ -33,6 +34,14 @@ namespace NzbDrone.Common.EnvironmentInfo
         static RuntimeInfo()
         {
             IsProduction = InternalIsProduction();
+        }
+
+        public DateTime StartTime
+        {
+            get
+            {
+                return _startTime;
+            }
         }
 
         public static bool IsUserInteractive => Environment.UserInteractive;
