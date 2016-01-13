@@ -19,7 +19,8 @@ namespace NzbDrone.Host
                                  "NzbDrone.Core",
                                  "NzbDrone.Api",
                                  "NzbDrone.SignalR",
-                                 "Sonarr.Api.V3"
+                                 "Sonarr.Api.V3",
+                                 "Sonarr.Http"
                              };
 
             return new MainAppContainerBuilder(args, assemblies).Container;
