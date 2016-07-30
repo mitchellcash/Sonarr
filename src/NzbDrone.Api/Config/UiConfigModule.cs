@@ -1,9 +1,7 @@
 ﻿using NzbDrone.Core.Configuration;
-using Sonarr.Http;
 
 namespace NzbDrone.Api.Config
 {
-    public class UiConfigModule : SonarrRestModule<UiConfigResource>
     public class UiConfigModule : NzbDroneConfigModule<UiConfigResource>
     {
         public UiConfigModule(IConfigService configService)
