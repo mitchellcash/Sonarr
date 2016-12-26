@@ -6,7 +6,6 @@ import { align, sortDirections } from 'Helpers/Props';
 import LoadingIndicator from 'Components/LoadingIndicator';
 import PageContent from 'Components/Page/PageContent';
 import PageContentBody from 'Components/Page/PageContentBody';
-import PageContentFooter from 'Components/Page/PageContentFooter';
 import PageToolbar from 'Components/Page/Toolbar/PageToolbar';
 import PageToolbarSection from 'Components/Page/Toolbar/PageToolbarSection';
 import FilterMenu from 'Components/Menu/FilterMenu';
