@@ -27,7 +27,7 @@ class PageToolbarSection extends Component {
 }
 
 PageToolbarSection.propTypes = {
-  children: PropTypes.node.isRequired,
+  children: PropTypes.node,
   alignContent: PropTypes.oneOf([align.LEFT, align.CENTER, align.RIGHT])
 };
 

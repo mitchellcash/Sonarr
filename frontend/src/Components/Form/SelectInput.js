@@ -21,9 +21,11 @@ class SelectInput extends Component {
   render() {
     const {
       className,
+      disabledClassName,
       name,
       value,
       values,
+      isDisabled,
       hasError,
       hasWarning
     } = this.props;
@@ -33,8 +35,10 @@ class SelectInput extends Component {
         className={classNames(
           className,
           hasError && styles.hasError,
-          hasWarning && styles.hasWarning
+          hasWarning && styles.hasWarning,
+          isDisabled && disabledClassName
         )}
+        disabled={isDisabled}
         name={name}
         value={value}
         onChange={this.onChange}
@@ -53,16 +57,20 @@ class SelectInput extends Component {
 
 SelectInput.propTypes = {
   className: PropTypes.string,
+  disabledClassName: PropTypes.string,
   name: PropTypes.string.isRequired,
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
   values: PropTypes.arrayOf(PropTypes.object).isRequired,
+  isDisabled: PropTypes.bool,
   hasError: PropTypes.bool,
   hasWarning: PropTypes.bool,
   onChange: PropTypes.func.isRequired
 };
 
 SelectInput.defaultProps = {
-  className: styles.select
+  className: styles.select,
+  disabledClassName: styles.isDisabled,
+  isDisabled: false
 };
 
 export default SelectInput;

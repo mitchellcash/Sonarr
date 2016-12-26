@@ -1,0 +1,12 @@
+.contentFooter {
+  flex: 0 0 auto;
+  padding: 20px;
+  background-color: #dcdcdc;
+
+  /* Until the styling is fixed */
+
+  position: fixed;
+  left: 210px;
+  bottom: 0;
+  width: 100%;
+}

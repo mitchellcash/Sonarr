@@ -1,0 +1,14 @@
+.status,
+.monitored {
+  width: 50px;
+}
+
+.title {
+  width: 1px;
+  white-space: nowrap;
+}
+
+.seasons {
+  display: flex;
+  flex-wrap: wrap;
+}

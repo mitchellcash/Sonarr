@@ -1,6 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import Button from 'Components/Button';
-import Icon from 'Components/Icon';
+import SpinnerIconButton from 'Components/SpinnerIconButton';
 import styles from './MonitorToggleButton.css';
 
 class MonitorToggleButton extends Component {
@@ -27,22 +26,19 @@ class MonitorToggleButton extends Component {
     const iconName = monitored ? 'icon-sonarr-monitored' : 'icon-sonarr-unmonitored';
 
     return (
-      <Button
+      <SpinnerIconButton
         className={className}
+        name={iconName}
         title={monitored ? monitoredMessage : unmonitoredMessage}
+        isSpinning={isSaving}
         onPress={this.onPress}
-      >
-        <Icon
-          name={isSaving ? 'icon-sonarr-spinner fa-spin' : iconName}
-        />
-      </Button>
+      />
     );
   }
 }
 
 MonitorToggleButton.propTypes = {
   className: PropTypes.string.isRequired,
-  id: PropTypes.number.isRequired,
   monitored: PropTypes.bool.isRequired,
   isSaving: PropTypes.bool.isRequired,
   onPress: PropTypes.func.isRequired

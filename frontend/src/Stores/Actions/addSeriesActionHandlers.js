@@ -1,19 +1,10 @@
 import _ from 'lodash';
 import $ from 'jquery';
+import getMonitoringOptions from 'Utilities/Series/getMonitoringOptions';
 import * as types from './actionTypes';
 import { set, update, updateItem } from './baseActions';
 
 const section = 'addSeries';
-
-function monitorSeasons(seasons, startingSeason) {
-  seasons.forEach((season) => {
-    if (season.seasonNumber >= startingSeason) {
-      season.monitored = true;
-    } else {
-      season.monitored = false;
-    }
-  });
-}
 
 function getNewSeries(series, payload) {
   const {
@@ -25,50 +16,19 @@ function getNewSeries(series, payload) {
     searchForMissingEpisodes
   } = payload;
 
+  const {
+    seasons,
+    monitoringOptions: addOptions
+  } = getMonitoringOptions(series.seasons, monitor);
+
+  addOptions.searchForMissingEpisodes = searchForMissingEpisodes;
+  series.addOptions = addOptions;
+  series.seasons = seasons;
   series.monitored = true;
   series.qualityProfileId = qualityProfileId;
   series.rootFolderPath = rootFolder;
   series.seriesType = seriesType;
   series.seasonFolder = seasonFolder;
-
-  const seasons = series.seasons;
-  const firstSeason = _.min(_.reject(seasons, { seasonNumber: 0 }), 'seasonNumber').seasonNumber;
-  const lastSeason = _.max(seasons, 'seasonNumber').seasonNumber;
-
-  monitorSeasons(seasons, firstSeason);
-
-  const options = {
-    ignoreEpisodesWithFiles: false,
-    ignoreEpisodesWithoutFiles: false,
-    searchForMissingEpisodes
-  };
-
-  switch (monitor) {
-    case 'future':
-      options.ignoreEpisodesWithFiles = true;
-      options.ignoreEpisodesWithoutFiles = true;
-      break;
-    case 'latest':
-      monitorSeasons(seasons, lastSeason);
-      break;
-    case 'first':
-      monitorSeasons(seasons, lastSeason + 1);
-      _.find(seasons, { seasonNumber: firstSeason }).monitored = true;
-      break;
-    case 'missing':
-      options.ignoreEpisodesWithFiles = true;
-      break;
-    case 'existing':
-      options.ignoreEpisodesWithoutFiles = true;
-      break;
-    case 'none':
-      monitorSeasons(seasons, lastSeason + 1);
-      break;
-    default:
-      break;
-  }
-
-  series.addOptions = options;
 
   return series;
 }
