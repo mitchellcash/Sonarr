@@ -7,12 +7,19 @@ import SelectInput from './SelectInput';
 function createMapStateToProps() {
   return createSelector(
     (state) => state.settings.qualityProfiles,
-    (qualityProfiles) => {
+    (state, { includeNoChange }) => includeNoChange,
+    (qualityProfiles, includeNoChange) => {
       const values = _.map(qualityProfiles.items, (qualityProfile) => {
         return {
           [qualityProfile.id]: qualityProfile.name
         };
       });
+
+      if (includeNoChange) {
+        values.unshift({
+          'noChange': 'No Change'
+        });
+      }
 
       return {
         values
@@ -44,7 +51,12 @@ class QualityProfileSelectInputConnector extends Component {
 }
 
 QualityProfileSelectInputConnector.propTypes = {
+  includeNoChange: PropTypes.bool.isRequired,
   onChange: PropTypes.func.isRequired
+};
+
+QualityProfileSelectInputConnector.defaultProps = {
+  includeNoChange: false
 };
 
 export default connect(createMapStateToProps)(QualityProfileSelectInputConnector);

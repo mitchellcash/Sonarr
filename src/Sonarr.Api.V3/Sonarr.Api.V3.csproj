@@ -141,6 +141,7 @@
     <Compile Include="Notifications\NotificationModule.cs" />
     <Compile Include="Notifications\NotificationResource.cs" />
     <Compile Include="SeasonPass\SeasonPassSeriesResource.cs" />
+    <Compile Include="Series\SeriesEditorResource.cs" />
     <Compile Include="SonarrV3FeedModule.cs" />
     <Compile Include="SonarrV3Module.cs" />
     <Compile Include="Profiles\Languages\LanguageModule.cs" />

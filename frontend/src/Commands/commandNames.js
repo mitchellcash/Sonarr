@@ -10,6 +10,7 @@ export const EPISODE_SEARCH = 'EpisodeSearch';
 export const MANUAL_IMPORT = 'ManualImport';
 export const MISSING_EPISODE_SEARCH = 'MissingEpisodeSearch';
 export const REFRESH_SERIES = 'RefreshSeries';
+export const RENAME_SERIES = 'RenameSeries';
 export const RESET_API_KEY = 'ResetApiKey';
 export const RSS_SYNC = 'RssSync';
 
@@ -25,6 +26,7 @@ export default {
   MANUAL_IMPORT,
   MISSING_EPISODE_SEARCH,
   REFRESH_SERIES,
+  RENAME_SERIES,
   RESET_API_KEY,
   RSS_SYNC
 };

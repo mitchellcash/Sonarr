@@ -9,6 +9,7 @@ import OAuthInputConnector from './OAuthInputConnector';
 import PasswordInput from './PasswordInput';
 import PathInputConnector from './PathInputConnector';
 import QualityProfileSelectInputConnector from './QualityProfileSelectInputConnector';
+import RootFolderSelectInputConnector from './RootFolderSelectInputConnector';
 import SelectInput from './SelectInput';
 import TagInputConnector from './TagInputConnector';
 import TextTagInputConnector from './TextTagInputConnector';
@@ -38,6 +39,9 @@ function getComponent(type) {
 
     case inputTypes.QUALITY_PROFILE_SELECT:
       return QualityProfileSelectInputConnector;
+
+    case inputTypes.ROOT_FOLDER_SELECT:
+      return RootFolderSelectInputConnector;
 
     case inputTypes.SELECT:
       return SelectInput;

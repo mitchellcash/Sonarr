@@ -10,6 +10,7 @@ import RelativeDateCellConnector from 'Components/Table/Cells/RelativeDateCellCo
 import SeriesTitleLink from 'Series/SeriesTitleLink';
 import EditSeriesModalConnector from 'Series/Edit/EditSeriesModalConnector';
 import DeleteSeriesModal from 'Series/Delete/DeleteSeriesModal';
+import SeriesStatusCell from './SeriesStatusCell';
 import styles from './SeriesIndexRow.css';
 
 class SeriesIndexRow extends Component {
@@ -75,20 +76,10 @@ class SeriesIndexRow extends Component {
 
     return (
       <TableRow>
-        <TableRowCell className={styles.status}>
-          <Icon
-            className={styles.statusIcon}
-            name={monitored ? 'icon-sonarr-monitored' : 'icon-sonarr-unmonitored'}
-            title={monitored ? 'Series is monitored' : 'Series is unmonitored'}
-          />
-
-          <Icon
-            className={styles.statusIcon}
-            name={status === 'ended' ? 'icon-sonarr-series-ended' : 'icon-sonarr-series-continuing'}
-            title={status === 'ended' ? 'Ended' : 'Continuing'}
-
-          />
-        </TableRowCell>
+        <SeriesStatusCell
+          monitored={monitored}
+          status={status}
+        />
 
         <TableRowCell>
           <SeriesTitleLink

@@ -2,6 +2,7 @@ import _ from 'lodash';
 import persistState from 'redux-localstorage';
 import { persistState as addSeriesPersistState } from 'Stores/Reducers/addSeriesReducers';
 import { persistState as seriesIndexPersistState } from 'Stores/Reducers/seriesIndexReducers';
+import { persistState as seriesEditorPersistState } from 'Stores/Reducers/seriesEditorReducers';
 import { persistState as seasonPassPersistState } from 'Stores/Reducers/seasonPassReducers';
 import { persistState as calendarPersistState } from 'Stores/Reducers/calendarReducers';
 import { persistState as historyPersistState } from 'Stores/Reducers/historyReducers';
@@ -32,6 +33,7 @@ function merge(initialState, persistedState) {
 const paths = [
   ...addSeriesPersistState,
   ...seriesIndexPersistState,
+  ...seriesEditorPersistState,
   ...seasonPassPersistState,
   ...calendarPersistState,
   ...historyPersistState,

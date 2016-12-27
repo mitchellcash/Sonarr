@@ -47,7 +47,7 @@
     "gulp-wrap": "0.13.0",
     "handlebars": "4.0.5",
     "handlebars-loader": "1.2.0",
-    "lodash": "4.15.0",
+    "lodash": "4.17.3",
     "postcss-loader": "0.9.1",
     "postcss-nested": "1.0.0",
     "postcss-simple-vars": "3.0.0",

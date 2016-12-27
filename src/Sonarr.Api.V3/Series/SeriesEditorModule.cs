@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using Nancy;
+﻿using Nancy;
+using NzbDrone.Common.Extensions;
 using NzbDrone.Core.Tv;
 using Sonarr.Http.Extensions;
 
@@ -18,10 +18,33 @@ namespace Sonarr.Api.V3.Series
 
         private Response SaveAll()
         {
-            //Read from request
-            var series = Request.Body.FromJson<List<SeriesResource>>().ToModel();
+            var resource = Request.Body.FromJson<SeriesEditorResource>();
+            var seriesToUpdate = _seriesService.GetSeries(resource.SeriesIds);
 
-            return _seriesService.UpdateSeries(series)
+            foreach (var series in seriesToUpdate)
+            {
+                if (resource.Monitored.HasValue)
+                {
+                    series.Monitored = resource.Monitored.Value;
+                }
+
+                if (resource.QualityProfileId.HasValue)
+                {
+                    series.ProfileId = resource.QualityProfileId.Value;
+                }
+
+                if (resource.SeasonFolder.HasValue)
+                {
+                    series.SeasonFolder = resource.SeasonFolder.Value;
+                }
+
+                if (resource.RootFolderPath.IsNotNullOrWhiteSpace())
+                {
+                    series.RootFolderPath = resource.RootFolderPath;
+                }
+            }
+
+            return _seriesService.UpdateSeries(seriesToUpdate)
                                  .ToResource()
                                  .AsResponse(HttpStatusCode.Accepted);
         }
