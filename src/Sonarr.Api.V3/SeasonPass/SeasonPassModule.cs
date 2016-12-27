@@ -28,7 +28,11 @@ namespace Sonarr.Api.V3.SeasonPass
             foreach (var s in request.Series)
             {
                 var series = seriesToUpdate.Single(c => c.Id == s.Id);
-                series.Monitored = s.Monitored;
+
+                if (s.Monitored.HasValue)
+                {
+                    series.Monitored = s.Monitored.Value;
+                }
 
                 if (s.Seasons != null && s.Seasons.Any())
                 {

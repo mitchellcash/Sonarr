@@ -33,12 +33,8 @@ class SeasonPassFooter extends Component {
   //
   // Listeners
 
-  onMonitoredChange = ({ value }) => {
-    this.setState({ monitored: value });
-  }
-
-  onMonitorChange = ({ value }) => {
-    this.setState({ monitor: value });
+  onInputChange = ({ name, value }) => {
+    this.setState({ [name]: value });
   }
 
   onUpdateSelectedPress = () => {
@@ -107,7 +103,7 @@ class SeasonPassFooter extends Component {
             value={monitored}
             values={monitoredOptions}
             isDisabled={!selectedCount}
-            onChange={this.onMonitoredChange}
+            onChange={this.onInputChange}
           />
         </div>
 
@@ -121,7 +117,7 @@ class SeasonPassFooter extends Component {
             value={monitor}
             values={monitorOptions}
             isDisabled={!selectedCount}
-            onChange={this.onMonitorChange}
+            onChange={this.onInputChange}
           />
         </div>
 
