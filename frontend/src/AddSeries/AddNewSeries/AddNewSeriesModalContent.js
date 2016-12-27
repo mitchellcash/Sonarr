@@ -72,8 +72,6 @@ class AddNewSeriesModalContent extends Component {
       year,
       overview,
       images,
-      qualityProfiles,
-      rootFolders,
       adding,
       addError,
       rootFolder,
@@ -84,18 +82,6 @@ class AddNewSeriesModalContent extends Component {
       onModalClose,
       onInputChange
     } = this.props;
-
-    const qualityProfileOptions = _.reduce(qualityProfiles, (acc, qualityProfile) => {
-      acc.push({ [qualityProfile.id]: qualityProfile.name });
-
-      return acc;
-    }, []);
-
-    const rootFolderOptions = _.reduce(rootFolders, (acc, r) => {
-      acc.push({ [r.path]: r.path });
-
-      return acc;
-    }, []);
 
     const monitorOptions = [
       { 'all': 'All Episodes' },
@@ -144,10 +130,9 @@ class AddNewSeriesModalContent extends Component {
                   <FormLabel>Path</FormLabel>
 
                   <FormInputGroup
-                    type={inputTypes.SELECT}
+                    type={inputTypes.ROOT_FOLDER_SELECT}
                     name="rootFolder"
                     value={rootFolder}
-                    values={rootFolderOptions}
                     onChange={onInputChange}
                   />
                 </FormGroup>
@@ -182,10 +167,9 @@ class AddNewSeriesModalContent extends Component {
                   <FormLabel>Quality Profile</FormLabel>
 
                   <FormInputGroup
-                    type={inputTypes.SELECT}
+                    type={inputTypes.QUALITY_PROFILE_SELECT}
                     name="qualityProfileId"
                     value={qualityProfileId}
-                    values={qualityProfileOptions}
                     onChange={this.onQualityProfileIdChange}
                   />
                 </FormGroup>

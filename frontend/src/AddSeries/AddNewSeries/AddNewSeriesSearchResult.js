@@ -90,9 +90,12 @@ class AddNewSeriesSearchResult extends Component {
               {ratings.value * 10}%
             </Label>
 
-            <Label size={sizes.LARGE}>
-              {network}
-            </Label>
+            {
+              !!network &&
+                <Label size={sizes.LARGE}>
+                  {network}
+                </Label>
+            }
 
             {
               status === 'ended' &&
@@ -129,7 +132,7 @@ AddNewSeriesSearchResult.propTypes = {
   title: PropTypes.string.isRequired,
   titleSlug: PropTypes.string.isRequired,
   year: PropTypes.number.isRequired,
-  network: PropTypes.string.isRequired,
+  network: PropTypes.string,
   status: PropTypes.string.isRequired,
   overview: PropTypes.string,
   ratings: PropTypes.object.isRequired,

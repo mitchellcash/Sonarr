@@ -1,8 +1,9 @@
 import _ from 'lodash';
-import React, { PropTypes } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
-import SelectInput from './SelectInput';
+import { addRootFolder } from 'Stores/Actions/rootFolderActions';
+import RootFolderSelectInput from './RootFolderSelectInput';
 
 function createMapStateToProps() {
   return createSelector(
@@ -21,6 +22,10 @@ function createMapStateToProps() {
         });
       }
 
+      values.push({
+        'addNew': 'Add a new path'
+      });
+
       return {
         values
       };
@@ -28,21 +33,40 @@ function createMapStateToProps() {
   );
 }
 
-function RootFolderSelectInputConnector(props) {
-  return (
-    <SelectInput
-      {...props}
-    />
-  );
+const mapDispatchToProps = {
+  addRootFolder
+};
+
+class RootFolderSelectInputConnector extends Component {
+
+  //
+  // Listeners
+
+  onNewRootFolderSelect = (path) => {
+    this.props.addRootFolder({ path });
+  }
+
+  //
+  // Render
+
+  render() {
+    return (
+      <RootFolderSelectInput
+        {...this.props}
+        onNewRootFolderSelect={this.onNewRootFolderSelect}
+      />
+    );
+  }
 }
 
 RootFolderSelectInputConnector.propTypes = {
   includeNoChange: PropTypes.bool.isRequired,
-  onChange: PropTypes.func.isRequired
+  onChange: PropTypes.func.isRequired,
+  addRootFolder: PropTypes.func.isRequired
 };
 
 RootFolderSelectInputConnector.defaultProps = {
   includeNoChange: false
 };
 
-export default connect(createMapStateToProps)(RootFolderSelectInputConnector);
+export default connect(createMapStateToProps, mapDispatchToProps)(RootFolderSelectInputConnector);

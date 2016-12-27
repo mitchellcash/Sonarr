@@ -2,12 +2,15 @@ import { handleActions } from 'redux-actions';
 import * as types from 'Stores/Actions/actionTypes';
 import createSetReducer from './Creators/createSetReducer';
 import createUpdateReducer from './Creators/createUpdateReducer';
+import createUpdateItemReducer from './Creators/createUpdateItemReducer';
 import createRemoveItemReducer from './Creators/createRemoveItemReducer';
 
 export const defaultState = {
   fetching: false,
   populated: false,
   error: null,
+  isSaving: false,
+  saveError: null,
   items: []
 };
 
@@ -17,6 +20,7 @@ const rootFolderReducers = handleActions({
 
   [types.SET]: createSetReducer(reducerSection),
   [types.UPDATE]: createUpdateReducer(reducerSection),
+  [types.UPDATE_ITEM]: createUpdateItemReducer(reducerSection),
   [types.REMOVE_ITEM]: createRemoveItemReducer(reducerSection)
 
 }, defaultState);
