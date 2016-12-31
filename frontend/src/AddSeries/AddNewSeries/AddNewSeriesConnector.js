@@ -39,6 +39,8 @@ class AddNewSeriesConnector extends Component {
     if (this._seriesLookupTimeout) {
       clearTimeout(this._seriesLookupTimeout);
     }
+
+    this.props.clearAddSeries();
   }
 
   //
