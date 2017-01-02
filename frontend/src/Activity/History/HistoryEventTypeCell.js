@@ -25,13 +25,13 @@ function getTooltip(eventType, data) {
     case 'grabbed':
       return `Episode grabbed from ${data.indexer} and sent to ${data.downloadClient}`;
     case 'seriesFolderImported':
-      return 'Episode downloaded successfully and picked up from download client';
+      return 'Episode imported from series folder';
     case 'downloadFolderImported':
-      return 'Episode download failed';
+      return 'Episode downloaded successfully and picked up from download client';
     case 'downloadFailed':
-      return 'Episode file deleted';
+      return 'Episode download failed';
     case 'episodeFileDeleted':
-      return '';
+      return 'Episode file deleted';
     default:
       return 'Unknown event';
   }
