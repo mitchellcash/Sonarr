@@ -58,6 +58,10 @@ class HistoryRow extends Component {
       timeFormat
     } = this.props;
 
+    if (!episode) {
+      return null;
+    }
+
     return (
       <TableRow>
         <HistoryEventTypeCell
@@ -130,7 +134,7 @@ class HistoryRow extends Component {
 HistoryRow.propTypes = {
   episodeId: PropTypes.number,
   series: PropTypes.object.isRequired,
-  episode: PropTypes.object.isRequired,
+  episode: PropTypes.object,
   quality: PropTypes.object.isRequired,
   eventType: PropTypes.string.isRequired,
   sourceTitle: PropTypes.string.isRequired,
