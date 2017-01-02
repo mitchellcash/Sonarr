@@ -1,7 +1,7 @@
 var NzbDroneController = require('Shared/NzbDroneController');
 var AddNewSeriesLayout = require('./AddNewSeries/AddNewSeriesLayout');
-var ImportSeriesLayout = require('./ImportSeries/ImportSeriesLayout');
-var ImportSeriesTableLayout = require('./ImportSeries/ImportSeriesTableLayout');
+var ImportSeriesSelectFolderLayout = require('./ImportSeries/SelectFolder/ImportSeriesSelectFolderLayout');
+var ImportSeriesLayout = require('./ImportSeries/Import/ImportSeriesLayout');
 
 const AddSeriesController = NzbDroneController.extend({
   initialize() {
@@ -19,12 +19,12 @@ const AddSeriesController = NzbDroneController.extend({
 
   importSeries() {
     this.setTitle('Import Series');
-    this.showMainRegion(new ImportSeriesLayout());
+    this.showMainRegion(new ImportSeriesSelectFolderLayout());
   },
 
   importFolder(id) {
     this.setTitle('Import Series');
-    this.showMainRegion(new ImportSeriesTableLayout({ rootFolderId: id }));
+    this.showMainRegion(new ImportSeriesLayout({ rootFolderId: parseInt(id) }));
   }
 });
 

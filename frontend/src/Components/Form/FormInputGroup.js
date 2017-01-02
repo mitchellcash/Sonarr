@@ -4,12 +4,14 @@ import Icon from 'Components/Icon';
 import Link from 'Components/Link';
 import CaptchaInputConnector from './CaptchaInputConnector';
 import CheckInput from './CheckInput';
+import MonitorEpisodesSelectInput from './MonitorEpisodesSelectInput';
 import NumberInput from './NumberInput';
 import OAuthInputConnector from './OAuthInputConnector';
 import PasswordInput from './PasswordInput';
 import PathInputConnector from './PathInputConnector';
 import QualityProfileSelectInputConnector from './QualityProfileSelectInputConnector';
 import RootFolderSelectInputConnector from './RootFolderSelectInputConnector';
+import SeriesTypeSelectInput from './SeriesTypeSelectInput';
 import SelectInput from './SelectInput';
 import TagInputConnector from './TagInputConnector';
 import TextTagInputConnector from './TextTagInputConnector';
@@ -24,6 +26,9 @@ function getComponent(type) {
 
     case inputTypes.CHECK:
       return CheckInput;
+
+    case inputTypes.MONITOR_EPISODES_SELECT:
+      return MonitorEpisodesSelectInput;
 
     case inputTypes.NUMBER:
       return NumberInput;
@@ -45,6 +50,9 @@ function getComponent(type) {
 
     case inputTypes.SELECT:
       return SelectInput;
+
+    case inputTypes.SERIES_TYPE_SELECT:
+      return SeriesTypeSelectInput;
 
     case inputTypes.TAG:
       return TagInputConnector;

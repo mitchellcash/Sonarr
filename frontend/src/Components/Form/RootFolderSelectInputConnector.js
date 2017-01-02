@@ -40,6 +40,22 @@ const mapDispatchToProps = {
 class RootFolderSelectInputConnector extends Component {
 
   //
+  // Lifecycle
+
+  componentWillMount() {
+    const {
+      name,
+      value,
+      values,
+      onChange
+    } = this.props;
+
+    if (!value || !_.some(values, { id: value })) {
+      onChange({ name, value: _.keys(values[0])[0] });
+    }
+  }
+
+  //
   // Listeners
 
   onNewRootFolderSelect = (path) => {
@@ -60,6 +76,9 @@ class RootFolderSelectInputConnector extends Component {
 }
 
 RootFolderSelectInputConnector.propTypes = {
+  name: PropTypes.string.isRequired,
+  value: PropTypes.string,
+  values: PropTypes.arrayOf(PropTypes.object).isRequired,
   includeNoChange: PropTypes.bool.isRequired,
   onChange: PropTypes.func.isRequired,
   addRootFolder: PropTypes.func.isRequired

@@ -31,6 +31,21 @@ function createMapStateToProps() {
 class QualityProfileSelectInputConnector extends Component {
 
   //
+  // Lifecycle
+
+  componentWillMount() {
+    const {
+      name,
+      value,
+      values
+    } = this.props;
+
+    if (!value || !_.some(values, (option) => parseInt(_.keys(option)[0]) === value)) {
+      this.onChange({ name, value: _.keys(values[0])[0] });
+    }
+  }
+
+  //
   // Listeners
 
   onChange = ({ name, value }) => {
@@ -51,6 +66,9 @@ class QualityProfileSelectInputConnector extends Component {
 }
 
 QualityProfileSelectInputConnector.propTypes = {
+  name: PropTypes.string.isRequired,
+  value: PropTypes.number,
+  values: PropTypes.arrayOf(PropTypes.object).isRequired,
   includeNoChange: PropTypes.bool.isRequired,
   onChange: PropTypes.func.isRequired
 };

@@ -1,9 +1,11 @@
 import _ from 'lodash';
 
-function getSelectedIds(selectedState) {
+function getSelectedIds(selectedState, { parseIds = true } = {}) {
   return _.reduce(selectedState, (result, value, id) => {
     if (value) {
-      result.push(parseInt(id));
+      const parsedId = parseIds ? parseInt(id) : id;
+
+      result.push(parsedId);
     }
 
     return result;

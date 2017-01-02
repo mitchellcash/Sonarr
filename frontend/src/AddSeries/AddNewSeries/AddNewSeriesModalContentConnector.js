@@ -7,9 +7,7 @@ import AddNewSeriesModalContent from './AddNewSeriesModalContent';
 function createMapStateToProps() {
   return createSelector(
     (state) => state.addSeries,
-    (state) => state.settings.qualityProfiles.items,
-    (state) => state.rootFolders.items,
-    (addSeriesState, qualityProfiles, rootFolders) => {
+    (addSeriesState) => {
       const {
         adding,
         addError,
@@ -17,8 +15,6 @@ function createMapStateToProps() {
       } = addSeriesState;
 
       return {
-        qualityProfiles,
-        rootFolders,
         adding,
         addError,
         ...defaults

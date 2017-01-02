@@ -3,20 +3,22 @@ using System.Linq;
 using Nancy;
 using NzbDrone.Core.MediaCover;
 using NzbDrone.Core.MetadataSource;
+using NzbDrone.Core.Tv;
 using Sonarr.Http;
 using Sonarr.Http.Extensions;
-using Sonarr.Http.Mapping;
 
 namespace Sonarr.Api.V3.Series
 {
     public class SeriesLookupModule : SonarrRestModule<SeriesResource>
     {
         private readonly ISearchForNewSeries _searchProxy;
+        private readonly ISeriesService _seriesService;
 
-        public SeriesLookupModule(ISearchForNewSeries searchProxy)
+        public SeriesLookupModule(ISearchForNewSeries searchProxy, ISeriesService seriesService)
             : base("/series/lookup")
         {
             _searchProxy = searchProxy;
+            _seriesService = seriesService;
             Get["/"] = x => Search();
         }
 

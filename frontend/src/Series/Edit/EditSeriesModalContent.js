@@ -36,12 +36,6 @@ class EditSeriesModalContent extends Component {
       tags
     } = item;
 
-    const seriesTypeOptions = [
-      { standard: 'Standard' },
-      { daily: 'Daily' },
-      { anime: 'Anime' }
-    ];
-
     return (
       <ModalContent onModalClose={onModalClose}>
         <ModalHeader>
@@ -91,9 +85,8 @@ class EditSeriesModalContent extends Component {
               <FormLabel>Series Type</FormLabel>
 
               <FormInputGroup
-                type={inputTypes.SELECT}
+                type={inputTypes.SERIES_TYPE_SELECT}
                 name="seriesType"
-                values={seriesTypeOptions}
                 {...seriesType}
                 onChange={onInputChange}
               />

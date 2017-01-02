@@ -37,7 +37,8 @@ class TableSelectCell extends Component {
     const {
       className,
       id,
-      isSelected
+      isSelected,
+      ...otherProps
     } = this.props;
 
     return (
@@ -46,6 +47,7 @@ class TableSelectCell extends Component {
           className={styles.input}
           name={id.toString()}
           value={isSelected}
+          {...otherProps}
           onChange={this.onChange}
         />
       </TableRowCell>
@@ -55,7 +57,7 @@ class TableSelectCell extends Component {
 
 TableSelectCell.propTypes = {
   className: PropTypes.string.isRequired,
-  id: PropTypes.number.isRequired,
+  id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
   isSelected: PropTypes.bool.isRequired,
   onSelectedChange: PropTypes.func.isRequired
 };

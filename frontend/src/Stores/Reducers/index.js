@@ -1,5 +1,6 @@
 import { combineReducers } from 'redux';
 import addSeries, { defaultState as defaultAddSeriesState } from './addSeriesReducers';
+import importSeries, { defaultState as defaultImportSeriesState } from './importSeriesReducers';
 import series, { defaultState as defaultSeriesState } from './seriesReducers';
 import seriesIndex, { defaultState as defaultSeriesIndexState } from './seriesIndexReducers';
 import seriesEditor, { defaultState as defaultSeriesEditorState } from './seriesEditorReducers';
@@ -26,6 +27,7 @@ import rootFolders, { defaultState as defaultRootFoldersState } from './rootFold
 
 export const defaultState = {
   addSeries: defaultAddSeriesState,
+  importSeries: defaultImportSeriesState,
   series: defaultSeriesState,
   seriesIndex: defaultSeriesIndexState,
   seriesEditor: defaultSeriesEditorState,
@@ -53,6 +55,7 @@ export const defaultState = {
 
 export default combineReducers({
   addSeries,
+  importSeries,
   series,
   seriesIndex,
   seriesEditor,

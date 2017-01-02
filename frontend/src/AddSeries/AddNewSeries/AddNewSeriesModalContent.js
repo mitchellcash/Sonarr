@@ -30,24 +30,6 @@ class AddNewSeriesModalContent extends Component {
     };
   }
 
-  componentDidMount() {
-    const {
-      qualityProfileId,
-      qualityProfiles,
-      rootFolder,
-      rootFolders,
-      onInputChange
-    } = this.props;
-
-    if ((!qualityProfileId || !_.find(qualityProfiles, { id: qualityProfileId })) && qualityProfiles.length) {
-      onInputChange({ name: 'qualityProfileId', value: qualityProfiles[0].id });
-    }
-
-    if ((!rootFolder || !_.find(rootFolders, { path: rootFolder })) && rootFolders.length) {
-      onInputChange({ name: 'rootFolder', value: rootFolders[0].path });
-    }
-  }
-
   //
   // Listeners
 
@@ -82,22 +64,6 @@ class AddNewSeriesModalContent extends Component {
       onModalClose,
       onInputChange
     } = this.props;
-
-    const monitorOptions = [
-      { 'all': 'All Episodes' },
-      { 'future': 'Future Episodes' },
-      { 'missing': 'Missing Episodes' },
-      { 'existing': 'Existing Episodes' },
-      { 'first': 'Only First Season' },
-      { 'latest': 'Only Latest Season' },
-      { 'none': 'None' }
-    ];
-
-    const seriesTypeOptions = [
-      { 'standard': 'Standard' },
-      { 'daily': 'Daily' },
-      { 'anime': 'Anime' }
-    ];
 
     return (
       <ModalContent onModalClose={onModalClose}>
@@ -155,10 +121,9 @@ class AddNewSeriesModalContent extends Component {
                   </FormLabel>
 
                   <FormInputGroup
-                    type={inputTypes.SELECT}
+                    type={inputTypes.MONITOR_EPISODES_SELECT}
                     name="monitor"
                     value={monitor}
-                    values={monitorOptions}
                     onChange={onInputChange}
                   />
                 </FormGroup>
@@ -178,10 +143,9 @@ class AddNewSeriesModalContent extends Component {
                   <FormLabel>Series Type</FormLabel>
 
                   <FormInputGroup
-                    type={inputTypes.SELECT}
+                    type={inputTypes.SERIES_TYPE_SELECT}
                     name="seriesType"
                     value={seriesType}
-                    values={seriesTypeOptions}
                     onChange={onInputChange}
                   />
                 </FormGroup>
@@ -234,8 +198,6 @@ AddNewSeriesModalContent.propTypes = {
   year: PropTypes.number.isRequired,
   overview: PropTypes.string,
   images: PropTypes.arrayOf(PropTypes.object).isRequired,
-  qualityProfiles: PropTypes.arrayOf(PropTypes.object).isRequired,
-  rootFolders: PropTypes.arrayOf(PropTypes.object).isRequired,
   adding: PropTypes.bool.isRequired,
   addError: PropTypes.object,
   rootFolder: PropTypes.string,

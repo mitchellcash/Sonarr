@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
 import createExistingSeriesSelector from 'Stores/Selectors/createExistingSeriesSelector';
-import AddNewSeriesSearchResult from './AddNewSeriesSearchResult';
+import ImportSeriesSearchResult from './ImportSeriesSearchResult';
 
 function createMapStateToProps() {
   return createSelector(
@@ -15,16 +15,16 @@ function createMapStateToProps() {
   );
 }
 
-function AddNewSeriesSearchResultConnector(props) {
+function ImportSeriesSearchResultConnector(props) {
   return (
-    <AddNewSeriesSearchResult
+    <ImportSeriesSearchResult
       {...props}
     />
   );
 }
 
-AddNewSeriesSearchResultConnector.propTypes = {
+ImportSeriesSearchResultConnector.propTypes = {
   tvdbId: PropTypes.number.isRequired
 };
 
-export default connect(createMapStateToProps)(AddNewSeriesSearchResultConnector);
+export default connect(createMapStateToProps)(ImportSeriesSearchResultConnector);

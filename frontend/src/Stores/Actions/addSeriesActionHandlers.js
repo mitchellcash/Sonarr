@@ -1,37 +1,10 @@
 import _ from 'lodash';
 import $ from 'jquery';
-import getMonitoringOptions from 'Utilities/Series/getMonitoringOptions';
+import getNewSeries from 'Utilities/Series/getNewSeries';
 import * as types from './actionTypes';
 import { set, update, updateItem } from './baseActions';
 
 const section = 'addSeries';
-
-function getNewSeries(series, payload) {
-  const {
-    rootFolder,
-    monitor,
-    qualityProfileId,
-    seriesType,
-    seasonFolder,
-    searchForMissingEpisodes
-  } = payload;
-
-  const {
-    seasons,
-    monitoringOptions: addOptions
-  } = getMonitoringOptions(series.seasons, monitor);
-
-  addOptions.searchForMissingEpisodes = searchForMissingEpisodes;
-  series.addOptions = addOptions;
-  series.seasons = seasons;
-  series.monitored = true;
-  series.qualityProfileId = qualityProfileId;
-  series.rootFolderPath = rootFolder;
-  series.seriesType = seriesType;
-  series.seasonFolder = seasonFolder;
-
-  return series;
-}
 
 const addSeriesActionHandlers = {
   [types.LOOKUP_SERIES]: function(payload) {

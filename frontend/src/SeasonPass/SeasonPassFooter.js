@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { kinds } from 'Helpers/Props';
 import SpinnerButton from 'Components/SpinnerButton';
+import MonitorEpisodesSelectInput from 'Components/Form/MonitorEpisodesSelectInput';
 import SelectInput from 'Components/Form/SelectInput';
 import PageContentFooter from 'Components/Page/PageContentFooter';
 import styles from './SeasonPassFooter.css';
@@ -76,17 +77,6 @@ class SeasonPassFooter extends Component {
       { 'unmonitored': 'Unmonitored' }
     ];
 
-    const monitorOptions = [
-      { [NO_CHANGE]: 'No Change' },
-      { 'all': 'All Episodes' },
-      { 'future': 'Future Episodes' },
-      { 'missing': 'Missing Episodes' },
-      { 'existing': 'Existing Episodes' },
-      { 'first': 'Only First Season' },
-      { 'latest': 'Only Latest Season' },
-      { 'none': 'None' }
-    ];
-
     const noChanges = monitored === NO_CHANGE && monitor === NO_CHANGE;
 
     return (
@@ -112,10 +102,10 @@ class SeasonPassFooter extends Component {
             Monitor Episodes
           </div>
 
-          <SelectInput
+          <MonitorEpisodesSelectInput
             name="monitor"
             value={monitor}
-            values={monitorOptions}
+            includeNoChange={true}
             isDisabled={!selectedCount}
             onChange={this.onInputChange}
           />
