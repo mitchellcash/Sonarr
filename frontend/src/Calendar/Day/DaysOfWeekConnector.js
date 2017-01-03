@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
-import createUISettingsSelector from 'Stores/Selectors/createUISettingsSelector';
+import createUISettingsSelector from 'Store/Selectors/createUISettingsSelector';
 import DaysOfWeek from './DaysOfWeek';
 
 function createMapStateToProps() {

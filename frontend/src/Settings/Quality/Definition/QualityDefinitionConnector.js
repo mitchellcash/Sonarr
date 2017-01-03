@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { setQualityDefinitionValue } from 'Stores/Actions/settingsActions';
+import { setQualityDefinitionValue } from 'Store/Actions/settingsActions';
 import QualityDefinition from './QualityDefinition';
 
 function mapStateToProps(state) {

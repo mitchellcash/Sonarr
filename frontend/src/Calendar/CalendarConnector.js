@@ -3,9 +3,9 @@ import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
 import hasDifferentItems from 'Utilities/Object/hasDifferentItems';
 import selectUniqueIds from 'Utilities/Object/selectUniqueIds';
-import * as calendarActions from 'Stores/Actions/calendarActions';
-import { fetchEpisodeFiles, clearEpisodeFiles } from 'Stores/Actions/episodeFileActions';
-import { fetchQueueDetails, clearQueueDetails } from 'Stores/Actions/queueActions';
+import * as calendarActions from 'Store/Actions/calendarActions';
+import { fetchEpisodeFiles, clearEpisodeFiles } from 'Store/Actions/episodeFileActions';
+import { fetchQueueDetails, clearQueueDetails } from 'Store/Actions/queueActions';
 import Calendar from './Calendar';
 
 function createMapStateToProps() {

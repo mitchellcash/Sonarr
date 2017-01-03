@@ -2,7 +2,7 @@ import _ from 'lodash';
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
-import { fetchIndexerSchema, selectIndexerSchema } from 'Stores/Actions/settingsActions';
+import { fetchIndexerSchema, selectIndexerSchema } from 'Store/Actions/settingsActions';
 import AddIndexerModalContent from './AddIndexerModalContent';
 
 function createMapStateToProps() {

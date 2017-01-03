@@ -3,7 +3,7 @@ import tpl from './GeneralLayout.hbs';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import appStore from 'Stores/appStore';
+import appStore from 'Store/appStore';
 import GeneralSettingsConnector from './GeneralSettingsConnector';
 
 module.exports = Marionette.LayoutView.extend({

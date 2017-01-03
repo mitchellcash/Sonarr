@@ -1,8 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import { createSelector } from 'reselect';
-import connectSection from 'Stores/connectSection';
-import createClientSideCollectionSelector from 'Stores/Selectors/createClientSideCollectionSelector';
-import { setSeriesSort } from 'Stores/Actions/seriesIndexActions';
+import connectSection from 'Store/connectSection';
+import createClientSideCollectionSelector from 'Store/Selectors/createClientSideCollectionSelector';
+import { setSeriesSort } from 'Store/Actions/seriesIndexActions';
 import SeriesIndexTable from './SeriesIndexTable';
 
 function createMapStateToProps() {

@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import { update } from 'Stores/Actions/baseActions';
+import { update } from 'Store/Actions/baseActions';
 
 function updateEpisodes(dispatch, section, episodes, episodeIds, options) {
   const data = _.reduce(episodes, (result, item) => {

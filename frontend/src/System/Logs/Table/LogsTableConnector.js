@@ -2,9 +2,9 @@ import _ from 'lodash';
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
-import createCommandsSelector from 'Stores/Selectors/createCommandsSelector';
-import { executeCommand } from 'Stores/Actions/commandActions';
-import * as systemActions from 'Stores/Actions/systemActions';
+import createCommandsSelector from 'Store/Selectors/createCommandsSelector';
+import { executeCommand } from 'Store/Actions/commandActions';
+import * as systemActions from 'Store/Actions/systemActions';
 import commandNames from 'Commands/commandNames';
 import LogsTable from './LogsTable';
 

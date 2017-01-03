@@ -3,7 +3,7 @@ import tpl from './ProfileLayout.hbs';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import appStore from 'Stores/appStore';
+import appStore from 'Store/appStore';
 import Profiles from './Profiles';
 
 module.exports = Marionette.LayoutView.extend({

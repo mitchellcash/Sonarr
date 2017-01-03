@@ -2,9 +2,9 @@ import _ from 'lodash';
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
-import createEpisodeSelector from 'Stores/Selectors/createEpisodeSelector';
-import createQueueItemSelector from 'Stores/Selectors/createQueueItemSelector';
-import createEpisodeFileSelector from 'Stores/Selectors/createEpisodeFileSelector';
+import createEpisodeSelector from 'Store/Selectors/createEpisodeSelector';
+import createQueueItemSelector from 'Store/Selectors/createQueueItemSelector';
+import createEpisodeFileSelector from 'Store/Selectors/createEpisodeFileSelector';
 import EpisodeStatus from './EpisodeStatus';
 
 function createMapStateToProps() {

@@ -3,7 +3,7 @@ import tpl from './MediaManagementLayout.hbs';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import appStore from 'Stores/appStore';
+import appStore from 'Store/appStore';
 import MediaManagementConnector from './MediaManagementConnector';
 
 module.exports = Marionette.LayoutView.extend({

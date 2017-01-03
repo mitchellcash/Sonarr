@@ -1,9 +1,9 @@
 import React, { Component, PropTypes } from 'react';
 import { createSelector } from 'reselect';
-import createProviderSettingsSelector from 'Stores/Selectors/createProviderSettingsSelector';
-import { setNotificationValue, setNotificationFieldValue, saveNotification, testNotification } from 'Stores/Actions/settingsActions';
-import { fetchTags } from 'Stores/Actions/tagActions';
-import connectSection from 'Stores/connectSection';
+import createProviderSettingsSelector from 'Store/Selectors/createProviderSettingsSelector';
+import { setNotificationValue, setNotificationFieldValue, saveNotification, testNotification } from 'Store/Actions/settingsActions';
+import { fetchTags } from 'Store/Actions/tagActions';
+import connectSection from 'Store/connectSection';
 import EditNotificationModalContent from './EditNotificationModalContent';
 
 function createMapStateToProps() {

@@ -1,9 +1,9 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
-import { markAsFailed } from 'Stores/Actions/historyActions';
-import createEpisodeSelector from 'Stores/Selectors/createEpisodeSelector';
-import createUISettingsSelector from 'Stores/Selectors/createUISettingsSelector';
+import { markAsFailed } from 'Store/Actions/historyActions';
+import createEpisodeSelector from 'Store/Selectors/createEpisodeSelector';
+import createUISettingsSelector from 'Store/Selectors/createUISettingsSelector';
 import HistoryRow from './HistoryRow';
 
 function createMapStateToProps() {

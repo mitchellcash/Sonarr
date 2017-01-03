@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
-import { setAddSeriesDefault, addSeries } from 'Stores/Actions/addSeriesActions';
+import { setAddSeriesDefault, addSeries } from 'Store/Actions/addSeriesActions';
 import AddNewSeriesModalContent from './AddNewSeriesModalContent';
 
 function createMapStateToProps() {

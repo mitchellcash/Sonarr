@@ -2,8 +2,8 @@ import _ from 'lodash';
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
-import * as historyActions from 'Stores/Actions/historyActions';
-import { fetchEpisodes } from 'Stores/Actions/episodeActions';
+import * as historyActions from 'Store/Actions/historyActions';
+import { fetchEpisodes } from 'Store/Actions/episodeActions';
 import History from './History';
 
 function createMapStateToProps() {

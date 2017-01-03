@@ -2,8 +2,8 @@ import _ from 'lodash';
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
-import { setImportSeriesValue, importSeries, clearImportSeries } from 'Stores/Actions/importSeriesActions';
-import { fetchRootFolders } from 'Stores/Actions/rootFolderActions';
+import { setImportSeriesValue, importSeries, clearImportSeries } from 'Store/Actions/importSeriesActions';
+import { fetchRootFolders } from 'Store/Actions/rootFolderActions';
 import ImportSeries from './ImportSeries';
 
 function createMapStateToProps() {

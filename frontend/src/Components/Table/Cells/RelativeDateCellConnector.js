@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
-import createUiSettingsSelector from 'Stores/Selectors/createUiSettingsSelector';
+import createUiSettingsSelector from 'Store/Selectors/createUiSettingsSelector';
 import RelativeDateCell from './RelativeDateCell';
 
 function createMapStateToProps() {

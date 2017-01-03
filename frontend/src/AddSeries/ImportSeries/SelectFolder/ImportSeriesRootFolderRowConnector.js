@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
-import { deleteRootFolder } from 'Stores/Actions/rootFolderActions';
+import { deleteRootFolder } from 'Store/Actions/rootFolderActions';
 import ImportSeriesRootFolderRow from './ImportSeriesRootFolderRow';
 
 function createMapStateToProps() {

@@ -2,9 +2,9 @@ import _ from 'lodash';
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
-import createCommandsSelector from 'Stores/Selectors/createCommandsSelector';
-import createQualityProfileSelector from 'Stores/Selectors/createQualityProfileSelector';
-import { executeCommand } from 'Stores/Actions/commandActions';
+import createCommandsSelector from 'Store/Selectors/createCommandsSelector';
+import createQualityProfileSelector from 'Store/Selectors/createQualityProfileSelector';
+import { executeCommand } from 'Store/Actions/commandActions';
 import commandNames from 'Commands/commandNames';
 
 function createMapStateToProps() {

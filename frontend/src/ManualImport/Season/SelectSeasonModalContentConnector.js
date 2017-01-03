@@ -1,8 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
-import { updateManualImportItem } from 'Stores/Actions/manualImportActions';
-import createSeriesSelector from 'Stores/Selectors/createSeriesSelector';
+import { updateManualImportItem } from 'Store/Actions/manualImportActions';
+import createSeriesSelector from 'Store/Selectors/createSeriesSelector';
 import SelectSeasonModalContent from './SelectSeasonModalContent';
 
 function createMapStateToProps() {

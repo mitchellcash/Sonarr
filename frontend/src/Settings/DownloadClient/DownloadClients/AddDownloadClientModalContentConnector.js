@@ -2,7 +2,7 @@ import _ from 'lodash';
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
-import { fetchDownloadClientSchema, selectDownloadClientSchema } from 'Stores/Actions/settingsActions';
+import { fetchDownloadClientSchema, selectDownloadClientSchema } from 'Store/Actions/settingsActions';
 import AddDownloadClientModalContent from './AddDownloadClientModalContent';
 
 function createMapStateToProps() {

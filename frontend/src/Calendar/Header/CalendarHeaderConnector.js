@@ -2,8 +2,8 @@ import _ from 'lodash';
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
-import createUISettingsSelector from 'Stores/Selectors/createUISettingsSelector';
-import { setCalendarView, gotoCalendarToday, gotoCalendarPreviousRange, gotoCalendarNextRange } from 'Stores/Actions/calendarActions';
+import createUISettingsSelector from 'Store/Selectors/createUISettingsSelector';
+import { setCalendarView, gotoCalendarToday, gotoCalendarPreviousRange, gotoCalendarNextRange } from 'Store/Actions/calendarActions';
 import CalendarHeader from './CalendarHeader';
 
 function createMapStateToProps() {

@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
-import { fetchMetadata } from 'Stores/Actions/settingsActions';
+import { fetchMetadata } from 'Store/Actions/settingsActions';
 import Metadatas from './Metadatas';
 
 function createMapStateToProps() {

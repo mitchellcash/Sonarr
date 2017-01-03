@@ -2,8 +2,8 @@ import _ from 'lodash';
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
-import selectSettings from 'Stores/Selectors/selectSettings';
-import { setDelayProfileValue, saveDelayProfile } from 'Stores/Actions/settingsActions';
+import selectSettings from 'Store/Selectors/selectSettings';
+import { setDelayProfileValue, saveDelayProfile } from 'Store/Actions/settingsActions';
 import EditDelayProfileModalContent from './EditDelayProfileModalContent';
 
 const newDelayProfile = {

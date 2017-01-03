@@ -2,9 +2,9 @@ import _ from 'underscore';
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
-import createCommandsSelector from 'Stores/Selectors/createCommandsSelector';
-import { fetchBackups } from 'Stores/Actions/systemActions';
-import { executeCommand } from 'Stores/Actions/commandActions';
+import createCommandsSelector from 'Store/Selectors/createCommandsSelector';
+import { fetchBackups } from 'Store/Actions/systemActions';
+import { executeCommand } from 'Store/Actions/commandActions';
 import commandNames from 'Commands/commandNames';
 import Backups from './Backups';
 

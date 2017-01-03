@@ -2,8 +2,8 @@ import _ from 'lodash';
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
-import { queueLookupSeries, setImportSeriesValue } from 'Stores/Actions/importSeriesActions';
-import createAllSeriesSelector from 'Stores/Selectors/createAllSeriesSelector';
+import { queueLookupSeries, setImportSeriesValue } from 'Store/Actions/importSeriesActions';
+import createAllSeriesSelector from 'Store/Selectors/createAllSeriesSelector';
 import ImportSeriesRow from './ImportSeriesRow';
 
 function createMapStateToProps() {

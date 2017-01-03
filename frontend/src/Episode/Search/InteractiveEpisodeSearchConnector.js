@@ -1,8 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import { createSelector } from 'reselect';
-import connectSection from 'Stores/connectSection';
-import { fetchReleases, setReleasesSort, grabRelease } from 'Stores/Actions/releaseActions';
-import createClientSideCollectionSelector from 'Stores/Selectors/createClientSideCollectionSelector';
+import connectSection from 'Store/connectSection';
+import { fetchReleases, setReleasesSort, grabRelease } from 'Store/Actions/releaseActions';
+import createClientSideCollectionSelector from 'Store/Selectors/createClientSideCollectionSelector';
 import InteractiveEpisodeSearch from './InteractiveEpisodeSearch';
 
 function createMapStateToProps() {

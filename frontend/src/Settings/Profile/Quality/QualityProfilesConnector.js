@@ -1,8 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
-import { fetchQualityProfiles, deleteQualityProfile } from 'Stores/Actions/settingsActions';
-import { fetchLanguages } from 'Stores/Actions/languageActions';
+import { fetchQualityProfiles, deleteQualityProfile } from 'Store/Actions/settingsActions';
+import { fetchLanguages } from 'Store/Actions/languageActions';
 import QualityProfiles from './QualityProfiles';
 
 function createMapStateToProps() {

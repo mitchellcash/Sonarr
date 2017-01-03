@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
-import { fetchDiskSpace } from 'Stores/Actions/systemActions';
+import { fetchDiskSpace } from 'Store/Actions/systemActions';
 import DiskSpace from './DiskSpace';
 
 function createMapStateToProps() {

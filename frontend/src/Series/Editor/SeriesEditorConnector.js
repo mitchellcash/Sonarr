@@ -1,10 +1,10 @@
 import React, { Component, PropTypes } from 'react';
 import { createSelector } from 'reselect';
-import connectSection from 'Stores/connectSection';
-import createClientSideCollectionSelector from 'Stores/Selectors/createClientSideCollectionSelector';
-import createCommandSelector from 'Stores/Selectors/createCommandSelector';
-import { setSeriesEditorSort, setSeriesEditorFilter, saveSeriesEditor } from 'Stores/Actions/seriesEditorActions';
-import { fetchRootFolders } from 'Stores/Actions/rootFolderActions';
+import connectSection from 'Store/connectSection';
+import createClientSideCollectionSelector from 'Store/Selectors/createClientSideCollectionSelector';
+import createCommandSelector from 'Store/Selectors/createCommandSelector';
+import { setSeriesEditorSort, setSeriesEditorFilter, saveSeriesEditor } from 'Store/Actions/seriesEditorActions';
+import { fetchRootFolders } from 'Store/Actions/rootFolderActions';
 import commandNames from 'Commands/commandNames';
 import SeriesEditor from './SeriesEditor';
 

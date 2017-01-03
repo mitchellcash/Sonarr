@@ -3,7 +3,7 @@ import tpl from './MetadataLayout.hbs';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import appStore from 'Stores/appStore';
+import appStore from 'Store/appStore';
 import MetadataSettings from './MetadataSettings';
 
 module.exports = Marionette.LayoutView.extend({

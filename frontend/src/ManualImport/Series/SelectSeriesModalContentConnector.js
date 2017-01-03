@@ -2,8 +2,8 @@ import _ from 'lodash';
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
-import { updateManualImportItem } from 'Stores/Actions/manualImportActions';
-import createAllSeriesSelector from 'Stores/Selectors/createAllSeriesSelector';
+import { updateManualImportItem } from 'Store/Actions/manualImportActions';
+import createAllSeriesSelector from 'Store/Selectors/createAllSeriesSelector';
 import SelectSeriesModalContent from './SelectSeriesModalContent';
 
 function createMapStateToProps() {

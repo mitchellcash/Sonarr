@@ -1,7 +1,7 @@
 import { createSelector } from 'reselect';
-import connectSection from 'Stores/connectSection';
-import createClientSideCollectionSelector from 'Stores/Selectors/createClientSideCollectionSelector';
-import createUISettingsSelector from 'Stores/Selectors/createUISettingsSelector';
+import connectSection from 'Store/connectSection';
+import createClientSideCollectionSelector from 'Store/Selectors/createClientSideCollectionSelector';
+import createUISettingsSelector from 'Store/Selectors/createUISettingsSelector';
 import SeriesIndexPosters from './SeriesIndexPosters';
 
 function createMapStateToProps() {

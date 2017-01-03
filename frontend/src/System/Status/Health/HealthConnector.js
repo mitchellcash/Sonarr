@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
-import { fetchHealth } from 'Stores/Actions/systemActions';
+import { fetchHealth } from 'Store/Actions/systemActions';
 import Health from './Health';
 
 function createMapStateToProps() {

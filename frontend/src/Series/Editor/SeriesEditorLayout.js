@@ -2,7 +2,7 @@ const Marionette = require('marionette');
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import appStore from 'Stores/appStore';
+import appStore from 'Store/appStore';
 import SeriesEditorConnector from './SeriesEditorConnector';
 import tpl from './SeriesEditorLayout.hbs';
 

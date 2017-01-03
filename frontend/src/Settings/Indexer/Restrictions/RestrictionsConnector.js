@@ -1,8 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
-import { fetchRestrictions, deleteRestriction } from 'Stores/Actions/settingsActions';
-import { fetchTags } from 'Stores/Actions/tagActions';
+import { fetchRestrictions, deleteRestriction } from 'Store/Actions/settingsActions';
+import { fetchTags } from 'Store/Actions/tagActions';
 import Restrictions from './Restrictions';
 
 function createMapStateToProps() {

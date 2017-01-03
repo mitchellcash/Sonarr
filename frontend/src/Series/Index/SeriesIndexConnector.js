@@ -2,10 +2,10 @@ import _ from 'lodash';
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
-import createCommandsSelector from 'Stores/Selectors/createCommandsSelector';
-import { fetchSeries } from 'Stores/Actions/seriesActions';
-import { setSeriesSort, setSeriesFilter, setSeriesView } from 'Stores/Actions/seriesIndexActions';
-import { executeCommand } from 'Stores/Actions/commandActions';
+import createCommandsSelector from 'Store/Selectors/createCommandsSelector';
+import { fetchSeries } from 'Store/Actions/seriesActions';
+import { setSeriesSort, setSeriesFilter, setSeriesView } from 'Store/Actions/seriesIndexActions';
+import { executeCommand } from 'Store/Actions/commandActions';
 import commandNames from 'Commands/commandNames';
 import SeriesIndex from './SeriesIndex';
 

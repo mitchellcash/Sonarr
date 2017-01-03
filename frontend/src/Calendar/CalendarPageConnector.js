@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
-import { setCalendarIncludeUnmonitored } from 'Stores/Actions/calendarActions';
+import { setCalendarIncludeUnmonitored } from 'Store/Actions/calendarActions';
 import CalendarPage from './CalendarPage';
 
 function createMapStateToProps() {

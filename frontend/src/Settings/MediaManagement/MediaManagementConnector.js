@@ -1,9 +1,9 @@
 import _ from 'lodash';
 import React, { Component, PropTypes } from 'react';
 import { createSelector } from 'reselect';
-import createSettingsSectionSelector from 'Stores/Selectors/createSettingsSectionSelector';
-import { fetchMediaManagementSettings, setMediaManagementSettingsValue, saveMediaManagementSettings, saveNamingSettings } from 'Stores/Actions/settingsActions';
-import connectSection from 'Stores/connectSection';
+import createSettingsSectionSelector from 'Store/Selectors/createSettingsSectionSelector';
+import { fetchMediaManagementSettings, setMediaManagementSettingsValue, saveMediaManagementSettings, saveNamingSettings } from 'Store/Actions/settingsActions';
+import connectSection from 'Store/connectSection';
 import MediaManagement from './MediaManagement';
 
 function createMapStateToProps() {

@@ -2,8 +2,8 @@ import _ from 'lodash';
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
-import createAllSeriesSelector from 'Stores/Selectors/createAllSeriesSelector';
-import { executeCommand } from 'Stores/Actions/commandActions';
+import createAllSeriesSelector from 'Store/Selectors/createAllSeriesSelector';
+import { executeCommand } from 'Store/Actions/commandActions';
 import commandNames from 'Commands/commandNames';
 import OrganizeSeriesModalContent from './OrganizeSeriesModalContent';
 

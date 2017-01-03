@@ -2,10 +2,10 @@ import _ from 'lodash';
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
-import createCommandsSelector from 'Stores/Selectors/createCommandsSelector';
-import * as wantedActions from 'Stores/Actions/wantedActions';
-import { executeCommand } from 'Stores/Actions/commandActions';
-import { fetchQueueDetails } from 'Stores/Actions/queueActions';
+import createCommandsSelector from 'Store/Selectors/createCommandsSelector';
+import * as wantedActions from 'Store/Actions/wantedActions';
+import { executeCommand } from 'Store/Actions/commandActions';
+import { fetchQueueDetails } from 'Store/Actions/queueActions';
 import commandNames from 'Commands/commandNames';
 import Missing from './Missing';
 

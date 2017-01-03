@@ -2,8 +2,8 @@ import _ from 'lodash';
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
-import { fetchDelayProfiles, deleteDelayProfile, reorderDelayProfile } from 'Stores/Actions/settingsActions';
-import { fetchTags } from 'Stores/Actions/tagActions';
+import { fetchDelayProfiles, deleteDelayProfile, reorderDelayProfile } from 'Store/Actions/settingsActions';
+import { fetchTags } from 'Store/Actions/tagActions';
 import DelayProfiles from './DelayProfiles';
 
 function createMapStateToProps() {

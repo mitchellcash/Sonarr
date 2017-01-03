@@ -51,7 +51,9 @@ class Health extends Component {
 
         {
           healthOk &&
-            <div>No issues with your configuration</div>
+            <div className={styles.healthOk}>
+              No issues with your configuration
+            </div>
         }
 
         {

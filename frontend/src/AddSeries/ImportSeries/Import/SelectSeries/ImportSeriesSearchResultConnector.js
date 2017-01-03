@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
-import createExistingSeriesSelector from 'Stores/Selectors/createExistingSeriesSelector';
+import createExistingSeriesSelector from 'Store/Selectors/createExistingSeriesSelector';
 import ImportSeriesSearchResult from './ImportSeriesSearchResult';
 
 function createMapStateToProps() {

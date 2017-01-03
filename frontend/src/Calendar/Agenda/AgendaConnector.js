@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
-import { gotoCalendarToday } from 'Stores/Actions/calendarActions';
+import { gotoCalendarToday } from 'Store/Actions/calendarActions';
 import Agenda from './Agenda';
 
 function createMapStateToProps() {

@@ -2,7 +2,7 @@ import _ from 'lodash';
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
-import { addTag } from 'Stores/Actions/tagActions';
+import { addTag } from 'Store/Actions/tagActions';
 import TagInput from './TagInput';
 
 const validTagRegex = new RegExp('[^-_a-z0-9]', 'i');

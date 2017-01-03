@@ -1,8 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
-import createSeriesSelector from 'Stores/Selectors/createSeriesSelector';
-import { deleteSeries } from 'Stores/Actions/seriesActions';
+import createSeriesSelector from 'Store/Selectors/createSeriesSelector';
+import { deleteSeries } from 'Store/Actions/seriesActions';
 import DeleteSeriesModalContent from './DeleteSeriesModalContent';
 
 function createMapStateToProps() {

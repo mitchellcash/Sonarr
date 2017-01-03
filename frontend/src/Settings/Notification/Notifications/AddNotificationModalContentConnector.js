@@ -2,7 +2,7 @@ import _ from 'lodash';
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
-import { fetchNotificationSchema, selectNotificationSchema } from 'Stores/Actions/settingsActions';
+import { fetchNotificationSchema, selectNotificationSchema } from 'Store/Actions/settingsActions';
 import AddNotificationModalContent from './AddNotificationModalContent';
 
 function createMapStateToProps() {

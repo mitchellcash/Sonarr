@@ -1,10 +1,10 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
-import { clearReleases } from 'Stores/Actions/releaseActions';
-import { toggleEpisodeMonitored } from 'Stores/Actions/episodeActions';
-import createEpisodeSelector from 'Stores/Selectors/createEpisodeSelector';
-import createSeriesSelector from 'Stores/Selectors/createSeriesSelector';
+import { clearReleases } from 'Store/Actions/releaseActions';
+import { toggleEpisodeMonitored } from 'Store/Actions/episodeActions';
+import createEpisodeSelector from 'Store/Selectors/createEpisodeSelector';
+import createSeriesSelector from 'Store/Selectors/createSeriesSelector';
 import EpisodeDetailsModalContent from './EpisodeDetailsModalContent';
 
 function createMapStateToProps() {

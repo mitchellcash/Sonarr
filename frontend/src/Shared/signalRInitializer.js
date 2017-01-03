@@ -1,8 +1,8 @@
 import $ from 'jquery';
 import vent from 'vent';
 import Messenger from 'Shared/Messenger';
-import appStore from 'Stores/appStore';
-import { updateCommand, finishCommand } from 'Stores/Actions/commandActions';
+import appStore from 'Store/appStore';
+import { updateCommand, finishCommand } from 'Store/Actions/commandActions';
 
 require('signalR');
 

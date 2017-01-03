@@ -1,10 +1,10 @@
 import _ from 'lodash';
 import React, { Component, PropTypes } from 'react';
 import { createSelector } from 'reselect';
-import connectSection from 'Stores/connectSection';
-import { fetchEpisodes, setEpisodesSort, clearEpisodes } from 'Stores/Actions/episodeActions';
-import { updateManualImportItem } from 'Stores/Actions/manualImportActions';
-import createClientSideCollectionSelector from 'Stores/Selectors/createClientSideCollectionSelector';
+import connectSection from 'Store/connectSection';
+import { fetchEpisodes, setEpisodesSort, clearEpisodes } from 'Store/Actions/episodeActions';
+import { updateManualImportItem } from 'Store/Actions/manualImportActions';
+import createClientSideCollectionSelector from 'Store/Selectors/createClientSideCollectionSelector';
 import SelectEpisodeModalContent from './SelectEpisodeModalContent';
 
 function createMapStateToProps() {

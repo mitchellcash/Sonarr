@@ -3,7 +3,7 @@ import tpl from './IndexerLayout.hbs';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import appStore from 'Stores/appStore';
+import appStore from 'Store/appStore';
 import IndexerSettings from './IndexerSettings';
 
 module.exports = Marionette.LayoutView.extend({

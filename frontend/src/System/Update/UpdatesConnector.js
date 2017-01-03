@@ -1,8 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
-import { fetchUpdates } from 'Stores/Actions/systemActions';
-import { executeCommand } from 'Stores/Actions/commandActions';
+import { fetchUpdates } from 'Store/Actions/systemActions';
+import { executeCommand } from 'Store/Actions/commandActions';
 import commandNames from 'Commands/commandNames';
 import Updates from './Updates';
 

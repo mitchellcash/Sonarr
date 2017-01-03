@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
-import { refreshCaptcha, getCaptchaCookie, resetCaptcha } from 'Stores/Actions/captchaActions';
+import { refreshCaptcha, getCaptchaCookie, resetCaptcha } from 'Store/Actions/captchaActions';
 import CaptchaInput from './CaptchaInput';
 
 function createMapStateToProps() {

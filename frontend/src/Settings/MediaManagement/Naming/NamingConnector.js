@@ -1,9 +1,9 @@
 import _ from 'lodash';
 import React, { Component, PropTypes } from 'react';
 import { createSelector } from 'reselect';
-import createSettingsSectionSelector from 'Stores/Selectors/createSettingsSectionSelector';
-import { fetchNamingSettings, setNamingSettingsValue, fetchNamingExamples } from 'Stores/Actions/settingsActions';
-import connectSection from 'Stores/connectSection';
+import createSettingsSectionSelector from 'Store/Selectors/createSettingsSectionSelector';
+import { fetchNamingSettings, setNamingSettingsValue, fetchNamingExamples } from 'Store/Actions/settingsActions';
+import connectSection from 'Store/connectSection';
 import Naming from './Naming';
 
 function createMapStateToProps() {

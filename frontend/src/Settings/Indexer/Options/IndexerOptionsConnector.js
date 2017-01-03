@@ -1,8 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import { createSelector } from 'reselect';
-import createSettingsSectionSelector from 'Stores/Selectors/createSettingsSectionSelector';
-import { fetchIndexerOptions, setIndexerOptionsValue, saveIndexerOptions } from 'Stores/Actions/settingsActions';
-import connectSection from 'Stores/connectSection';
+import createSettingsSectionSelector from 'Store/Selectors/createSettingsSectionSelector';
+import { fetchIndexerOptions, setIndexerOptionsValue, saveIndexerOptions } from 'Store/Actions/settingsActions';
+import connectSection from 'Store/connectSection';
 import IndexerOptions from './IndexerOptions';
 
 function createMapStateToProps() {

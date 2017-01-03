@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
-import { startOAuth, resetOAuth } from 'Stores/Actions/oAuthActions';
+import { startOAuth, resetOAuth } from 'Store/Actions/oAuthActions';
 import OAuthInput from './OAuthInput';
 
 function createMapStateToProps() {

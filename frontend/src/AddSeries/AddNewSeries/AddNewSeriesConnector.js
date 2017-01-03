@@ -1,8 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
-import { lookupSeries, clearAddSeries } from 'Stores/Actions/addSeriesActions';
-import { fetchRootFolders } from 'Stores/Actions/rootFolderActions';
+import { lookupSeries, clearAddSeries } from 'Store/Actions/addSeriesActions';
+import { fetchRootFolders } from 'Store/Actions/rootFolderActions';
 import AddNewSeries from './AddNewSeries';
 
 function createMapStateToProps() {

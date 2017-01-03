@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
-import { fetchDownloadClients, deleteDownloadClient } from 'Stores/Actions/settingsActions';
+import { fetchDownloadClients, deleteDownloadClient } from 'Store/Actions/settingsActions';
 import DownloadClients from './DownloadClients';
 
 function createMapStateToProps() {

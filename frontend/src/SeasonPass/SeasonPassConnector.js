@@ -1,8 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import { createSelector } from 'reselect';
-import connectSection from 'Stores/connectSection';
-import createClientSideCollectionSelector from 'Stores/Selectors/createClientSideCollectionSelector';
-import { setSeasonPassSort, setSeasonPassFilter, saveSeasonPass } from 'Stores/Actions/seasonPassActions';
+import connectSection from 'Store/connectSection';
+import createClientSideCollectionSelector from 'Store/Selectors/createClientSideCollectionSelector';
+import { setSeasonPassSort, setSeasonPassFilter, saveSeasonPass } from 'Store/Actions/seasonPassActions';
 import SeasonPass from './SeasonPass';
 
 function createMapStateToProps() {

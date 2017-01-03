@@ -2,9 +2,9 @@ import _ from 'lodash';
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
-import { grabQueueItem, removeQueueItem } from 'Stores/Actions/queueActions';
-import createEpisodeSelector from 'Stores/Selectors/createEpisodeSelector';
-import createUiSettingsSelector from 'Stores/Selectors/createUiSettingsSelector';
+import { grabQueueItem, removeQueueItem } from 'Store/Actions/queueActions';
+import createEpisodeSelector from 'Store/Selectors/createEpisodeSelector';
+import createUiSettingsSelector from 'Store/Selectors/createUiSettingsSelector';
 import QueueRow from './QueueRow';
 
 function createMapStateToProps() {

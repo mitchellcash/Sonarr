@@ -2,7 +2,7 @@ import _ from 'lodash';
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
-import { fetchPaths, clearPaths } from 'Stores/Actions/pathActions';
+import { fetchPaths, clearPaths } from 'Store/Actions/pathActions';
 import PathInput from './PathInput';
 
 function createMapStateToProps() {

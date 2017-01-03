@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
-import { fetchTags } from 'Stores/Actions/tagActions';
+import { fetchTags } from 'Store/Actions/tagActions';
 import CalendarLinkModalContent from './CalendarLinkModalContent';
 
 function createMapStateToProps() {

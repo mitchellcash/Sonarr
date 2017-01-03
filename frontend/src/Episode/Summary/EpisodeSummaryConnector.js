@@ -1,9 +1,9 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
-import createEpisodeSelector from 'Stores/Selectors/createEpisodeSelector';
-import createEpisodeFileSelector from 'Stores/Selectors/createEpisodeFileSelector';
-import createSeriesSelector from 'Stores/Selectors/createSeriesSelector';
+import createEpisodeSelector from 'Store/Selectors/createEpisodeSelector';
+import createEpisodeFileSelector from 'Store/Selectors/createEpisodeFileSelector';
+import createSeriesSelector from 'Store/Selectors/createSeriesSelector';
 import EpisodeSummary from './EpisodeSummary';
 
 function createMapStateToProps() {

@@ -1,10 +1,10 @@
 import _ from 'lodash';
 import React, { Component, PropTypes } from 'react';
 import { createSelector } from 'reselect';
-import connectSection from 'Stores/connectSection';
-import { fetchManualImportItems, setManualImportSort, clearManualImport } from 'Stores/Actions/manualImportActions';
-import createClientSideCollectionSelector from 'Stores/Selectors/createClientSideCollectionSelector';
-import { executeCommand } from 'Stores/Actions/commandActions';
+import connectSection from 'Store/connectSection';
+import { fetchManualImportItems, setManualImportSort, clearManualImport } from 'Store/Actions/manualImportActions';
+import createClientSideCollectionSelector from 'Store/Selectors/createClientSideCollectionSelector';
+import { executeCommand } from 'Store/Actions/commandActions';
 import commandNames from 'Commands/commandNames';
 import InteractiveImportModalContent from './InteractiveImportModalContent';
 

@@ -1,11 +1,11 @@
 import _ from 'lodash';
 import React, { Component, PropTypes } from 'react';
 import { createSelector } from 'reselect';
-import createSettingsSectionSelector from 'Stores/Selectors/createSettingsSectionSelector';
-import createCommandsSelector from 'Stores/Selectors/createCommandsSelector';
-import { setGeneralSettingsValue, saveGeneralSettings, fetchGeneralSettings } from 'Stores/Actions/settingsActions';
-import { executeCommand } from 'Stores/Actions/commandActions';
-import connectSection from 'Stores/connectSection';
+import createSettingsSectionSelector from 'Store/Selectors/createSettingsSectionSelector';
+import createCommandsSelector from 'Store/Selectors/createCommandsSelector';
+import { setGeneralSettingsValue, saveGeneralSettings, fetchGeneralSettings } from 'Store/Actions/settingsActions';
+import { executeCommand } from 'Store/Actions/commandActions';
+import connectSection from 'Store/connectSection';
 import commandNames from 'Commands/commandNames';
 import GeneralSettings from './GeneralSettings';
 

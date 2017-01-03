@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
-import { fetchRemotePathMappings, deleteRemotePathMapping } from 'Stores/Actions/settingsActions';
+import { fetchRemotePathMappings, deleteRemotePathMapping } from 'Store/Actions/settingsActions';
 import RemotePathMappings from './RemotePathMappings';
 
 function createMapStateToProps() {

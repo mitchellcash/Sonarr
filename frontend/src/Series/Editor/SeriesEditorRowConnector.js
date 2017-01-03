@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
-import createQualityProfileSelector from 'Stores/Selectors/createQualityProfileSelector';
+import createQualityProfileSelector from 'Store/Selectors/createQualityProfileSelector';
 import SeriesEditorRow from './SeriesEditorRow';
 
 function createMapStateToProps() {

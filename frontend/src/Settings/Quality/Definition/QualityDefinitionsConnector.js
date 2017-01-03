@@ -2,7 +2,7 @@ import _ from 'lodash';
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
-import { fetchQualityDefinitions, saveQualityDefinitions } from 'Stores/Actions/settingsActions';
+import { fetchQualityDefinitions, saveQualityDefinitions } from 'Store/Actions/settingsActions';
 import QualityDefinitions from './QualityDefinitions';
 
 function createMapStateToProps() {

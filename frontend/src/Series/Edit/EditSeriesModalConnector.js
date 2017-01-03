@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { clearPendingChanges } from 'Stores/Actions/baseActions';
+import { clearPendingChanges } from 'Store/Actions/baseActions';
 import EditSeriesModal from './EditSeriesModal';
 
 const mapDispatchToProps = {

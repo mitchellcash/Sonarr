@@ -3,7 +3,7 @@ import tpl from './DownloadClientLayout.hbs';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import appStore from 'Stores/appStore';
+import appStore from 'Store/appStore';
 import DownloadClientSettings from './DownloadClientSettings';
 
 module.exports = Marionette.LayoutView.extend({

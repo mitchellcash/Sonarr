@@ -2,8 +2,8 @@ import _ from 'lodash';
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
-import selectSettings from 'Stores/Selectors/selectSettings';
-import { setRestrictionValue, saveRestriction } from 'Stores/Actions/settingsActions';
+import selectSettings from 'Store/Selectors/selectSettings';
+import { setRestrictionValue, saveRestriction } from 'Store/Actions/settingsActions';
 import EditRestrictionModalContent from './EditRestrictionModalContent';
 
 const newRestriction = {

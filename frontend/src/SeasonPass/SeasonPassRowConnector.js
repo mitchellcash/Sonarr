@@ -2,8 +2,8 @@ import _ from 'lodash';
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
-import createSeriesSelector from 'Stores/Selectors/createSeriesSelector';
-import { toggleSeriesMonitored, toggleSeasonMonitored } from 'Stores/Actions/seriesActions';
+import createSeriesSelector from 'Store/Selectors/createSeriesSelector';
+import { toggleSeriesMonitored, toggleSeasonMonitored } from 'Store/Actions/seriesActions';
 import SeasonPassRow from './SeasonPassRow';
 
 function createMapStateToProps() {

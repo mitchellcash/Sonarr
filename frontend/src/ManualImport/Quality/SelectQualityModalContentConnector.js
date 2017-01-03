@@ -2,8 +2,8 @@ import _ from 'lodash';
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
-import { fetchQualityProfileSchema } from 'Stores/Actions/settingsActions';
-import { updateManualImportItem } from 'Stores/Actions/manualImportActions';
+import { fetchQualityProfileSchema } from 'Store/Actions/settingsActions';
+import { updateManualImportItem } from 'Store/Actions/manualImportActions';
 import SelectQualityModalContent from './SelectQualityModalContent';
 
 function createMapStateToProps() {

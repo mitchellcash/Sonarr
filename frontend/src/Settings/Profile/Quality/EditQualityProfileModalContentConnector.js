@@ -1,9 +1,9 @@
 import _ from 'lodash';
 import React, { Component, PropTypes } from 'react';
 import { createSelector } from 'reselect';
-import createProviderSettingsSelector from 'Stores/Selectors/createProviderSettingsSelector';
-import { fetchQualityProfileSchema, setQualityProfileValue, saveQualityProfile } from 'Stores/Actions/settingsActions';
-import connectSection from 'Stores/connectSection';
+import createProviderSettingsSelector from 'Store/Selectors/createProviderSettingsSelector';
+import { fetchQualityProfileSchema, setQualityProfileValue, saveQualityProfile } from 'Store/Actions/settingsActions';
+import connectSection from 'Store/connectSection';
 import EditQualityProfileModalContent from './EditQualityProfileModalContent';
 
 function createQualitiesSelector() {

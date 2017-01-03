@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { toggleAdvancedSettings } from 'Stores/Actions/settingsActions';
+import { toggleAdvancedSettings } from 'Store/Actions/settingsActions';
 import SettingsToolbar from './SettingsToolbar';
 
 function mapStateToProps(state) {

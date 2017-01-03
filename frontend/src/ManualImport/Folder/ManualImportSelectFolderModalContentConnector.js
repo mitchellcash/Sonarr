@@ -1,8 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
-import { addRecentFolder } from 'Stores/Actions/manualImportActions';
-import { executeCommand } from 'Stores/Actions/commandActions';
+import { addRecentFolder } from 'Store/Actions/manualImportActions';
+import { executeCommand } from 'Store/Actions/commandActions';
 import commandNames from 'Commands/commandNames';
 import ManualImportSelectFolderModalContent from './ManualImportSelectFolderModalContent';
 

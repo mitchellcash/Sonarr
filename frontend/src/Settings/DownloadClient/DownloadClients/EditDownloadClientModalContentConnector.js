@@ -1,8 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import { createSelector } from 'reselect';
-import createProviderSettingsSelector from 'Stores/Selectors/createProviderSettingsSelector';
-import { setDownloadClientValue, setDownloadClientFieldValue, saveDownloadClient, testDownloadClient } from 'Stores/Actions/settingsActions';
-import connectSection from 'Stores/connectSection';
+import createProviderSettingsSelector from 'Store/Selectors/createProviderSettingsSelector';
+import { setDownloadClientValue, setDownloadClientFieldValue, saveDownloadClient, testDownloadClient } from 'Store/Actions/settingsActions';
+import connectSection from 'Store/connectSection';
 import EditDownloadClientModalContent from './EditDownloadClientModalContent';
 
 function createMapStateToProps() {
