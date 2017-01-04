@@ -5,7 +5,7 @@ import isToday from 'Utilities/Date/isToday';
 import isTomorrow from 'Utilities/Date/isTomorrow';
 import isYesterday from 'Utilities/Date/isYesterday';
 
-function getRelativeDate(date, shortDateFormat, showRelativeDates, { timeFormat, includeSeconds = false, timeForToday = false }) {
+function getRelativeDate(date, shortDateFormat, showRelativeDates, { timeFormat, includeSeconds = false, timeForToday = false } = {}) {
   if (!showRelativeDates) {
     return moment(date).format(shortDateFormat);
   }
