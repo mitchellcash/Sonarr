@@ -60,7 +60,7 @@ class LogsNavMenu extends Component {
           </MenuItem>
 
           <MenuItem
-            to={'system/logs/update'}
+            to={'system/logs/updatefiles'}
           >
             Update Log Files
           </MenuItem>

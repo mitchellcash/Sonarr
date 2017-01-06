@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import classNames from 'classNames';
+import { icons } from 'Helpers/Props';
 import Button from './Button';
 import Icon from './Icon';
 import styles from './SpinnerButton.css';
@@ -53,7 +54,7 @@ SpinnerButton.propTypes = {
 
 SpinnerButton.defaultProps = {
   className: styles.button,
-  spinnerIcon: 'icon-sonarr-spinner'
+  spinnerIcon: icons.SPINNER
 };
 
 export default SpinnerButton;

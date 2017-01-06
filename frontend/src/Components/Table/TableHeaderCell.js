@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { sortDirections } from 'Helpers/Props';
+import { icons, sortDirections } from 'Helpers/Props';
 import Link from 'Components/Link';
 import Icon from 'Components/Icon';
 import styles from './TableHeaderCell.css';
@@ -41,8 +41,8 @@ class TableHeaderCell extends Component {
 
     const isSorting = sortable && sortKey === name;
     const sortIcon = sortDirection === sortDirections.ASCENDING ?
-                     'icon-sonarr-sort-asc' :
-                     'icon-sonarr-sort-desc';
+                     icons.SORT_ASCENDING :
+                     icons.SORT_DESCENDING;
 
     return (
       sortable ?

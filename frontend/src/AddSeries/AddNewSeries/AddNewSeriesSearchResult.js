@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { kinds, sizes } from 'Helpers/Props';
+import { icons, kinds, sizes } from 'Helpers/Props';
 import Icon from 'Components/Icon';
 import Label from 'Components/Label';
 import Link from 'Components/Link';
@@ -74,7 +74,8 @@ class AddNewSeriesSearchResult extends Component {
               isExistingSeries &&
                 <Icon
                   className={styles.alreadyExistsIcon}
-                  name="fa fa-check-circle"
+                  name={icons.CHECK_CIRCLE}
+                  size={36}
                   title="Already in your library"
                 />
             }
@@ -84,7 +85,7 @@ class AddNewSeriesSearchResult extends Component {
             <Label size={sizes.LARGE}>
               <Icon
                 className={styles.heart}
-                name="icon-sonarr-heart"
+                name={icons.HEART}
               />
 
               {ratings.value * 10}%

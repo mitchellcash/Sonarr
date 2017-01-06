@@ -78,9 +78,7 @@ class UpdateLogFilesConnector extends Component {
 UpdateLogFilesConnector.propTypes = {
   deleteFilesExecuting: PropTypes.bool.isRequired,
   fetchUpdateLogFiles: PropTypes.func.isRequired,
-  executeCommand: PropTypes.func.isRequired,
-  registerFinishCommandHandler: PropTypes.func.isRequired,
-  unregisterFinishCommandHandler: PropTypes.func.isRequired
+  executeCommand: PropTypes.func.isRequired
 };
 
 export default connect(createMapStateToProps, mapDispatchToProps)(UpdateLogFilesConnector);

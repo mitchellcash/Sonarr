@@ -1,4 +1,5 @@
 import { combineReducers } from 'redux';
+import { routerReducer } from 'react-router-redux';
 import addSeries, { defaultState as defaultAddSeriesState } from './addSeriesReducers';
 import importSeries, { defaultState as defaultImportSeriesState } from './importSeriesReducers';
 import series, { defaultState as defaultSeriesState } from './seriesReducers';
@@ -78,5 +79,6 @@ export default combineReducers({
   captcha,
   oAuth,
   manualImport,
-  rootFolders
+  rootFolders,
+  routing: routerReducer
 });

@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react';
+import { icons } from 'Helpers/Props';
 import Link from 'Components/Link';
 import Icon from 'Components/Icon';
 import styles from './ModalContent.css';
@@ -20,7 +21,10 @@ function ModalContent(props) {
         className={styles.closeButton}
         onPress={onModalClose}
       >
-        <Icon name="icon-sonarr-close-modal" />
+        <Icon
+          name={icons.CLOSE}
+          size={18}
+        />
       </Link>
 
       {children}

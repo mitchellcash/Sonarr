@@ -1,5 +1,6 @@
 import moment from 'moment';
 import React, { PropTypes } from 'react';
+import { icons, kinds } from 'Helpers/Props';
 import colors from 'Styles/Variables/colors';
 import Icon from 'Components/Icon';
 import CircularProgressBar from 'Components/CircularProgressBar';
@@ -33,7 +34,8 @@ function CalendarEventQueueDetails(props) {
     if (errorMessage) {
       return (
         <Icon
-          name="icon-sonarr-import-failed"
+          name={icons.DOWNLOAD}
+          kind={kinds.DANGER}
           title={`Import failed: ${errorMessage}`}
         />
       );
@@ -45,7 +47,8 @@ function CalendarEventQueueDetails(props) {
   if (errorMessage) {
     return (
       <Icon
-        name="icon-sonarr-download-failed"
+        name={icons.DOWNLOADING}
+        kind={kinds.DANGER}
         title={`Download failed: ${errorMessage}`}
       />
     );
@@ -54,7 +57,8 @@ function CalendarEventQueueDetails(props) {
   if (status === 'failed') {
     return (
       <Icon
-        name="icon-sonarr-download-failed"
+        name={icons.DOWNLOADING}
+        kind={kinds.DANGER}
         title="Download failed: check download client for more details"
       />
     );
@@ -63,7 +67,8 @@ function CalendarEventQueueDetails(props) {
   if (status === 'warning') {
     return (
       <Icon
-        name="icon-sonarr-download-warning"
+        name={icons.DOWNLOADING}
+        kind={kinds.WARNING}
         title="Download warning: check download client for more details"
       />
     );
@@ -72,7 +77,7 @@ function CalendarEventQueueDetails(props) {
   if (missingAbsoluteNumber) {
     return (
       <Icon
-        name="icon-sonarr-form-warning"
+        name={icons.WARNING}
         title="Episode does not have an absolute episode number"
       />
     );
@@ -81,7 +86,7 @@ function CalendarEventQueueDetails(props) {
   if (progress < 5) {
     return (
       <Icon
-        name="icon-sonarr-downloading"
+        name={icons.DOWNLOADING}
         title={`Episode is downloading - ${progress.toFixed(1)}% ${title}`}
       />
     );

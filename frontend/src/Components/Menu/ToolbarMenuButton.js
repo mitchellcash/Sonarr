@@ -11,10 +11,14 @@ function ToolbarMenuButton(props) {
   } = props;
 
   return (
-    <MenuButton {...otherProps}>
+    <MenuButton
+      className={styles.menuButton}
+      {...otherProps}
+    >
       <Icon
         className={styles.menuButtonIcon}
         name={iconName}
+        size={22}
       />
       <span className={styles.menuButtonText}>
         {text}

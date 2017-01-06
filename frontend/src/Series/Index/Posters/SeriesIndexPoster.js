@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import getRelativeDate from 'Utilities/Date/getRelativeDate';
 import getProgressBarKind from 'Utilities/Series/getProgressBarKind';
-import { kinds } from 'Helpers/Props';
+import { icons, kinds } from 'Helpers/Props';
 import IconButton from 'Components/IconButton';
 import SpinnerIconButton from 'Components/SpinnerIconButton';
 import Label from 'Components/Label';
@@ -79,7 +79,7 @@ class SeriesIndexPoster extends Component {
         <Label className={styles.controls}>
           <SpinnerIconButton
             className={styles.action}
-            name="icon-sonarr-refresh"
+            name={icons.REFRESH}
             title="Refresh series"
             isSpinning={isRefreshingSeries}
             onPress={onRefreshSeriesPress}
@@ -87,7 +87,7 @@ class SeriesIndexPoster extends Component {
 
           <IconButton
             className={styles.action}
-            name="icon-sonarr-edit"
+            name={icons.EDIT}
             title="Edit Series"
             onPress={this.onEditSeriesPress}
           />
@@ -113,6 +113,7 @@ class SeriesIndexPoster extends Component {
             images={images}
             size={250}
             lazy={true}
+            overflow={true}
           />
         </Link>
 

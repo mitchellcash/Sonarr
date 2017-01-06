@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import { icons } from 'Helpers/Props';
 import episodeEntities from 'Episode/episodeEntities';
 import LoadingIndicator from 'Components/LoadingIndicator';
 import Table from 'Components/Table/Table';
@@ -8,7 +9,6 @@ import PageContent from 'Components/Page/PageContent';
 import PageContentBody from 'Components/Page/PageContentBody';
 import PageToolbar from 'Components/Page/Toolbar/PageToolbar';
 import PageToolbarSection from 'Components/Page/Toolbar/PageToolbarSection';
-import PageToolbarSeparator from 'Components/Page/Toolbar/PageToolbarSeparator';
 import PageToolbarButton from 'Components/Page/Toolbar/PageToolbarButton';
 import QueueRowConnector from './QueueRowConnector';
 
@@ -74,12 +74,11 @@ class Queue extends Component {
         <PageToolbar>
           <PageToolbarSection>
             <PageToolbarButton
-              iconName="icon-sonarr-refresh"
+              iconName={icons.REFRESH}
               title="Refresh"
               animate={fetching}
               onPress={onRefreshPress}
             />
-            <PageToolbarSeparator />
           </PageToolbarSection>
         </PageToolbar>
 

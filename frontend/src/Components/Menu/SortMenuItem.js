@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { sortDirections } from 'Helpers/Props';
+import { icons, sortDirections } from 'Helpers/Props';
 import SelectedMenuItem from './SelectedMenuItem';
 
 class SortMenuItem extends Component {
@@ -31,7 +31,7 @@ class SortMenuItem extends Component {
 
     return (
       <SelectedMenuItem
-        selectedIconName={sortDirection === sortDirections.ASCENDING ? 'icon-sonarr-sort-asc' : 'icon-sonarr-sort-desc'}
+        selectedIconName={sortDirection === sortDirections.ASCENDING ? icons.SORT_ASCENDING : icons.SORT_DESCENDING}
         isSelected={isSelected}
         {...otherProps}
         onPress={this.onPress}

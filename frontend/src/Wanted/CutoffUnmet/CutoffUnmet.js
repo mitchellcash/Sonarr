@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import getSelectedIds from 'Utilities/Table/getSelectedIds';
 import selectAll from 'Utilities/Table/selectAll';
 import toggleSelected from 'Utilities/Table/toggleSelected';
-import { align, kinds } from 'Helpers/Props';
+import { align, icons, kinds } from 'Helpers/Props';
 import LoadingIndicator from 'Components/LoadingIndicator';
 import Table from 'Components/Table/Table';
 import TableBody from 'Components/Table/TableBody';
@@ -138,14 +138,14 @@ class CutoffUnmet extends Component {
         <PageToolbar>
           <PageToolbarSection>
             <PageToolbarButton
-              iconName="icon-sonarr-search"
+              iconName={icons.SEARCH}
               title="Search selected"
               animate={isSearchingForEpisodes}
               onPress={this.onSearchSelectedPress}
             />
 
             <PageToolbarButton
-              iconName="icon-sonarr-monitored"
+              iconName={icons.MONITORED}
               title="Unmonitor selected"
               animate={isSaving}
               onPress={this.onUnmonitorSelectedPress}
@@ -154,7 +154,7 @@ class CutoffUnmet extends Component {
             <PageToolbarSeparator />
 
             <PageToolbarButton
-              iconName="icon-sonarr-search"
+              iconName={icons.SEARCH}
               title="Search all cutoffUnmet"
               animate={isSearchingForCutoffUnmetEpisodes}
               onPress={this.onSearchAllCutoffUnmetPress}

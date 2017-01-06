@@ -1,6 +1,7 @@
 import moment from 'moment';
 import React, { Component, PropTypes } from 'react';
 import classNames from 'classNames';
+import { icons } from 'Helpers/Props';
 import formatTime from 'Utilities/Date/formatTime';
 import padNumber from 'Utilities/Number/padNumber';
 import getStatusStyle from 'Calendar/getStatusStyle';
@@ -88,7 +89,7 @@ class CalendarEvent extends Component {
             {
               !queueItem && grabbed &&
                 <Icon
-                  name="icon-sonarr-downloading"
+                  name={icons.DOWNLOADING}
                   title="Episode is downloading"
                 />
             }

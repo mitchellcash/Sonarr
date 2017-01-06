@@ -20,8 +20,8 @@ module.exports = {
 
   themeBlue: '#35c5f4',
   themeRed: '#c4273c',
-  themeDarkColor: '#4f566f',
-  themeLightColor: '#3a3f51',
+  themeDarkColor: '#3a3f51',
+  themeLightColor: '#4f566f',
 
   torrentColor: '#00853d',
   usenetColor: '#17b1d9',
@@ -35,6 +35,7 @@ module.exports = {
 
   sidebarColor: '#e1e2e3',
   sidebarBackgroundColor: '#3a3f51',
+  sidebarActiveBackgroundColor: '#252833',
 
   // Toolbar
   toolbarColor: '#e1e2e3',

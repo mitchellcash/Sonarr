@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import { icons } from 'Helpers/Props';
 import Menu from 'Components/Menu/Menu';
 import ToolbarMenuButton from 'Components/Menu/ToolbarMenuButton';
 
@@ -16,7 +17,7 @@ class ViewMenu extends Component {
     return (
       <Menu className={className}>
         <ToolbarMenuButton
-          iconName="icon-sonarr-view"
+          iconName={icons.VIEW}
           text="View"
         />
           {children}

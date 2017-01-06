@@ -67,7 +67,7 @@ class QualityProfileSelectInputConnector extends Component {
 
 QualityProfileSelectInputConnector.propTypes = {
   name: PropTypes.string.isRequired,
-  value: PropTypes.number,
+  value: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   values: PropTypes.arrayOf(PropTypes.object).isRequired,
   includeNoChange: PropTypes.bool.isRequired,
   onChange: PropTypes.func.isRequired

@@ -4,7 +4,7 @@ import { kinds, sizes } from 'Helpers/Props';
 import IconButton from 'Components/IconButton';
 import ConfirmModal from 'Components/Modal/ConfirmModal';
 import Label from 'Components/Label';
-import QualityProfileNameConnector from 'Settings/Profile/Quality/QualityProfileNameConnector';
+import QualityProfileNameConnector from 'Settings/Profiles/Quality/QualityProfileNameConnector';
 import EpisodeQuality from 'Episode/EpisodeQuality';
 import EpisodeAiringConnector from './EpisodeAiringConnector';
 import styles from './EpisodeSummary.css';

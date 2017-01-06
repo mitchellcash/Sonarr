@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react';
 import classNames from 'classNames';
+import { icons } from 'Helpers/Props';
 import PageToolbar from 'Components/Page/Toolbar/PageToolbar';
 import PageToolbarSection from 'Components/Page/Toolbar/PageToolbarSection';
 import PageToolbarButton from 'Components/Page/Toolbar/PageToolbarButton';
@@ -23,7 +24,7 @@ function SettingsToolbar(props) {
             styles.advancedSettings,
             advancedSettings && styles.advancedSettingsEnabled
           )}
-          iconName="icon-sonarr-advanced-settings"
+          iconName={icons.ADVANCED_SETTINGS}
           title="Advanced Settings"
           onPress={onAdvancedSettingsPress}
         />
@@ -31,7 +32,7 @@ function SettingsToolbar(props) {
         {
           showSave &&
             <PageToolbarButton
-              iconName="icon-sonarr-save"
+              iconName={icons.SAVE}
               title="Save"
               animate={saving}
               isDisabled={!hasPendingChanges}

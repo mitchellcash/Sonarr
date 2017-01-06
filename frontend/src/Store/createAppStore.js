@@ -3,7 +3,6 @@ import thunk from 'redux-thunk';
 import reducers, { defaultState } from 'Store/Reducers';
 import persistState from 'Store/Middleware/persistState';
 
-
 function createAppStore() {
   const middlewares = compose(
     applyMiddleware(thunk),
@@ -15,10 +14,6 @@ function createAppStore() {
     defaultState,
     middlewares
   );
-
-  // appStore.dispatch(fetchSeries());
-  // appStore.dispatch(fetchTags());
-  // appStore.dispatch(fetchQualityProfiles());
 
   return appStore;
 }

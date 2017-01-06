@@ -1,6 +1,6 @@
 import moment from 'moment';
 import React, { PropTypes } from 'react';
-import { align } from 'Helpers/Props';
+import { align, icons } from 'Helpers/Props';
 import Button from 'Components/Button';
 import Icon from 'Components/Icon';
 import LoadingIndicator from 'Components/LoadingIndicator';
@@ -56,14 +56,14 @@ function CalendarHeader(props) {
           buttonGroupPosition={align.LEFT}
           onPress={onPreviousPress}
         >
-          <Icon name="icon-sonarr-pager-previous" />
+          <Icon name={icons.PAGE_PREVIOUS} />
         </Button>
 
         <Button
           buttonGroupPosition={align.RIGHT}
           onPress={onNextPress}
         >
-          <Icon name="icon-sonarr-pager-next" />
+          <Icon name={icons.PAGE_NEXT} />
         </Button>
 
         <Button

@@ -2,7 +2,6 @@ import _ from 'lodash';
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
-import episodeEntities from 'Episode/episodeEntities';
 import createCommandsSelector from 'Store/Selectors/createCommandsSelector';
 import * as wantedActions from 'Store/Actions/wantedActions';
 import { executeCommand } from 'Store/Actions/commandActions';

@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import { Link as RouterLink } from 'react-router';
 import classNames from 'classNames';
 import styles from './Link.css';
 
@@ -36,17 +37,18 @@ class Link extends Component {
     let el = component;
 
     if (to) {
-      el = 'a';
-
       if (/\w+?:\/\//.test(to)) {
+        el = 'a';
         linkProps.href = to;
         linkProps.target = target || '_blank';
       } else if (to.startsWith(window.Sonarr.UrlBase)) {
-        linkProps.href = to;
-        linkProps.target = target || '_self';
+        el = RouterLink;
+        linkProps.to = to;
+        linkProps.target = target;
       } else {
-        linkProps.href = `${window.Sonarr.UrlBase}/${to.replace(/^\//, '')}`;
-        linkProps.target = target || '_self';
+        el = RouterLink;
+        linkProps.to = `${window.Sonarr.UrlBase}/${to.replace(/^\//, '')}`;
+        linkProps.target = target;
       }
     }
 
@@ -62,12 +64,17 @@ class Link extends Component {
       isDisabled && 'isDisabled'
     );
 
+    const props = {
+      ...otherProps,
+      ...linkProps
+    };
+
+    if (!linkProps.to) {
+      props.onClick = this.onClick;
+    }
+
     return (
-      React.createElement(el, {
-        ...otherProps,
-        ...linkProps,
-        onClick: this.onClick
-      })
+      React.createElement(el, props)
     );
   }
 }

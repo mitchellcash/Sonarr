@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { align } from 'Helpers/Props';
+import { align, icons } from 'Helpers/Props';
 import LoadingIndicator from 'Components/LoadingIndicator';
 import Table from 'Components/Table/Table';
 import TableBody from 'Components/Table/TableBody';
@@ -19,6 +19,7 @@ import LogsTableRow from './LogsTableRow';
 const headers = [
   {
     name: 'level',
+    label: '',
     sortable: true
   },
   {
@@ -70,14 +71,14 @@ class LogsTable extends Component {
             <PageToolbarSeparator />
 
             <PageToolbarButton
-              iconName="icon-sonarr-refresh"
-              animateIconName="icon-sonarr-refresh"
+              iconName={icons.REFRESH}
+              animateIconName={icons.REFRESH}
               animate={fetching}
               onPress={onRefreshPress}
             />
 
             <PageToolbarButton
-              iconName="icon-sonarr-clear"
+              iconName={icons.CLEAR}
               animate={clearLogExecuting}
               onPress={onClearLogsPress}
             />

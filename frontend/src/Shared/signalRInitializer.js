@@ -1,5 +1,4 @@
 import $ from 'jquery';
-import vent from 'vent';
 import Messenger from 'Shared/Messenger';
 import appStore from 'Store/appStore';
 import { updateCommand, finishCommand } from 'Store/Actions/commandActions';
@@ -49,7 +48,6 @@ const signalRInitializer = {
 
     this.signalRconnection.received((message) => {
       console.debug('SignalR: received', message.name, message.body);
-      vent.trigger(`server:${message.name}`, message.body);
 
       const handler = handlers[message.name];
 

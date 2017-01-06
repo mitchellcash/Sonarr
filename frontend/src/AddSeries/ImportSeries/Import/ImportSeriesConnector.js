@@ -8,10 +8,10 @@ import ImportSeries from './ImportSeries';
 
 function createMapStateToProps() {
   return createSelector(
-    (state, { rootFolderId }) => rootFolderId,
+    (state, { params }) => params,
     (state) => state.rootFolders,
     (state) => state.addSeries,
-    (rootFolderId, rootFolders, addSeries) => {
+    (params, rootFolders, addSeries) => {
       const {
         fetching: rootFoldersFetching,
         populated: rootFoldersPopulated,
@@ -19,7 +19,10 @@ function createMapStateToProps() {
         items
       } = rootFolders;
 
+      const rootFolderId = parseInt(params.rootFolderId);
+
       const result = {
+        rootFolderId,
         rootFoldersFetching,
         rootFoldersPopulated,
         rootFoldersError
@@ -92,6 +95,7 @@ class ImportSeriesConnector extends Component {
 }
 
 ImportSeriesConnector.propTypes = {
+  params: PropTypes.object.isRequired,
   rootFoldersPopulated: PropTypes.bool.isRequired,
   setImportSeriesValue: PropTypes.func.isRequired,
   importSeries: PropTypes.func.isRequired,

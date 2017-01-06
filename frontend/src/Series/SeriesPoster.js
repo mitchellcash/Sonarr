@@ -50,7 +50,8 @@ class SeriesPoster extends Component {
     const {
       className,
       size,
-      lazy
+      lazy,
+      overflow
     } = this.props;
 
     const {
@@ -72,6 +73,7 @@ class SeriesPoster extends Component {
         <LazyLoad
           height={size}
           offset={100}
+          overflow={overflow}
           placeholder={
             <img
               className={className}
@@ -102,12 +104,14 @@ SeriesPoster.propTypes = {
   className: PropTypes.string,
   images: PropTypes.arrayOf(PropTypes.object).isRequired,
   size: PropTypes.number.isRequired,
-  lazy: PropTypes.bool.isRequired
+  lazy: PropTypes.bool.isRequired,
+  overflow: PropTypes.bool.isRequired
 };
 
 SeriesPoster.defaultProps = {
   size: 250,
-  lazy: true
+  lazy: true,
+  overflow: false
 };
 
 export default SeriesPoster;

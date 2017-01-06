@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { scrollDirections } from 'Helpers/Props';
+import { icons, scrollDirections } from 'Helpers/Props';
 import Icon from 'Components/Icon';
 import Button from 'Components/Button';
 import Scroller from 'Components/Scroller';
@@ -12,6 +12,23 @@ import RelativeDateCellConnector from 'Components/Table/Cells/RelativeDateCellCo
 import TableRow from 'Components/Table/TableRow';
 import TableRowCell from 'Components/Table/Cells/TableRowCell';
 import styles from './LogsTableRow.css';
+
+function getIconName(level) {
+  switch (level) {
+    case 'trace':
+    case 'debug':
+    case 'info':
+      return icons.INFO;
+    case 'warn':
+      return icons.DANGER;
+    case 'error':
+      return icons.BUG;
+    case 'fatal':
+      return icons.FATAL;
+    default:
+      return icons.UNKNOWN;
+  }
+}
 
 class LogsTableRow extends Component {
 
@@ -58,7 +75,8 @@ class LogsTableRow extends Component {
           className={styles.level}
         >
           <Icon
-            name={`icon-sonarr-log-${level.toLowerCase()}`}
+            className={styles[level.toLowerCase()]}
+            name={getIconName(level.toLowerCase())}
             title={level}
           />
         </TableRowCell>

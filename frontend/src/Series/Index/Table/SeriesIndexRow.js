@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import getProgressBarKind from 'Utilities/Series/getProgressBarKind';
-import Icon from 'Components/Icon';
+import { icons } from 'Helpers/Props';
 import IconButton from 'Components/IconButton';
 import SpinnerIconButton from 'Components/SpinnerIconButton';
 import ProgressBar from 'Components/ProgressBar';
@@ -121,14 +121,14 @@ class SeriesIndexRow extends Component {
 
         <TableRowCell className={styles.actions}>
           <SpinnerIconButton
-            name="icon-sonarr-refresh"
+            name={icons.REFRESH}
             title="Refresh series"
             isSpinning={isRefreshingSeries}
             onPress={onRefreshSeriesPress}
           />
 
           <IconButton
-            name="icon-sonarr-edit"
+            name={icons.EDIT}
             title="Edit Series"
             onPress={this.onEditSeriesPress}
           />

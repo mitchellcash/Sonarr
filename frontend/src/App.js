@@ -1,16 +1,19 @@
-import React, { Component } from 'react';
+import React, { PropTypes } from 'react';
 import { Provider } from 'react-redux';
-import SonarrApp from './SonarrApp';
-import appStore from 'Stores/appStore';
+import { Router } from 'react-router';
+import routes from './routes';
 
-class App extends Component {
-  render() {
-    return (
-      <Provider store={appStore}>
-        <SonarrApp />
-      </Provider>
-    );
-  }
+function App({ store, history }) {
+  return (
+    <Provider store={store}>
+      <Router history={history} routes={routes} />
+    </Provider>
+  );
 }
+
+App.propTypes = {
+  store: PropTypes.object.isRequired,
+  history: PropTypes.object.isRequired
+};
 
 export default App;

@@ -10,8 +10,8 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
 
     <link href="/Content/bootstrap.css" rel='stylesheet' type='text/css'/>
-    <link href="/Content/vendor.css" rel='stylesheet' type='text/css'/>
-    <link href="/Content/sonarr.css" rel='stylesheet' type='text/css'/>
+    <!-- <link href="/Content/vendor.css" rel='stylesheet' type='text/css'/> -->
+    <!-- <link href="/Content/sonarr.css" rel='stylesheet' type='text/css'/> -->
 
     <link rel="apple-touch-icon" href="/Content/Images/touch/60.png"/>
     <link rel="apple-touch-icon" sizes="76x76" href="/Content/Images/touch/76.png"/>
@@ -21,31 +21,8 @@
   </head>
 
   <body>
-    <header id="navbar-region" class="topnavbar-wrapper"></header>
-    <div id="sidebar-region"></div>
-    <div id="actionbar-region"></div>
-    <section id="content-section">
-      <!-- <div id="content-wrapper"> -->
-      <div class="container-fluid" id="main-region">
-        <div class="col-xs-12">
-          <h1 class="loading-message">Loading Battlestation</h1>
-          <div class="spinner-container">
-            <div class="ball-scale-ripple-multiple spinner">
-              <div class="spinner-item"></div>
-              <div class="spinner-item"></div>
-              <div class="spinner-item"></div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- </div> -->
-      <div id="footer-region"></div>
-    </section>
-    <!-- Page footer-->
-    <!--<footer>-->
-    <!--<span>&copy; 2015 - Sonarr</span>-->
-    <!--</footer>-->
-    <div id="fullscreen-modal-region"></div>
+    <div id="root" class="root">
+    </div>
   </body>
 
   <div id="notification-region"></div>
@@ -63,8 +40,8 @@
     };
   </script>
   <script src="/polyfills.js"></script>
-  <script src="/handlebars.runtime.js"></script>
-  <script src="/templates.js"></script>
+  <!-- <script src="/handlebars.runtime.js"></script> -->
+  <!-- <script src="/templates.js"></script> -->
   <script src="/vendor.js"></script>
   <script src="/main.js"></script>
 

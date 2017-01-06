@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import { icons } from 'Helpers/Props';
 import LoadingIndicator from 'Components/LoadingIndicator';
 import Table from 'Components/Table/Table';
 import PageContent from 'Components/Page/PageContent';
@@ -51,14 +52,14 @@ class LogFiles extends Component {
             <PageToolbarSeparator />
 
             <PageToolbarButton
-              iconName="icon-sonarr-refresh"
-              animateIconName="icon-sonarr-refresh"
+              iconName={icons.REFRESH}
+              animateIconName={icons.REFRESH}
               animate={fetching}
               onPress={onRefreshPress}
             />
 
             <PageToolbarButton
-              iconName="icon-sonarr-clear"
+              iconName={icons.CLEAR}
               animate={deleteFilesExecuting}
               onPress={onDeleteFilesPress}
             />

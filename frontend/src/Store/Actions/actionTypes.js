@@ -14,6 +14,11 @@ export const SAVE_SETTINGS = 'SAVE_SETTINGS';
 export const REMOVE_ITEM = 'REMOVE_ITEM';
 
 //
+// App
+
+export const INIT_SIGNALR = 'INIT_SIGNALR';
+
+//
 // Add Series
 
 export const LOOKUP_SERIES = 'LOOKUP_SERIES';

@@ -53,7 +53,10 @@ class BackupsConnector extends Component {
   // Listeners
 
   onBackupPress = () => {
-    this.props.executeCommand({ name: commandNames.BACKUP });
+    this.props.executeCommand({
+      name: commandNames.BACKUP,
+      type: 'manual'
+    });
   }
 
   //

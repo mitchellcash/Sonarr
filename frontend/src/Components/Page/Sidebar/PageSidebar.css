@@ -1,0 +1,16 @@
+.sidebar {
+  flex: 0 0 210px;
+  overflow-y: auto;
+  width: 210px;
+  background-color: $sidebarBackgroundColor;
+  color: $white;
+}
+
+@media only screen and (max-device-width: $breakpointSmall) {
+  .sidebar {
+    position: absolute;
+    top: 60px;
+    bottom: 0;
+    z-index: 1;
+  }
+}

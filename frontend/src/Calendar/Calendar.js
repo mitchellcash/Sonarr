@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import { icons } from 'Helpers/Props';
 import LoadingIndicator from 'Components/LoadingIndicator';
 import * as calendarViews from './calendarViews';
 import CalendarHeaderConnector from './Header/CalendarHeaderConnector';

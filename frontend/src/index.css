@@ -1,0 +1,30 @@
+@import 'Content/Fonts/fonts.css';
+
+@import 'Content/Fonts/font-awesome.css';
+
+html,
+body,
+.root {
+  height: 100%; /* needed for proper layout */
+}
+
+body {
+  overflow: hidden;
+  font-family: $defaultFontFamily;
+}
+
+.root {
+  overflow: hidden;
+}
+
+@media only screen and (max-device-width: $breakpointSmall) {
+  html,
+  body,
+  .root {
+    height: auto;
+  }
+
+  body {
+    overflow-y: auto;
+  }
+}

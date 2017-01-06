@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import { icons } from 'Helpers/Props';
 import Icon from 'Components/Icon';
 import MonitorToggleButton from 'Components/MonitorToggleButton';
 import TableRow from 'Components/Table/TableRow';
@@ -39,7 +40,7 @@ class SeasonPassRow extends Component {
         <TableRowCell className={styles.status}>
           <Icon
             className={styles.statusIcon}
-            name={status === 'ended' ? 'icon-sonarr-series-ended' : 'icon-sonarr-series-continuing'}
+            name={status === 'ended' ? icons.SERIES_ENDED : icons.SERIES_CONTINUING}
             title={status === 'ended' ? 'Ended' : 'Continuing'}
 
           />

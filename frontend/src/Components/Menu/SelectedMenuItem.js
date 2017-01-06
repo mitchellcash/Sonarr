@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react';
+import { icons } from 'Helpers/Props';
 import Icon from 'Components/Icon';
 import MenuItem from './MenuItem';
 import styles from './SelectedMenuItem.css';
@@ -34,7 +35,7 @@ SelectedMenuItem.propTypes = {
 };
 
 SelectedMenuItem.defaultProps = {
-  selectedIconName: 'icon-sonarr-check'
+  selectedIconName: icons.CHECK
 };
 
 export default SelectedMenuItem;

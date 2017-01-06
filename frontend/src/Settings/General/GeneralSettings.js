@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { inputTypes, kinds } from 'Helpers/Props';
+import { icons, inputTypes, kinds } from 'Helpers/Props';
 import LoadingIndicator from 'Components/LoadingIndicator';
 import FieldSet from 'Components/FieldSet';
 import Icon from 'Components/Icon';
@@ -291,7 +291,7 @@ class GeneralSettings extends Component {
                           kind={kinds.DANGER}
                           onPress={this.onResetApiKeyPress}
                         >
-                          <Icon name={isResettingApiKey ? 'icon-sonarr-refresh fa-spin' : 'icon-sonarr-refresh'} />
+                          <Icon name={isResettingApiKey ? `${icons.REFRESH} fa-spin` : icons.REFRESH} />
                         </FormInputButton>
                       }
                       onChange={onInputChange}

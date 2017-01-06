@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import { icons } from 'Helpers/Props';
 import LoadingIndicator from 'Components/LoadingIndicator';
 import Table from 'Components/Table/Table';
 import TableBody from 'Components/Table/TableBody';
@@ -56,7 +57,7 @@ class Blacklist extends Component {
         <PageToolbar>
           <PageToolbarSection>
             <PageToolbarButton
-              iconName="icon-sonarr-clear"
+              iconName={icons.CLEAR}
               title="Clear Blacklist"
               animate={isClearingBlacklistExecuting}
               onPress={onClearBlacklistPress}

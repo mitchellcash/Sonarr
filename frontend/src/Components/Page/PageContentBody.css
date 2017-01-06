@@ -1,6 +1,13 @@
 .contentBody {
-  flex: 1 1 auto;
+  flex: 1;
+}
+
+.innerContentBody {
   padding: 20px;
-  /* Disabled until more of the UI is overhauled */
-  /* overflow-y: auto; */
+}
+
+@media only screen and (max-device-width: $breakpointSmall) {
+  .contentBody {
+    overflow-y: hidden;
+  }
 }

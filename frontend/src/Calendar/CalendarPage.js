@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { align } from 'Helpers/Props';
+import { align, icons } from 'Helpers/Props';
 import PageContent from 'Components/Page/PageContent';
 import PageContentBody from 'Components/Page/PageContentBody';
 import PageToolbar from 'Components/Page/Toolbar/PageToolbar';
@@ -53,7 +53,7 @@ class CalendarPage extends Component {
         <PageToolbar>
           <PageToolbarSection>
             <PageToolbarButton
-              iconName="icon-sonarr-calendar"
+              iconName={icons.CALENDAR}
               title="Get iCal link"
               onPress={this.onGetCalendarLinkPress}
             />

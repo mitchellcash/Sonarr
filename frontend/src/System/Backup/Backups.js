@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import { icons } from 'Helpers/Props';
 import Icon from 'Components/Icon';
 import Link from 'Components/Link';
 import LoadingIndicator from 'Components/LoadingIndicator';
@@ -50,7 +51,7 @@ class Backups extends Component {
         <PageToolbar>
           <PageToolbarSection>
             <PageToolbarButton
-              iconName="icon-sonarr-file-text"
+              iconName={icons.BACKUP}
               animate={backupExecuting}
               onPress={onBackupPress}
             />
@@ -83,14 +84,14 @@ class Backups extends Component {
                         time
                       } = item;
 
-                      let iconClassName = 'icon-sonarr-backup-scheduled';
+                      let iconClassName = icons.SCHEDULED;
                       let iconTooltip = 'Scheduled';
 
                       if (type === 'manual') {
-                        iconClassName = 'icon-sonarr-backup-manual';
+                        iconClassName = icons.INTERACTIVE;
                         iconTooltip = 'Manual';
                       } else if (item === 'update') {
-                        iconClassName = 'icon-sonarr-backup-update';
+                        iconClassName = icons.UPDATE;
                         iconTooltip = 'Before update';
                       }
 

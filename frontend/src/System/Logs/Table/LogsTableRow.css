@@ -25,3 +25,27 @@
   font-family: $monoSpaceFontFamily;
   line-height: 1.52857143;
 }
+
+.info {
+  color: #1e90ff;
+}
+
+.debug {
+  color: #808080;
+}
+
+.trace {
+  color: #d3d3d3;
+}
+
+.warn {
+  color: $warningColor;
+}
+
+.error {
+  color: $dangerColor;
+}
+
+.fatal {
+  color: $purple;
+}

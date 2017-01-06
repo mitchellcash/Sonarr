@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { align, sortDirections } from 'Helpers/Props';
+import { align, icons, sortDirections } from 'Helpers/Props';
 import LoadingIndicator from 'Components/LoadingIndicator';
 import PageContent from 'Components/Page/PageContent';
 import PageContentBody from 'Components/Page/PageContentBody';
@@ -58,14 +58,14 @@ class SeriesIndex extends Component {
         <PageToolbar>
           <PageToolbarSection>
             <PageToolbarButton
-              iconName="icon-sonarr-refresh"
+              iconName={icons.REFRESH}
               title="Update all series"
               animate={isRefreshingSeries}
               onPress={onRefreshSeriesPress}
             />
 
             <PageToolbarButton
-              iconName="icon-sonarr-rss"
+              iconName={icons.RSS}
               title="Start RSS Sync"
               animate={isRssSyncExecuting}
               onPress={onRssSyncPress}

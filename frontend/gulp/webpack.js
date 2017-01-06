@@ -32,7 +32,7 @@ const config = {
   },
   entry: {
     vendor: 'vendor.js',
-    main: 'main.js'
+    main: 'index.js'
   },
   resolve: {
     root: [
@@ -104,9 +104,26 @@ const config = {
           knownHelpers: ['if_eq', 'unless_eq', 'if_gt']
         }
       },
+
+      // Load all css files except index.css
       {
-        test: /\.css$/,
+        test: /^(?:(?!index\.css$).)*\.css$/,
         loader: 'style!css-loader?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!postcss-loader'
+      },
+
+      // Load index.css, but don't prefix/postfix the class name
+      {
+        test: /index.css$/,
+        loader: 'style!css-loader?modules&importLoaders=1&localIdentName=[local]!postcss-loader'
+      },
+
+      {
+        test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+        loader: 'url?limit=10240&mimetype=application/font-woff&emitFile=false&name=[name].[ext]&publicPath=/Content/Fonts/'
+      },
+      {
+        test: /\.(ttf|eot|eot?#iefix|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+        loader: 'file-loader?emitFile=false&name=[name].[ext]&publicPath=/Content/Fonts/'
       }
     ]
   },

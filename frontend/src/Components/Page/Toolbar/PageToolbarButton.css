@@ -3,9 +3,13 @@
 
   width: 60px;
   text-align: center;
-  font-size: 22px;
+  line-height: 60px;
 
   &:hover {
     color: $toobarButtonHoverColor;
   }
+}
+
+.icon {
+  vertical-align: middle;
 }

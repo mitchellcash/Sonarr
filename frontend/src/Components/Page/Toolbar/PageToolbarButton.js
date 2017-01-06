@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import classNames from 'classNames';
+import { icons } from 'Helpers/Props';
 import Link from 'Components/Link';
 import Icon from 'Components/Icon';
 import styles from './PageToolbarButton.css';
@@ -26,10 +27,14 @@ class PageToolbarButton extends Component {
         onPress={onPress}
         {...otherProps}
       >
-        <Icon name={classNames(
-          icon,
-          animate && 'fa-spin'
-        )} />
+        <Icon
+          className={styles.icon}
+          name={classNames(
+            icon,
+            animate && 'fa-spin'
+          )}
+          size={22}
+        />
       </Link>
     );
   }
@@ -44,7 +49,7 @@ PageToolbarButton.propTypes = {
 };
 
 PageToolbarButton.defaultProps = {
-  animateIconName: 'icon-sonarr-spinner',
+  animateIconName: icons.SPINNER,
   animate: false
 };
 

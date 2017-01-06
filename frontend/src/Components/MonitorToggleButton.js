@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import { icons } from 'Helpers/Props';
 import SpinnerIconButton from 'Components/SpinnerIconButton';
 import styles from './MonitorToggleButton.css';
 
@@ -23,7 +24,7 @@ class MonitorToggleButton extends Component {
 
     const monitoredMessage = 'Monitored, click to unmonitor';
     const unmonitoredMessage = 'Unmonitored, click to monitor';
-    const iconName = monitored ? 'icon-sonarr-monitored' : 'icon-sonarr-unmonitored';
+    const iconName = monitored ? icons.MONITORED : icons.UNMONITORED;
 
     return (
       <SpinnerIconButton

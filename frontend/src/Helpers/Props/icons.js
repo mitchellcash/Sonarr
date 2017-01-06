@@ -1,9 +1,53 @@
+export const ACTIVITY = 'fa fa-clock-o';
+export const ADD = 'fa fa-plus';
+export const ADVANCED_SETTINGS = 'fa fa-cog';
+export const BACKUP = 'fa fa-file-text';
+export const BUG = 'fa fa-bug';
+export const CALENDAR = 'fa fa-calendar';
 export const CARET_DOWN = 'fa fa-caret-down';
+export const CHECK = 'fa fa-check';
+export const CHECK_CIRCLE = 'fa fa-check-circle';
+export const CHECK_INDETERMINATE = 'fa fa-minus';
+export const CLEAR = 'fa fa-trash';
+export const CLOSE = 'fa fa-times';
+export const DANGER = 'fa fa-exclamation-circle';
+export const DOWNLOAD = 'fa fa-download';
+export const DOWNLOADED = 'fa fa-inbox';
+export const DOWNLOADING = 'fa fa-cloud-download';
+export const EDIT = 'fa fa-wrench';
+export const FATAL = 'fa fa-times-circle';
+export const FILTER = 'fa fa-filter';
+export const HEART = 'fa fa-heart';
+export const INFO = 'fa fa-info-circle';
+export const INTERACTIVE = 'fa fa-user';
+export const MONITORED = 'fa fa-bookmark';
+export const PAGE_FIRST = 'fa fa-fast-backward';
+export const PAGE_PREVIOUS = 'fa fa-backward';
+export const PAGE_NEXT = 'fa fa-forward';
+export const PAGE_LAST = 'fa fa-fast-forward';
+export const PENDING = 'fa fa-clock-o';
+export const QUEUED = 'fa fa-cloud';
+export const REFRESH = 'fa fa-refresh';
+export const REMOVE = 'fa fa-remove';
+export const RSS = 'fa fa-rss';
+export const SAVE = 'fa fa-floppy-o';
+export const SCHEDULED = 'fa fa-clock-o';
 export const SEARCH = 'fa fa-search';
+export const SERIES_CONTINUING = 'fa fa-play';
+export const SERIES_ENDED = 'fa fa-stop';
+export const SETTINGS = 'fa fa-cogs';
+export const SORT = 'fa fa-sort';
+export const SORT_ASCENDING = 'fa fa-sort-asc';
+export const SORT_DESCENDING = 'fa fa-sort-desc';
+export const SPIN = 'fa-spin';
+export const SPINNER = 'fa fa-spinner';
+export const SYSTEM = 'fa fa-laptop';
+export const UNKNOWN = 'fa fa-question';
+export const UNMONITORED = 'fa fa-bookmark-o';
+export const UPDATE = 'fa fa-retweet';
+export const VIEW = 'fa fa-eye';
 export const WARNING = 'fa fa-exclamation-triangle';
 
 export const all = [
-  CARET_DOWN,
-  SEARCH,
-  WARNING
+  // Add all icons
 ];

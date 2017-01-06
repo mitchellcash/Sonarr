@@ -1,8 +1,7 @@
 import React, { Component, PropTypes } from 'react';
+import { icons } from 'Helpers/Props';
 import Menu from 'Components/Menu/Menu';
 import ToolbarMenuButton from 'Components/Menu/ToolbarMenuButton';
-
-import styles from './SortMenu.css';
 
 class SortMenu extends Component {
 
@@ -18,7 +17,7 @@ class SortMenu extends Component {
     return (
       <Menu className={className}>
         <ToolbarMenuButton
-          iconName="icon-sonarr-sort-by"
+          iconName={icons.SORT}
           text="Sort"
         />
           {children}

@@ -1,23 +1,17 @@
-import React, { Component, PropTypes } from 'react';
+import React, { PropTypes } from 'react';
 import styles from './PageContent.css';
 
-class PageContent extends Component {
+function PageContent(props) {
+  const {
+    className,
+    children
+  } = props;
 
-  //
-  // Render
-
-  render() {
-    const {
-      className,
-      children
-    } = this.props;
-
-    return (
-      <div className={className}>
-        {children}
-      </div>
-    );
-  }
+  return (
+    <div className={className}>
+      {children}
+    </div>
+  );
 }
 
 PageContent.propTypes = {

@@ -4,7 +4,6 @@ var watch = require('gulp-watch');
 var paths = require('./helpers/paths.js');
 
 require('./handlebars.js');
-require('./less.js');
 require('./copy.js');
 require('./webpack.js');
 
@@ -18,13 +17,12 @@ function watchTask(glob, task) {
   });
 }
 
-gulp.task('watch', ['handlebars', 'less', 'copyHtml', 'copyContent', 'copyJs'], () => {
+gulp.task('watch', ['handlebars', 'copyHtml', 'copyContent', 'copyJs'], () => {
   livereload.listen();
 
   gulp.start('webpackWatch');
 
   watchTask(paths.src.templates, 'handlebars');
-  watchTask(paths.src.less, 'less');
   watchTask(paths.src.html, 'copyHtml');
-  watchTask([paths.src.content + '**/*.*', '!**/*.less'], 'copyContent');
+  watchTask([paths.src.content + '**/*.*'], 'copyContent');
 });

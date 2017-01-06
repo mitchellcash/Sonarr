@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import { icons } from 'Helpers/Props';
 import Button from 'Components/Button';
 import Icon from 'Components/Icon';
 import LoadingIndicator from 'Components/LoadingIndicator';
@@ -64,7 +65,8 @@ class AddNewSeries extends Component {
           <div className={styles.searchContainer}>
             <div className={styles.searchIconContainer}>
               <Icon
-                name="icon-sonarr-search"
+                name={icons.SEARCH}
+                size={20}
               />
             </div>
 
@@ -81,7 +83,8 @@ class AddNewSeries extends Component {
               onPress={this.onClearSeriesLookupPress}
             >
               <Icon
-                name="icon-sonarr-remove"
+                name={icons.REMOVE}
+                size={20}
               />
             </Button>
           </div>

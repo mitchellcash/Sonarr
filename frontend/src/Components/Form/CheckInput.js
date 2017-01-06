@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import classNames from 'classNames';
-import { kinds } from 'Helpers/Props';
+import { icons, kinds } from 'Helpers/Props';
 import Icon from 'Components/Icon';
 import FormInputHelpText from './FormInputHelpText';
 import styles from './CheckInput.css';
@@ -116,12 +116,12 @@ class CheckInput extends Component {
           >
             {
               isChecked &&
-                <Icon name="icon-sonarr-check" />
+                <Icon name={icons.CHECK} />
             }
 
             {
               isIndeterminate &&
-                <Icon name="icon-sonarr-indeterminate" />
+                <Icon name={icons.CHECK_INDETERMINATE} />
             }
           </div>
 

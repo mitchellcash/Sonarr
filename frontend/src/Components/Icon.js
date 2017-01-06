@@ -13,6 +13,7 @@ class Icon extends Component {
       className,
       name,
       kind,
+      size,
       title
     } = this.props;
 
@@ -24,6 +25,9 @@ class Icon extends Component {
           styles[kind]
         )}
         title={title}
+        style={{
+          fontSize: `${size}px`
+        }}
       >
       </icon>
     );
@@ -36,11 +40,13 @@ Icon.propTypes = {
   name: PropTypes.string.isRequired,
   // name: PropTypes.oneOf(icons.ALL).isRequired,
   kind: PropTypes.string.isRequired,
+  size: PropTypes.number.isRequired,
   title: PropTypes.string
 };
 
 Icon.defaultProps = {
-  kind: kinds.DEFAULT
+  kind: kinds.DEFAULT,
+  size: 14
 };
 
 export default Icon;

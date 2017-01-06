@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react';
+import { icons } from 'Helpers/Props';
 import IconButton from './IconButton';
 
 function SpinnerIconButton(props) {
@@ -24,7 +25,7 @@ SpinnerIconButton.propTypes = {
 };
 
 SpinnerIconButton.defaultProps = {
-  spinningName: 'icon-sonarr-spinner'
+  spinningName: icons.SPINNER
 };
 
 export default SpinnerIconButton;
