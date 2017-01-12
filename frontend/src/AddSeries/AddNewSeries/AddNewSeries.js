@@ -17,6 +17,8 @@ class AddNewSeries extends Component {
   constructor(props, context) {
     super(props, context);
 
+    this._seriesLookupTimeout = null;
+
     this.state = {
       term: ''
     };
@@ -35,10 +37,16 @@ class AddNewSeries extends Component {
   // Listeners
 
   onSearchInputChange = ({ value }) => {
+    if (this._seriesLookupTimeout) {
+      clearTimeout(this._seriesLookupTimeout);
+    }
+
     this.setState({ term: value }, () => {
-      if (value && value.length > 2) {
-        this.props.onSeriesLookupChange(value);
-      }
+      this._seriesLookupTimeout = setTimeout(() => {
+        if (value && value.length > 2) {
+          this.props.onSeriesLookupChange(value);
+        }
+      }, 200);
     });
   }
 
