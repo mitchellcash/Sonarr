@@ -6,9 +6,7 @@ function createQualityProfileSelector() {
     (state, { qualityProfileId }) => qualityProfileId,
     (state) => state.settings.qualityProfiles.items,
     (qualityProfileId, qualityProfiles) => {
-      var test = _.find(qualityProfiles, { id: qualityProfileId });
-
-      return test;
+      return _.find(qualityProfiles, { id: qualityProfileId });
     }
   );
 }

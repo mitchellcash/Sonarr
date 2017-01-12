@@ -1,42 +1,12 @@
 import $ from 'jquery';
+import createFetchHandler from './Creators/createFetchHandler';
 import * as types from './actionTypes';
-import { set, update } from './baseActions';
 import { updateRelease } from './releaseActions';
 
 const section = 'releases';
 
 const releaseActionHandlers = {
-  [types.FETCH_RELEASES]: function(payload) {
-    return function(dispatch, getState) {
-      dispatch(set({ section, fetching: true }));
-
-      const promise = $.ajax({
-        url: '/release',
-        data: payload,
-        traditional: true
-      });
-
-      promise.done((data) => {
-        dispatch(update({ section, data }));
-
-        dispatch(set({
-          section,
-          fetching: false,
-          populated: true,
-          error: null
-        }));
-      });
-
-      promise.fail((xhr) => {
-        dispatch(set({
-          section,
-          fetching: false,
-          populated: false,
-          error: xhr
-        }));
-      });
-    };
-  },
+  [types.FETCH_RELEASES]: createFetchHandler(section, '/release'),
 
   [types.GRAB_RELEASE]: function(payload) {
     return function(dispatch, getState) {

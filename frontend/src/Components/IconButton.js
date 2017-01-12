@@ -3,7 +3,14 @@ import Link from './Link';
 import Icon from './Icon';
 import styles from './IconButton.css';
 
-function IconButton({ className, name, ...otherProps }) {
+function IconButton(props) {
+  const {
+    className,
+    name,
+    size,
+    ...otherProps
+  } = props;
+
   return (
     <Link
       className={className}
@@ -11,6 +18,7 @@ function IconButton({ className, name, ...otherProps }) {
     >
       <Icon
         name={name}
+        size={size}
       />
     </Link>
   );
@@ -18,7 +26,8 @@ function IconButton({ className, name, ...otherProps }) {
 
 IconButton.propTypes = {
   className: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired
+  name: PropTypes.string.isRequired,
+  size: PropTypes.number
 };
 
 IconButton.defaultProps = {

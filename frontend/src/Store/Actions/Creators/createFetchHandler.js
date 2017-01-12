@@ -7,7 +7,9 @@ function createFetchHandler(section, url) {
       dispatch(set({ section, fetching: true }));
 
       const promise = $.ajax({
-        url
+        url,
+        data: payload,
+        traditional: true
       });
 
       promise.done((data) => {

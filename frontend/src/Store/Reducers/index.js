@@ -25,6 +25,7 @@ import captcha, { defaultState as defaultCaptchaState } from './captchaReducers'
 import oAuth, { defaultState as defaultOAuthState } from './oAuthReducers';
 import manualImport, { defaultState as defaultManualImportState } from './manualImportReducers';
 import rootFolders, { defaultState as defaultRootFoldersState } from './rootFolderReducers';
+import organizePreview, { defaultState as defaultOrganizePreviewState } from './organizePreviewReducers';
 
 export const defaultState = {
   addSeries: defaultAddSeriesState,
@@ -51,7 +52,8 @@ export const defaultState = {
   captcha: defaultCaptchaState,
   oAuth: defaultOAuthState,
   manualImport: defaultManualImportState,
-  rootFolders: defaultRootFoldersState
+  rootFolders: defaultRootFoldersState,
+  organizePreview: defaultOrganizePreviewState
 };
 
 export default combineReducers({
@@ -80,5 +82,6 @@ export default combineReducers({
   oAuth,
   manualImport,
   rootFolders,
+  organizePreview,
   routing: routerReducer
 });

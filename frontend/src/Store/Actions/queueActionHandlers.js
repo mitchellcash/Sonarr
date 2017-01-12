@@ -1,76 +1,14 @@
 import $ from 'jquery';
 import serverSideCollectionHandlers from 'Utilities/serverSideCollectionHandlers';
+import createFetchHandler from './Creators/createFetchHandler';
 import createServerSideCollectionHandlers from './Creators/createServerSideCollectionHandlers';
 import * as types from './actionTypes';
-import { set, update, updateItem } from './baseActions';
+import { updateItem } from './baseActions';
 import { fetchQueue } from './queueActions';
 
 const queueActionHandlers = {
-  [types.FETCH_QUEUE_STATUS]: function(payload) {
-    const section = 'status';
-
-    return function(dispatch, getState) {
-      dispatch(set({ section, fetching: true }));
-
-      const promise = $.ajax({
-        url: '/queue/status'
-      });
-
-      promise.done((data) => {
-        dispatch(update({ section, data }));
-
-        dispatch(set({
-          section,
-          fetching: false,
-          populated: true,
-          error: null
-        }));
-      });
-
-      promise.fail((xhr) => {
-        dispatch(set({
-          section,
-          fetching: false,
-          populated: false,
-          error: xhr
-        }));
-      });
-    };
-  },
-
-  [types.FETCH_QUEUE_DETAILS]: function(payload) {
-    const section = 'details';
-
-    return function(dispatch, getState) {
-      dispatch(set({ section, fetching: true }));
-
-      const promise = $.ajax({
-        url: '/queue/details',
-        data: payload,
-        traditional: true
-      });
-
-      promise.done((data) => {
-        dispatch(update({ section, data }));
-
-        dispatch(set({
-          section,
-          fetching: false,
-          populated: true,
-          error: null
-        }));
-      });
-
-      promise.fail((xhr) => {
-        dispatch(set({
-          section,
-          fetching: false,
-          populated: false,
-          error: xhr
-        }));
-      });
-    };
-  },
+  [types.FETCH_QUEUE_STATUS]: createFetchHandler('status', '/queue/status'),
+  [types.FETCH_QUEUE_DETAILS]: createFetchHandler('details', '/queue/details'),
 
   ...createServerSideCollectionHandlers('paged', '/queue', (state) => state.queue, {
     [serverSideCollectionHandlers.FETCH]: types.FETCH_QUEUE,

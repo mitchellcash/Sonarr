@@ -1,42 +1,13 @@
 import _ from 'lodash';
 import $ from 'jquery';
+import createFetchHandler from './Creators/createFetchHandler';
 import * as types from './actionTypes';
-import { set, update, updateItem } from './baseActions';
+import { updateItem } from './baseActions';
 
 const section = 'episodes';
 
 const episodeActionHandlers = {
-  [types.FETCH_EPISODES]: function(payload) {
-    return function(dispatch, getState) {
-      dispatch(set({ section, fetching: true }));
-
-      const promise = $.ajax({
-        url: '/episode',
-        data: payload,
-        traditional: true
-      });
-
-      promise.done((data) => {
-        dispatch(update({ section, data }));
-
-        dispatch(set({
-          section,
-          fetching: false,
-          populated: true,
-          error: null
-        }));
-      });
-
-      promise.fail((xhr) => {
-        dispatch(set({
-          section,
-          fetching: false,
-          populated: false,
-          error: xhr
-        }));
-      });
-    };
-  },
+  [types.FETCH_EPISODES]: createFetchHandler(section, '/episode'),
 
   [types.TOGGLE_EPISODE_MONITORED]: function(payload) {
     return function(dispatch, getState) {
