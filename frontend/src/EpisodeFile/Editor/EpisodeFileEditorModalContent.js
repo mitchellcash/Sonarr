@@ -19,8 +19,7 @@ import styles from './EpisodeFileEditorModalContent.css';
 const headers = [
   {
     name: 'episodeNumber',
-    label: 'Episode',
-    sortable: true
+    label: 'Episode'
   },
   {
     name: 'relativePath',
@@ -28,8 +27,7 @@ const headers = [
   },
   {
     name: 'airDateUtc',
-    label: 'Air Date',
-    sortable: true
+    label: 'Air Date'
   },
   {
     name: 'quality',
