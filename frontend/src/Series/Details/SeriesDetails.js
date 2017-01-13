@@ -12,8 +12,9 @@ import PageToolbar from 'Components/Page/Toolbar/PageToolbar';
 import PageToolbarSection from 'Components/Page/Toolbar/PageToolbarSection';
 import PageToolbarSeparator from 'Components/Page/Toolbar/PageToolbarSeparator';
 import PageToolbarButton from 'Components/Page/Toolbar/PageToolbarButton';
-import QualityProfileNameConnector from 'Settings/Profiles/Quality/QualityProfileNameConnector';
+import EpisodeFileEditorModal from 'EpisodeFile/Editor/EpisodeFileEditorModal';
 import OrganizePreviewModalConnector from 'Organize/OrganizePreviewModalConnector';
+import QualityProfileNameConnector from 'Settings/Profiles/Quality/QualityProfileNameConnector';
 import SeriesPoster from 'Series/SeriesPoster';
 import EditSeriesModalConnector from 'Series/Edit/EditSeriesModalConnector';
 import DeleteSeriesModal from 'Series/Delete/DeleteSeriesModal';
@@ -37,6 +38,7 @@ class SeriesDetails extends Component {
 
     this.state = {
       isOrganizeModalOpen: false,
+      isManageEpisodesOpen: false,
       isEditSeriesModalOpen: false,
       isDeleteSeriesModalOpen: false
     };
@@ -51,6 +53,14 @@ class SeriesDetails extends Component {
 
   onOrganizeModalClose = () => {
     this.setState({ isOrganizeModalOpen: false });
+  }
+
+  onManageEpisodesPress = () => {
+    this.setState({ isManageEpisodesOpen: true });
+  }
+
+  onManageEpisodesModalClose = () => {
+    this.setState({ isManageEpisodesOpen: false });
   }
 
   onEditSeriesPress = () => {
@@ -96,6 +106,7 @@ class SeriesDetails extends Component {
 
     const {
       isOrganizeModalOpen,
+      isManageEpisodesOpen,
       isEditSeriesModalOpen,
       isDeleteSeriesModalOpen
     } = this.state;
@@ -137,7 +148,7 @@ class SeriesDetails extends Component {
             <PageToolbarButton
               iconName={icons.EPISODE_FILE}
               title="Manage episode files in this series"
-              // onPress={onSearchPress}
+              onPress={this.onManageEpisodesPress}
             />
 
             <PageToolbarSeparator />
@@ -280,6 +291,12 @@ class SeriesDetails extends Component {
             isOpen={isOrganizeModalOpen}
             seriesId={id}
             onModalClose={this.onOrganizeModalClose}
+          />
+
+          <EpisodeFileEditorModal
+            isOpen={isManageEpisodesOpen}
+            seriesId={id}
+            onModalClose={this.onManageEpisodesModalClose}
           />
 
           <EditSeriesModalConnector

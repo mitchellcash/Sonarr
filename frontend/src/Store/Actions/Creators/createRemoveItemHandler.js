@@ -4,12 +4,12 @@ import { set, removeItem } from '../baseActions';
 function createRemoveItemHandler(section, url, getFromState) {
   return function(payload) {
     return function(dispatch, getState) {
-      dispatch(set({ section, deleting: true }));
-
       const {
         id,
         ...queryParms
       } = payload;
+
+      dispatch(set({ section, deleting: true }));
 
       const ajaxOptions = {
         url: `${url}/${id}?${$.param(queryParms, true)}`,
