@@ -6,7 +6,7 @@ import createCommandsSelector from 'Store/Selectors/createCommandsSelector';
 import { fetchSeries } from 'Store/Actions/seriesActions';
 import { setSeriesSort, setSeriesFilter, setSeriesView } from 'Store/Actions/seriesIndexActions';
 import { executeCommand } from 'Store/Actions/commandActions';
-import commandNames from 'Commands/commandNames';
+import * as commandNames from 'Commands/commandNames';
 import SeriesIndex from './SeriesIndex';
 
 function createMapStateToProps() {

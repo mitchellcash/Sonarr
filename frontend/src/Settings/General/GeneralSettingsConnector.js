@@ -6,7 +6,7 @@ import createCommandsSelector from 'Store/Selectors/createCommandsSelector';
 import { setGeneralSettingsValue, saveGeneralSettings, fetchGeneralSettings } from 'Store/Actions/settingsActions';
 import { executeCommand } from 'Store/Actions/commandActions';
 import connectSection from 'Store/connectSection';
-import commandNames from 'Commands/commandNames';
+import * as commandNames from 'Commands/commandNames';
 import GeneralSettings from './GeneralSettings';
 
 function createMapStateToProps() {

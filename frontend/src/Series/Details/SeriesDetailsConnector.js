@@ -7,7 +7,7 @@ import createCommandsSelector from 'Store/Selectors/createCommandsSelector';
 import { fetchEpisodes } from 'Store/Actions/episodeActions';
 import { fetchEpisodeFiles } from 'Store/Actions/episodeFileActions';
 import { executeCommand } from 'Store/Actions/commandActions';
-import commandNames from 'Commands/commandNames';
+import * as commandNames from 'Commands/commandNames';
 import SeriesDetails from './SeriesDetails';
 
 function createMapStateToProps() {
@@ -65,7 +65,7 @@ class SeriesDetailsConnector extends Component {
 
   onSearchPress = () => {
     this.props.executeCommand({
-      name: commandNames.SEARCH_SERIES,
+      name: commandNames.SERIES_SEARCH,
       seriesId: this.props.id
     });
   }

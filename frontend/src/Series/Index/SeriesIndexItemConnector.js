@@ -5,7 +5,7 @@ import { createSelector } from 'reselect';
 import createCommandsSelector from 'Store/Selectors/createCommandsSelector';
 import createQualityProfileSelector from 'Store/Selectors/createQualityProfileSelector';
 import { executeCommand } from 'Store/Actions/commandActions';
-import commandNames from 'Commands/commandNames';
+import * as commandNames from 'Commands/commandNames';
 
 function createMapStateToProps() {
   return createSelector(

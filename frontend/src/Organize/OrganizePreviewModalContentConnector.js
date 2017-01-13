@@ -5,7 +5,7 @@ import createSeriesSelector from 'Store/Selectors/createSeriesSelector';
 import { fetchOrganizePreview } from 'Store/Actions/organizePreviewActions';
 import { fetchNamingSettings } from 'Store/Actions/settingsActions';
 import { executeCommand } from 'Store/Actions/commandActions';
-import commandNames from 'Commands/commandNames';
+import * as commandNames from 'Commands/commandNames';
 import OrganizePreviewModalContent from './OrganizePreviewModalContent';
 
 function createMapStateToProps() {
@@ -14,7 +14,7 @@ function createMapStateToProps() {
     (state) => state.settings.naming,
     createSeriesSelector(),
     (organizePreview, naming, series) => {
-      const props = organizePreview;
+      const props = { ...organizePreview };
       props.fetching = organizePreview.fetching || naming.fetching;
       props.populated = organizePreview.populated && naming.populated;
       props.error = organizePreview.error || naming.error;
@@ -56,11 +56,11 @@ class OrganizePreviewModalContentConnector extends Component {
   // Listeners
 
   onOrganizePress = (files) => {
-    // this.props.executeCommand({
-    //   name: commandNames.RENAME_FILES,
-    //   seriesId: this.props.seriesId,
-    //   files
-    // });
+    this.props.executeCommand({
+      name: commandNames.RENAME_FILES,
+      seriesId: this.props.seriesId,
+      files
+    });
 
     this.props.onModalClose();
   }

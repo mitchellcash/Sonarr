@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
 import { fetchUpdates } from 'Store/Actions/systemActions';
 import { executeCommand } from 'Store/Actions/commandActions';
-import commandNames from 'Commands/commandNames';
+import * as commandNames from 'Commands/commandNames';
 import Updates from './Updates';
 
 function createMapStateToProps() {

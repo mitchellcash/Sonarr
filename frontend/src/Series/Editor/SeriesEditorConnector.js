@@ -5,7 +5,7 @@ import createClientSideCollectionSelector from 'Store/Selectors/createClientSide
 import createCommandSelector from 'Store/Selectors/createCommandSelector';
 import { setSeriesEditorSort, setSeriesEditorFilter, saveSeriesEditor } from 'Store/Actions/seriesEditorActions';
 import { fetchRootFolders } from 'Store/Actions/rootFolderActions';
-import commandNames from 'Commands/commandNames';
+import * as commandNames from 'Commands/commandNames';
 import SeriesEditor from './SeriesEditor';
 
 function createMapStateToProps() {

@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
 import { addRecentFolder } from 'Store/Actions/manualImportActions';
 import { executeCommand } from 'Store/Actions/commandActions';
-import commandNames from 'Commands/commandNames';
+import * as commandNames from 'Commands/commandNames';
 import ManualImportSelectFolderModalContent from './ManualImportSelectFolderModalContent';
 
 function createMapStateToProps() {

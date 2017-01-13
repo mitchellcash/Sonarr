@@ -5,7 +5,7 @@ import { createSelector } from 'reselect';
 import createCommandsSelector from 'Store/Selectors/createCommandsSelector';
 import * as blacklistActions from 'Store/Actions/blacklistActions';
 import { executeCommand } from 'Store/Actions/commandActions';
-import commandNames from 'Commands/commandNames';
+import * as commandNames from 'Commands/commandNames';
 import Blacklist from './Blacklist';
 
 function createMapStateToProps() {

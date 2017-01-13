@@ -15,6 +15,8 @@ import PageToolbarButton from 'Components/Page/Toolbar/PageToolbarButton';
 import QualityProfileNameConnector from 'Settings/Profiles/Quality/QualityProfileNameConnector';
 import OrganizePreviewModalConnector from 'Organize/OrganizePreviewModalConnector';
 import SeriesPoster from 'Series/SeriesPoster';
+import EditSeriesModalConnector from 'Series/Edit/EditSeriesModalConnector';
+import DeleteSeriesModal from 'Series/Delete/DeleteSeriesModal';
 import styles from './SeriesDetails.css';
 
 function getFanartUrl(images) {
@@ -34,7 +36,9 @@ class SeriesDetails extends Component {
     super(props, context);
 
     this.state = {
-      isOrganizeModalOpen: false
+      isOrganizeModalOpen: false,
+      isEditSeriesModalOpen: false,
+      isDeleteSeriesModalOpen: false
     };
   }
 
@@ -47,6 +51,25 @@ class SeriesDetails extends Component {
 
   onOrganizeModalClose = () => {
     this.setState({ isOrganizeModalOpen: false });
+  }
+
+  onEditSeriesPress = () => {
+    this.setState({ isEditSeriesModalOpen: true });
+  }
+
+  onEditSeriesModalClose = () => {
+    this.setState({ isEditSeriesModalOpen: false });
+  }
+
+  onDeleteSeriesPress = () => {
+    this.setState({
+      isEditSeriesModalOpen: false,
+      isDeleteSeriesModalOpen: true
+    });
+  }
+
+  onDeleteSeriesModalClose = () => {
+    this.setState({ isDeleteSeriesModalOpen: false });
   }
 
   //
@@ -72,7 +95,9 @@ class SeriesDetails extends Component {
     } = this.props;
 
     const {
-      isOrganizeModalOpen
+      isOrganizeModalOpen,
+      isEditSeriesModalOpen,
+      isDeleteSeriesModalOpen
     } = this.state;
 
     let episodeFilesCountMessage = 'No episode files';
@@ -120,13 +145,13 @@ class SeriesDetails extends Component {
             <PageToolbarButton
               iconName={icons.EDIT}
               title="Edit series"
-              // onPress={onRefreshPress}
+              onPress={this.onEditSeriesPress}
             />
 
             <PageToolbarButton
               iconName={icons.DELETE}
               title="Delete series"
-              // onPress={onSearchPress}
+              onPress={this.onDeleteSeriesPress}
             />
 
             <PageToolbarSeparator />
@@ -255,6 +280,19 @@ class SeriesDetails extends Component {
             isOpen={isOrganizeModalOpen}
             seriesId={id}
             onModalClose={this.onOrganizeModalClose}
+          />
+
+          <EditSeriesModalConnector
+            isOpen={isEditSeriesModalOpen}
+            seriesId={id}
+            onModalClose={this.onEditSeriesModalClose}
+            onDeleteSeriesPress={this.onDeleteSeriesPress}
+          />
+
+          <DeleteSeriesModal
+            isOpen={isDeleteSeriesModalOpen}
+            seriesId={id}
+            onModalClose={this.onDeleteSeriesModalClose}
           />
         </PageContentBody>
       </PageContent>

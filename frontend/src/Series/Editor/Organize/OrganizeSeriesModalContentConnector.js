@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
 import createAllSeriesSelector from 'Store/Selectors/createAllSeriesSelector';
 import { executeCommand } from 'Store/Actions/commandActions';
-import commandNames from 'Commands/commandNames';
+import * as commandNames from 'Commands/commandNames';
 import OrganizeSeriesModalContent from './OrganizeSeriesModalContent';
 
 function createMapStateToProps() {

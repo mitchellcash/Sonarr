@@ -14,23 +14,5 @@ export const RENAME_FILES = 'RenameFiles';
 export const RENAME_SERIES = 'RenameSeries';
 export const RESET_API_KEY = 'ResetApiKey';
 export const RSS_SYNC = 'RssSync';
-export const SEARCH_SEASON = 'SearchSeason';
-export const SEARCH_SERIES = 'SearchSeries';
-
-export default {
-  APPLICATION_UPDATE,
-  BACKUP,
-  CLEAR_BLACKLIST,
-  CLEAR_LOGS,
-  DELETE_LOG_FILES,
-  DELETE_UPDATE_LOG_FILES,
-  DOWNLOADED_EPSIODES_SCAN,
-  EPISODE_SEARCH,
-  MANUAL_IMPORT,
-  MISSING_EPISODE_SEARCH,
-  REFRESH_SERIES,
-  RENAME_FILES,
-  RENAME_SERIES,
-  RESET_API_KEY,
-  RSS_SYNC
-};
+export const SEASON_SEARCH = 'easonSearch';
+export const SERIES_SEARCH = 'SeriesSearch';

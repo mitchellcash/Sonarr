@@ -6,7 +6,7 @@ import createCommandsSelector from 'Store/Selectors/createCommandsSelector';
 import * as wantedActions from 'Store/Actions/wantedActions';
 import { executeCommand } from 'Store/Actions/commandActions';
 import { fetchQueueDetails } from 'Store/Actions/queueActions';
-import commandNames from 'Commands/commandNames';
+import * as commandNames from 'Commands/commandNames';
 import Missing from './Missing';
 
 function createMapStateToProps() {

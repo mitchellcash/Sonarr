@@ -5,7 +5,7 @@ import { createSelector } from 'reselect';
 import createCommandsSelector from 'Store/Selectors/createCommandsSelector';
 import { fetchBackups } from 'Store/Actions/systemActions';
 import { executeCommand } from 'Store/Actions/commandActions';
-import commandNames from 'Commands/commandNames';
+import * as commandNames from 'Commands/commandNames';
 import Backups from './Backups';
 
 function createMapStateToProps() {

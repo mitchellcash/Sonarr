@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
 import { executeCommand } from 'Store/Actions/commandActions';
-import commandNames from 'Commands/commandNames';
+import * as commandNames from 'Commands/commandNames';
 import EpisodeSearch from './EpisodeSearch';
 import InteractiveEpisodeSearchConnector from './InteractiveEpisodeSearchConnector';
 

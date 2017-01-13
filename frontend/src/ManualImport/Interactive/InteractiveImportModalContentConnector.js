@@ -5,7 +5,7 @@ import connectSection from 'Store/connectSection';
 import { fetchManualImportItems, setManualImportSort, clearManualImport } from 'Store/Actions/manualImportActions';
 import createClientSideCollectionSelector from 'Store/Selectors/createClientSideCollectionSelector';
 import { executeCommand } from 'Store/Actions/commandActions';
-import commandNames from 'Commands/commandNames';
+import * as commandNames from 'Commands/commandNames';
 import InteractiveImportModalContent from './InteractiveImportModalContent';
 
 function createMapStateToProps() {

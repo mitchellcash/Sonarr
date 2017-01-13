@@ -5,7 +5,7 @@ import { createSelector } from 'reselect';
 import createCommandsSelector from 'Store/Selectors/createCommandsSelector';
 import { executeCommand } from 'Store/Actions/commandActions';
 import * as systemActions from 'Store/Actions/systemActions';
-import commandNames from 'Commands/commandNames';
+import * as commandNames from 'Commands/commandNames';
 import LogsTable from './LogsTable';
 
 function createMapStateToProps() {
