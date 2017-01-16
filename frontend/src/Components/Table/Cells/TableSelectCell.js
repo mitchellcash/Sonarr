@@ -56,7 +56,7 @@ class TableSelectCell extends Component {
 }
 
 TableSelectCell.propTypes = {
-  className: PropTypes.string.isRequired, 
+  className: PropTypes.string.isRequired,
   id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
   isSelected: PropTypes.bool.isRequired,
   onSelectedChange: PropTypes.func.isRequired

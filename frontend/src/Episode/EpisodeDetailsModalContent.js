@@ -28,12 +28,11 @@ class EpisodeDetailsModalContent extends Component {
     super(props, context);
 
     this.state = {
-      selectedTab: 'details'
+      selectedTab: props.selectedTab
     };
   }
 
   componentWillMount() {
-    this.setState({ selectedTab: this.props.selectedTab });
     Tabs.setUseDefaultStyles(false);
   }
 
@@ -55,6 +54,7 @@ class EpisodeDetailsModalContent extends Component {
       seriesId,
       seriesTitle,
       titleSlug,
+      seriesMonitored,
       seriesType,
       seasonNumber,
       episodeNumber,
@@ -64,6 +64,7 @@ class EpisodeDetailsModalContent extends Component {
       monitored,
       isSaving,
       showOpenSeriesButton,
+      startInteractiveSearch,
       onMonitorEpisodePress,
       onModalClose
     } = this.props;
@@ -79,11 +80,15 @@ class EpisodeDetailsModalContent extends Component {
             className={styles.toggleButton}
             id={episodeId}
             monitored={monitored}
+            size={18}
+            isDisabled={!seriesMonitored}
             isSaving={isSaving}
             onPress={onMonitorEpisodePress}
           />
 
-          {seriesTitle}
+          <span className={styles.seriesTitle}>
+            {seriesTitle}
+          </span>
 
           <span className={styles.separator}>-</span>
 
@@ -141,6 +146,7 @@ class EpisodeDetailsModalContent extends Component {
             <TabPanel className={styles.tabPanel}>
               <EpisodeSearchConnector
                 episodeId={episodeId}
+                startInteractiveSearch={startInteractiveSearch}
                 onModalClose={onModalClose}
               />
             </TabPanel>
@@ -177,6 +183,7 @@ EpisodeDetailsModalContent.propTypes = {
   seriesId: PropTypes.number.isRequired,
   seriesTitle: PropTypes.string.isRequired,
   titleSlug: PropTypes.string.isRequired,
+  seriesMonitored: PropTypes.bool.isRequired,
   seriesType: PropTypes.string.isRequired,
   seasonNumber: PropTypes.number.isRequired,
   episodeNumber: PropTypes.number.isRequired,
@@ -187,13 +194,15 @@ EpisodeDetailsModalContent.propTypes = {
   isSaving: PropTypes.bool,
   showOpenSeriesButton: PropTypes.bool,
   selectedTab: PropTypes.string.isRequired,
+  startInteractiveSearch: PropTypes.bool.isRequired,
   onMonitorEpisodePress: PropTypes.func.isRequired,
   onModalClose: PropTypes.func.isRequired
 };
 
 EpisodeDetailsModalContent.defaultProps = {
   selectedTab: 'details',
-  episodeEntity: episodeEntities.EPISODES
+  episodeEntity: episodeEntities.EPISODES,
+  startInteractiveSearch: false
 };
 
 export default EpisodeDetailsModalContent;

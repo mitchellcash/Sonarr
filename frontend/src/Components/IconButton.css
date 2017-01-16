@@ -9,7 +9,7 @@
   font-size: inherit;
 
   &:hover {
-    border: nome;
+    border: none;
     background-color: inherit;
     color: $iconButtonHoverColor;
   }

@@ -1,11 +1,14 @@
 import _ from 'lodash';
 import React, { Component, PropTypes } from 'react';
 import formatBytes from 'Utilities/Number/formatBytes';
+import selectAll from 'Utilities/Table/selectAll';
+import toggleSelected from 'Utilities/Table/toggleSelected';
 import { align, icons, sizes } from 'Helpers/Props';
 import HeartRating from 'Components/HeartRating';
 import Icon from 'Components/Icon';
 import IconButton from 'Components/IconButton';
 import Label from 'Components/Label';
+import LoadingIndicator from 'Components/LoadingIndicator';
 import PageContent from 'Components/Page/PageContent';
 import PageContentBody from 'Components/Page/PageContentBody';
 import PageToolbar from 'Components/Page/Toolbar/PageToolbar';
@@ -18,6 +21,7 @@ import QualityProfileNameConnector from 'Settings/Profiles/Quality/QualityProfil
 import SeriesPoster from 'Series/SeriesPoster';
 import EditSeriesModalConnector from 'Series/Edit/EditSeriesModalConnector';
 import DeleteSeriesModal from 'Series/Delete/DeleteSeriesModal';
+import SeriesDetailsSeasonConnector from './SeriesDetailsSeasonConnector';
 import styles from './SeriesDetails.css';
 
 function getFanartUrl(images) {
@@ -26,6 +30,14 @@ function getFanartUrl(images) {
     // Remove protocol
     return fanartImage.url.replace(/^https?:/, '');
   }
+}
+
+function getExpandedState(newState) {
+  return {
+    allExpanded: newState.allSelected,
+    allCollapsed: newState.allUnselected,
+    expandedState: newState.selectedState
+  };
 }
 
 class SeriesDetails extends Component {
@@ -40,7 +52,10 @@ class SeriesDetails extends Component {
       isOrganizeModalOpen: false,
       isManageEpisodesOpen: false,
       isEditSeriesModalOpen: false,
-      isDeleteSeriesModalOpen: false
+      isDeleteSeriesModalOpen: false,
+      allExpanded: false,
+      allCollapsed: false,
+      expandedState: {}
     };
   }
 
@@ -82,6 +97,29 @@ class SeriesDetails extends Component {
     this.setState({ isDeleteSeriesModalOpen: false });
   }
 
+  onExpandAllPress = () => {
+    const {
+      allExpanded,
+      expandedState
+    } = this.state;
+
+    this.setState(getExpandedState(selectAll(expandedState, !allExpanded)));
+  }
+
+  onExpandPress = (seasonNumber, isExpanded) => {
+    this.setState((state) => {
+      const convertedState = {
+        allSelected: state.allExpanded,
+        allUnselected: state.allCollapsed,
+        selectedState: state.expandedState
+      };
+
+      const newState = toggleSelected(convertedState, seasonNumber, isExpanded, false);
+
+      return getExpandedState(newState);
+    });
+  }
+
   //
   // Render
 
@@ -96,8 +134,13 @@ class SeriesDetails extends Component {
       qualityProfileId,
       overview,
       images,
+      seasons,
       isRefreshing,
       isSearching,
+      isFetching,
+      isPopulated,
+      episodesError,
+      episodeFilesError,
       previousSeries,
       nextSeries,
       onRefreshPress,
@@ -108,7 +151,10 @@ class SeriesDetails extends Component {
       isOrganizeModalOpen,
       isManageEpisodesOpen,
       isEditSeriesModalOpen,
-      isDeleteSeriesModalOpen
+      isDeleteSeriesModalOpen,
+      allExpanded,
+      allCollapsed,
+      expandedState
     } = this.state;
 
     let episodeFilesCountMessage = 'No episode files';
@@ -117,6 +163,14 @@ class SeriesDetails extends Component {
       episodeFilesCountMessage = '1 episode file';
     } else if (episodeFilesCount > 1) {
       episodeFilesCountMessage = `${episodeFilesCount} episode files`;
+    }
+
+    let expandIcon = icons.EXPAND_INDETERMINATE;
+
+    if (allExpanded) {
+      expandIcon = icons.COLLAPSE;
+    } else if (allCollapsed) {
+      expandIcon = icons.EXPAND;
     }
 
     return (
@@ -170,9 +224,9 @@ class SeriesDetails extends Component {
 
           <PageToolbarSection align={align.RIGHT}>
             <PageToolbarButton
-              iconName={icons.EXPAND}
+              iconName={expandIcon}
               title="Expand all seasons in this series"
-              // onPress={onSearchPress}
+              onPress={this.onExpandAllPress}
             />
           </PageToolbarSection>
         </PageToolbar>
@@ -283,7 +337,39 @@ class SeriesDetails extends Component {
           </div>
 
           <div className={styles.contentContainer}>
-            Content goes here
+            {
+              !isPopulated && !episodesError && !episodeFilesError &&
+                <LoadingIndicator />
+            }
+
+            {
+              !isFetching && episodesError &&
+                <div>Loading episodes Failed</div>
+            }
+
+            {
+              !isFetching && episodeFilesError &&
+                <div>Loading episode files failed</div>
+            }
+
+            {
+              isPopulated &&
+                <div>
+                  {
+                    seasons.slice(0).reverse().map((season) => {
+                      return (
+                        <SeriesDetailsSeasonConnector
+                          key={season.seasonNumber}
+                          seriesId={id}
+                          {...season}
+                          isExpanded={expandedState[season.seasonNumber]}
+                          onExpandPress={this.onExpandPress}
+                        />
+                      );
+                    })
+                  }
+                </div>
+            }
 
           </div>
 
@@ -327,8 +413,13 @@ SeriesDetails.propTypes = {
   qualityProfileId: PropTypes.number.isRequired,
   overview: PropTypes.string.isRequired,
   images: PropTypes.arrayOf(PropTypes.object).isRequired,
+  seasons: PropTypes.arrayOf(PropTypes.object).isRequired,
   isRefreshing: PropTypes.bool.isRequired,
   isSearching: PropTypes.bool.isRequired,
+  isFetching: PropTypes.bool.isRequired,
+  isPopulated: PropTypes.bool.isRequired,
+  episodesError: PropTypes.object,
+  episodeFilesError: PropTypes.object,
   previousSeries: PropTypes.object.isRequired,
   nextSeries: PropTypes.object.isRequired,
   onRefreshPress: PropTypes.func.isRequired,

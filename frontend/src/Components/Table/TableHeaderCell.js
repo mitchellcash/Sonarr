@@ -78,7 +78,7 @@ TableHeaderCell.propTypes = {
   sortKey: PropTypes.string,
   fixedSortDirection: PropTypes.string,
   sortDirection: PropTypes.string,
-  children: PropTypes.node.isRequired,
+  children: PropTypes.node,
   onSortPress: PropTypes.func
 };
 

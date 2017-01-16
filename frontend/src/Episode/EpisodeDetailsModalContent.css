@@ -1,7 +1,5 @@
-.toggleButton {
-  composes: toggleButton from 'Components/MonitorToggleButton.css';
-
-  margin-right: 10px;
+.seriesTitle {
+  margin-left: 5px;
 }
 
 .separator {

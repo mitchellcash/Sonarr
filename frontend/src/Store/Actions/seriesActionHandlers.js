@@ -101,6 +101,16 @@ const seriesActionHandlers = {
           section,
           ...data
         }));
+
+        const episodes = _.filter(getState().episodes.items, { seriesId: id, seasonNumber });
+
+        episodes.forEach((episode) => {
+          dispatch(updateItem({
+            id: episode.id,
+            section: 'episodes',
+            monitored
+          }));
+        });
       });
 
       promise.fail((xhr) => {

@@ -1,5 +1,6 @@
 import _ from 'lodash';
 import $ from 'jquery';
+import episodeEntities from 'Episode/episodeEntities';
 import createFetchHandler from './Creators/createFetchHandler';
 import * as types from './actionTypes';
 import { updateItem } from './baseActions';
@@ -13,7 +14,7 @@ const episodeActionHandlers = {
     return function(dispatch, getState) {
       const {
         episodeId: id,
-        episodeEntity,
+        episodeEntity = episodeEntities.EPISODES,
         monitored
       } = payload;
 

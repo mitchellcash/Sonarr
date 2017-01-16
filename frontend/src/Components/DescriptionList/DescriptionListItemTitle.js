@@ -1,24 +1,26 @@
-import React, { Component, PropTypes } from 'react';
+import React, { PropTypes } from 'react';
 import styles from './DescriptionListItemTitle.css';
 
-class DescriptionListItemTitle extends Component {
+function DescriptionListItemTitle(props) {
+  const {
+    className,
+    children
+  } = props;
 
-  //
-  // Render
-
-  render() {
-    const {
-      children
-    } = this.props;
-
-    return (
-      <dt className={styles.title}>{children}</dt>
-    );
-  }
+  return (
+    <dt className={className}>
+      {children}
+    </dt>
+  );
 }
 
 DescriptionListItemTitle.propTypes = {
+  className: PropTypes.string.isRequired,
   children: PropTypes.string
+};
+
+DescriptionListItemTitle.defaultProps = {
+  className: styles.title
 };
 
 export default DescriptionListItemTitle;

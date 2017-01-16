@@ -13,9 +13,11 @@ import SeriesDetails from './SeriesDetails';
 function createMapStateToProps() {
   return createSelector(
     (state, { params }) => params,
+    (state) => state.episodes,
+    (state) => state.episodeFiles,
     createAllSeriesSelector(),
     createCommandsSelector(),
-    (params, allSeries, commands) => {
+    (params, episodes, episodeFiles, allSeries, commands) => {
       const sortedSeries = _.orderBy(allSeries, 'sortTitle');
       const seriesIndex = _.findIndex(sortedSeries, { titleSlug: params.titleSlug });
       const series = sortedSeries[seriesIndex];
@@ -24,10 +26,19 @@ function createMapStateToProps() {
       const isRefreshing = _.some(commands, { name: commandNames.REFRESH_SERIES, seriesId: series.id });
       const isSearching = _.some(commands, { name: commandNames.SERIES_SEARCH, seriesId: series.id });
 
+      const isFetching = episodes.fetching || episodeFiles.fetching;
+      const isPopulated = episodes.populated && episodeFiles.populated;
+      const episodesError = episodes.error;
+      const episodeFilesError = episodeFiles.error;
+
       return {
         ...series,
         isRefreshing,
         isSearching,
+        isFetching,
+        isPopulated,
+        episodesError,
+        episodeFilesError,
         previousSeries,
         nextSeries
       };

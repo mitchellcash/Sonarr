@@ -1,31 +1,85 @@
 import React, { PropTypes } from 'react';
+import { icons, kinds, tooltipPositions } from 'Helpers/Props';
+import Icon from 'Components/Icon';
+import Popover from 'Components/Tooltip/Popover';
+import SceneInfo from './SceneInfo';
+import styles from './EpisodeNumber.css';
 
 function EpisodeNumber(props) {
   const {
     episodeNumber,
     absoluteEpisodeNumber,
-    seriesType,
     sceneSeasonNumber,
     sceneEpisodeNumber,
-    sceneAbsoluteEpisodeNumber
+    sceneAbsoluteEpisodeNumber,
+    unverifiedSceneNumbering,
+    alternateTitles,
+    seriesType
   } = props;
 
-  if (seriesType === 'anime') {
-    return (
-      <span>
-        {episodeNumber}
-
-        {
-          absoluteEpisodeNumber &&
-            <span>({absoluteEpisodeNumber})</span>
-        }
-      </span>
-    );
-  }
+  const hasSceneInformation = sceneSeasonNumber !== undefined ||
+    sceneEpisodeNumber !== undefined ||
+    (seriesType === 'anime' && sceneAbsoluteEpisodeNumber !== undefined) ||
+    !!alternateTitles.length;
 
   return (
     <span>
-      {episodeNumber}
+      {
+        hasSceneInformation ?
+          <Popover
+            anchor={
+              <span>
+                {episodeNumber}
+
+                {
+                  seriesType === 'anime' && !!absoluteEpisodeNumber &&
+                    <span className={styles.absoluteEpisodeNumber}>
+                      ({absoluteEpisodeNumber})
+                    </span>
+                }
+              </span>
+            }
+            title="Scene Information"
+            body={
+              <SceneInfo
+                sceneSeasonNumber={sceneSeasonNumber}
+                sceneEpisodeNumber={sceneEpisodeNumber}
+                sceneAbsoluteEpisodeNumber={sceneAbsoluteEpisodeNumber}
+                alternateTitles={alternateTitles}
+                seriesType={seriesType}
+              />
+            }
+            position={tooltipPositions.RIGHT}
+          /> :
+          <span>
+            {episodeNumber}
+
+            {
+              seriesType === 'anime' && !!absoluteEpisodeNumber &&
+                <span className={styles.absoluteEpisodeNumber}>
+                  ({absoluteEpisodeNumber})
+                </span>
+            }
+          </span>
+      }
+
+      {
+        unverifiedSceneNumbering &&
+          <Icon
+            name={icons.WARNING}
+            kind={kinds.WARNING}
+            title="Scene number hasn't been verified yet"
+          />
+      }
+
+      {
+        seriesType === 'anime' && !absoluteEpisodeNumber &&
+          <Icon
+            name={icons.WARNING}
+            kind={kinds.WARNING}
+            title="Episode does not have an absolute episode number"
+          />
+      }
     </span>
   );
 }
@@ -34,10 +88,16 @@ EpisodeNumber.propTypes = {
   seasonNumber: PropTypes.number.isRequired,
   episodeNumber: PropTypes.number.isRequired,
   absoluteEpisodeNumber: PropTypes.number,
-  seriesType: PropTypes.string,
   sceneSeasonNumber: PropTypes.number,
   sceneEpisodeNumber: PropTypes.number,
-  sceneAbsoluteEpisodeNumber: PropTypes.number
+  sceneAbsoluteEpisodeNumber: PropTypes.number,
+  unverifiedSceneNumbering: PropTypes.bool.isRequired,
+  alternateTitles: PropTypes.arrayOf(PropTypes.object).isRequired,
+  seriesType: PropTypes.string
+};
+
+EpisodeNumber.defaultProps = {
+  unverifiedSceneNumbering: false
 };
 
 export default EpisodeNumber;

@@ -4,3 +4,10 @@
   padding: 0;
   font-size: inherit;
 }
+
+.disabledButton {
+  composes: button from 'Components/IconButton.css';
+
+  color: $disabledColor;
+  cursor: not-allowed;
+}

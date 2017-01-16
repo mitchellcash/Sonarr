@@ -285,7 +285,7 @@ class Missing extends Component {
 
 Missing.propTypes = {
   fetching: PropTypes.bool.isRequired,
-  items: PropTypes.array.isRequired,
+  items: PropTypes.arrayOf(PropTypes.object).isRequired,
   totalRecords: PropTypes.number,
   isScanningDroneFactory: PropTypes.bool.isRequired,
   isSearchingForEpisodes: PropTypes.bool.isRequired,

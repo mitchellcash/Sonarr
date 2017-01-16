@@ -5,6 +5,7 @@ import { clearReleases } from 'Store/Actions/releaseActions';
 import { toggleEpisodeMonitored } from 'Store/Actions/episodeActions';
 import createEpisodeSelector from 'Store/Selectors/createEpisodeSelector';
 import createSeriesSelector from 'Store/Selectors/createSeriesSelector';
+import episodeEntities from 'Episode/episodeEntities';
 import EpisodeDetailsModalContent from './EpisodeDetailsModalContent';
 
 function createMapStateToProps() {
@@ -15,12 +16,14 @@ function createMapStateToProps() {
       const {
         title: seriesTitle,
         titleSlug,
+        monitored: seriesMonitored,
         seriesType
       } = series;
 
       return {
         seriesTitle,
         titleSlug,
+        seriesMonitored,
         seriesType,
         ...episode
       };
@@ -80,6 +83,10 @@ EpisodeDetailsModalContentConnector.propTypes = {
   seriesId: PropTypes.number.isRequired,
   clearReleases: PropTypes.func.isRequired,
   toggleEpisodeMonitored: PropTypes.func.isRequired
+};
+
+EpisodeDetailsModalContentConnector.defaultProps = {
+  episodeEntity: episodeEntities.EPISODES
 };
 
 export default connect(createMapStateToProps, mapDispatchToProps)(EpisodeDetailsModalContentConnector);

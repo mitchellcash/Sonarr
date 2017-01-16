@@ -9,20 +9,33 @@ class DescriptionListItem extends Component {
 
   render() {
     const {
+      titleClassName,
+      descriptionClassName,
       title,
       data
     } = this.props;
 
     return (
       <span>
-        <DescriptionListItemTitle>{title}</DescriptionListItemTitle>
-        <DescriptionListItemDescription>{data}</DescriptionListItemDescription>
+        <DescriptionListItemTitle
+          className={titleClassName}
+        >
+          {title}
+        </DescriptionListItemTitle>
+
+        <DescriptionListItemDescription
+          className={descriptionClassName}
+        >
+          {data}
+        </DescriptionListItemDescription>
       </span>
     );
   }
 }
 
 DescriptionListItem.propTypes = {
+  titleClassName: PropTypes.string,
+  descriptionClassName: PropTypes.string,
   title: PropTypes.string,
   data: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.node])
 };

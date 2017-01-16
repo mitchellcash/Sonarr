@@ -30,7 +30,7 @@ class EpisodeSearchConnector extends Component {
     super(props, context);
 
     this.state = {
-      isInteractiveSearchOpen: false
+      isInteractiveSearchOpen: props.startInteractiveSearch
     };
   }
 
@@ -81,6 +81,7 @@ class EpisodeSearchConnector extends Component {
 EpisodeSearchConnector.propTypes = {
   episodeId: PropTypes.number.isRequired,
   populated: PropTypes.bool.isRequired,
+  startInteractiveSearch: PropTypes.bool.isRequired,
   onModalClose: PropTypes.func.isRequired,
   executeCommand: PropTypes.func.isRequired
 };

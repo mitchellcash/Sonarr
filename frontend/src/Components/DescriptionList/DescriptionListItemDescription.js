@@ -1,26 +1,26 @@
-import React, { Component, PropTypes } from 'react';
+import React, { PropTypes } from 'react';
 import styles from './DescriptionListItemDescription.css';
 
-class DescriptionListItemDescription extends Component {
+function DescriptionListItemDescription(props) {
+  const {
+    className,
+    children
+  } = props;
 
-  //
-  // Render
-
-  render() {
-    const {
-      children
-    } = this.props;
-
-    return (
-      <dd className={styles.description}>
-        {children}
-      </dd>
-    );
-  }
+  return (
+    <dd className={className}>
+      {children}
+    </dd>
+  );
 }
 
 DescriptionListItemDescription.propTypes = {
+  className: PropTypes.string.isRequired,
   children: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.node])
+};
+
+DescriptionListItemDescription.defaultProps = {
+  className: styles.description
 };
 
 export default DescriptionListItemDescription;

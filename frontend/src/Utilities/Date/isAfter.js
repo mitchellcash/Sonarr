@@ -1,6 +1,6 @@
 import moment from 'moment';
 
-function isBefore(date, offsets = {}) {
+function isAfter(date, offsets = {}) {
   if (!date) {
     return false;
   }
@@ -11,7 +11,7 @@ function isBefore(date, offsets = {}) {
     offsetTime.add(offsets[key], key);
   });
 
-  return moment(date).isBefore(offsetTime);
+  return moment(date).isAfter(offsetTime);
 }
 
-export default isBefore;
+export default isAfter;

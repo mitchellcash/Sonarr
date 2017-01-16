@@ -14,5 +14,5 @@ export const RENAME_FILES = 'RenameFiles';
 export const RENAME_SERIES = 'RenameSeries';
 export const RESET_API_KEY = 'ResetApiKey';
 export const RSS_SYNC = 'RssSync';
-export const SEASON_SEARCH = 'easonSearch';
+export const SEASON_SEARCH = 'SeasonSearch';
 export const SERIES_SEARCH = 'SeriesSearch';

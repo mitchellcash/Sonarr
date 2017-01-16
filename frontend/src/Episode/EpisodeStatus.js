@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import isBefore from 'Utilities/Date/isBefore';
-import { kinds, sizes } from 'Helpers/Props';
+import { icons, kinds, sizes } from 'Helpers/Props';
 import Icon from 'Components/Icon';
 import ProgressBar from 'Components/ProgressBar';
 import EpisodeQuality from './EpisodeQuality';
@@ -40,7 +40,7 @@ function EpisodeStatus(props) {
       return (
         <div className={styles.center}>
           <Icon
-            name="icon-sonarr-downloading"
+            name={icons.DOWNLOADING}
             title="Episode is downloading"
           />
         </div>
@@ -63,7 +63,7 @@ function EpisodeStatus(props) {
     return (
       <div className={styles.center}>
         <Icon
-          name="icon-sonarr-downloading"
+          name={icons.DOWNLOADING}
           title="Episode is downloading"
         />
       </div>
@@ -74,7 +74,7 @@ function EpisodeStatus(props) {
     return (
       <div className={styles.center}>
         <Icon
-          name="icon-sonarr-tba"
+          name={icons.TBA}
           title="TBA"
         />
       </div>
@@ -85,7 +85,7 @@ function EpisodeStatus(props) {
     return (
       <div className={styles.center}>
         <Icon
-          name="icon-sonarr-unmonitored"
+          name={icons.UNMONITORED}
           title="Episode is not monitored"
         />
       </div>
@@ -96,7 +96,7 @@ function EpisodeStatus(props) {
     return (
       <div className={styles.center}>
         <Icon
-          name="icon-sonarr-missing"
+          name={icons.MISSING}
           title="Episode missing from disk"
         />
       </div>
@@ -106,7 +106,7 @@ function EpisodeStatus(props) {
   return (
     <div className={styles.center}>
       <Icon
-        name="icon-sonarr-not-aired"
+        name={icons.NOT_AIRED}
         title="Episode has not aired"
       />
     </div>
