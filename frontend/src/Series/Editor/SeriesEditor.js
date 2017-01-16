@@ -83,7 +83,7 @@ class SeriesEditor extends Component {
 
   onSelectedChange = ({ id, value, shiftKey = false }) => {
     this.setState((state) => {
-      return toggleSelected(state, id, value, shiftKey);
+      return toggleSelected(state, this.props.items, id, value, shiftKey);
     });
   }
 

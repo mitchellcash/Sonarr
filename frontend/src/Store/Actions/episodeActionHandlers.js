@@ -50,6 +50,54 @@ const episodeActionHandlers = {
         }));
       });
     };
+  },
+
+  [types.TOGGLE_EPISODES_MONITORED]: function(payload) {
+    return function(dispatch, getState) {
+      const {
+        episodeIds,
+        episodeEntity = episodeEntities.EPISODES,
+        monitored
+      } = payload;
+
+      const episodeSection = _.last(episodeEntity.split('.'));
+
+      episodeIds.forEach((episodeId) => {
+        dispatch(updateItem({
+          id: episodeId,
+          section: episodeSection,
+          isSaving: true
+        }));
+      });
+
+      const promise = $.ajax({
+        url: '/episode/monitor',
+        method: 'PUT',
+        data: JSON.stringify({ episodeIds, monitored }),
+        dataType: 'json'
+      });
+
+      promise.done((data) => {
+        episodeIds.forEach((episodeId) => {
+          dispatch(updateItem({
+            id: episodeId,
+            section: episodeSection,
+            isSaving: false,
+            monitored
+          }));
+        });
+      });
+
+      promise.fail((xhr) => {
+        episodeIds.forEach((episodeId) => {
+          dispatch(updateItem({
+            id: episodeId,
+            section: episodeSection,
+            isSaving: false
+          }));
+        });
+      });
+    };
   }
 };
 

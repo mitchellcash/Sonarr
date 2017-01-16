@@ -48,13 +48,6 @@ class EpisodeRowConnector extends Component {
   //
   // Listeners
 
-  onMonitorEpisodePress = (monitored) => {
-    this.props.toggleEpisodeMonitored({
-      episodeId: this.props.id,
-      monitored
-    });
-  }
-
   onSearchPress = () => {
     this.props.executeCommand({
       name: commandNames.EPISODE_SEARCH,
@@ -69,7 +62,6 @@ class EpisodeRowConnector extends Component {
     return (
       <EpisodeRow
         {...this.props}
-        onMonitorEpisodePress={this.onMonitorEpisodePress}
         onSearchPress={this.onSearchPress}
       />
     );
@@ -80,6 +72,7 @@ EpisodeRowConnector.propTypes = {
   id: PropTypes.number.isRequired,
   seriesId: PropTypes.number.isRequired,
   sceneSeasonNumber: PropTypes.number,
+  onMonitorEpisodePress: PropTypes.func.isRequired,
   toggleEpisodeMonitored: PropTypes.func.isRequired,
   executeCommand: PropTypes.func.isRequired
 };

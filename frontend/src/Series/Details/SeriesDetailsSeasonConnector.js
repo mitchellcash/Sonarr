@@ -5,6 +5,7 @@ import { createSelector } from 'reselect';
 import createSeriesSelector from 'Store/Selectors/createSeriesSelector';
 import createCommandsSelector from 'Store/Selectors/createCommandsSelector';
 import { toggleSeasonMonitored } from 'Store/Actions/seriesActions';
+import { toggleEpisodesMonitored } from 'Store/Actions/episodeActions';
 import { executeCommand } from 'Store/Actions/commandActions';
 import * as commandNames from 'Commands/commandNames';
 import SeriesDetailsSeason from './SeriesDetailsSeason';
@@ -23,9 +24,10 @@ function createMapStateToProps() {
       });
 
       const episodesInSeason = _.filter(episodes.items, { seasonNumber });
+      const sortedEpisodes = _.orderBy(episodesInSeason, 'episodeNumber', 'desc');
 
       return {
-        items: episodesInSeason,
+        items: sortedEpisodes,
         isSearching,
         seriesMonitored: series.monitored
       };
@@ -35,6 +37,7 @@ function createMapStateToProps() {
 
 const mapDispatchToProps = {
   toggleSeasonMonitored,
+  toggleEpisodesMonitored,
   executeCommand
 };
 
@@ -69,6 +72,13 @@ class SeriesDetailsSeasonConnector extends Component {
     });
   }
 
+  onMonitorEpisodePress = (episodeIds, monitored) => {
+    this.props.toggleEpisodesMonitored({
+      episodeIds,
+      monitored
+    });
+  }
+
   //
   // Render
 
@@ -78,6 +88,7 @@ class SeriesDetailsSeasonConnector extends Component {
         {...this.props}
         onMonitorSeasonPress={this.onMonitorSeasonPress}
         onSearchPress={this.onSearchPress}
+        onMonitorEpisodePress={this.onMonitorEpisodePress}
       />
     );
   }
@@ -87,6 +98,7 @@ SeriesDetailsSeasonConnector.propTypes = {
   seriesId: PropTypes.number.isRequired,
   seasonNumber: PropTypes.number.isRequired,
   toggleSeasonMonitored: PropTypes.func.isRequired,
+  toggleEpisodesMonitored: PropTypes.func.isRequired,
   executeCommand: PropTypes.func.isRequired
 };
 

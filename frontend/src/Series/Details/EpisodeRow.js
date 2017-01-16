@@ -35,6 +35,10 @@ class EpisodeRow extends Component {
     this.setState({ isDetailsModalOpen: false });
   }
 
+  onMonitorEpisodePress = (monitored, options) => {
+    this.props.onMonitorEpisodePress(this.props.id, monitored, options);
+  }
+
   //
   // Render
 
@@ -57,7 +61,6 @@ class EpisodeRow extends Component {
       seriesMonitored,
       seriesType,
       alternateTitles,
-      onMonitorEpisodePress,
       onSearchPress
     } = this.props;
 
@@ -68,7 +71,7 @@ class EpisodeRow extends Component {
             monitored={monitored}
             isDisabled={!seriesMonitored}
             isSaving={isSaving}
-            onPress={onMonitorEpisodePress}
+            onPress={this.onMonitorEpisodePress}
           />
         </TableRowCell>
 

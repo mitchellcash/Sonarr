@@ -114,7 +114,7 @@ class SeriesDetails extends Component {
         selectedState: state.expandedState
       };
 
-      const newState = toggleSelected(convertedState, seasonNumber, isExpanded, false);
+      const newState = toggleSelected(convertedState, [], seasonNumber, isExpanded, false);
 
       return getExpandedState(newState);
     });

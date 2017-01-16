@@ -1,6 +1,6 @@
-import _ from 'lodash';
+import getToggledRange from './getToggledRange';
 
-function toggleSelected(state, id, selected, shiftKey) {
+function toggleSelected(state, items, id, selected, shiftKey) {
   let allSelected = true;
   let allUnselected = true;
 
@@ -10,21 +10,8 @@ function toggleSelected(state, id, selected, shiftKey) {
     [id]: selected
   };
 
-  if (shiftKey && state.lastToggled) {
-    const items = this.props.items;
-
-    const lastToggledIndex = _.findIndex(items, { id: lastToggled });
-    const changedIndex = _.findIndex(items, { id });
-    let lower = 0;
-    let upper = 0;
-
-    if (lastToggledIndex > changedIndex) {
-      lower = changedIndex;
-      upper = lastToggledIndex + 1;
-    } else {
-      lower = lastToggledIndex;
-      upper = changedIndex;
-    }
+  if (shiftKey && lastToggled) {
+    const { lower, upper } = getToggledRange(items, id, lastToggled);
 
     for (let i = lower; i < upper; i++) {
       selectedState[items[i].id] = selected;

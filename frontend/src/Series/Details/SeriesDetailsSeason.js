@@ -1,6 +1,7 @@
 import _ from 'lodash';
 import React, { Component, PropTypes } from 'react';
 import isAfter from 'Utilities/Date/isAfter';
+import getToggledRange from 'Utilities/Table/getToggledRange';
 import { icons } from 'Helpers/Props';
 import IconButton from 'Components/IconButton';
 import MonitorToggleButton from 'Components/MonitorToggleButton';
@@ -47,7 +48,8 @@ class SeriesDetailsSeason extends Component {
 
     this.state = {
       isOrganizeModalOpen: false,
-      isManageEpisodesOpen: false
+      isManageEpisodesOpen: false,
+      lastToggledEpisode: null
     };
   }
 
@@ -92,6 +94,24 @@ class SeriesDetailsSeason extends Component {
     } = this.props;
 
     this.props.onExpandPress(seasonNumber, !isExpanded);
+  }
+
+  onMonitorEpisodePress = (episodeId, monitored, { shiftKey }) => {
+    const lastToggled = this.state.lastToggledEpisode;
+    const episodeIds = [episodeId];
+
+    if (shiftKey && lastToggled) {
+      const { lower, upper } = getToggledRange(this.props.items, episodeId, lastToggled);
+      const items = this.props.items;
+
+      for (let i = lower; i < upper; i++) {
+        episodeIds.push(items[i].id);
+      }
+    }
+
+    this.setState({ lastToggledEpisode: episodeId });
+
+    this.props.onMonitorEpisodePress(_.uniq(episodeIds), monitored);
   }
 
   //
@@ -195,11 +215,12 @@ class SeriesDetailsSeason extends Component {
                     >
                       <TableBody>
                         {
-                          items.slice().reverse().map((item) => {
+                          items.map((item) => {
                             return (
                               <EpisodeRowConnector
                                 key={item.id}
                                 {...item}
+                                onMonitorEpisodePress={this.onMonitorEpisodePress}
                               />
                             );
                           })
@@ -248,6 +269,7 @@ SeriesDetailsSeason.propTypes = {
   seriesMonitored: PropTypes.bool.isRequired,
   onMonitorSeasonPress: PropTypes.func.isRequired,
   onExpandPress: PropTypes.func.isRequired,
+  onMonitorEpisodePress: PropTypes.func.isRequired,
   onSearchPress: PropTypes.func.isRequired
 };
 
