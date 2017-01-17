@@ -4,6 +4,7 @@ import { createSelector } from 'reselect';
 import { fetchSeries } from 'Store/Actions/seriesActions';
 import { fetchTags } from 'Store/Actions/tagActions';
 import { fetchQualityProfiles, fetchUISettings } from 'Store/Actions/settingsActions';
+import { fetchStatus } from 'Store/Actions/systemActions';
 import ErrorPage from './ErrorPage';
 import LoadingPage from './LoadingPage';
 import Page from './Page';
@@ -40,7 +41,8 @@ const mapDispatchToProps = {
   fetchSeries,
   fetchTags,
   fetchQualityProfiles,
-  fetchUISettings
+  fetchUISettings,
+  fetchStatus
 };
 
 class PageConnector extends Component {
@@ -54,6 +56,7 @@ class PageConnector extends Component {
       this.props.fetchTags();
       this.props.fetchQualityProfiles();
       this.props.fetchUISettings();
+      this.props.fetchStatus();
     }
   }
 
@@ -99,7 +102,8 @@ PageConnector.propTypes = {
   fetchSeries: PropTypes.func.isRequired,
   fetchTags: PropTypes.func.isRequired,
   fetchQualityProfiles: PropTypes.func.isRequired,
-  fetchUISettings: PropTypes.func.isRequired
+  fetchUISettings: PropTypes.func.isRequired,
+  fetchStatus: PropTypes.func.isRequired
 };
 
 export default connect(createMapStateToProps, mapDispatchToProps)(PageConnector);

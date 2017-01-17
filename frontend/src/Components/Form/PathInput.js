@@ -38,9 +38,9 @@ class PathInput extends Component {
     return (
       <span>
         <span className={styles.pathMatch}>
-          {path.substring(0, lastSeparatorIndex)}
+          {path.substr(0, lastSeparatorIndex)}
         </span>
-        {path.substring(lastSeparatorIndex)}
+        {path.substr(lastSeparatorIndex)}
       </span>
     );
   }

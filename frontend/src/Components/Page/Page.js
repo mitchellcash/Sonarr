@@ -7,6 +7,24 @@ import styles from './Page.css';
 class Page extends Component {
 
   //
+  // Lifecycle
+
+  constructor(props, context) {
+    super(props, context);
+
+    this.state = {
+      isSidebarVisible: true
+    };
+  }
+
+  //
+  // Listeners
+
+  onSidebarToggle = () => {
+    this.setState({ isSidebarVisible: !this.state.isSidebarVisible });
+  }
+
+  //
   // Render
 
   render() {
@@ -18,11 +36,14 @@ class Page extends Component {
 
     return (
       <div className={className}>
-        <PageHeader />
+        <PageHeader
+          onSidebarToggle={this.onSidebarToggle}
+        />
 
         <div className={styles.main}>
           <PageSidebar
             location={location}
+            isSidebarVisible={this.state.isSidebarVisible}
           />
 
           {children}

@@ -29,6 +29,7 @@ class Link extends Component {
       to,
       target,
       isDisabled,
+      noRouter,
       onPress,
       ...otherProps
     } = this.props;
@@ -41,6 +42,10 @@ class Link extends Component {
         el = 'a';
         linkProps.href = to;
         linkProps.target = target || '_blank';
+      } else if (noRouter) {
+        el = 'a';
+        linkProps.href = to;
+        linkProps.target = target || '_self';
       } else if (to.startsWith(window.Sonarr.UrlBase)) {
         el = RouterLink;
         linkProps.to = to;
@@ -85,11 +90,13 @@ Link.propTypes = {
   to: PropTypes.string,
   target: PropTypes.string,
   isDisabled: PropTypes.bool,
+  noRouter: PropTypes.bool,
   onPress: PropTypes.func
 };
 
 Link.defaultProps = {
-  component: 'button'
+  component: 'button',
+  noRouter: false
 };
 
 export default Link;

@@ -13,7 +13,8 @@ class Scroller extends Component {
       className,
       scrollDirection,
       autoScroll,
-      children
+      children,
+      ...otherProps
     } = this.props;
 
     return (
@@ -24,6 +25,7 @@ class Scroller extends Component {
           styles[scrollDirection],
           autoScroll && styles.autoScroll
         )}
+        {...otherProps}
       >
         {children}
       </div>
@@ -36,7 +38,7 @@ Scroller.propTypes = {
   className: PropTypes.string,
   scrollDirection: PropTypes.oneOf([scrollDirections.NONE, scrollDirections.HORIZONTAL, scrollDirections.VERTICAL]).isRequired,
   autoScroll: PropTypes.bool.isRequired,
-  children: PropTypes.node.isRequired
+  children: PropTypes.node
 };
 
 Scroller.defaultProps = {

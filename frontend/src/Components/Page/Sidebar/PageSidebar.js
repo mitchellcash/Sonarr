@@ -1,5 +1,6 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { locationShape } from 'react-router';
+import classNames from 'classNames';
 import { icons } from 'Helpers/Props';
 import Scroller from 'Components/Scroller';
 import PageSidebarItem from './PageSidebarItem';
@@ -169,13 +170,19 @@ class PageSidebar extends Component {
 
   render() {
     const {
-      location
+      location,
+      isSidebarVisible
     } = this.props;
 
     const activeParent = getActiveParent(location);
 
     return (
-      <Scroller className={styles.sidebar}>
+      <Scroller
+        className={classNames(
+          styles.sidebar,
+          !isSidebarVisible && styles.sidebarHidden
+        )}
+      >
         {
           links.map((link) => {
             return (
@@ -209,7 +216,8 @@ class PageSidebar extends Component {
 }
 
 PageSidebar.propTypes = {
-  location: locationShape.isRequired
+  location: locationShape.isRequired,
+  isSidebarVisible: PropTypes.bool.isRequired
 };
 
 export default PageSidebar;

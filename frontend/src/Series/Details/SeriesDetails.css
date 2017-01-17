@@ -13,6 +13,7 @@
   z-index: -1;
   width: 100%;
   height: 100%;
+  background-size: cover;
 }
 
 .backdropOverlay {
@@ -32,6 +33,7 @@
 }
 
 .poster {
+  flex-shrink: 0;
   margin-right: 35px;
   width: 250px;
   height: 368px;

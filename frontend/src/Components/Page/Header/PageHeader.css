@@ -1,5 +1,34 @@
 .header {
+  display: flex;
+  align-items: center;
   flex: 0 0 auto;
   height: 60px;
   background-color: #23b7e5;
+  color: $white;
+}
+
+.logoContainer {
+  display: flex;
+  justify-content: center;
+  flex: 0 0 $sidebarWidth;
+}
+
+.sidebarToggleContainer {
+  display: none;
+  justify-content: center;
+  flex: 0 0 60px;
+}
+
+.searchInputContainer {
+  
+}
+
+@media only screen and (max-device-width: $breakpointSmall) {
+  .logoContainer {
+    flex: 0 0 60px;
+  }
+
+  .sidebarToggleContainer {
+    display: flex;
+  }
 }

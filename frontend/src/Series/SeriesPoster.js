@@ -31,9 +31,26 @@ class SeriesPoster extends Component {
     } = props;
 
     this.state = {
+      pixelRatio,
+      images,
       posterUrl: getPosterUrl(images, pixelRatio * size),
       hasError: false
     };
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const {
+      images,
+      pixelRatio
+    } = this.state;
+
+    if (nextProps.images !== images) {
+      this.setState({
+        images: nextProps.images,
+        posterUrl: getPosterUrl(nextProps.images, pixelRatio * nextProps.size),
+        hasError: false
+      });
+    }
   }
 
   //

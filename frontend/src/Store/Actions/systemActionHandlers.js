@@ -1,3 +1,4 @@
+import $ from 'jquery';
 import serverSideCollectionHandlers from 'Utilities/serverSideCollectionHandlers';
 import * as types from './actionTypes';
 import createFetchHandler from './Creators/createFetchHandler';
@@ -22,7 +23,21 @@ const systemActionHandlers = {
     [serverSideCollectionHandlers.EXACT_PAGE]: types.GOTO_LOGS_PAGE,
     [serverSideCollectionHandlers.SORT]: types.SET_LOGS_SORT,
     [serverSideCollectionHandlers.FILTER]: types.SET_LOGS_FILTER
-  })
+  }),
+
+  [types.RESTART]: function() {
+    $.ajax({
+      url: '/system/restart',
+      type: 'POST'
+    });
+  },
+
+  [types.SHUTDOWN]: function() {
+    $.ajax({
+      url: '/system/shutdown',
+      type: 'POST'
+    });
+  }
 };
 
 export default systemActionHandlers;

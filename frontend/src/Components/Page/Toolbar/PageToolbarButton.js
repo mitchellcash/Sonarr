@@ -15,6 +15,7 @@ class PageToolbarButton extends Component {
       iconName,
       animateIconName,
       animate,
+      isDisabled,
       onPress,
       ...otherProps
     } = this.props;
@@ -23,7 +24,11 @@ class PageToolbarButton extends Component {
 
     return (
       <Link
-        className={styles.toolbarButton}
+        className={classNames(
+          styles.toolbarButton,
+          isDisabled && styles.isDisabled
+        )}
+        isDisabled={isDisabled}
         onPress={onPress}
         {...otherProps}
       >
@@ -45,6 +50,7 @@ PageToolbarButton.propTypes = {
   iconName: PropTypes.string.isRequired,
   animateIconName: PropTypes.string,
   animate: PropTypes.bool,
+  isDisabled: PropTypes.bool,
   onPress: PropTypes.func.isRequired
 };
 

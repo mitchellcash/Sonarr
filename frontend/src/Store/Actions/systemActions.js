@@ -20,3 +20,6 @@ export const setLogsFilter = systemActionHandlers[types.SET_LOGS_FILTER];
 
 export const fetchLogFiles = systemActionHandlers[types.FETCH_LOG_FILES];
 export const fetchUpdateLogFiles = systemActionHandlers[types.FETCH_UPDATE_LOG_FILES];
+
+export const restart = systemActionHandlers[types.RESTART];
+export const shutdown = systemActionHandlers[types.SHUTDOWN];

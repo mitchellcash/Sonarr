@@ -58,7 +58,20 @@ class SeriesDetailsConnector extends Component {
   // Lifecycle
 
   componentDidMount() {
-    const seriesId = this.props.id;
+    this._populate(this.props);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.id !== this.props.id) {
+      this._populate(nextProps);
+    }
+  }
+
+  //
+  // Control
+
+  _populate(props) {
+    const seriesId = props.id;
 
     this.props.fetchEpisodes({ seriesId });
     this.props.fetchEpisodeFiles({ seriesId });

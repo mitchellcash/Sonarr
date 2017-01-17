@@ -66,6 +66,7 @@ function EpisodeNumber(props) {
       {
         unverifiedSceneNumbering &&
           <Icon
+            className={styles.warning}
             name={icons.WARNING}
             kind={kinds.WARNING}
             title="Scene number hasn't been verified yet"
@@ -75,6 +76,7 @@ function EpisodeNumber(props) {
       {
         seriesType === 'anime' && !absoluteEpisodeNumber &&
           <Icon
+            className={styles.warning}
             name={icons.WARNING}
             kind={kinds.WARNING}
             title="Episode does not have an absolute episode number"

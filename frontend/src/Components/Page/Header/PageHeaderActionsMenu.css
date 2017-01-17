@@ -1,0 +1,23 @@
+.menuContainer {
+  margin-left: auto;
+}
+
+.menuButton {
+  width: 60px;
+  height: 60px;
+  text-align: center;
+
+  &:hover {
+    color: $themeDarkColor;
+  }
+}
+
+.itemIcon {
+  margin-right: 8px;
+}
+
+.separator {
+  overflow: hidden;
+  height: 1px;
+  background-color: $themeDarkColor;
+}

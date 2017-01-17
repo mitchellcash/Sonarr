@@ -1,6 +1,6 @@
 module.exports = {
   // Sidebar
-  sidebarWidth: '180px',
+  sidebarWidth: '210px',
 
   // Toolbar
   toolbarHeight: '60px',
