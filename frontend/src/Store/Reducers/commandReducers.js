@@ -3,6 +3,7 @@ import { handleActions } from 'redux-actions';
 import * as types from 'Store/Actions/actionTypes';
 import createSetReducer from './Creators/createSetReducer';
 import createUpdateReducer from './Creators/createUpdateReducer';
+import createUpdateItemReducer from './Creators/createUpdateItemReducer';
 
 export const defaultState = {
   fetching: false,
@@ -18,25 +19,11 @@ const commandReducers = handleActions({
 
   [types.SET]: createSetReducer(reducerSection),
   [types.UPDATE]: createUpdateReducer(reducerSection),
+  [types.UPDATE_ITEM]: createUpdateItemReducer(reducerSection),
 
   [types.ADD_COMMAND]: (state, { payload }) => {
     const newState = Object.assign({}, state);
     newState.items = [...state.items, payload];
-
-    return newState;
-  },
-
-  [types.UPDATE_COMMAND]: (state, { payload }) => {
-    const newState = Object.assign({}, state);
-    const index = _.findIndex(newState.items, { id: payload.id });
-
-    newState.items = [...state.items];
-
-    if (index > -1) {
-      newState.items[index] = payload;
-    } else {
-      newState.items.push(payload);
-    }
 
     return newState;
   },

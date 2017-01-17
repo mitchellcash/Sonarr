@@ -1,11 +1,47 @@
 import $ from 'jquery';
 import isSameCommand from 'Utilities/Command/isSameCommand';
+import { messengerTypes } from 'Helpers/Props';
 import * as types from './actionTypes';
 import createFetchHandler from './Creators/createFetchHandler';
+import { showMessage } from './appActions';
+import { updateItem } from './baseActions';
 import { addCommand, removeCommand } from './commandActions';
 
 let lastCommand = null;
 let lastCommandTimeout = null;
+
+function showCommandMessage(payload, dispatch) {
+  const {
+    id,
+    name,
+    manual,
+    message,
+    sendUpdatesToClient,
+    state
+  } = payload;
+
+  if (!message || !sendUpdatesToClient) {
+    return;
+  }
+
+  let type = messengerTypes.INFO;
+  let hideAfter = 0;
+
+  if (state === 'completed') {
+    type = messengerTypes.SUCCESS;
+    hideAfter = 4;
+  } else if (state === 'failed') {
+    type = messengerTypes.ERROR;
+    hideAfter = manual ? 10 : 4;
+  }
+
+  dispatch(showMessage({
+    id,
+    message: `[${name}] ${message}`,
+    type,
+    hideAfter
+  }));
+}
 
 const commandActionHandlers = {
   [types.FETCH_COMMANDS]: createFetchHandler('commands', '/command'),
@@ -40,11 +76,18 @@ const commandActionHandlers = {
     };
   },
 
+  [types.UPDATE_COMMAND](payload) {
+    return (dispatch, getState) => {
+      dispatch(updateItem(payload));
+
+      showCommandMessage(payload, dispatch);
+    };
+  },
+
   [types.FINISH_COMMAND](payload) {
     return (dispatch, getState) => {
       const state = getState();
       const handlers = state.commands.handlers;
-
       Object.keys(handlers).forEach((key) => {
         const handler = handlers[key];
 
@@ -54,6 +97,7 @@ const commandActionHandlers = {
       });
 
       dispatch(removeCommand(payload));
+      showCommandMessage(payload, dispatch);
     };
   }
 

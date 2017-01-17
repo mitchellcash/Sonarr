@@ -1,6 +1,6 @@
 require('messenger');
-
 var messenger = require('messenger');
+
 module.exports = {
   show(options) {
     if (!options.type) {
@@ -37,25 +37,23 @@ module.exports = {
 
   monitor(options) {
     if (!options.promise) {
-      throw 'promise is required';
+      throw Error('promise is required');
     }
 
     if (!options.successMessage) {
-      throw 'success message is required';
+      throw Error('success message is required');
     }
 
     if (!options.errorMessage) {
-      throw 'error message is required';
+      throw Error('error message is required');
     }
 
-    var self = this;
-
-    options.promise.done(function() {
-      self.show({ message: options.successMessage });
+    options.promise.done(() => {
+      this.show({ message: options.successMessage });
     });
 
-    options.promise.fail(function() {
-      self.show({
+    options.promise.fail(() => {
+      this.show({
         message: options.errorMessage,
         type: 'error'
       });

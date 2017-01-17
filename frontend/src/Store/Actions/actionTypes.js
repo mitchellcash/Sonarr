@@ -17,6 +17,7 @@ export const REMOVE_ITEM = 'REMOVE_ITEM';
 // App
 
 export const INIT_SIGNALR = 'INIT_SIGNALR';
+export const SHOW_MESSAGE = 'SHOW_MESSAGE';
 
 //
 // Add Series
