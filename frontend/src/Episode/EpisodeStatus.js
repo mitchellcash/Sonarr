@@ -24,12 +24,14 @@ function EpisodeStatus(props) {
     const isCutoffNotMet = episodeFile.qualityCutoffNotMet;
 
     return (
-      <EpisodeQuality
-        quality={quality}
-        size={episodeFile.size}
-        isCutoffNotMet={isCutoffNotMet}
-        title="Episode Downloaded"
-      />
+      <div className={styles.center}>
+        <EpisodeQuality
+          quality={quality}
+          size={episodeFile.size}
+          isCutoffNotMet={isCutoffNotMet}
+          title="Episode Downloaded"
+        />
+      </div>
     );
   }
 

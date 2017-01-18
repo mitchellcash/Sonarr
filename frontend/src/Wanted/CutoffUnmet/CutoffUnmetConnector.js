@@ -2,10 +2,13 @@ import _ from 'lodash';
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
+import hasDifferentItems from 'Utilities/Object/hasDifferentItems';
+import selectUniqueIds from 'Utilities/Object/selectUniqueIds';
 import createCommandsSelector from 'Store/Selectors/createCommandsSelector';
 import * as wantedActions from 'Store/Actions/wantedActions';
 import { executeCommand } from 'Store/Actions/commandActions';
-import { fetchQueueDetails } from 'Store/Actions/queueActions';
+import { fetchQueueDetails, clearQueueDetails } from 'Store/Actions/queueActions';
+import { fetchEpisodeFiles, clearEpisodeFiles } from 'Store/Actions/episodeFileActions';
 import * as commandNames from 'Commands/commandNames';
 import CutoffUnmet from './CutoffUnmet';
 
@@ -41,7 +44,10 @@ function createMapStateToProps() {
 const mapDispatchToProps = {
   ...wantedActions,
   executeCommand,
-  fetchQueueDetails
+  fetchQueueDetails,
+  clearQueueDetails,
+  fetchEpisodeFiles,
+  clearEpisodeFiles
 };
 
 class CutoffUnmetConnector extends Component {
@@ -54,19 +60,21 @@ class CutoffUnmetConnector extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (_.differenceBy(nextProps.items, this.props.items, ({ id }) => id).length) {
-      const episodeIds = _.uniq(_.reduce(nextProps.items, (result, item) => {
-        const id = item.id;
-
-        if (id && id > 0) {
-          result.push(id);
-        }
-
-        return result;
-      }, []));
+    if (hasDifferentItems(nextProps.items, this.props.items)) {
+      const episodeIds = selectUniqueIds(nextProps.items, 'id');
+      const episodeFileIds = selectUniqueIds(nextProps.items, 'episodeFileId');
 
       this.props.fetchQueueDetails({ episodeIds });
+
+      if (episodeFileIds.length) {
+        this.props.fetchEpisodeFiles({ episodeFileIds });
+      }
     }
+  }
+
+  componentWillUnmount() {
+    this.props.clearQueueDetails();
+    this.props.clearEpisodeFiles();
   }
 
   //
@@ -154,7 +162,10 @@ CutoffUnmetConnector.propTypes = {
   setCutoffUnmetFilter: PropTypes.func.isRequired,
   batchUnmonitorCutoffUnmetEpisodes: PropTypes.func.isRequired,
   executeCommand: PropTypes.func.isRequired,
-  fetchQueueDetails: PropTypes.func.isRequired
+  fetchQueueDetails: PropTypes.func.isRequired,
+  clearQueueDetails: PropTypes.func.isRequired,
+  fetchEpisodeFiles: PropTypes.func.isRequired,
+  clearEpisodeFiles: PropTypes.func.isRequired
 };
 
 export default connect(createMapStateToProps, mapDispatchToProps)(CutoffUnmetConnector);

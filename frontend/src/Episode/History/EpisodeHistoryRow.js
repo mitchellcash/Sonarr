@@ -1,53 +1,138 @@
-const Marionette = require('marionette');
-const tableRowMixin = require('Table/tableRowMixin');
-const HistoryDetailsView = require('Activity/History/Details/HistoryDetailsView');
-const tpl = require('./EpisodeHistoryRow.hbs');
+import React, { Component, PropTypes } from 'react';
+import titleCase from 'Utilities/String/titleCase';
+import { icons, kinds, tooltipPositions } from 'Helpers/Props';
+import Icon from 'Components/Icon';
+import IconButton from 'Components/IconButton';
+import ConfirmModal from 'Components/Modal/ConfirmModal';
+import RelativeDateCellConnector from 'Components/Table/Cells/RelativeDateCellConnector';
+import TableRow from 'Components/Table/TableRow';
+import TableRowCell from 'Components/Table/Cells/TableRowCell';
+import Popover from 'Components/Tooltip/Popover';
+import EpisodeQuality from 'Episode/EpisodeQuality';
+import HistoryDetailsConnector from 'Activity/History/Details/HistoryDetailsConnector';
+import HistoryEventTypeCell from 'Activity/History/HistoryEventTypeCell';
+import styles from './EpisodeHistoryRow.css';
 
-const EpisodeHistoryRow = Marionette.LayoutView.extend({
+class EpisodeHistoryRow extends Component {
 
-  className: 'episode-history-row',
-  template: tpl,
+  //
+  // Lifecycle
 
-  events: {
-    'click .x-failed': '_markAsFailed'
-  },
+  constructor(props, context) {
+    super(props, context);
 
-  regions: {
-    details: '.x-details'
-  },
-
-  ui: {
-    detailsCell: '.x-details-cell'
-  },
-
-  onRender() {
-    this.details.show(new HistoryDetailsView({ model: this.model }));
-
-    this.ui.detailsCell.popover({
-      content: this.details.currentView.$el.html(),
-      html: true,
-      trigger: 'hover',
-      title: 'Details',
-      placement: 'left',
-      container: this.$el
-    });
-  },
-
-  _markAsFailed() {
-    var url = '/history/failed';
-    var data = {
-      id: this.model.get('id')
+    this.state = {
+      isMarkAsFailedModalOpen: false
     };
-
-    $.ajax({
-      url,
-      type: 'POST',
-      data
-    });
   }
 
-});
+  //
+  // Listeners
 
-tableRowMixin.apply(EpisodeHistoryRow);
+  onMarkAsFailedPress = () => {
+    this.setState({ isMarkAsFailedModalOpen: true });
+  }
 
-module.exports = EpisodeHistoryRow;
+  onConfirmMarkAsFailed = () => {
+    this.props.onMarkAsFailedPress(this.props.id);
+    this.setState({ isMarkAsFailedModalOpen: false });
+  }
+
+  onMarkAsFailedModalClose = () => {
+    this.setState({ isMarkAsFailedModalOpen: false });
+  }
+
+  //
+  // Render
+
+  render() {
+    const {
+      eventType,
+      sourceTitle,
+      quality,
+      qualityCutoffNotMet,
+      date,
+      data
+    } = this.props;
+
+    const {
+      isMarkAsFailedModalOpen
+    } = this.state;
+
+    return (
+      <TableRow>
+        <HistoryEventTypeCell
+          eventType={eventType}
+          data={data}
+        />
+
+        <TableRowCell>
+          {sourceTitle}
+        </TableRowCell>
+
+        <TableRowCell>
+          <EpisodeQuality
+            quality={quality}
+            isCutoffNotMet={qualityCutoffNotMet}
+          />
+        </TableRowCell>
+
+        <RelativeDateCellConnector
+          date={date}
+        />
+
+        <TableRowCell className={styles.details}>
+          <Popover
+            anchor={
+              <Icon
+                name={icons.INFO}
+              />
+            }
+            title={titleCase(eventType)}
+            body={
+              <HistoryDetailsConnector
+                eventType={eventType}
+                sourceTitle={sourceTitle}
+                data={data}
+              />
+            }
+            position={tooltipPositions.LEFT}
+          />
+        </TableRowCell>
+
+        <TableRowCell className={styles.actions}>
+          {
+            eventType === 'grabbed' &&
+              <IconButton
+                name={icons.REMOVE}
+                onPress={this.onMarkAsFailedPress}
+              />
+          }
+        </TableRowCell>
+
+        <ConfirmModal
+          isOpen={isMarkAsFailedModalOpen}
+          kind={kinds.DANGER}
+          title="Mark as Failed"
+          message={`Are you sure you want to mark '${sourceTitle}' as failed?`}
+          confirmLabel="Mark as Failed"
+          onConfirm={this.onConfirmMarkAsFailed}
+          onCancel={this.onMarkAsFailedModalClose}
+        />
+      </TableRow>
+    );
+  }
+}
+
+EpisodeHistoryRow.propTypes = {
+  id: PropTypes.number.isRequired,
+  eventType: PropTypes.string.isRequired,
+  sourceTitle: PropTypes.string.isRequired,
+  quality: PropTypes.object.isRequired,
+  qualityCutoffNotMet: PropTypes.bool.isRequired,
+  date: PropTypes.string.isRequired,
+  data: PropTypes.object.isRequired,
+  onMarkAsFailedPress: PropTypes.func.isRequired
+};
+
+export default EpisodeHistoryRow;

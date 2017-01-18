@@ -24,6 +24,10 @@ function slicer(paths) {
   };
 }
 
+function serialize(obj) {
+  return JSON.stringify(obj, null, 2);
+}
+
 function merge(initialState, persistedState) {
   const result = persistedState ? _.merge(initialState, persistedState) : initialState;
 
@@ -46,6 +50,7 @@ const paths = [
 
 const config = {
   slicer,
+  serialize,
   merge,
   key: 'sonarr'
 };

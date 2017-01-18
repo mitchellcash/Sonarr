@@ -35,7 +35,7 @@
 }
 
 .inverse {
-  background-color: $white;
+  background-color: $gray;
   color: $defaultColor;
 }
 

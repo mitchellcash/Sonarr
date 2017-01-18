@@ -1,5 +1,4 @@
 const _ = require('lodash');
-const fs = require('fs');
 const gulp = require('gulp');
 const simpleVars = require('postcss-simple-vars');
 const nested = require('postcss-nested');
@@ -14,15 +13,6 @@ const uiFolder = 'UI.Phantom';
 const htmlAnnotate = path.join(__dirname, 'helpers', 'html-annotate-loader');
 const root = path.join(__dirname, '..', 'src');
 
-const hbsHelpersRoot = path.join(root, 'Handlebars', 'Helpers');
-const handlebarsHelperDir = fs.readdirSync(hbsHelpersRoot)
-.map((file) => {
-  const helperDir = path.join(hbsHelpersRoot, file);
-  return fs.statSync(helperDir).isDirectory()? helperDir : undefined;
-})
-.filter((dir) => {
-  return !!dir;
-});
 console.log('ROOT:', root);
 
 const config = {
@@ -93,30 +83,22 @@ const config = {
           }
         }
       },
-      // This is disabled until we drop the number of errors
-      // { test: /\.js?$/, exclude: /(node_modules|JsLibraries)/, loader: 'eslint-loader' },
-      {
-        test: /\.hbs?$/,
-        loader: 'handlebars-loader',
-        query: {
-          runtime: 'handlebars',
-          helperDirs: handlebarsHelperDir,
-          knownHelpers: ['if_eq', 'unless_eq', 'if_gt']
-        }
-      },
 
-      // Load all css files except index.css
+      // CSS Modules
       {
-        test: /^(?:(?!index\.css$).)*\.css$/,
+        test: /\.css$/,
+        exclude: /(node_modules|globals.css)/,
         loader: 'style!css-loader?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!postcss-loader'
       },
 
-      // Load index.css, but don't prefix/postfix the class name
+      // Global styles
       {
-        test: /index.css$/,
-        loader: 'style!css-loader?modules&importLoaders=1&localIdentName=[local]!postcss-loader'
+        test: /\.css$/,
+        include: /(node_modules|globals.css)/,
+        loader: 'style!css-loader'
       },
 
+      // Fonts
       {
         test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
         loader: 'url?limit=10240&mimetype=application/font-woff&emitFile=false&name=[name].[ext]&publicPath=/Content/Fonts/'

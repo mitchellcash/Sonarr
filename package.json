@@ -50,6 +50,7 @@
     "handlebars": "4.0.5",
     "handlebars-loader": "1.2.0",
     "lodash": "4.17.3",
+    "normalize.css": "^5.0.0",
     "postcss-loader": "0.9.1",
     "postcss-nested": "1.0.0",
     "postcss-simple-vars": "3.0.0",

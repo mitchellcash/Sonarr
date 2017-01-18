@@ -1,9 +1,9 @@
 import React, { Component, PropTypes } from 'react';
 import formatAge from 'Utilities/Number/formatAge';
 import formatBytes from 'Utilities/Number/formatBytes';
-import { kinds, tooltipPositions } from 'Helpers/Props';
+import { icons, kinds, tooltipPositions } from 'Helpers/Props';
 import Icon from 'Components/Icon';
-import IconButton from 'Components/IconButton';
+import SpinnerIconButton from 'Components/SpinnerIconButton';
 import Label from 'Components/Label';
 import Link from 'Components/Link';
 import TableRow from 'Components/Table/TableRow';
@@ -15,14 +15,14 @@ import styles from './InteractiveEpisodeSearchRow.css';
 
 function getDownloadIcon(grabbing, grabbed, grabError) {
   if (grabbing) {
-    return 'icon-sonarr-spinner fa-spin';
+    return icons.SPINNER;
   } else if (grabbed) {
-    return 'icon-sonarr-downloading';
+    return icons.DOWNLOADING;
   } else if (grabError) {
-    return 'icon-sonarr-download-failed';
+    return icons.DOWNLOADING;
   }
 
-  return 'icon-sonarr-download';
+  return icons.DOWNLOAD;
 }
 
 function getDownloadTooltip(grabbing, grabbed, grabError) {
@@ -114,7 +114,8 @@ class InteractiveEpisodeSearchRow extends Component {
           <Popover
             anchor={
               <Icon
-                name="icon-sonarr-form-danger"
+                name={icons.DANGER}
+                kind={kinds.DANGER}
               />
             }
             title="Release Rejected"
@@ -138,10 +139,11 @@ class InteractiveEpisodeSearchRow extends Component {
         <TableRowCell>
           {
             downloadAllowed &&
-              <IconButton
+              <SpinnerIconButton
                 name={getDownloadIcon(grabbing, grabbed, grabError)}
+                kind={grabError ? kinds.DANGER : kinds.DEFAULT}
                 title={getDownloadTooltip(grabbing, grabbed, grabError)}
-                isDisabled={grabbing}
+                isSpinning={grabbing}
                 onPress={this.onGrabPress}
               />
           }

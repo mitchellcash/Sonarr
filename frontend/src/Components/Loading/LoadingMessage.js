@@ -7,7 +7,7 @@ const messages = [
   'Previously on Sonarr...',
   'Bleep Bloop.',
   'Locating the required gigapixels to render...',
-  'Spinning up the hamster...',
+  'Spinning up the hamster wheel...',
   'at least you\'re not on hold',
   'hum something loud while others stare',
   'Loading humorous message... Please Wait',

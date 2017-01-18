@@ -13,7 +13,7 @@ class Page extends Component {
     super(props, context);
 
     this.state = {
-      isSidebarVisible: true
+      isSidebarVisible: false
     };
   }
 

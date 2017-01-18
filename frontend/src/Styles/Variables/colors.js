@@ -117,9 +117,21 @@ module.exports = {
   //
   // Alert
 
-  alertInfoColor: '#31708f',
-  alertInfoBackgroundColor: '#d9edf7',
+  alertDangerBorderColor: '#ebccd1',
+  alertDangerBackgroundColor: '#f2dede',
+  alertDangerColor: '#a94442',
+
   alertInfoBorderColor: '#bce8f1',
+  alertInfoBackgroundColor: '#d9edf7',
+  alertInfoColor: '#31708f',
+
+  alertSuccessBorderColor: '#d6e9c6',
+  alertSuccessBackgroundColor: '#dff0d8',
+  alertSuccessColor: '#3c763d',
+
+  alertWarningBorderColor: '#faebcc',
+  alertWarningBackgroundColor: '#fcf8e3',
+  alertWarningColor: '#8a6d3b',
 
   //
   // Slider

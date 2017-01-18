@@ -1,8 +1,9 @@
 import React, { Component, PropTypes } from 'react';
 import titleCase from 'Utilities/String/titleCase';
-import LoadingIndicator from 'Components/LoadingIndicator';
+import { icons, kinds } from 'Helpers/Props';
 import Icon from 'Components/Icon';
 import Link from 'Components/Link';
+import LoadingIndicator from 'Components/LoadingIndicator';
 import FieldSet from 'Components/FieldSet';
 import Table from 'Components/Table/Table';
 import TableBody from 'Components/Table/TableBody';
@@ -65,12 +66,11 @@ class Health extends Component {
                 {
                   items.map((item, index) => {
                     return (
-                      <TableRow
-                        key={`health${index}`}
-                      >
+                      <TableRow key={`health${index}`}>
                         <TableRowCell>
                           <Icon
-                            name={`icon-sonarr-health-${item.type.toLowerCase()}`}
+                            name={icons.DANGER}
+                            kind={item.type.toLowerCase() === 'error' ? kinds.DANGER : kinds.WARNING}
                             title={titleCase(item.type)}
                           />
                         </TableRowCell>

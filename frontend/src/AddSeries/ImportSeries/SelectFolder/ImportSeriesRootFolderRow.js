@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react';
 import formatBytes from 'Utilities/Number/formatBytes';
+import { icons } from 'Helpers/Props';
 import IconButton from 'Components/IconButton';
 import Link from 'Components/Link';
 import TableRow from 'Components/Table/TableRow';
@@ -38,7 +39,7 @@ function ImportSeriesRootFolderRow(props) {
 
       <TableRowCell className={styles.actions}>
         <IconButton
-          name="icon-sonarr-remove"
+          name={icons.REMOVE}
           onPress={onDeletePress}
         />
       </TableRowCell>

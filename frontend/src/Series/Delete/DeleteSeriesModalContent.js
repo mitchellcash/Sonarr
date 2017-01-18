@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import formatBytes from 'Utilities/Number/formatBytes';
-import { inputTypes, kinds } from 'Helpers/Props';
+import { icons, inputTypes, kinds } from 'Helpers/Props';
 import Button from 'Components/Button';
 import Icon from 'Components/Icon';
 import FormGroup from 'Components/Form/FormGroup';
@@ -72,7 +72,7 @@ class DeleteSeriesModalContent extends Component {
           <div className={styles.pathContainer}>
             <Icon
               className={styles.pathIcon}
-              name="icon-sonarr-folder"
+              name={icons.FOLDER}
             />
 
             {path}

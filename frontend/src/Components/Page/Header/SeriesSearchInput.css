@@ -2,10 +2,6 @@
   display: flex;
 }
 
-.icon {
-  line-height: 24px !important;
-}
-
 .input {
   margin-left: 8px;
   width: 200px;

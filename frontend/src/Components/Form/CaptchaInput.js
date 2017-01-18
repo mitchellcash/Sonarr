@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react';
 import ReCAPTCHA from 'react-google-recaptcha';
 import classNames from 'classNames';
+import { icons } from 'Helpers/Props';
 import Icon from 'Components/Icon';
 import FormInputButton from './FormInputButton';
 import TextInput from './TextInput';
@@ -41,7 +42,7 @@ function CaptchaInput(props) {
         >
           <Icon
             name={classNames(
-              'icon-sonarr-refresh',
+              icons.REFRESH,
               refreshing && 'fa-spin'
             )}
           />

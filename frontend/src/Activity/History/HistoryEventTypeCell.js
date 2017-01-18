@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react';
+import { icons, kinds } from 'Helpers/Props';
 import Icon from 'Components/Icon';
 import TableRowCell from 'Components/Table/Cells/TableRowCell';
 import styles from './HistoryEventTypeCell.css';
@@ -6,17 +7,26 @@ import styles from './HistoryEventTypeCell.css';
 function getIconName(eventType) {
   switch (eventType) {
     case 'grabbed':
-      return 'icon-sonarr-downloading';
+      return icons.DOWNLOADING;
     case 'seriesFolderImported':
-      return 'icon-sonarr-hdd';
+      return icons.DRIVE;
     case 'downloadFolderImported':
-      return 'icon-sonarr-imported';
+      return icons.DOWNLOADED;
     case 'downloadFailed':
-      return 'icon-sonarr-download-failed';
+      return icons.DOWNLOADING;
     case 'episodeFileDeleted':
-      return 'icon-sonarr-deleted';
+      return icons.DELETE;
     default:
-      return 'icon-sonarr-unknown';
+      return icons.UNKNOWN;
+  }
+}
+
+function getIconKind(eventType) {
+  switch (eventType) {
+    case 'downloadFailed':
+      return icons.DANGER;
+    default:
+      return kinds.DEFAULT;
   }
 }
 
@@ -39,6 +49,7 @@ function getTooltip(eventType, data) {
 
 function HistoryEventTypeCell({ eventType, data }) {
   const iconName = getIconName(eventType);
+  const iconKind = getIconKind(eventType);
   const tooltip = getTooltip(eventType, data);
 
   return (
@@ -46,7 +57,10 @@ function HistoryEventTypeCell({ eventType, data }) {
       className={styles.cell}
       title={tooltip}
     >
-      <Icon name={iconName} />
+      <Icon
+        name={iconName}
+        kinds={iconKind}
+      />
     </TableRowCell>
   );
 }

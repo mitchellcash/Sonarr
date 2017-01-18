@@ -6,28 +6,26 @@
   border-radius: 4px;
 }
 
-.default {
-  background-color: $defaultColor;
-}
-
-.primary {
-  background-color: $primaryColor;
-}
-
-.success {
-  background-color: $successColor;
-}
-
-.warning {
-  background-color: $warningColor;
-}
-
 .danger {
-  background-color: $dangerColor;
+  border-color: $alertDangerBorderColor;
+  background-color: $alertDangerBackgroundColor;
+  color: $alertDangerColor;
 }
 
 .info {
   border-color: $alertInfoBorderColor;
   background-color: $alertInfoBackgroundColor;
   color: $alertInfoColor;
+}
+
+.success {
+  border-color: $alertSuccessBorderColor;
+  background-color: $alertSuccessBackgroundColor;
+  color: $alertSuccessColor;
+}
+
+.warning {
+  border-color: $alertWarningBorderColor;
+  background-color: $alertWarningBackgroundColor;
+  color: $alertWarningColor;
 }

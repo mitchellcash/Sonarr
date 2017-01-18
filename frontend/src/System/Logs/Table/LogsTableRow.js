@@ -9,7 +9,7 @@ import ModalHeader from 'Components/Modal/ModalHeader';
 import ModalBody from 'Components/Modal/ModalBody';
 import ModalFooter from 'Components/Modal/ModalFooter';
 import RelativeDateCellConnector from 'Components/Table/Cells/RelativeDateCellConnector';
-import TableRow from 'Components/Table/TableRow';
+import TableRowButton from 'Components/Table/TableRowButton';
 import TableRowCell from 'Components/Table/Cells/TableRowCell';
 import styles from './LogsTableRow.css';
 
@@ -46,7 +46,7 @@ class LogsTableRow extends Component {
   //
   // Listeners
 
-  onClick = () => {
+  onPress = () => {
     this.setState({ isDetailsModalOpen: true });
   }
 
@@ -67,13 +67,8 @@ class LogsTableRow extends Component {
     } = this.props;
 
     return (
-      <TableRow
-        className={styles.row}
-        onClick={this.onClick}
-      >
-        <TableRowCell
-          className={styles.level}
-        >
+      <TableRowButton onPress={this.onPress}>
+        <TableRowCell className={styles.level}>
           <Icon
             className={styles[level.toLowerCase()]}
             name={getIconName(level.toLowerCase())}
@@ -132,7 +127,7 @@ class LogsTableRow extends Component {
             </ModalFooter>
           </ModalContent>
         </Modal>
-      </TableRow>
+      </TableRowButton>
     );
   }
 

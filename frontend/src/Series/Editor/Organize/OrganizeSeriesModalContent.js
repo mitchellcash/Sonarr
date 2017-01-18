@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import { kinds } from 'Helpers/Props';
+import { icons, kinds } from 'Helpers/Props';
 import Alert from 'Components/Alert';
 import Button from 'Components/Button';
 import Icon from 'Components/Icon';
@@ -27,7 +27,7 @@ function OrganizeSeriesModalContent(props) {
           Tip: To preview a rename... select "Cancel" then any series title and use the
           <Icon
             className={styles.renameIcon}
-            name="icon-sonarr-rename"
+            name={icons.ORGANIZE}
           />
         </Alert>
 

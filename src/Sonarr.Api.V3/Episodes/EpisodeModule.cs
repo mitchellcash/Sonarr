@@ -46,9 +46,9 @@ namespace Sonarr.Api.V3.Episodes
                 return MapToResource(_episodeService.GetEpisodeBySeries(seriesId), false, false);
             }
 
-            string episodeFileIdsValue = episodeIdsQuery.Value.ToString();
+            string episodeIdsValue = episodeIdsQuery.Value.ToString();
 
-            var episodeIds = episodeFileIdsValue.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
+            var episodeIds = episodeIdsValue.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
                                             .Select(e => Convert.ToInt32(e))
                                             .ToList();
 

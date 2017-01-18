@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import formatBytes from 'Utilities/Number/formatBytes';
-import { tooltipPositions } from 'Helpers/Props';
+import { icons, kinds, tooltipPositions } from 'Helpers/Props';
 import Icon from 'Components/Icon';
 import TableRow from 'Components/Table/TableRow';
 import TableRowCell from 'Components/Table/Cells/TableRowCell';
@@ -173,7 +173,8 @@ class InteractiveImportRow extends Component {
               <Popover
                 anchor={
                   <Icon
-                    name="icon-sonarr-form-danger"
+                    name={icons.DANGER}
+                    kind={kinds.DANGER}
                   />
                 }
                 title="Release Rejected"

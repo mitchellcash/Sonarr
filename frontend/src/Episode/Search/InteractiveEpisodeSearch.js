@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import { sortDirections } from 'Helpers/Props';
+import { icons, sortDirections } from 'Helpers/Props';
 import LoadingIndicator from 'Components/LoadingIndicator';
 import Icon from 'Components/Icon';
 import Table from 'Components/Table/Table';
@@ -44,13 +44,13 @@ const headers = [
   },
   {
     name: 'rejections',
-    label: React.createElement(Icon, { name: 'icon-sonarr-header-rejections' }),
+    label: React.createElement(Icon, { name: icons.DANGER }),
     sortable: true,
     fixedSortDirection: sortDirections.ASCENDING
   },
   {
     name: 'releaseWeight',
-    label: React.createElement(Icon, { name: 'icon-sonarr-download' }),
+    label: React.createElement(Icon, { name: icons.DOWNLOAD }),
     sortable: true,
     fixedSortDirection: sortDirections.ASCENDING
   }

@@ -1,16 +1,32 @@
 import React, { Component, PropTypes } from 'react';
+import { icons } from 'Helpers/Props';
 import Icon from 'Components/Icon';
-import TableRow from 'Components/Table/TableRow';
+import TableRowButton from 'Components/Table/TableRowButton';
 import TableRowCell from 'Components/Table/Cells/TableRowCell';
 import styles from './FileBrowserRow.css';
+
+function getIconName(type) {
+  switch (type) {
+    case 'computer':
+      return icons.COMPUTER;
+    case 'drive':
+      return icons.DRIVE;
+    case 'file':
+      return icons.FILE;
+    case 'parent':
+      return icons.PARENT;
+    default:
+      return icons.FOLDER;
+  }
+}
 
 class FileBrowserRow extends Component {
 
   //
   // Listeners
 
-  onClick = () => {
-    this.props.onClick(this.props.path);
+  onPress = () => {
+    this.props.onPress(this.props.path);
   }
 
   //
@@ -23,16 +39,13 @@ class FileBrowserRow extends Component {
     } = this.props;
 
     return (
-      <TableRow
-        className={styles.row}
-        onClick={this.onClick}
-      >
+      <TableRowButton onPress={this.onPress}>
         <TableRowCell className={styles.type}>
-          <Icon name={`icon-sonarr-browser-${type}`} />
+          <Icon name={getIconName(type)} />
         </TableRowCell>
 
         <TableRowCell>{name}</TableRowCell>
-      </TableRow>
+      </TableRowButton>
     );
   }
 
@@ -42,7 +55,7 @@ FileBrowserRow.propTypes = {
   type: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   path: PropTypes.string.isRequired,
-  onClick: PropTypes.func.isRequired
+  onPress: PropTypes.func.isRequired
 };
 
 export default FileBrowserRow;

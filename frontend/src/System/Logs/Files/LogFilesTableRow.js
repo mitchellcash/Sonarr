@@ -25,9 +25,7 @@ class LogFilesTableRow extends Component {
           date={lastWriteTime}
         />
 
-        <TableRowCell
-          className={styles.download}
-        >
+        <TableRowCell className={styles.download}>
           <Link
             className="no-router"
             to={downloadUrl}

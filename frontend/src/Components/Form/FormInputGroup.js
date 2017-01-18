@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import { inputTypes } from 'Helpers/Props';
+import { icons, inputTypes } from 'Helpers/Props';
 import Icon from 'Components/Icon';
 import Link from 'Components/Link';
 import CaptchaInputConnector from './CaptchaInputConnector';
@@ -109,7 +109,7 @@ function FormInputGroup(props) {
           {
           pending &&
           <Icon
-          name="icon-sonarr-unsaved-setting"
+          name={icons.UNSAVED_SETTING}
           className={styles.pendingChangesIcon}
           title="Change has not been saved yet"
           />

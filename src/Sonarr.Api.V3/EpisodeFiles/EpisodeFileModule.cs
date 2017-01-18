@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Nancy;
@@ -59,16 +60,35 @@ namespace Sonarr.Api.V3.EpisodeFiles
 
         private List<EpisodeFileResource> GetEpisodeFiles()
         {
-            if (!Request.Query.SeriesId.HasValue)
+            var seriesIdQuery = Request.Query.SeriesId;
+            var episodeFileIdsQuery = Request.Query.EpisodeFileIds;
+
+            if (!seriesIdQuery.HasValue && !episodeFileIdsQuery.HasValue)
             {
-                throw new BadRequestException("seriesId is missing");
+                throw new BadRequestException("seriesId or episodeFileIds must be provided");
             }
 
-            var seriesId = (int)Request.Query.SeriesId;
+            if (seriesIdQuery.HasValue)
+            {
+                int seriesId = Convert.ToInt32(seriesIdQuery.Value);
+                var series = _seriesService.GetSeries(seriesId);
 
-            var series = _seriesService.GetSeries(seriesId);
+                return _mediaFileService.GetFilesBySeries(seriesId).ConvertAll(f => f.ToResource(series, _qualityUpgradableSpecification));
+            }
 
-            return _mediaFileService.GetFilesBySeries(seriesId).ConvertAll(f => f.ToResource(series, _qualityUpgradableSpecification));
+            else
+            {
+                string episodeFileIdsValue = episodeFileIdsQuery.Value.ToString();
+
+                var episodeFileIds = episodeFileIdsValue.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
+                                                        .Select(e => Convert.ToInt32(e))
+                                                        .ToList();
+
+                var episodeFiles = _mediaFileService.Get(episodeFileIds);
+                var series = _seriesService.GetSeries(episodeFiles.First().SeriesId);
+
+                return episodeFiles.ConvertAll(f => f.ToResource(series, _qualityUpgradableSpecification));
+            }
         }
 
         private void SetQuality(EpisodeFileResource episodeFileResource)

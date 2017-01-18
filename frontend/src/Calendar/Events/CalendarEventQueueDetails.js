@@ -24,7 +24,7 @@ function CalendarEventQueueDetails(props) {
   if (status === 'pending') {
     return (
       <Icon
-        name="icon-sonarr-pending"
+        name={icons.PENDING}
         title={`Release will be processed ${moment(estimatedCompletionTime).fromNow()}`}
       />
     );

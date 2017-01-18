@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import LoadingIndicator from 'Components/LoadingIndicator';
 import Table from 'Components/Table/Table';
 import TableBody from 'Components/Table/TableBody';
-import EpisodeHistoryRow from './EpisodeHistoryRow2';
+import EpisodeHistoryRow from './EpisodeHistoryRow';
 
 const headers = [
   {

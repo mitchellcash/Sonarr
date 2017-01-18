@@ -142,7 +142,6 @@ class SeriesSearchInput extends Component {
     return (
       <div className={styles.wrapper}>
         <Icon
-          className={styles.icon}
           name={icons.SEARCH}
         />
 

@@ -13,13 +13,13 @@ class FieldSet extends Component {
     } = this.props;
 
     return (
-      <fieldset className={styles.fieldset}>
+      <fieldset className={styles.fieldSet}>
         <legend className={styles.legend}>
           {legend}
         </legend>
         {children}
       </fieldset>
-    )
+    );
   }
 
 }
@@ -29,4 +29,4 @@ FieldSet.propTypes = {
   children: PropTypes.node
 };
 
-export default FieldSet
+export default FieldSet;

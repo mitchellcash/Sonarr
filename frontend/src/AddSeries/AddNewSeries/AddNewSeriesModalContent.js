@@ -1,6 +1,5 @@
-import _ from 'lodash';
 import React, { Component, PropTypes } from 'react';
-import { kinds, inputTypes, tooltipPositions } from 'Helpers/Props';
+import { icons, kinds, inputTypes, tooltipPositions } from 'Helpers/Props';
 import Icon from 'Components/Icon';
 import SpinnerButton from 'Components/SpinnerButton';
 import Form from 'Components/Form/Form';
@@ -93,7 +92,7 @@ class AddNewSeriesModalContent extends Component {
 
               <Form>
                 <FormGroup>
-                  <FormLabel>Path</FormLabel>
+                  <FormLabel>Root Folder</FormLabel>
 
                   <FormInputGroup
                     type={inputTypes.ROOT_FOLDER_SELECT}
@@ -111,7 +110,7 @@ class AddNewSeriesModalContent extends Component {
                       anchor={
                         <Icon
                           className={styles.monitorDetailsIcon}
-                          name="icon-sonarr-details"
+                          name={icons.INFO}
                         />
                       }
                       title="Monitoring Options"

@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import classNames from 'classNames';
-import { kinds } from 'Helpers/Props';
+import { icons, kinds } from 'Helpers/Props';
 import Icon from 'Components/Icon';
 import Link from 'Components/Link';
 import ConfirmModal from 'Components/Modal/ConfirmModal';
@@ -72,7 +72,7 @@ class RemotePathMapping extends Component {
           <Link
             onPress={this.onEditRemotePathMappingPress}
           >
-            <Icon name="icon-sonarr-edit" />
+            <Icon name={icons.EDIT} />
           </Link>
         </div>
 

@@ -19,10 +19,6 @@
   flex: 0 0 60px;
 }
 
-.searchInputContainer {
-  
-}
-
 @media only screen and (max-device-width: $breakpointSmall) {
   .logoContainer {
     flex: 0 0 60px;

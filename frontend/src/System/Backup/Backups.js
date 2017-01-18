@@ -96,12 +96,8 @@ class Backups extends Component {
                       }
 
                       return (
-                        <TableRow
-                          key={id}
-                        >
-                          <TableRowCell
-                            className={styles.type}
-                          >
+                        <TableRow key={id}>
+                          <TableRowCell className={styles.type}>
                             {
                               <Icon
                                 name={iconClassName}

@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import getSelectedIds from 'Utilities/Table/getSelectedIds';
 import selectAll from 'Utilities/Table/selectAll';
 import toggleSelected from 'Utilities/Table/toggleSelected';
-import { kinds } from 'Helpers/Props';
+import { icons, kinds } from 'Helpers/Props';
 import Button from 'Components/Button';
 import Icon from 'Components/Icon';
 import LoadingIndicator from 'Components/LoadingIndicator';
@@ -46,7 +46,10 @@ const headers = [
   },
   {
     name: 'rejections',
-    label: React.createElement(Icon, { name: 'icon-sonarr-form-danger' })
+    label: React.createElement(Icon, {
+      name: icons.DANGER,
+      kind: kinds.DANGER
+    })
   }
 ];
 

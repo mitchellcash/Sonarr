@@ -49,7 +49,7 @@ class FileBrowserModalContent extends Component {
     this.setState({ currentPath: value });
   }
 
-  onRowClick = (path) => {
+  onRowPress = (path) => {
     this.setState({ currentPath: path });
     this.props.onFetchPaths(path);
   }
@@ -144,7 +144,7 @@ class FileBrowserModalContent extends Component {
                         type={file.type}
                         name={file.name}
                         path={file.path}
-                        onClick={this.onRowClick}
+                        onPress={this.onRowPress}
                       />
                     );
                   })

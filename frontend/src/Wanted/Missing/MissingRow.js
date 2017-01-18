@@ -8,6 +8,7 @@ import RelativeDateCellConnector from 'Components/Table/Cells/RelativeDateCellCo
 import TableRow from 'Components/Table/TableRow';
 import TableRowCell from 'Components/Table/Cells/TableRowCell';
 import TableSelectCell from 'Components/Table/Cells/TableSelectCell';
+import styles from './MissingRow.css';
 
 class MissingRow extends Component {
 
@@ -46,7 +47,7 @@ class MissingRow extends Component {
           />
         </TableRowCell>
 
-        <TableRowCell>
+        <TableRowCell className={styles.episode}>
           <SeasonEpisodeNumber
             seasonNumber={seasonNumber}
             episodeNumber={episodeNumber}
@@ -72,7 +73,7 @@ class MissingRow extends Component {
           date={airDateUtc}
         />
 
-        <TableRowCell>
+        <TableRowCell className={styles.status}>
           <EpisodeStatusConnector
             episodeId={id}
             episodeFileId={episodeFileId}

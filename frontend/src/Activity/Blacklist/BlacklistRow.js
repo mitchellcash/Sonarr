@@ -1,10 +1,11 @@
 import React, { Component, PropTypes } from 'react';
-import EpisodeQuality from 'Episode/EpisodeQuality';
-import SeriesTitleLink from 'Series/SeriesTitleLink';
+import { icons } from 'Helpers/Props';
 import IconButton from 'Components/IconButton';
 import RelativeDateCellConnector from 'Components/Table/Cells/RelativeDateCellConnector';
 import TableRow from 'Components/Table/TableRow';
 import TableRowCell from 'Components/Table/Cells/TableRowCell';
+import EpisodeQuality from 'Episode/EpisodeQuality';
+import SeriesTitleLink from 'Series/SeriesTitleLink';
 import BlacklistDetailsModal from './BlacklistDetailsModal';
 import styles from './BlacklistRow.css';
 
@@ -37,7 +38,6 @@ class BlacklistRow extends Component {
 
   render() {
     const {
-      id,
       series,
       sourceTitle,
       quality,
@@ -72,7 +72,7 @@ class BlacklistRow extends Component {
 
         <TableRowCell className={styles.details}>
           <IconButton
-            name="icon-sonarr-details"
+            name={icons.INFO}
             onPress={this.onDetailsPress}
           />
         </TableRowCell>

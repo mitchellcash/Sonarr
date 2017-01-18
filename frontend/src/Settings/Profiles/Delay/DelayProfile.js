@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import classNames from 'classNames';
 import titleCase from 'Utilities/String/titleCase';
-import { kinds } from 'Helpers/Props';
+import { icons, kinds } from 'Helpers/Props';
 import Icon from 'Components/Icon';
 import Link from 'Components/Link';
 import TagList from 'Components/TagList';
@@ -113,7 +113,7 @@ class DelayProfile extends Component {
             className={id === 1 ? styles.editButton : undefined}
             onPress={this.onEditDelayProfilePress}
           >
-            <Icon name="icon-sonarr-edit" />
+            <Icon name={icons.EDIT} />
           </Link>
 
           {
@@ -122,7 +122,7 @@ class DelayProfile extends Component {
                 <div className={styles.dragHandle}>
                   <Icon
                     className={styles.dragIcon}
-                    name="icon-sonarr-reorder"
+                    name={icons.REORDER}
                   />
                 </div>
               )

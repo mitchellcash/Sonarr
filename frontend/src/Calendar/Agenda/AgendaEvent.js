@@ -3,10 +3,11 @@ import React, { Component, PropTypes } from 'react';
 import classNames from 'classNames';
 import formatTime from 'Utilities/Date/formatTime';
 import padNumber from 'Utilities/Number/padNumber';
+import { icons } from 'Helpers/Props';
 import getStatusStyle from 'Calendar/getStatusStyle';
-import episodeEntities from 'Episode/episodeEntities';
 import Icon from 'Components/Icon';
 import Link from 'Components/Link';
+import episodeEntities from 'Episode/episodeEntities';
 import EpisodeDetailsModal from 'Episode/EpisodeDetailsModal';
 import CalendarEventQueueDetails from 'Calendar/Events/CalendarEventQueueDetails';
 import styles from './AgendaEvent.css';
@@ -116,7 +117,7 @@ class AgendaEvent extends Component {
           {
             !queueItem && grabbed &&
               <Icon
-                name="icon-sonarr-downloading"
+                name={icons.DOWNLOADING}
                 title="Episode is downloading"
               />
           }

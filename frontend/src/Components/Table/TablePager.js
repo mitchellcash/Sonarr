@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import classNames from 'classNames';
+import { icons } from 'Helpers/Props';
 import Link from 'Components/Link';
 import Icon from 'Components/Icon';
 import SelectInput from 'Components/Form/SelectInput';
@@ -70,7 +71,7 @@ class TablePager extends Component {
             isDisabled={isFirstPage}
             onPress={onFirstPagePress}
           >
-            <Icon name="icon-sonarr-pager-first" />
+            <Icon name={icons.PAGE_FIRST} />
           </Link>
 
           <Link
@@ -81,7 +82,7 @@ class TablePager extends Component {
             isDisabled={isFirstPage}
             onPress={onPreviousPagePress}
           >
-            <Icon name="icon-sonarr-pager-previous" />
+            <Icon name={icons.PAGE_PREVIOUS} />
           </Link>
 
           <div className={styles.pageNumber}>
@@ -114,7 +115,7 @@ class TablePager extends Component {
             isDisabled={isLastPage}
             onPress={onNextPagePress}
           >
-            <Icon name="icon-sonarr-pager-next" />
+            <Icon name={icons.PAGE_NEXT} />
           </Link>
 
           <Link
@@ -125,7 +126,7 @@ class TablePager extends Component {
             isDisabled={isLastPage}
             onPress={onLastPagePress}
           >
-            <Icon name="icon-sonarr-pager-last" />
+            <Icon name={icons.PAGE_LAST} />
           </Link>
         </div>
 

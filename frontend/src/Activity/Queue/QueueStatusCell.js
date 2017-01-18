@@ -1,5 +1,5 @@
-import React, { PropTypes } from 'react'
-import { tooltipPositions } from 'Helpers/Props';
+import React, { PropTypes } from 'react';
+import { icons, kinds, tooltipPositions } from 'Helpers/Props';
 import Icon from 'Components/Icon';
 import TableRowCell from 'Components/Table/Cells/TableRowCell';
 import Popover from 'Components/Tooltip/Popover';
@@ -44,40 +44,45 @@ function QueueStatusCell(props) {
   const hasError = trackedDownloadStatus === 'error';
 
   // status === 'downloading'
-  let iconName = 'icon-sonarr-downloading';
+  let iconName = icons.DOWNLOADING;
+  let iconKind = kinds.DEFAULT;
   let title = 'Downloading';
 
   if (status === 'queued') {
-    iconName = 'icon-sonarr-queued';
+    iconName = icons.QUEUED;
     title = 'Queued';
   }
 
   if (status === 'completed') {
-    iconName = 'icon-sonarr-downloaded';
+    iconName = icons.DOWNLOADED;
     title = 'Downloaded';
   }
 
   if (status === 'pending') {
-    iconName = 'icon-sonarr-pending';
+    iconName = icons.PENDING;
     title = 'Pending';
   }
 
   if (status === 'failed') {
-    iconName = 'icon-sonarr-download-failed';
+    iconName = icons.DOWNLOADING;
+    iconKind = kinds.DANGER;
     title = 'Download failed';
   }
 
   if (status === 'warning') {
-    iconName = 'icon-sonarr-download-warning';
+    iconName = icons.DOWNLOADING;
+    iconKind = kinds.WARNING;
     title = 'Download warning: check download client for more details';
   }
 
   if (hasError) {
     if (status === 'completed') {
-      iconName = 'icon-sonarr-import-failed';
+      iconName = icons.DOWNLOAD;
+      iconKind = kinds.DANGER;
       title = `Import failed: ${sourceTitle}`;
     } else {
-      iconName = 'icon-sonarr-download-failed';
+      iconName = icons.DOWNLOADING;
+      iconKind = kinds.DANGER;
       title = 'Download failed';
     }
   }
@@ -89,6 +94,7 @@ function QueueStatusCell(props) {
           <Icon
             className={hasWarning ? styles.warning : null}
             name={iconName}
+            kind={iconKind}
           />
         }
         title={title}

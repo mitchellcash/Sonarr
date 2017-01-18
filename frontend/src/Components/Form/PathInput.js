@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import Autosuggest from 'react-autosuggest';
 import classNames from 'classNames';
+import { icons } from 'Helpers/Props';
 import Icon from 'Components/Icon';
 import FileBrowserModal from 'Components/FileBrowser/FileBrowserModal';
 import FormInputButton from './FormInputButton';
@@ -154,7 +155,7 @@ class PathInput extends Component {
                 className={styles.fileBrowserButton}
                 onPress={this.onFileBrowserOpenPress}
               >
-                <Icon name="icon-sonarr-folder-open" />
+                <Icon name={icons.FOLDER_OPEN} />
               </FormInputButton>
 
               <FileBrowserModal

@@ -1,9 +1,10 @@
 import React, { Component, PropTypes } from 'react';
-import episodeEntities from 'Episode/episodeEntities';
+import { icons } from 'Helpers/Props';
 import IconButton from 'Components/IconButton';
 import RelativeDateCellConnector from 'Components/Table/Cells/RelativeDateCellConnector';
 import TableRow from 'Components/Table/TableRow';
 import TableRowCell from 'Components/Table/Cells/TableRowCell';
+import episodeEntities from 'Episode/episodeEntities';
 import SeasonEpisodeNumber from 'Episode/SeasonEpisodeNumber';
 import EpisodeTitleLink from 'Episode/EpisodeTitleLink';
 import EpisodeQuality from 'Episode/EpisodeQuality';
@@ -110,7 +111,7 @@ class HistoryRow extends Component {
 
         <TableRowCell className={styles.details}>
           <IconButton
-            name="icon-sonarr-details"
+            name={icons.INFO}
             onPress={this.onDetailsPress}
           />
         </TableRowCell>

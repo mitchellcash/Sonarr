@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import formatBytes from 'Utilities/Number/formatBytes';
-import { kinds, sizes } from 'Helpers/Props';
+import { icons, kinds, sizes } from 'Helpers/Props';
 import IconButton from 'Components/IconButton';
 import ConfirmModal from 'Components/Modal/ConfirmModal';
 import Label from 'Components/Label';
@@ -124,7 +124,7 @@ class EpisodeSummary extends Component {
 
                 <div className={styles.actions}>
                   <IconButton
-                    name="icon-sonarr-delete-row"
+                    name={icons.REMOVE}
                     onPress={this.onConfirmRemoveEpisodeFile}
                   />
                 </div>

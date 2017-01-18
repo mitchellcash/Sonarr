@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { inputTypes, kinds, sizes } from 'Helpers/Props';
+import { icons, inputTypes, kinds, sizes } from 'Helpers/Props';
 import Icon from 'Components/Icon';
 import Button from 'Components/Button';
 import Form from 'Components/Form/Form';
@@ -165,7 +165,7 @@ class CalendarLinkModalContent extends Component {
                     target="_blank"
                     data-no-router={true}
                   >
-                    <Icon name="icon-sonarr-calendar-o" />
+                    <Icon name={icons.CALENDAR_O} />
                   </FormInputButton>
                 }
                 onChange={this.onInputChange}

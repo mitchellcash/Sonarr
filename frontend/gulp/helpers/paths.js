@@ -9,6 +9,7 @@ const paths = {
     scripts: root + '**/*.js',
     less: [root + '**/*.less'],
     content: root + 'Content/',
+    fonts: root + 'Content/Fonts/',
     images: root + 'Content/Images/**/*',
     exclude: {
       libs: `!${root}JsLibraries/**`
@@ -16,7 +17,9 @@ const paths = {
   },
   dest: {
     root: './_output/UI.Phantom/',
-    content: './_output/UI.Phantom/Content/'
+    content: './_output/UI.Phantom/Content/',
+    fonts: './_output/UI.Phantom/Content/Fonts/',
+    images: './_output/UI.Phantom/Content/Images/'
   }
 };
 

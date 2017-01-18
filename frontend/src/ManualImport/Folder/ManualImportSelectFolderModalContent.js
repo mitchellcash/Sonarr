@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { kinds, sizes } from 'Helpers/Props';
+import { icons, kinds, sizes } from 'Helpers/Props';
 import Button from 'Components/Button';
 import Icon from 'Components/Icon';
 import PathInputConnector from 'Components/Form/PathInputConnector';
@@ -114,7 +114,7 @@ class ManualImportSelectFolderModalContent extends Component {
               >
                 <Icon
                   className={styles.buttonIcon}
-                  name="icon-sonarr-import-quick"
+                  name={icons.QUICK}
                 />
 
                 Quick Import
@@ -131,7 +131,7 @@ class ManualImportSelectFolderModalContent extends Component {
               >
                 <Icon
                   className={styles.buttonIcon}
-                  name="icon-sonarr-import-interactive"
+                  name={icons.INTERACTIVE}
                 />
 
                 Interactive Import

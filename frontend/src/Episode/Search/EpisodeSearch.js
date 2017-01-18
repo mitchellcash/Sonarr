@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import { kinds, sizes } from 'Helpers/Props';
+import { icons, kinds, sizes } from 'Helpers/Props';
 import Button from 'Components/Button';
 import Icon from 'Components/Icon';
 import styles from './EpisodeSearch.css';
@@ -20,7 +20,7 @@ function EpisodeSearch(props) {
         >
           <Icon
             className={styles.buttonIcon}
-            name="icon-sonarr-search-quick"
+            name={icons.QUICK}
           />
 
           Quick Search
@@ -36,7 +36,7 @@ function EpisodeSearch(props) {
         >
           <Icon
             className={styles.buttonIcon}
-            name="icon-sonarr-search-interactive"
+            name={icons.INTERACTIVE}
           />
 
           Interactive Search

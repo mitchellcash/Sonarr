@@ -1,29 +1,30 @@
-import React, { Component, PropTypes } from 'react';
+import React, { PropTypes } from 'react';
+import styles from './TableRow.css';
 
-class TableRow extends Component {
+function TableRow(props) {
+  const {
+    className,
+    children,
+    ...otherProps
+  } = props;
 
-  //
-  // Render
-
-  render() {
-    const {
-      children,
-      ...otherProps
-    } = this.props;
-
-    return (
-      <tr
-        {...otherProps}
-      >
-        {children}
-      </tr>
-    );
-  }
-
+  return (
+    <tr
+      className={className}
+      {...otherProps}
+    >
+      {children}
+    </tr>
+  );
 }
 
 TableRow.propTypes = {
+  className: PropTypes.string.isRequired,
   children: PropTypes.node
+};
+
+TableRow.defaultProps = {
+  className: styles.row
 };
 
 export default TableRow;

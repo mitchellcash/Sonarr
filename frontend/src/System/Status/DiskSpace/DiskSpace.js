@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import FormatHelpers from 'Shared/FormatHelpers';
+import formatBytes from 'Utilities/Number/formatBytes';
 import LoadingIndicator from 'Components/LoadingIndicator';
 import FieldSet from 'Components/FieldSet';
 import Table from 'Components/Table/Table';
@@ -51,9 +51,7 @@ class DiskSpace extends Component {
                 {
                   items.map((item) => {
                     return (
-                      <TableRow
-                        key={item.path}
-                      >
+                      <TableRow key={item.path}>
                         <TableRowCell>
                           {item.path}
 
@@ -62,8 +60,8 @@ class DiskSpace extends Component {
                               ` (${item.label})`
                           }
                         </TableRowCell>
-                        <TableRowCell>{FormatHelpers.bytes(item.freeSpace)}</TableRowCell>
-                        <TableRowCell>{FormatHelpers.bytes(item.totalSpace)}</TableRowCell>
+                        <TableRowCell>{formatBytes(item.freeSpace)}</TableRowCell>
+                        <TableRowCell>{formatBytes(item.totalSpace)}</TableRowCell>
                       </TableRow>
                     );
                   })

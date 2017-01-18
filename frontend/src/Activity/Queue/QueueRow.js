@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import { icons } from 'Helpers/Props';
 import IconButton from 'Components/IconButton';
 import SpinnerIconButton from 'Components/SpinnerIconButton';
 import ProgressBar from 'Components/ProgressBar';
@@ -165,7 +166,7 @@ class QueueRow extends Component {
           {
             showManualImport &&
               <IconButton
-                name="icon-sonarr-import-manual"
+                name={icons.INTERACTIVE}
                 onPress={this.onManualImportPress}
               />
           }
@@ -173,14 +174,14 @@ class QueueRow extends Component {
           {
             isPending &&
               <SpinnerIconButton
-                name="icon-sonarr-download"
+                name={icons.DOWNLOAD}
                 isSpinning={grabbing}
                 onPress={onGrabPress}
               />
           }
 
           <SpinnerIconButton
-            name="icon-sonarr-delete-row"
+            name={icons.REMOVE}
             isSpinning={removing}
             onPress={this.onRemoveQueueItemPress}
           />

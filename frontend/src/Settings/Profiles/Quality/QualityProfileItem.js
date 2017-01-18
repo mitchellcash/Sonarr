@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import classNames from 'classNames';
+import { icons } from 'Helpers/Props';
 import Icon from 'Components/Icon';
 import CheckInput from 'Components/Form/CheckInput';
 import styles from './QualityProfileItem.css';
@@ -55,7 +56,7 @@ class QualityProfileItem extends Component {
               <div className={styles.dragHandle}>
                 <Icon
                   className={styles.dragIcon}
-                  name="icon-sonarr-reorder"
+                  name={icons.REORDER}
                 />
               </div>
             )

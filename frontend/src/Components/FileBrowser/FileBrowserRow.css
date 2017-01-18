@@ -1,9 +1,5 @@
-.row {
-  composes: clickable from 'Styles/Mixins/clickable.css';
-
-  cursor: pointer;
-}
-
 .type {
+  composes: cell from 'Components/Table/Cells/TableRowCell.css';
+
   width: 32px;
 }

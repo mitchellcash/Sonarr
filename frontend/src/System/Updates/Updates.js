@@ -1,7 +1,7 @@
 import _ from 'underscore';
 import React, { Component, PropTypes } from 'react';
 import { kinds } from 'Helpers/Props';
-import shortDate from 'Utilities/Date/shortDate';
+import formatDate from 'Utilities/Date/formatDate';
 import LoadingIndicator from 'Components/LoadingIndicator';
 import Button from 'Components/Button';
 import Icon from 'Components/Icon';
@@ -20,6 +20,7 @@ class Updates extends Component {
     const {
       fetching,
       items,
+      shortDateFormat,
       onInstallLatestPress
     } = this.props;
 
@@ -80,7 +81,7 @@ class Updates extends Component {
                         <div className={styles.info}>
                           <div className={styles.version}>{update.version}</div>
                           <div className={styles.space}>&mdash;</div>
-                          <div className={styles.date}>{shortDate(update.releaseDate)}</div>
+                          <div className={styles.date}>{formatDate(update.releaseDate, shortDateFormat)}</div>
 
                           {
                             update.branch !== 'master' &&
@@ -127,6 +128,7 @@ class Updates extends Component {
 Updates.propTypes = {
   fetching: PropTypes.bool.isRequired,
   items: PropTypes.array.isRequired,
+  shortDateFormat: PropTypes.string.isRequired,
   onInstallLatestPress: PropTypes.func.isRequired
 };
 

@@ -1,9 +1,6 @@
+.episode,
 .status {
   composes: cell from 'Components/Table/Cells/TableRowCell.css';
-  
-  width: 30px;
-}
 
-.warning {
-  color: $warningColor;
+  width: 100px;
 }

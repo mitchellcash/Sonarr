@@ -3,7 +3,6 @@ var livereload = require('gulp-livereload');
 var watch = require('gulp-watch');
 var paths = require('./helpers/paths.js');
 
-require('./handlebars.js');
 require('./copy.js');
 require('./webpack.js');
 
@@ -17,12 +16,12 @@ function watchTask(glob, task) {
   });
 }
 
-gulp.task('watch', ['handlebars', 'copyHtml', 'copyContent', 'copyJs'], () => {
+gulp.task('watch', ['copyHtml', 'copyFonts', 'copyImages', 'copyJs'], () => {
   livereload.listen();
 
   gulp.start('webpackWatch');
 
-  watchTask(paths.src.templates, 'handlebars');
   watchTask(paths.src.html, 'copyHtml');
-  watchTask([paths.src.content + '**/*.*'], 'copyContent');
+  watchTask(paths.src.fonts + '**/*.*', 'copyFonts');
+  watchTask(paths.src.images + '**/*.*', 'copyImages');
 });

@@ -1,26 +1,16 @@
-@import 'Content/Fonts/fonts.css';
-@import 'Content/Fonts/font-awesome.css';
-@import 'Content/Overrides/messenger.css';
-
 html,
-body,
-.root {
+body {
   height: 100%; /* needed for proper layout */
 }
 
 body {
   overflow: hidden;
-  font-family: $defaultFontFamily;
-}
+  background-color: #f5f7fa;
 
-.root {
-  overflow: hidden;
 }
 
 @media only screen and (max-device-width: $breakpointSmall) {
-  html,
-  body,
-  .root {
+  body {
     height: auto;
   }
 

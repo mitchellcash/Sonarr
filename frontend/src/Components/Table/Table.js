@@ -1,8 +1,11 @@
 import _ from 'lodash';
-import React, { Component, PropTypes } from 'react';
+import React, { PropTypes } from 'react';
+import { scrollDirections } from 'Helpers/Props';
+import Scroller from 'Components/Scroller';
 import TableHeader from './TableHeader';
 import TableHeaderCell from './TableHeaderCell';
 import TableSelectAllHeaderCell from './TableSelectAllHeaderCell';
+import styles from './Table.css';
 
 const tableHeaderCellProps = [
   'sortKey',
@@ -19,25 +22,22 @@ function getTableHeaderCellProps(props) {
   }, {});
 }
 
-class Table extends Component {
+function Table(props) {
+  const {
+    className,
+    selectAll,
+    headers,
+    children,
+    onSortPress,
+    ...otherProps
+  } = props;
 
-  //
-  // Render
-
-  render() {
-    const {
-      className,
-      selectAll,
-      headers,
-      children,
-      onSortPress,
-      ...otherProps
-    } = this.props;
-
-    return (
-      <table
-        className={className}
-      >
+  return (
+    <Scroller
+      className={styles.tableContainer}
+      scrollDirection={scrollDirections.HORIZONTAL}
+    >
+      <table className={className}>
         <TableHeader>
           {
             selectAll &&
@@ -61,8 +61,8 @@ class Table extends Component {
         </TableHeader>
         {children}
       </table>
-    );
-  }
+    </Scroller>
+  );
 }
 
 Table.propTypes = {
@@ -74,7 +74,7 @@ Table.propTypes = {
 };
 
 Table.defaultProps = {
-  className: 'table table-hover',
+  className: styles.table,
   selectAll: false
 };
 

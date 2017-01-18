@@ -81,9 +81,7 @@ class Tasks extends Component {
                       }
 
                       return (
-                        <TableRow
-                          key={item.id}
-                        >
+                        <TableRow key={item.id}>
                           <TableRowCell>{item.name}</TableRowCell>
                           <TableRowCell
                             className={styles.interval}

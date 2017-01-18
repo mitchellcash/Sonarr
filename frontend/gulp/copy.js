@@ -25,14 +25,22 @@ gulp.task('copyHtml', () => {
     .pipe(livereload());
 });
 
-gulp.task('copyContent', () => {
-  return gulp.src([
-    path.join(paths.src.content, '**', '*.*'),
-    '!**/*.less',
-    '!**/*.css'
-  ])
-    .pipe(cache('copyContent'))
+gulp.task('copyFonts', () => {
+  return gulp.src(
+    path.join(paths.src.fonts, '**', '*.*')
+  )
+    .pipe(cache('copyFonts'))
     .pipe(print())
-    .pipe(gulp.dest(paths.dest.content))
+    .pipe(gulp.dest(paths.dest.fonts))
+    .pipe(livereload());
+});
+
+gulp.task('copyImages', () => {
+  return gulp.src(
+    path.join(paths.src.images, '**', '*.*')
+  )
+    .pipe(cache('copyFonts'))
+    .pipe(print())
+    .pipe(gulp.dest(paths.dest.images))
     .pipe(livereload());
 });

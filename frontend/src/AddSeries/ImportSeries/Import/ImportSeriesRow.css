@@ -1,16 +1,24 @@
 .monitor,
 .seriesType {
+  composes: cell from 'Components/Table/Cells/TableRowCell.css';
+
   width: 200px;
 }
 
 .qualityProfile {
+  composes: cell from 'Components/Table/Cells/TableRowCell.css';
+
   width: 250px;
 }
 
 .seasonFolder {
+  composes: cell from 'Components/Table/Cells/TableRowCell.css';
+
   width: 150px;
 }
 
 .series {
+  composes: cell from 'Components/Table/Cells/TableRowCell.css';
+  
   width: 400px;
 }
