@@ -1,4 +1,4 @@
-import _ from 'underscore';
+import _ from 'lodash';
 import React, { Component, PropTypes } from 'react';
 import classNames from 'classNames';
 import styles from './SelectInput.css';

@@ -1,4 +1,4 @@
-import _ from 'underscore';
+import _ from 'lodash';
 import getSectionState from 'Utilities/State/getSectionState';
 import updateSectionState from 'Utilities/State/updateSectionState';
 

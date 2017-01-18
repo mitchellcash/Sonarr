@@ -1,4 +1,4 @@
-import _ from 'underscore';
+import _ from 'lodash';
 import { handleActions } from 'redux-actions';
 import * as types from 'Store/Actions/actionTypes';
 import createSetReducer from './Creators/createSetReducer';

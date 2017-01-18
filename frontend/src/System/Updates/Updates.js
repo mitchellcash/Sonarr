@@ -1,4 +1,4 @@
-import _ from 'underscore';
+import _ from 'lodash';
 import React, { Component, PropTypes } from 'react';
 import { kinds } from 'Helpers/Props';
 import formatDate from 'Utilities/Date/formatDate';

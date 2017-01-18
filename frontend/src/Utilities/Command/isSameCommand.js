@@ -1,4 +1,4 @@
-import _ from 'underscore';
+import _ from 'lodash';
 
 function isSameCommand(commandA, commandB) {
   if (commandA.name.toLocaleLowerCase() !== commandB.name.toLocaleLowerCase()) {
