@@ -96,11 +96,11 @@ const config = {
       // Fonts
       {
         test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-        loader: 'url?limit=10240&mimetype=application/font-woff&emitFile=false&name=[name].[ext]&publicPath=/Content/Fonts/'
+        loader: 'url?limit=10240&mimetype=application/font-woff&emitFile=false&name=[name].[ext]&publicPath=Content/Fonts/'
       },
       {
         test: /\.(ttf|eot|eot?#iefix|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-        loader: 'file-loader?emitFile=false&name=[name].[ext]&publicPath=/Content/Fonts/'
+        loader: 'file-loader?emitFile=false&name=[name].[ext]&publicPath=Content/Fonts/'
       }
     ]
   },
