@@ -101,9 +101,9 @@ class SeriesIndexRow extends Component {
 
         />
 
-        <RelativeDateCellConnector
+        {/* <RelativeDateCellConnector
           date={previousAiring}
-        />
+        /> */}
 
         <TableRowCell className={styles.seasonCount}>
           {seasonCount}
