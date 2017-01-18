@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import classNames from 'classNames';
+import classNames from 'classnames';
 import { map } from 'Helpers/elementChildren';
 import Icon from 'Components/Icon';
 import Link from 'Components/Link';

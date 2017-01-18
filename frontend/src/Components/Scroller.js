@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import classNames from 'classNames';
+import classNames from 'classnames';
 import { scrollDirections } from 'Helpers/Props';
 import styles from './Scroller.css';
 

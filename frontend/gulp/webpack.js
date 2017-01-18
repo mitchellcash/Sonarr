@@ -10,7 +10,6 @@ const webpack = require('webpack');
 const errorHandler = require('./helpers/errorHandler');
 
 const uiFolder = 'UI.Phantom';
-const htmlAnnotate = path.join(__dirname, 'helpers', 'html-annotate-loader');
 const root = path.join(__dirname, '..', 'src');
 
 console.log('ROOT:', root);
@@ -64,10 +63,6 @@ const config = {
     }
   },
   module: {
-    preLoaders: [{
-      test: /\.hbs$/,
-      loader: htmlAnnotate
-    }],
     loaders: [
       {
         test: /\.js?$/,

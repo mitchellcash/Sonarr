@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { Link as RouterLink } from 'react-router';
-import classNames from 'classNames';
+import classNames from 'classnames';
 import styles from './Link.css';
 
 class Link extends Component {

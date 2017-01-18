@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
 import Portal from 'react-portal';
-import classNames from 'classNames';
+import classNames from 'classnames';
 import { sizes } from 'Helpers/Props';
 import * as keyCodes from 'Utilities/Constants/keyCodes';
 import styles from './Modal.css';

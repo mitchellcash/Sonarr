@@ -3,7 +3,7 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
 import createCommandsSelector from 'Store/Selectors/createCommandsSelector';
-import createUiSettingsSelector from 'Store/Selectors/createUiSettingsSelector';
+import createUISettingsSelector from 'Store/Selectors/createUISettingsSelector';
 import { fetchTasks } from 'Store/Actions/systemActions';
 import { executeCommand } from 'Store/Actions/commandActions';
 import Tasks from './Tasks';
@@ -12,7 +12,7 @@ function createMapStateToProps() {
   return createSelector(
     (state) => state.system.tasks,
     createCommandsSelector(),
-    createUiSettingsSelector(),
+    createUISettingsSelector(),
     (tasks, commands, uiSettings) => {
       const {
         fetching

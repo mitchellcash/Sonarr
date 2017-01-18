@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import classNames from 'classNames';
+import classNames from 'classnames';
 import { sizes } from 'Helpers/Props';
 import Link from 'Components/Link';
 import styles from './NamingOption.css';

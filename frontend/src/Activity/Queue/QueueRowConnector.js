@@ -4,13 +4,13 @@ import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
 import { grabQueueItem, removeQueueItem } from 'Store/Actions/queueActions';
 import createEpisodeSelector from 'Store/Selectors/createEpisodeSelector';
-import createUiSettingsSelector from 'Store/Selectors/createUiSettingsSelector';
+import createUISettingsSelector from 'Store/Selectors/createUISettingsSelector';
 import QueueRow from './QueueRow';
 
 function createMapStateToProps() {
   return createSelector(
     createEpisodeSelector(),
-    createUiSettingsSelector(),
+    createUISettingsSelector(),
     (episode, uiSettings) => {
       const result = _.pick(uiSettings, [
         'showRelativeDates',

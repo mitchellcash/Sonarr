@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { locationShape } from 'react-router';
-import classNames from 'classNames';
+import classNames from 'classnames';
 import { icons } from 'Helpers/Props';
 import Scroller from 'Components/Scroller';
 import PageSidebarItem from './PageSidebarItem';

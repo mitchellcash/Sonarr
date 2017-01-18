@@ -1,6 +1,6 @@
 import moment from 'moment';
 import React, { Component, PropTypes } from 'react';
-import classNames from 'classNames';
+import classNames from 'classnames';
 import getRelativeDate from 'Utilities/Date/getRelativeDate';
 import * as calendarViews from 'Calendar/calendarViews';
 import styles from './DayOfWeek.css';

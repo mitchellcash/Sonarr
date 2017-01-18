@@ -8,8 +8,7 @@ var paths = require('./helpers/paths.js');
 gulp.task('copyJs', () => {
   return gulp.src(
     [
-      path.join(paths.src.root, 'polyfills.js'),
-      path.join(paths.src.root, 'JsLibraries/handlebars.runtime.js')
+      path.join(paths.src.root, 'polyfills.js')
     ])
     .pipe(cache('copyJs'))
     .pipe(print())

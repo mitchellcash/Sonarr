@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import Autosuggest from 'react-autosuggest';
-import classNames from 'classNames';
+import classNames from 'classnames';
 import { icons } from 'Helpers/Props';
 import Icon from 'Components/Icon';
 import FileBrowserModal from 'Components/FileBrowser/FileBrowserModal';

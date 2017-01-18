@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import TetherComponent from 'react-tether';
-import classNames from 'classNames';
+import classNames from 'classnames';
 import { tooltipPositions } from 'Helpers/Props';
 import styles from './Popover.css';
 

@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { icons, kinds } from 'Helpers/Props';
-import classNames from 'classNames';
+import classNames from 'classnames';
 import styles from './Icon.css';
 
 class Icon extends Component {

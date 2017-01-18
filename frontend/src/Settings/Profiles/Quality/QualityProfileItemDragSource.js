@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { findDOMNode } from 'react-dom';
 import { DragSource, DropTarget } from 'react-dnd';
-import classNames from 'classNames';
+import classNames from 'classnames';
 import { QUALITY_PROFILE_ITEM } from 'Helpers/dragTypes';
 import QualityProfileItem from './QualityProfileItem';
 import styles from './QualityProfileItemDragSource.css';

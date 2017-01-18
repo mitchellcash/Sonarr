@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import classNames from 'classNames';
+import classNames from 'classnames';
 import titleCase from 'Utilities/String/titleCase';
 import { icons, kinds } from 'Helpers/Props';
 import Icon from 'Components/Icon';

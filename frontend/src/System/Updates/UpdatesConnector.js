@@ -3,14 +3,14 @@ import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
 import { fetchUpdates } from 'Store/Actions/systemActions';
 import { executeCommand } from 'Store/Actions/commandActions';
-import createUiSettingsSelector from 'Store/Selectors/createUiSettingsSelector';
+import createUISettingsSelector from 'Store/Selectors/createUISettingsSelector';
 import * as commandNames from 'Commands/commandNames';
 import Updates from './Updates';
 
 function createMapStateToProps() {
   return createSelector(
     (state) => state.system.updates,
-    createUiSettingsSelector(),
+    createUISettingsSelector(),
     (updates, uiSettings) => {
       const {
         fetching,

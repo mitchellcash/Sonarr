@@ -1,6 +1,6 @@
 import moment from 'moment';
 import React, { PropTypes } from 'react';
-import classNames from 'classNames';
+import classNames from 'classnames';
 import * as calendarViews from 'Calendar/calendarViews';
 import CalendarEventConnector from 'Calendar/Events/CalendarEventConnector';
 import styles from './CalendarDay.css';

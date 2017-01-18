@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import ReCAPTCHA from 'react-google-recaptcha';
-import classNames from 'classNames';
+import classNames from 'classnames';
 import { icons } from 'Helpers/Props';
 import Icon from 'Components/Icon';
 import FormInputButton from './FormInputButton';

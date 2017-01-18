@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import classNames from 'classNames';
+import classNames from 'classnames';
 import { kinds } from 'Helpers/Props';
 import styles from './Alert.css';
 

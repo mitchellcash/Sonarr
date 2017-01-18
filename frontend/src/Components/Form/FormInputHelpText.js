@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import classNames from 'classNames';
+import classNames from 'classnames';
 import styles from './FormInputHelpText.css';
 
 function FormInputHelpText({ className, text, isError, isWarning, isCheckInput }) {

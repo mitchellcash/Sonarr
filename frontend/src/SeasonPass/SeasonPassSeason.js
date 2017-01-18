@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import classNames from 'classNames';
+import classNames from 'classnames';
 import padNumber from 'Utilities/Number/padNumber';
 import Label from 'Components/Label';
 import MonitorToggleButton from 'Components/MonitorToggleButton';

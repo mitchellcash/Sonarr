@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import classNames from 'classNames';
+import classNames from 'classnames';
 import { icons } from 'Helpers/Props';
 import Button from './Button';
 import Icon from './Icon';

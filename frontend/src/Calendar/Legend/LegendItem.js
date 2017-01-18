@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import classNames from 'classNames';
+import classNames from 'classnames';
 import titleCase from 'Utilities/String/titleCase';
 import styles from './LegendItem.css';
 
