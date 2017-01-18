@@ -57,8 +57,9 @@ class Updates extends Component {
             noUpdateToInstall &&
               <div className={styles.upToDate}>
                 <Icon
-                  name="fa fa-check-circle"
                   className={styles.upToDateIcon}
+                  name="fa fa-check-circle"
+                  size={30}
                 />
                 <div className={styles.upToDateMessage}>
                   The latest version of Sonarr is already installed
