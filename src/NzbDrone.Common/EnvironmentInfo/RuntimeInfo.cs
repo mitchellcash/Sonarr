@@ -5,6 +5,7 @@ using System.Reflection;
 using System.Security.Principal;
 using System.ServiceProcess;
 using NLog;
+using NzbDrone.Common.Processes;
 
 namespace NzbDrone.Common.EnvironmentInfo
 {

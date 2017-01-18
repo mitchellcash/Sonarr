@@ -3,6 +3,7 @@ using Moq;
 using NUnit.Framework;
 using NzbDrone.Core.MetadataSource.SkyHook;
 using NzbDrone.Core.Test.Framework;
+using NzbDrone.Core.Tv;
 using NzbDrone.Test.Common;
 using NzbDrone.Test.Common.Categories;
 

@@ -7,7 +7,6 @@ using NzbDrone.Common.Instrumentation;
 using NzbDrone.Core.Instrumentation;
 using NzbDrone.Core.Lifecycle;
 using NzbDrone.Core.Messaging.Events;
-using Sonarr.Http.ErrorManagement;
 using Sonarr.Http.Extensions.Pipelines;
 using TinyIoC;
 

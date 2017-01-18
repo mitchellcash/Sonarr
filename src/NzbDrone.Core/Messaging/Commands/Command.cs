@@ -4,7 +4,7 @@ namespace NzbDrone.Core.Messaging.Commands
 {
     public abstract class Command
     {
-        private bool _sendUpdatesToClient = false;
+        private bool _sendUpdatesToClient;
 
         public virtual bool SendUpdatesToClient
         {
@@ -16,6 +16,8 @@ namespace NzbDrone.Core.Messaging.Commands
             set
             {
                 _sendUpdatesToClient = value;
+            }           
+        }
 
         public virtual bool UpdateScheduledTask => true;
 

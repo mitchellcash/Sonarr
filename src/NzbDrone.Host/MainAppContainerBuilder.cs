@@ -1,11 +1,10 @@
 ﻿using System.Collections.Generic;
 using Nancy.Bootstrapper;
-using NzbDrone.Api;
+using Sonarr.Http;
 using NzbDrone.Common.Composition;
 using NzbDrone.Common.EnvironmentInfo;
 using NzbDrone.Common.Http.Dispatchers;
 using NzbDrone.SignalR;
-using Sonarr.Http;
 
 namespace NzbDrone.Host
 {
@@ -24,11 +23,9 @@ namespace NzbDrone.Host
                              };
 
             return new MainAppContainerBuilder(args, assemblies).Container;
-            assemblies.Add(OsInfo.IsWindows ? "NzbDrone.Windows" : "NzbDrone.Mono");
         }
 
         private MainAppContainerBuilder(StartupContext args, List<string> assemblies)
-        private MainAppContainerBuilder(IStartupContext args, string[] assemblies)
             : base(args, assemblies)
         {
             AutoRegisterImplementations<NzbDronePersistentConnection>();
