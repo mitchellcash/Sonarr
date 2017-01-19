@@ -71,6 +71,14 @@ class GeneralSettings extends Component {
       username,
       password,
       apiKey,
+      proxyEnabled,
+      proxyType,
+      proxyHostname,
+      proxyPort,
+      proxyUsername,
+      proxyPassword,
+      proxyBypassFilter,
+      proxyBypassLocalAddresses,
       logLevel,
       analyticsEnabled,
       branch,
@@ -83,6 +91,12 @@ class GeneralSettings extends Component {
       { 'none': 'None' },
       { 'basic': 'Basic (Browser Popup)' },
       { 'forms': 'Forms (Login Page)' }
+    ];
+
+    const proxyTypeOptions = [
+      { 'http': 'HTTP(S)' },
+      { 'socks4': 'Socks4' },
+      { 'socks5': 'Socks5 (Support TOR)' }
     ];
 
     const logLevelOptions = [
@@ -279,7 +293,7 @@ class GeneralSettings extends Component {
                   }
 
                   <FormGroup>
-                    <FormLabel>API Key (Needs reset button)</FormLabel>
+                    <FormLabel>API Key</FormLabel>
 
                     <FormInputGroup
                       type={inputTypes.TEXT}
@@ -298,6 +312,107 @@ class GeneralSettings extends Component {
                       {...apiKey}
                     />
                   </FormGroup>
+                </FieldSet>
+
+                <FieldSet
+                  legend="Proxy Settings"
+                >
+                  <FormGroup>
+                    <FormLabel>Use Proxy</FormLabel>
+
+                    <FormInputGroup
+                      type={inputTypes.CHECK}
+                      name="proxyEnabled"
+                      onChange={onInputChange}
+                      {...proxyEnabled}
+                    />
+                  </FormGroup>
+
+                  {
+                    proxyEnabled.value &&
+                      <div>
+                        <FormGroup>
+                          <FormLabel>Proxy Type</FormLabel>
+
+                          <FormInputGroup
+                            type={inputTypes.SELECT}
+                            name="proxyType"
+                            values={proxyTypeOptions}
+                            onChange={onInputChange}
+                            {...proxyType}
+                          />
+                        </FormGroup>
+
+                        <FormGroup>
+                          <FormLabel>Hostname</FormLabel>
+
+                          <FormInputGroup
+                            type={inputTypes.TEXT}
+                            name="proxyHostname"
+                            onChange={onInputChange}
+                            {...proxyHostname}
+                          />
+                        </FormGroup>
+
+                        <FormGroup>
+                          <FormLabel>Port</FormLabel>
+
+                          <FormInputGroup
+                            type={inputTypes.NUMBER}
+                            name="proxyPort"
+                            onChange={onInputChange}
+                            {...proxyPort}
+                          />
+                        </FormGroup>
+
+                        <FormGroup>
+                          <FormLabel>Username</FormLabel>
+
+                          <FormInputGroup
+                            type={inputTypes.TEXT}
+                            name="proxyUsername"
+                            helpText="You only need to enter a username and password if one is required. Leave them blank otherwise."
+                            onChange={onInputChange}
+                            {...proxyUsername}
+                          />
+                        </FormGroup>
+
+                        <FormGroup>
+                          <FormLabel>Password</FormLabel>
+
+                          <FormInputGroup
+                            type={inputTypes.PASSWORD}
+                            name="proxyPassword"
+                            helpText="You only need to enter a username and password if one is required. Leave them blank otherwise."
+                            onChange={onInputChange}
+                            {...proxyPassword}
+                          />
+                        </FormGroup>
+
+                        <FormGroup>
+                          <FormLabel>Ignored Addresses</FormLabel>
+
+                          <FormInputGroup
+                            type={inputTypes.TEXT}
+                            name="proxyBypassFilter"
+                            helpText="Use ',' as a separator, and '*.' as a wildcard for subdomains"
+                            onChange={onInputChange}
+                            {...proxyBypassFilter}
+                          />
+                        </FormGroup>
+
+                        <FormGroup>
+                          <FormLabel>Bypass Proxy for Local Addresses</FormLabel>
+
+                          <FormInputGroup
+                            type={inputTypes.CHECK}
+                            name="proxyBypassLocalAddresses"
+                            onChange={onInputChange}
+                            {...proxyBypassLocalAddresses}
+                          />
+                        </FormGroup>
+                      </div>
+                  }
                 </FieldSet>
 
                 <FieldSet
