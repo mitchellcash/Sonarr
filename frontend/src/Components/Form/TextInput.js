@@ -57,7 +57,7 @@ TextInput.propTypes = {
   className: PropTypes.string.isRequired,
   placeholder: PropTypes.string,
   name: PropTypes.string.isRequired,
-  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.arrayOf(PropTypes.string)]).isRequired,
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.array]).isRequired,
   hasError: PropTypes.bool,
   hasWarning: PropTypes.bool,
   hasButton: PropTypes.bool,
