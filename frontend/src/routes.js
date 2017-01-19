@@ -1,5 +1,6 @@
 import React from 'react';
 import { Route, IndexRoute } from 'react-router';
+import NotFound from 'Components/NotFound';
 import PageConnector from 'Components/Page/PageConnector';
 import SeriesIndexConnector from 'Series/Index/SeriesIndexConnector';
 import AddNewSeriesConnector from 'AddSeries/AddNewSeries/AddNewSeriesConnector';
@@ -207,6 +208,11 @@ const routes = (
         component={UpdateLogFilesConnector}
       />
     </Route>
+
+    <Route
+      path="*"
+      component={NotFound}
+    />
   </Route>
 );
 
