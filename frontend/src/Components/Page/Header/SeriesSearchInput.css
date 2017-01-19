@@ -89,3 +89,9 @@
 .focused {
   background-color: $themeLightColor;
 }
+
+@media only screen and (max-width: $breakpointSmall) {
+  .input {
+    width: 170px;
+  }
+}

@@ -12,7 +12,7 @@
 @media only screen and (max-device-width: $breakpointSmall) {
   .sidebar {
     position: absolute;
-    top: 60px;
+    top: 0;
     bottom: 0;
     z-index: 1;
   }
