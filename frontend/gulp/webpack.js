@@ -20,8 +20,9 @@ const config = {
     ignored: /node_modules/
   },
   entry: {
+    preload: 'preload.js',
     vendor: 'vendor.js',
-    main: 'index.js'
+    index: 'index.js'
   },
   resolve: {
     root: [
@@ -96,11 +97,11 @@ const config = {
       // Fonts
       {
         test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-        loader: 'url?limit=10240&mimetype=application/font-woff&emitFile=false&name=[name].[ext]&publicPath=Content/Fonts/'
+        loader: 'url?limit=10240&mimetype=application/font-woff&emitFile=false&name=Content/Fonts/[name].[ext]'
       },
       {
         test: /\.(ttf|eot|eot?#iefix|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-        loader: 'file-loader?emitFile=false&name=[name].[ext]&publicPath=Content/Fonts/'
+        loader: 'file-loader?emitFile=false&name=Content/Fonts/[name].[ext]'
       }
     ]
   },
@@ -133,7 +134,7 @@ const config = {
 };
 
 gulp.task('webpack', () => {
-  return gulp.src('main.js')
+  return gulp.src('index.js')
     .pipe(webpackStream(config))
     .pipe(gulp.dest(''));
 });

@@ -1,8 +1,8 @@
 /* Base */
 // require('jquery');
-// require('underscore');
-// require('messenger');
-// require('moment');
+require('lodash');
+require('messenger');
+require('moment');
 // require('signalR');
 // require('jquery-ui');
 // require('jquery.easypiechart');
