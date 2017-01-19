@@ -18,14 +18,14 @@
 @media only screen and (max-device-width: $breakpointSmall) {
   .sidebarContainer {
     position: fixed;
-    top: 0;
+    top: -100px;
     bottom: 0;
     z-index: 1;
   }
 
   .sidebar {
     position: fixed;
-    top: 60px;
+    top: 160px;
     bottom: 0;
     z-index: 1;
   }
