@@ -14,7 +14,6 @@ function createMapStateToProps() {
         shortDateFormat: uiSettings.shortDateFormat,
         timeFormat: uiSettings.timeFormat,
         ...series
-
       };
     }
   );
