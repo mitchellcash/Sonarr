@@ -20,7 +20,7 @@ function createTestProviderHandler(section, url, getFromState) {
       const promise = $.ajax(ajaxOptions);
 
       promise.done((data) => {
-        dispatch(updateItem({ section, data }));
+        dispatch(updateItem({ section, data, id: payload.id }));
 
         dispatch(set({
           section,
