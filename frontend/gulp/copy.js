@@ -38,7 +38,7 @@ gulp.task('copyImages', () => {
   return gulp.src(
     path.join(paths.src.images, '**', '*.*')
   )
-    .pipe(cache('copyFonts'))
+    .pipe(cache('copyImages'))
     .pipe(print())
     .pipe(gulp.dest(paths.dest.images))
     .pipe(livereload());

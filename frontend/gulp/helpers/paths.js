@@ -10,7 +10,7 @@ const paths = {
     less: [root + '**/*.less'],
     content: root + 'Content/',
     fonts: root + 'Content/Fonts/',
-    images: root + 'Content/Images/**/*',
+    images: root + 'Content/Images/',
     exclude: {
       libs: `!${root}JsLibraries/**`
     }
