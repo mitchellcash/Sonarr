@@ -26,17 +26,21 @@ const systemActionHandlers = {
   }),
 
   [types.RESTART]: function() {
-    $.ajax({
-      url: '/system/restart',
-      type: 'POST'
-    });
+    return function() {
+      $.ajax({
+        url: '/system/restart',
+        type: 'POST'
+      });
+    };
   },
 
   [types.SHUTDOWN]: function() {
-    $.ajax({
-      url: '/system/shutdown',
-      type: 'POST'
-    });
+    return function() {
+      $.ajax({
+        url: '/system/shutdown',
+        type: 'POST'
+      });
+    };
   }
 };
 
