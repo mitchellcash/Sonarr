@@ -70,7 +70,7 @@ class Queue extends Component {
     } = this.props;
 
     return (
-      <PageContent>
+      <PageContent title="Queue">
         <PageToolbar>
           <PageToolbarSection>
             <PageToolbarButton

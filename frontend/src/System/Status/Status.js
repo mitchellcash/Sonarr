@@ -13,7 +13,7 @@ class Status extends Component {
 
   render() {
     return (
-      <PageContent>
+      <PageContent title="Status">
         <PageContentBody>
           <HealthConnector />
           <DiskSpaceConnector />

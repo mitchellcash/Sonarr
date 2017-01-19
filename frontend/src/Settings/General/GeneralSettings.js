@@ -99,7 +99,7 @@ class GeneralSettings extends Component {
     const authenticationEnabled = authenticationMethod && authenticationMethod.value !== 'none';
 
     return (
-      <PageContent>
+      <PageContent title="General Settings">
         <SettingsToolbarConnector
           {...otherProps}
           onSavePress={onSavePress}

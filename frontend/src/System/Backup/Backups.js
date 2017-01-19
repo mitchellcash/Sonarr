@@ -47,7 +47,7 @@ class Backups extends Component {
     const noBackups = !fetching && !items.length;
 
     return (
-      <PageContent>
+      <PageContent title="Backups">
         <PageToolbar>
           <PageToolbarSection>
             <PageToolbarButton

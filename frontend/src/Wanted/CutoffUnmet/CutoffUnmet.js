@@ -134,7 +134,7 @@ class CutoffUnmet extends Component {
     } = this.state;
 
     return (
-      <PageContent>
+      <PageContent title="Cutoff Unmet">
         <PageToolbar>
           <PageToolbarSection>
             <PageToolbarButton

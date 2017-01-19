@@ -41,7 +41,7 @@ class IndexerSettings extends Component {
 
   render() {
     return (
-      <PageContent>
+      <PageContent title="Indexer Settings">
         <SettingsToolbarConnector
           hasPendingChanges={this.state.hasPendingChanges}
           onSavePress={this.onSavePress}

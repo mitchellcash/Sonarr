@@ -53,7 +53,7 @@ class UISettings extends Component {
     ];
 
     return (
-      <PageContent>
+      <PageContent title="UI Settings">
         <SettingsToolbarConnector
           {...otherProps}
           onSavePress={onSavePress}

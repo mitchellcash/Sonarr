@@ -112,7 +112,7 @@ class SeasonPass extends Component {
     } = this.state;
 
     return (
-      <PageContent>
+      <PageContent title="Season Pass">
         <PageToolbar>
           <PageToolbarSection />
           <PageToolbarSection alignContent={align.RIGHT}>

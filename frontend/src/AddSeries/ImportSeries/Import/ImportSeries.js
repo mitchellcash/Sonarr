@@ -98,7 +98,7 @@ class ImportSeries extends Component {
     } = this.state;
 
     return (
-      <PageContent>
+      <PageContent title="Import Series">
         <PageContentBody>
           {
             rootFoldersFetching && !rootFoldersPopulated &&

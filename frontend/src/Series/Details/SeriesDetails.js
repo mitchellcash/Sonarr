@@ -174,7 +174,7 @@ class SeriesDetails extends Component {
     }
 
     return (
-      <PageContent>
+      <PageContent title={title}>
         <PageToolbar>
           <PageToolbarSection>
             <PageToolbarButton

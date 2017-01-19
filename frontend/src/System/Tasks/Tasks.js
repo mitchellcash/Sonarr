@@ -54,7 +54,7 @@ class Tasks extends Component {
     } = this.props;
 
     return (
-      <PageContent>
+      <PageContent title="Tasks">
         <PageContentBody>
           {
             fetching &&

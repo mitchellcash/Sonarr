@@ -35,7 +35,7 @@ class MediaManagement extends Component {
     ];
 
     return (
-      <PageContent>
+      <PageContent title="Media Management Settings">
         <SettingsToolbarConnector
           advancedSettings={advancedSettings}
           {...otherProps}

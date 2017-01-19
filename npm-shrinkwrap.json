@@ -1364,6 +1364,11 @@
       "from": "execall@>=1.0.0 <2.0.0",
       "resolved": "https://registry.npmjs.org/execall/-/execall-1.0.0.tgz"
     },
+    "exenv": {
+      "version": "1.2.1",
+      "from": "exenv@>=1.2.1 <2.0.0",
+      "resolved": "https://registry.npmjs.org/exenv/-/exenv-1.2.1.tgz"
+    },
     "exit-hook": {
       "version": "1.1.1",
       "from": "exit-hook@>=1.0.0 <2.0.0",
@@ -2641,6 +2646,11 @@
       "from": "lodash.isobject@>=2.4.1 <2.5.0",
       "resolved": "https://registry.npmjs.org/lodash.isobject/-/lodash.isobject-2.4.1.tgz"
     },
+    "lodash.keys": {
+      "version": "3.1.2",
+      "from": "lodash.keys@>=3.1.2 <4.0.0",
+      "resolved": "https://registry.npmjs.org/lodash.keys/-/lodash.keys-3.1.2.tgz"
+    },
     "lodash.pickby": {
       "version": "4.6.0",
       "from": "lodash.pickby@>=4.6.0 <5.0.0",
@@ -3476,6 +3486,11 @@
       "from": "react-dnd-html5-backend@latest",
       "resolved": "https://registry.npmjs.org/react-dnd-html5-backend/-/react-dnd-html5-backend-2.1.2.tgz"
     },
+    "react-document-title": {
+      "version": "2.0.2",
+      "from": "react-document-title@latest",
+      "resolved": "https://registry.npmjs.org/react-document-title/-/react-document-title-2.0.2.tgz"
+    },
     "react-dom": {
       "version": "15.3.1",
       "from": "react-dom@15.3.1",
@@ -3527,6 +3542,11 @@
       "version": "4.0.7",
       "from": "react-router-redux@latest",
       "resolved": "https://registry.npmjs.org/react-router-redux/-/react-router-redux-4.0.7.tgz"
+    },
+    "react-side-effect": {
+      "version": "1.1.0",
+      "from": "react-side-effect@>=1.0.2 <2.0.0",
+      "resolved": "https://registry.npmjs.org/react-side-effect/-/react-side-effect-1.1.0.tgz"
     },
     "react-slider": {
       "version": "0.7.0",
@@ -3837,6 +3857,11 @@
       "version": "1.0.0",
       "from": "shallow-equal@>=1.0.0 <2.0.0",
       "resolved": "https://registry.npmjs.org/shallow-equal/-/shallow-equal-1.0.0.tgz"
+    },
+    "shallowequal": {
+      "version": "0.2.2",
+      "from": "shallowequal@>=0.2.2 <0.3.0",
+      "resolved": "https://registry.npmjs.org/shallowequal/-/shallowequal-0.2.2.tgz"
     },
     "shebang-regex": {
       "version": "1.0.0",

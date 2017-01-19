@@ -63,7 +63,7 @@ class LogsTable extends Component {
     } = this.props;
 
     return (
-      <PageContent>
+      <PageContent title="Logs">
         <PageToolbar>
           <PageToolbarSection>
             <LogsNavMenu current="Logs" />

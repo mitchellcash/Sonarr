@@ -6,7 +6,7 @@ import MetadatasConnector from './Metadata/MetadatasConnector';
 
 function MetadataSettings() {
   return (
-    <PageContent>
+    <PageContent title="Metadata Settings">
       <SettingsToolbarConnector
         showSave={false}
       />

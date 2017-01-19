@@ -77,7 +77,7 @@ class ImportSeriesSelectFolder extends Component {
     } = this.props;
 
     return (
-      <PageContent>
+      <PageContent title="Import Series">
         <PageContentBody>
           {
             fetching && !populated &&

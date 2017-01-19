@@ -39,7 +39,7 @@ class Quality extends Component {
 
   render() {
     return (
-      <PageContent>
+      <PageContent title="Quality Settings">
         <SettingsToolbarConnector
           hasPendingChanges={this.state.hasPendingChanges}
           onSavePress={this.onSavePress}

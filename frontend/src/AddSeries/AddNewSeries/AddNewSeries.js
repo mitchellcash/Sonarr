@@ -68,7 +68,7 @@ class AddNewSeries extends Component {
     const term = this.state.term;
 
     return (
-      <PageContent>
+      <PageContent title="Add New Series">
         <PageContentBody>
           <div className={styles.searchContainer}>
             <div className={styles.searchIconContainer}>

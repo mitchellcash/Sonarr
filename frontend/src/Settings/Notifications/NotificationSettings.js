@@ -6,7 +6,7 @@ import NotificationsConnector from './Notifications/NotificationsConnector';
 
 function NotificationSettings() {
   return (
-    <PageContent>
+    <PageContent title="Connect Settings">
       <SettingsToolbarConnector
         showSave={false}
       />

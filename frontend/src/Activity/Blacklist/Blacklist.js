@@ -53,7 +53,7 @@ class Blacklist extends Component {
     } = this.props;
 
     return (
-      <PageContent>
+      <PageContent title="Blacklist">
         <PageToolbar>
           <PageToolbarSection>
             <PageToolbarButton

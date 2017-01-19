@@ -146,7 +146,7 @@ class Missing extends Component {
     } = this.state;
 
     return (
-      <PageContent>
+      <PageContent title="Missing">
         <PageToolbar>
           <PageToolbarSection>
             <PageToolbarButton

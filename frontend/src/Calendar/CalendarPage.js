@@ -49,7 +49,7 @@ class CalendarPage extends Component {
     } = this.props;
 
     return (
-      <PageContent>
+      <PageContent title="Calendar">
         <PageToolbar>
           <PageToolbarSection>
             <PageToolbarButton

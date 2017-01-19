@@ -133,7 +133,7 @@ class SeriesEditor extends Component {
     } = this.state;
 
     return (
-      <PageContent>
+      <PageContent title="Series Editor">
         <PageToolbar>
           <PageToolbarSection />
           <PageToolbarSection alignContent={align.RIGHT}>

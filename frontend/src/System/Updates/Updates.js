@@ -30,7 +30,7 @@ class Updates extends Component {
     const noUpdateToInstall = hasUpdates && !hasUpdateToInstall;
 
     return (
-      <PageContent>
+      <PageContent title="Updates">
         <PageContentBody>
           {
             fetching &&

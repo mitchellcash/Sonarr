@@ -73,7 +73,7 @@ class History extends Component {
     const hasError = error || episodesError;
 
     return (
-      <PageContent>
+      <PageContent title="History">
         <PageToolbar className={styles.toolbar}>
           <PageToolbarSection alignContent={align.RIGHT}>
             <FilterMenu>

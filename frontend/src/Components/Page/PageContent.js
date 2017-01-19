@@ -1,21 +1,26 @@
 import React, { PropTypes } from 'react';
+import DocumentTitle from 'react-document-title';
 import styles from './PageContent.css';
 
 function PageContent(props) {
   const {
     className,
+    title,
     children
   } = props;
 
   return (
-    <div className={className}>
-      {children}
-    </div>
+    <DocumentTitle title={title ? `${title} - Sonarr` : 'Sonarr'}>
+      <div className={className}>
+        {children}
+      </div>
+    </DocumentTitle>
   );
 }
 
 PageContent.propTypes = {
   className: PropTypes.string,
+  title: PropTypes.string,
   children: PropTypes.node.isRequired
 };
 

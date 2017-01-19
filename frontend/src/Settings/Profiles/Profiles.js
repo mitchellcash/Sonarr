@@ -14,7 +14,7 @@ class Profiles extends Component {
 
   render() {
     return (
-      <PageContent>
+      <PageContent title="Profiles">
         <SettingsToolbarConnector
           showSave={false}
         />
