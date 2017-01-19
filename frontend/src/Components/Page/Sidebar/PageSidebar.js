@@ -177,40 +177,42 @@ class PageSidebar extends Component {
     const activeParent = getActiveParent(location);
 
     return (
-      <Scroller
+      <div
         className={classNames(
-          styles.sidebar,
+          styles.sidebarContainer,
           !isSidebarVisible && styles.sidebarHidden
         )}
       >
-        {
-          links.map((link) => {
-            return (
-              <PageSidebarItem
-                key={link.to}
-                iconName={link.iconName}
-                title={link.title}
-                to={link.to}
-                activeParent={activeParent}
-              >
-                {
-                  link.children && link.to === activeParent &&
-                    link.children.map((child) => {
-                      return (
-                        <PageSidebarItem
-                          key={child.to}
-                          title={child.title}
-                          to={child.to}
-                          isChildItem={true}
-                        />
-                      );
-                    })
-                }
-              </PageSidebarItem>
-            );
-          })
-        }
-      </Scroller>
+        <Scroller className={styles.sidebar}>
+          {
+            links.map((link) => {
+              return (
+                <PageSidebarItem
+                  key={link.to}
+                  iconName={link.iconName}
+                  title={link.title}
+                  to={link.to}
+                  activeParent={activeParent}
+                >
+                  {
+                    link.children && link.to === activeParent &&
+                      link.children.map((child) => {
+                        return (
+                          <PageSidebarItem
+                            key={child.to}
+                            title={child.title}
+                            to={child.to}
+                            isChildItem={true}
+                          />
+                        );
+                      })
+                  }
+                </PageSidebarItem>
+              );
+            })
+          }
+        </Scroller>
+      </div>
     );
   }
 }
