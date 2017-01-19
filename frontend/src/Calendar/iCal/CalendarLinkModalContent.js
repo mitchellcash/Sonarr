@@ -16,10 +16,11 @@ function getUrls(state) {
   const {
     unmonitored,
     premieresOnly,
+    asAllDay,
     tags
   } = state;
 
-  let icalUrl = `${window.location.host}${window.Sonarr.UrlBase}/feed/calendar/NzbDrone.ics?`;
+  let icalUrl = `${window.location.host}${window.Sonarr.UrlBase}/feed/calendar/Sonarr.ics?`;
 
   if (unmonitored) {
     icalUrl += 'unmonitored=true&';
@@ -27,6 +28,10 @@ function getUrls(state) {
 
   if (premieresOnly) {
     icalUrl += 'premieresOnly=true&';
+  }
+
+  if (asAllDay) {
+    icalUrl += 'asAllDay=true&';
   }
 
   if (tags.length) {
@@ -55,6 +60,7 @@ class CalendarLinkModalContent extends Component {
     const defaultState = {
       unmonitored: false,
       premieresOnly: false,
+      asAllDay: false,
       tags: []
     };
 
@@ -98,6 +104,7 @@ class CalendarLinkModalContent extends Component {
     const {
       unmonitored,
       premieresOnly,
+      asAllDay,
       tags,
       iCalHttpUrl,
       iCalWebCalUrl
@@ -131,6 +138,18 @@ class CalendarLinkModalContent extends Component {
                 name="premieresOnly"
                 value={premieresOnly}
                 helpText="Only the first episode in a season will be in the feed"
+                onChange={this.onInputChange}
+              />
+            </FormGroup>
+
+            <FormGroup>
+              <FormLabel>Show as All-Day Events</FormLabel>
+
+              <FormInputGroup
+                type={inputTypes.CHECK}
+                name="asAllDay"
+                value={asAllDay}
+                helpText="Events will appear as all-day events in your calendar"
                 onChange={this.onInputChange}
               />
             </FormGroup>
