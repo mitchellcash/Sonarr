@@ -24,6 +24,13 @@ $hoverScale: 1.05;
   }
 }
 
+.link {
+  composes: link from 'Components/Link.css';
+
+  display: block;
+}
+
+.link,
 .poster {
   width: calc(170px / $hoverScale);
   height: calc(250px / $hoverScale);

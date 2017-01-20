@@ -107,7 +107,10 @@ class SeriesIndexPoster extends Component {
           {title}
         </div>
 
-        <Link to={link}>
+        <Link
+          className={styles.link}
+          to={link}
+        >
           <SeriesPoster
             className={styles.poster}
             images={images}
