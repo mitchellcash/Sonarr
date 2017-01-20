@@ -11,6 +11,39 @@ import TableRow from 'Components/Table/TableRow';
 import TableRowCell from 'Components/Table/Cells/TableRowCell';
 import styles from './Health.css';
 
+function getInternalLink(source) {
+  switch (source) {
+    case 'IndexerCheck':
+      return (
+        <Link to="/settings/indexers">
+          Settings
+        </Link>
+      );
+    case 'DownloadClientCheck':
+    case 'DroneFactoryCheck':
+    case 'ImportMechanismCheck':
+      return (
+        <Link to="/settings/downloadclients">
+          Settings
+        </Link>
+      );
+    case 'RootFolderCheck':
+      return (
+        <Link to="/add/import">
+          Manage Root Folders
+        </Link>
+      );
+    case 'UpdateCheck':
+      return (
+        <Link to="/system/updates">
+          Updates
+        </Link>
+      );
+    default:
+      return;
+  }
+}
+
 class Health extends Component {
 
   //
@@ -36,8 +69,12 @@ class Health extends Component {
         label: 'Message'
       },
       {
-        name: 'link',
-        label: 'Link'
+        name: 'wikiLink',
+        label: 'Wiki'
+      },
+      {
+        name: 'internalLink',
+        label: ''
       }
     ];
 
@@ -64,9 +101,11 @@ class Health extends Component {
             >
               <TableBody>
                 {
-                  items.map((item, index) => {
+                  items.map((item) => {
+                    const internalLink = getInternalLink(item.source);
+
                     return (
-                      <TableRow key={`health${index}`}>
+                      <TableRow key={`health${item.id}`}>
                         <TableRowCell>
                           <Icon
                             name={icons.DANGER}
@@ -74,7 +113,9 @@ class Health extends Component {
                             title={titleCase(item.type)}
                           />
                         </TableRowCell>
+
                         <TableRowCell>{item.message}</TableRowCell>
+
                         <TableRowCell>
                           <Link
                             to={item.wikiUrl}
@@ -82,6 +123,12 @@ class Health extends Component {
                           >
                             Wiki
                           </Link>
+                        </TableRowCell>
+
+                        <TableRowCell>
+                          {
+                            internalLink
+                          }
                         </TableRowCell>
                       </TableRow>
                     );
