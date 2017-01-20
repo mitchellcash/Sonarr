@@ -4,6 +4,10 @@ import { align, icons } from 'Helpers/Props';
 import Button from 'Components/Button';
 import Icon from 'Components/Icon';
 import LoadingIndicator from 'Components/LoadingIndicator';
+import Menu from 'Components/Menu/Menu';
+import MenuButton from 'Components/Menu/MenuButton';
+import MenuContent from 'Components/Menu/MenuContent';
+import ViewMenuItem from 'Components/Menu/ViewMenuItem';
 import * as calendarViews from 'Calendar/calendarViews';
 import CalendarHeaderViewButton from './CalendarHeaderViewButton';
 import styles from './CalendarHeader.css';
@@ -49,79 +53,130 @@ function CalendarHeader(props) {
     onNextPress
   } = props;
 
+  const title = getTitle(time, start, end, view, longDateFormat);
+
   return (
-    <div className={styles.header}>
-      <div className={styles.navigationButtons}>
-        <Button
-          buttonGroupPosition={align.LEFT}
-          onPress={onPreviousPress}
-        >
-          <Icon name={icons.PAGE_PREVIOUS} />
-        </Button>
-
-        <Button
-          buttonGroupPosition={align.RIGHT}
-          onPress={onNextPress}
-        >
-          <Icon name={icons.PAGE_NEXT} />
-        </Button>
-
-        <Button
-          className={styles.todayButton}
-          onPress={onTodayPress}
-        >
-          Today
-        </Button>
+    <div>
+      <div className={styles.titleMobile}>
+        {title}
       </div>
 
-      <div className={styles.title}>
-        {getTitle(time, start, end, view, longDateFormat)}
-      </div>
-
-      <div className={styles.viewButtonsContainer}>
-        {
-          fetching &&
-            <LoadingIndicator
-              containerClassName={styles.loadingContainer}
-              size={20}
-            />
-        }
-
-        <div>
-          <CalendarHeaderViewButton
-            view={calendarViews.MONTH}
-            selectedView={view}
+      <div className={styles.header}>
+        <div className={styles.navigationButtons}>
+          <Button
             buttonGroupPosition={align.LEFT}
-            onPress={onCalendarViewChange}
-          />
+            onPress={onPreviousPress}
+          >
+            <Icon name={icons.PAGE_PREVIOUS} />
+          </Button>
 
-          <CalendarHeaderViewButton
-            view={calendarViews.WEEK}
-            selectedView={view}
-            buttonGroupPosition={align.CENTER}
-            onPress={onCalendarViewChange}
-          />
-
-          <CalendarHeaderViewButton
-            view={calendarViews.FORECAST}
-            selectedView={view}
-            buttonGroupPosition={align.CENTER}
-            onPress={onCalendarViewChange}
-          />
-
-          <CalendarHeaderViewButton
-            view={calendarViews.DAY}
-            selectedView={view}
-            buttonGroupPosition={align.CENTER}
-            onPress={onCalendarViewChange}
-          />
-
-          <CalendarHeaderViewButton
-            view={calendarViews.AGENDA}
-            selectedView={view}
+          <Button
             buttonGroupPosition={align.RIGHT}
-            onPress={onCalendarViewChange}
-          />
+            onPress={onNextPress}
+          >
+            <Icon name={icons.PAGE_NEXT} />
+          </Button>
+
+          <Button
+            className={styles.todayButton}
+            onPress={onTodayPress}
+          >
+            Today
+          </Button>
+        </div>
+
+        <div className={styles.titleDesktop}>
+          {title}
+        </div>
+
+        <div className={styles.viewButtonsContainer}>
+          {
+            fetching &&
+              <LoadingIndicator
+                containerClassName={styles.loadingContainer}
+                size={20}
+              />
+          }
+
+          <div className={styles.viewButtons}>
+            <CalendarHeaderViewButton
+              view={calendarViews.MONTH}
+              selectedView={view}
+              buttonGroupPosition={align.LEFT}
+              onPress={onCalendarViewChange}
+            />
+
+            <CalendarHeaderViewButton
+              view={calendarViews.WEEK}
+              selectedView={view}
+              buttonGroupPosition={align.CENTER}
+              onPress={onCalendarViewChange}
+            />
+
+            <CalendarHeaderViewButton
+              view={calendarViews.FORECAST}
+              selectedView={view}
+              buttonGroupPosition={align.CENTER}
+              onPress={onCalendarViewChange}
+            />
+
+            <CalendarHeaderViewButton
+              view={calendarViews.DAY}
+              selectedView={view}
+              buttonGroupPosition={align.CENTER}
+              onPress={onCalendarViewChange}
+            />
+
+            <CalendarHeaderViewButton
+              view={calendarViews.AGENDA}
+              selectedView={view}
+              buttonGroupPosition={align.RIGHT}
+              onPress={onCalendarViewChange}
+            />
+          </div>
+
+          <Menu className={styles.viewMenu}>
+            <MenuButton>
+              <Icon
+                name={icons.VIEW}
+                size={22}
+              />
+            </MenuButton>
+
+            <MenuContent alignMenu={align.RIGHT}>
+              <ViewMenuItem
+                name={calendarViews.WEEK}
+                selectedView={view}
+                onPress={onCalendarViewChange}
+              >
+                Week
+              </ViewMenuItem>
+
+              <ViewMenuItem
+                name={calendarViews.FORECAST}
+                selectedView={view}
+                onPress={onCalendarViewChange}
+              >
+                Forecast
+              </ViewMenuItem>
+
+              <ViewMenuItem
+                name={calendarViews.DAY}
+                selectedView={view}
+                onPress={onCalendarViewChange}
+              >
+                Day
+              </ViewMenuItem>
+
+              <ViewMenuItem
+                name={calendarViews.AGENDA}
+                selectedView={view}
+                onPress={onCalendarViewChange}
+              >
+                Agenda
+              </ViewMenuItem>
+            </MenuContent>
+          </Menu>
         </div>
       </div>
     </div>

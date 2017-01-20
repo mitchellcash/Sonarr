@@ -1,13 +1,10 @@
 import React, { Component, PropTypes } from 'react';
-import { icons } from 'Helpers/Props';
 import LoadingIndicator from 'Components/LoadingIndicator';
 import * as calendarViews from './calendarViews';
 import CalendarHeaderConnector from './Header/CalendarHeaderConnector';
 import DaysOfWeekConnector from './Day/DaysOfWeekConnector';
 import CalendarDaysConnector from './Day/CalendarDaysConnector';
 import AgendaConnector from './Agenda/AgendaConnector';
-import Legend from './Legend/Legend';
-import styles from './Calendar.css';
 
 class Calendar extends Component {
 
@@ -23,7 +20,7 @@ class Calendar extends Component {
     } = this.props;
 
     return (
-      <div className={styles.container}>
+      <div>
         {
           fetching && !populated &&
             <LoadingIndicator />
@@ -51,7 +48,6 @@ class Calendar extends Component {
                   </div>
               }
 
-              <Legend />
             </div>
         }
       </div>

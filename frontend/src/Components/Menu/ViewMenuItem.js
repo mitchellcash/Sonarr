@@ -21,11 +21,11 @@ class ViewMenuItem extends Component {
   render() {
     const {
       name,
-      view,
+      selectedView,
       ...otherProps
     } = this.props;
 
-    const isSelected = name === view;
+    const isSelected = name === selectedView;
 
     return (
       <SelectedMenuItem
@@ -39,7 +39,7 @@ class ViewMenuItem extends Component {
 
 ViewMenuItem.propTypes = {
   name: PropTypes.string,
-  view: PropTypes.string.isRequired,
+  selectedView: PropTypes.string.isRequired,
   onPress: PropTypes.func.isRequired
 };
 

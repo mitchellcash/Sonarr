@@ -23,7 +23,7 @@ function createMapStateToProps() {
       });
 
       return {
-        populated: status.populated,
+        populated: health.populated,
         count,
         errors,
         warnings

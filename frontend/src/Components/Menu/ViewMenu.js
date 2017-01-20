@@ -1,29 +1,23 @@
-import React, { Component, PropTypes } from 'react';
+import React, { PropTypes } from 'react';
 import { icons } from 'Helpers/Props';
 import Menu from 'Components/Menu/Menu';
 import ToolbarMenuButton from 'Components/Menu/ToolbarMenuButton';
 
-class ViewMenu extends Component {
+function ViewMenu(props) {
+  const {
+    className,
+    children
+  } = props;
 
-  //
-  // Render
-
-  render() {
-    const {
-      className,
-      children
-    } = this.props;
-
-    return (
-      <Menu className={className}>
-        <ToolbarMenuButton
-          iconName={icons.VIEW}
-          text="View"
-        />
-          {children}
-      </Menu>
-    );
-  }
+  return (
+    <Menu className={className}>
+      <ToolbarMenuButton
+        iconName={icons.VIEW}
+        text="View"
+      />
+        {children}
+    </Menu>
+  );
 }
 
 ViewMenu.propTypes = {

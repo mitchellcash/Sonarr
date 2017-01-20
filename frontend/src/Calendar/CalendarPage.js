@@ -9,8 +9,8 @@ import FilterMenu from 'Components/Menu/FilterMenu';
 import MenuContent from 'Components/Menu/MenuContent';
 import FilterMenuItem from 'Components/Menu/FilterMenuItem';
 import CalendarLinkModal from './iCal/CalendarLinkModal';
+import Legend from './Legend/Legend';
 import CalendarConnector from './CalendarConnector';
-import styles from './CalendarPage.css';
 
 class CalendarPage extends Component {
 
@@ -87,9 +87,8 @@ class CalendarPage extends Component {
         </PageToolbar>
 
         <PageContentBody>
-          <div className={styles.container}>
-            <CalendarConnector />
-          </div>
+          <CalendarConnector />
+          <Legend />
         </PageContentBody>
 
         <CalendarLinkModal

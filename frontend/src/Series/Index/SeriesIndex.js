@@ -79,7 +79,7 @@ class SeriesIndex extends Component {
               <MenuContent alignMenu={align.RIGHT}>
                 <ViewMenuItem
                   name="table"
-                  view={view}
+                  selectedView={view}
                   onPress={onViewSelect}
                 >
                   Table
@@ -87,7 +87,7 @@ class SeriesIndex extends Component {
 
                 <ViewMenuItem
                   name="posters"
-                  view={view}
+                  selectedView={view}
                   onPress={onViewSelect}
                 >
                   Posters
