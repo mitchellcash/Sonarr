@@ -215,7 +215,7 @@ class SeriesIndex extends Component {
 
           {
             !fetching && !!error &&
-              <div>Unable to load the calendar</div>
+              <div>Unable to load series</div>
           }
 
           {

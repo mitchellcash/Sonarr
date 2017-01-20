@@ -41,7 +41,7 @@ class SeriesIndexConnector extends Component {
   //
   // Lifecycle
 
-  componentDidMount() {
+  componentWillMount() {
     this.props.fetchSeries();
   }
 
