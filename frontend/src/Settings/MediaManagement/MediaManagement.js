@@ -23,6 +23,7 @@ class MediaManagement extends Component {
       error,
       settings,
       hasSettings,
+      isMono,
       onInputChange,
       onSavePress,
       ...otherProps
@@ -88,20 +89,23 @@ class MediaManagement extends Component {
                     <FieldSet
                       legend="Importing"
                     >
-                      <FormGroup
-                        advancedSettings={advancedSettings}
-                        isAdvanced={true}
-                      >
-                        <FormLabel>Skip Free Space Check (mono only)</FormLabel>
+                      {
+                        isMono &&
+                          <FormGroup
+                            advancedSettings={advancedSettings}
+                            isAdvanced={true}
+                          >
+                            <FormLabel>Skip Free Space Check</FormLabel>
 
-                        <FormInputGroup
-                          type={inputTypes.CHECK}
-                          name="skipFreeSpaceCheckWhenImporting"
-                          helpText="Use when drone is unable to detect free space from your series root folder"
-                          onChange={onInputChange}
-                          {...settings.skipFreeSpaceCheckWhenImporting}
-                        />
-                      </FormGroup>
+                            <FormInputGroup
+                              type={inputTypes.CHECK}
+                              name="skipFreeSpaceCheckWhenImporting"
+                              helpText="Use when drone is unable to detect free space from your series root folder"
+                              onChange={onInputChange}
+                              {...settings.skipFreeSpaceCheckWhenImporting}
+                            />
+                          </FormGroup>
+                      }
 
                       <FormGroup
                         advancedSettings={advancedSettings}
@@ -199,9 +203,9 @@ class MediaManagement extends Component {
                 </FieldSet>
 
                 {
-                  advancedSettings &&
+                  advancedSettings && isMono &&
                     <FieldSet
-                      legend="Permissions (mono only)"
+                      legend="Permissions"
                     >
                       <FormGroup
                         advancedSettings={advancedSettings}
@@ -298,6 +302,7 @@ MediaManagement.propTypes = {
   error: PropTypes.object,
   settings: PropTypes.object.isRequired,
   hasSettings: PropTypes.bool.isRequired,
+  isMono: PropTypes.bool.isRequired,
   onSavePress: PropTypes.func.isRequired,
   onInputChange: PropTypes.func.isRequired
 };

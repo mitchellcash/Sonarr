@@ -63,6 +63,7 @@ namespace Sonarr.Api.V3.System
                 IsLinux = OsInfo.IsLinux,
                 IsOsx = OsInfo.IsOsx,
                 IsWindows = OsInfo.IsWindows,
+                Mode = _runtimeInfo.Mode,
                 Branch = _configFileProvider.Branch,
                 Authentication = _configFileProvider.AuthenticationMethod,
                 SqliteVersion = _database.Version,

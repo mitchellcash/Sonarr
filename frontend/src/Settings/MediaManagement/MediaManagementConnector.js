@@ -2,6 +2,7 @@ import _ from 'lodash';
 import React, { Component, PropTypes } from 'react';
 import { createSelector } from 'reselect';
 import createSettingsSectionSelector from 'Store/Selectors/createSettingsSectionSelector';
+import createSystemStatusSelector from 'Store/Selectors/createSystemStatusSelector';
 import { fetchMediaManagementSettings, setMediaManagementSettingsValue, saveMediaManagementSettings, saveNamingSettings } from 'Store/Actions/settingsActions';
 import connectSection from 'Store/connectSection';
 import MediaManagement from './MediaManagement';
@@ -11,11 +12,13 @@ function createMapStateToProps() {
     (state) => state.settings.advancedSettings,
     (state) => state.settings.naming,
     createSettingsSectionSelector(),
-    (advancedSettings, namingSettings, sectionSettings) => {
+    createSystemStatusSelector(),
+    (advancedSettings, namingSettings, sectionSettings, systemStatus) => {
       return {
         advancedSettings,
         ...sectionSettings,
-        hasPendingChanges: !_.isEmpty(namingSettings.pendingChanges) || sectionSettings.hasPendingChanges
+        hasPendingChanges: !_.isEmpty(namingSettings.pendingChanges) || sectionSettings.hasPendingChanges,
+        isMono: systemStatus.isMono
       };
     }
   );

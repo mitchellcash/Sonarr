@@ -54,6 +54,8 @@ class GeneralSettings extends Component {
       settings,
       hasSettings,
       isResettingApiKey,
+      isMono,
+      mode,
       onInputChange,
       onSavePress,
       ...otherProps
@@ -231,17 +233,20 @@ class GeneralSettings extends Component {
                       </FormGroup>
                   }
 
-                  <FormGroup>
-                    <FormLabel>Open browser on start (Hide if Windows service)</FormLabel>
+                  {
+                    mode !== 'service' &&
+                      <FormGroup>
+                        <FormLabel>Open browser on start</FormLabel>
 
-                    <FormInputGroup
-                      type={inputTypes.CHECK}
-                      name="launchBrowser"
-                      helpText=" Open a web browser and navigate to Sonarr homepage on app start."
-                      onChange={onInputChange}
-                      {...launchBrowser}
-                    />
-                  </FormGroup>
+                        <FormInputGroup
+                          type={inputTypes.CHECK}
+                          name="launchBrowser"
+                          helpText=" Open a web browser and navigate to Sonarr homepage on app start."
+                          onChange={onInputChange}
+                          {...launchBrowser}
+                        />
+                      </FormGroup>
+                  }
 
                 </FieldSet>
 
@@ -469,63 +474,62 @@ class GeneralSettings extends Component {
                           {...branch}
                         />
                       </FormGroup>
+
+                      {
+                        isMono &&
+                          <div>
+                            <FormGroup
+                              advancedSettings={advancedSettings}
+                              isAdvanced={true}
+                            >
+                              <FormLabel>Automatic</FormLabel>
+
+                              <FormInputGroup
+                                type={inputTypes.CHECK}
+                                name="updateAutomatically"
+                                helpText="Automatically download and install updates. You will still be able to install from System: Updates"
+                                onChange={onInputChange}
+                                {...updateAutomatically}
+                              />
+                            </FormGroup>
+
+                            <FormGroup
+                              advancedSettings={advancedSettings}
+                              isAdvanced={true}
+                            >
+                              <FormLabel>Mechanism</FormLabel>
+
+                              <FormInputGroup
+                                type={inputTypes.SELECT}
+                                name="updateMechanism"
+                                values={updateOptions}
+                                helpText="Use Sonarr's built-in updater or a script"
+                                helpLink="https://github.com/Sonarr/Sonarr/wiki/Updating"
+                                onChange={onInputChange}
+                                {...updateMechanism}
+                              />
+                            </FormGroup>
+
+                            {
+                              updateMechanism.value === 'script' &&
+                                <FormGroup
+                                  advancedSettings={advancedSettings}
+                                  isAdvanced={true}
+                                >
+                                  <FormLabel>Script Path</FormLabel>
+
+                                  <FormInputGroup
+                                    type={inputTypes.TEXT}
+                                    name="updateScriptPath"
+                                    helpText="Path to a custom script that takes an extracted update package and handle the remainder of the update process"
+                                    onChange={onInputChange}
+                                    {...updateScriptPath}
+                                  />
+                                </FormGroup>
+                            }
+                          </div>
+                        }
                     </FieldSet>
-                }
-
-                {
-                  advancedSettings &&
-                    <FormGroup
-                      advancedSettings={advancedSettings}
-                      isAdvanced={true}
-                    >
-                      <FormLabel>Automatic</FormLabel>
-
-                      <FormInputGroup
-                        type={inputTypes.CHECK}
-                        name="updateAutomatically"
-                        helpText="Automatically download and install updates. You will still be able to install from System: Updates"
-                        onChange={onInputChange}
-                        {...updateAutomatically}
-                      />
-                    </FormGroup>
-                }
-
-                {
-                  advancedSettings &&
-                    <FormGroup
-                      advancedSettings={advancedSettings}
-                      isAdvanced={true}
-                    >
-                      <FormLabel>Mechanism</FormLabel>
-
-                      <FormInputGroup
-                        type={inputTypes.SELECT}
-                        name="updateMechanism"
-                        values={updateOptions}
-                        helpText="Use Sonarr's built-in updater or a script"
-                        helpLink="https://github.com/Sonarr/Sonarr/wiki/Updating"
-                        onChange={onInputChange}
-                        {...updateMechanism}
-                      />
-                    </FormGroup>
-                }
-
-                {
-                  advancedSettings && updateMechanism.value === 'script' &&
-                    <FormGroup
-                      advancedSettings={advancedSettings}
-                      isAdvanced={true}
-                    >
-                      <FormLabel>Script Path</FormLabel>
-
-                      <FormInputGroup
-                        type={inputTypes.TEXT}
-                        name="updateScriptPath"
-                        helpText="Path to a custom script that takes an extracted update package and handle the remainder of the update process"
-                        onChange={onInputChange}
-                        {...updateScriptPath}
-                      />
-                    </FormGroup>
                 }
               </Form>
           }
@@ -554,6 +558,8 @@ GeneralSettings.propTypes = {
   settings: PropTypes.object.isRequired,
   isResettingApiKey: PropTypes.bool.isRequired,
   hasSettings: PropTypes.bool.isRequired,
+  isMono: PropTypes.bool.isRequired,
+  mode: PropTypes.string.isRequired,
   onSavePress: PropTypes.func.isRequired,
   onInputChange: PropTypes.func.isRequired,
   onConfirmResetApiKey: PropTypes.func.isRequired
