@@ -78,7 +78,7 @@ const commandActionHandlers = {
 
   [types.UPDATE_COMMAND](payload) {
     return (dispatch, getState) => {
-      dispatch(updateItem(payload));
+      dispatch(updateItem({ section: 'commands', ...payload }));
 
       showCommandMessage(payload, dispatch);
     };
@@ -96,7 +96,7 @@ const commandActionHandlers = {
         }
       });
 
-      dispatch(removeCommand(payload));
+      dispatch(removeCommand({ section: 'commands', ...payload }));
       showCommandMessage(payload, dispatch);
     };
   }
