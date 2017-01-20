@@ -1,10 +1,12 @@
 import _ from 'lodash';
 import React, { Component, PropTypes } from 'react';
 import isAfter from 'Utilities/Date/isAfter';
+import isBefore from 'Utilities/Date/isBefore';
 import getToggledRange from 'Utilities/Table/getToggledRange';
-import { icons } from 'Helpers/Props';
+import { icons, kinds, sizes } from 'Helpers/Props';
 import Icon from 'Components/Icon';
 import IconButton from 'Components/IconButton';
+import Label from 'Components/Label';
 import Link from 'Components/Link';
 import MonitorToggleButton from 'Components/MonitorToggleButton';
 import SpinnerIconButton from 'Components/SpinnerIconButton';
@@ -39,6 +41,42 @@ const headers = [
     name: 'actions'
   }
 ];
+
+function getSeasonStatistics(episodes) {
+  let episodeCount = 0;
+  let episodeFileCount = 0;
+  let totalEpisodeCount = 0;
+
+  episodes.forEach((episode) => {
+    if (episode.episodeFileId || (episode.monitored && isBefore(episode.airDateUtc))) {
+      episodeCount ++;
+    }
+
+    if (episode.episodeFileId) {
+      episodeFileCount++;
+    }
+
+    totalEpisodeCount++;
+  });
+
+  return {
+    episodeCount,
+    episodeFileCount,
+    totalEpisodeCount
+  };
+}
+
+function getEpisodeCountKind(monitored, episodeFileCount, episodeCount) {
+  if (episodeFileCount === episodeCount && episodeCount > 0) {
+    return kinds.SUCCESS;
+  }
+
+  if (!monitored) {
+    return kinds.WARNING;
+  }
+
+  return kinds.DANGER;
+}
 
 class SeriesDetailsSeason extends Component {
 
@@ -134,6 +172,12 @@ class SeriesDetailsSeason extends Component {
     } = this.props;
 
     const {
+      episodeCount,
+      episodeFileCount,
+      totalEpisodeCount
+    } = getSeasonStatistics(items);
+
+    const {
       isOrganizeModalOpen,
       isManageEpisodesOpen
     } = this.state;
@@ -161,6 +205,20 @@ class SeriesDetailsSeason extends Component {
                   Season {seasonNumber}
                 </span>
             }
+
+            <span className={styles.episodeCountContainer}>
+              <Label
+                title={`${totalEpisodeCount} episodes total. ${episodeFileCount} episodes with files.`}
+                kind={getEpisodeCountKind(monitored, episodeFileCount, episodeCount)}
+                size={sizes.LARGE}
+              >
+                {
+                  monitored || episodeFileCount ?
+                    <span>{episodeFileCount} / {episodeCount}</span> :
+                    <span>&nbsp;</span>
+                }
+              </Label>
+            </span>
           </div>
 
           <Link

@@ -19,6 +19,11 @@
   margin-left: 5px;
 }
 
+.episodeCountContainer {
+  margin-left: 10px;
+  vertical-align: text-bottom;
+}
+
 .expandButton {
   composes: link from 'Components/Link.css';
 

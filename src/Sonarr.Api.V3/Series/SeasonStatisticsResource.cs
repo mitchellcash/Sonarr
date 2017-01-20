@@ -34,7 +34,7 @@ namespace Sonarr.Api.V3.Series
                 NextAiring = model.NextAiring,
                 PreviousAiring = model.PreviousAiring,
                 EpisodeFileCount = model.EpisodeFileCount,
-                EpisodeCount = model.EpisodeFileCount,
+                EpisodeCount = model.EpisodeCount,
                 TotalEpisodeCount = model.TotalEpisodeCount,
                 SizeOnDisk = model.SizeOnDisk
             };
