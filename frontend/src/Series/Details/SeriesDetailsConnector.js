@@ -2,6 +2,7 @@ import _ from 'lodash';
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
+import { findCommand } from 'Utilities/Command';
 import createAllSeriesSelector from 'Store/Selectors/createAllSeriesSelector';
 import createCommandsSelector from 'Store/Selectors/createCommandsSelector';
 import { fetchEpisodes } from 'Store/Actions/episodeActions';
@@ -23,8 +24,8 @@ function createMapStateToProps() {
       const series = sortedSeries[seriesIndex];
       const previousSeries = sortedSeries[seriesIndex - 1] || _.last(sortedSeries);
       const nextSeries = sortedSeries[seriesIndex + 1] || _.first(sortedSeries);
-      const isRefreshing = _.some(commands, { name: commandNames.REFRESH_SERIES, seriesId: series.id });
-      const isSearching = _.some(commands, { name: commandNames.SERIES_SEARCH, seriesId: series.id });
+      const isRefreshing = !!findCommand(commands, { name: commandNames.REFRESH_SERIES, seriesId: series.id });
+      const isSearching = !!findCommand(commands, { name: commandNames.SERIES_SEARCH, seriesId: series.id });
 
       const isFetching = episodes.fetching || episodeFiles.fetching;
       const isPopulated = episodes.populated && episodeFiles.populated;

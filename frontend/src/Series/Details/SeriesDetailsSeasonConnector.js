@@ -2,6 +2,7 @@ import _ from 'lodash';
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
+import { findCommand } from 'Utilities/Command';
 import createSeriesSelector from 'Store/Selectors/createSeriesSelector';
 import createCommandsSelector from 'Store/Selectors/createCommandsSelector';
 import { toggleSeasonMonitored } from 'Store/Actions/seriesActions';
@@ -17,7 +18,7 @@ function createMapStateToProps() {
     createSeriesSelector(),
     createCommandsSelector(),
     (seasonNumber, episodes, series, commands) => {
-      const isSearching = _.some(commands, {
+      const isSearching = !!findCommand(commands, {
         name: commandNames.SEASON_SEARCH,
         seriesId: series.id,
         seasonNumber

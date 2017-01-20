@@ -3,7 +3,9 @@ import React, { Component, PropTypes } from 'react';
 import isAfter from 'Utilities/Date/isAfter';
 import getToggledRange from 'Utilities/Table/getToggledRange';
 import { icons } from 'Helpers/Props';
+import Icon from 'Components/Icon';
 import IconButton from 'Components/IconButton';
+import Link from 'Components/Link';
 import MonitorToggleButton from 'Components/MonitorToggleButton';
 import SpinnerIconButton from 'Components/SpinnerIconButton';
 import Table from 'Components/Table/Table';
@@ -161,12 +163,17 @@ class SeriesDetailsSeason extends Component {
             }
           </div>
 
-          <div
+          <Link
             className={styles.expandButton}
-            onDoubleClick={this.onExpandPress}
+            onPress={this.onExpandPress}
           >
-
-          </div>
+            <Icon
+              className={styles.actionButton}
+              name={isExpanded ? icons.COLLAPSE : icons.EXPAND}
+              title={isExpanded ? 'Hide episodes' : 'Show episodes'}
+              size={24}
+            />
+          </Link>
 
           <div className={styles.actions}>
             <SpinnerIconButton
@@ -192,14 +199,6 @@ class SeriesDetailsSeason extends Component {
               title="Manage episode files in this series"
               size={24}
               onPress={this.onManageEpisodesPress}
-            />
-
-            <IconButton
-              className={styles.actionButton}
-              name={isExpanded ? icons.COLLAPSE : icons.EXPAND}
-              title="Show episodes"
-              size={24}
-              onPress={this.onExpandPress}
             />
           </div>
         </div>

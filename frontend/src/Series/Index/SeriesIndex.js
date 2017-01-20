@@ -59,6 +59,7 @@ class SeriesIndex extends Component {
           <PageToolbarSection>
             <PageToolbarButton
               iconName={icons.REFRESH}
+              animateIconName={icons.REFRESH}
               title="Update all series"
               animate={isRefreshingSeries}
               onPress={onRefreshSeriesPress}
