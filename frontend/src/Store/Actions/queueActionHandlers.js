@@ -7,7 +7,7 @@ import { updateItem } from './baseActions';
 import { fetchQueue } from './queueActions';
 
 const queueActionHandlers = {
-  [types.FETCH_QUEUE_STATUS]: createFetchHandler('status', '/queue/status'),
+  [types.FETCH_QUEUE_STATUS]: createFetchHandler('queueStatus', '/queue/status'),
   [types.FETCH_QUEUE_DETAILS]: createFetchHandler('details', '/queue/details'),
 
   ...createServerSideCollectionHandlers('paged', '/queue', (state) => state.queue, {

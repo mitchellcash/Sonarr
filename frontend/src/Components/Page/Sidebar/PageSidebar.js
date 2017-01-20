@@ -1,8 +1,11 @@
+import _ from 'lodash';
 import React, { Component, PropTypes } from 'react';
 import { locationShape } from 'react-router';
 import classNames from 'classnames';
 import { icons } from 'Helpers/Props';
 import Scroller from 'Components/Scroller';
+import QueueStatusConnector from 'Activity/Queue/Status/QueueStatusConnector';
+import HealthStatusConnector from 'System/Status/Health/HealthStatusConnector';
 import PageSidebarItem from './PageSidebarItem';
 import styles from './PageSidebar.css';
 
@@ -45,7 +48,8 @@ const links = [
     children: [
       {
         title: 'Queue',
-        to: '/activity/queue'
+        to: '/activity/queue',
+        statusComponent: QueueStatusConnector
       },
       {
         title: 'Blacklist',
@@ -110,6 +114,7 @@ const links = [
     iconName: icons.SYSTEM,
     title: 'System',
     to: '/system/status',
+    statusComponent: HealthStatusConnector,
     children: [
       {
         title: 'Tasks',
@@ -186,13 +191,24 @@ class PageSidebar extends Component {
         <Scroller className={styles.sidebar}>
           {
             links.map((link) => {
+              const childWithStatusComponent = _.find(link.children, (child) => {
+                return !!child.statusComponent;
+              });
+
+              const childStatusComponent = childWithStatusComponent ?
+                childWithStatusComponent.statusComponent :
+                null;
+
+              const isActiveParent = activeParent === link.to;
+
               return (
                 <PageSidebarItem
                   key={link.to}
                   iconName={link.iconName}
                   title={link.title}
                   to={link.to}
-                  activeParent={activeParent}
+                  statusComponent={isActiveParent || !childStatusComponent ? link.statusComponent : childStatusComponent}
+                  isActiveParent={isActiveParent}
                 >
                   {
                     link.children && link.to === activeParent &&
@@ -203,6 +219,7 @@ class PageSidebar extends Component {
                             title={child.title}
                             to={child.to}
                             isChildItem={true}
+                            statusComponent={child.statusComponent}
                           />
                         );
                       })

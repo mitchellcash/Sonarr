@@ -42,3 +42,7 @@
 .noIcon {
   margin-left: 25px;
 }
+
+.status {
+  float: right;
+}

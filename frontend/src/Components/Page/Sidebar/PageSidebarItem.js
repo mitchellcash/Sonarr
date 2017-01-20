@@ -10,8 +10,9 @@ function PageSidebarItem(props) {
     iconName,
     title,
     to,
-    activeParent,
+    isActiveParent,
     isChildItem,
+    statusComponent: StatusComponent,
     children
   } = props;
 
@@ -19,13 +20,13 @@ function PageSidebarItem(props) {
     <div
       className={classNames(
         styles.item,
-        activeParent === to && styles.isActiveItem
+        isActiveParent && styles.isActiveItem
       )}
     >
       <Link
         className={classNames(
           isChildItem ? styles.childLink : styles.link,
-          activeParent === to && styles.isActiveParentLink
+          isActiveParent && styles.isActiveParentLink
         )}
         activeClassName={styles.isActiveLink}
         onlyActiveOnIndex={!isChildItem}
@@ -43,6 +44,13 @@ function PageSidebarItem(props) {
         <span className={isChildItem && styles.noIcon}>
           {title}
         </span>
+
+        {
+          !!StatusComponent &&
+            <span className={styles.status}>
+              <StatusComponent />
+            </span>
+        }
       </Link>
 
       {
@@ -59,8 +67,9 @@ PageSidebarItem.propTypes = {
   iconName: PropTypes.string,
   title: PropTypes.string.isRequired,
   to: PropTypes.string.isRequired,
-  activeParent: PropTypes.string,
+  isActiveParent: PropTypes.bool,
   isChildItem: PropTypes.bool.isRequired,
+  statusComponent: PropTypes.func,
   children: PropTypes.node
 };
 

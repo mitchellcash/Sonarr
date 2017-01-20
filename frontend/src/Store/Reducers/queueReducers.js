@@ -10,7 +10,7 @@ import createReducers from './Creators/createReducers';
 import createUpdateServerSideCollectionReducer from './Creators/createUpdateServerSideCollectionReducer';
 
 export const defaultState = {
-  status: {
+  queueStatus: {
     fetching: false,
     populated: false,
     error: null,
@@ -45,7 +45,7 @@ export const persistState = [
 ];
 
 const propertyNames = [
-  'status',
+  'queueStatus',
   'details',
   'episodes'
 ];
