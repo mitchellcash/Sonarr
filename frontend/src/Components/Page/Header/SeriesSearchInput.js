@@ -87,11 +87,6 @@ class SeriesSearchInput extends Component {
     this.reset();
   }
 
-  onFocus = () => {
-    var t1 = 1;
-    var t2 = 2;
-  }
-
   onSuggestionsFetchRequested = ({ value }) => {
     const suggestions = _.filter(this.props.series, (series) => {
       return series.title.toLowerCase().contains(value.toLowerCase());
@@ -142,6 +137,7 @@ class SeriesSearchInput extends Component {
     return (
       <div className={styles.wrapper}>
         <Icon
+          className={styles.icon}
           name={icons.SEARCH}
         />
 
