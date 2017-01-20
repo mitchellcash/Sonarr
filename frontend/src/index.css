@@ -6,7 +6,6 @@ body {
 body {
   overflow: hidden;
   background-color: #f5f7fa;
-
 }
 
 @media only screen and (max-device-width: $breakpointSmall) {

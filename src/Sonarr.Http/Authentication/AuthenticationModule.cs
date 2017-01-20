@@ -33,7 +33,8 @@ namespace Sonarr.Http.Authentication
 
             if (user == null)
             {
-                return Context.GetRedirect("~/login?returnUrl=" + (string)Request.Query.returnUrl);
+                var returnUrl = (string)Request.Query.returnUrl;
+                return Context.GetRedirect($"~/login?returnUrl={returnUrl}&loginFailed=true");
             }
 
             DateTime? expiry = null;

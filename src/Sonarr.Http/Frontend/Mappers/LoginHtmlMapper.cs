@@ -1,6 +1,4 @@
-using System;
 using System.IO;
-using System.Text.RegularExpressions;
 using Nancy;
 using NLog;
 using NzbDrone.Common.Disk;
@@ -12,27 +10,18 @@ namespace Sonarr.Http.Frontend.Mappers
     public class LoginHtmlMapper : StaticResourceMapperBase
     {
         private readonly IDiskProvider _diskProvider;
-        private readonly IConfigFileProvider _configFileProvider;
-        private readonly Func<ICacheBreakerProvider> _cacheBreakProviderFactory;
         private readonly string _indexPath;
-        private static readonly Regex ReplaceRegex = new Regex("(?<=(?:href|src|data-main)=\").*?(?=\")", RegexOptions.Compiled | RegexOptions.IgnoreCase);
 
-        private static string URL_BASE;
         private string _generatedContent;
 
         public LoginHtmlMapper(IAppFolderInfo appFolderInfo,
                                IDiskProvider diskProvider,
                                IConfigFileProvider configFileProvider,
-                               Func<ICacheBreakerProvider> cacheBreakProviderFactory,
                                Logger logger)
             : base(diskProvider, logger)
         {
             _diskProvider = diskProvider;
-            _configFileProvider = configFileProvider;
-            _cacheBreakProviderFactory = cacheBreakProviderFactory;
-            _indexPath = Path.Combine(appFolderInfo.StartUpFolder, _configFileProvider.UiFolder, "login.html");
-
-            URL_BASE = configFileProvider.UrlBase;
+            _indexPath = Path.Combine(appFolderInfo.StartUpFolder, configFileProvider.UiFolder, "login.html");
         }
 
         public override string Map(string resourceUrl)
@@ -73,14 +62,6 @@ namespace Sonarr.Http.Frontend.Mappers
             }
 
             var text = _diskProvider.ReadAllText(_indexPath);
-
-            var cacheBreakProvider = _cacheBreakProviderFactory();
-
-            text = ReplaceRegex.Replace(text, match =>
-            {
-                var url = cacheBreakProvider.AddCacheBreakerToPath(match.Value);
-                return URL_BASE + url;
-            });
 
             _generatedContent = text;
 
