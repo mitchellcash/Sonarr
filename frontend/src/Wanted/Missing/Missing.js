@@ -41,8 +41,7 @@ const headers = [
   },
   {
     name: 'status',
-    label: 'Status',
-    sortable: true
+    label: 'Status'
   }
 ];
 

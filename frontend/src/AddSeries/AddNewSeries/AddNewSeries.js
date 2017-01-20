@@ -24,14 +24,17 @@ class AddNewSeries extends Component {
     };
   }
 
-  componentWillReceiveProps(nextProps) {
-    const addedSuccessfully = this.props.adding && !nextProps.adding && !nextProps.error;
+  // Don't reset the search input after adding a new series,
+  // the search result will become a link to the new series
 
-    if (addedSuccessfully && this.props.items.length === 1) {
-      this.setState({ term: '' });
-      this.props.onClearSeriesLookup();
-    }
-  }
+  // componentWillReceiveProps(nextProps) {
+  //   const addedSuccessfully = this.props.adding && !nextProps.adding && !nextProps.error;
+  //
+  //   if (addedSuccessfully && this.props.items.length === 1) {
+  //     this.setState({ term: '' });
+  //     this.props.onClearSeriesLookup();
+  //   }
+  // }
 
   //
   // Listeners

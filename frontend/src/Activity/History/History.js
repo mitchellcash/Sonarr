@@ -38,7 +38,7 @@ const headers = [
   },
   {
     name: 'date',
-    label: 'Air Date',
+    label: 'Date',
     sortable: true
   },
   {

@@ -25,12 +25,14 @@
 }
 
 .path {
-  flex: 1 0 auto;
+  composes: truncate from 'Styles/Mixins/truncate.css';
+
+  flex: 1 0 1px;
 }
 
 .size,
 .quality {
-  flex: 0 0 200px;
+  flex: 0 0 125px;
 }
 
 .actions {

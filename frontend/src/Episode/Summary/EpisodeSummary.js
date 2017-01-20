@@ -107,7 +107,10 @@ class EpisodeSummary extends Component {
               </div>
 
               <div className={styles.fileRow}>
-                <div className={styles.path}>
+                <div
+                  className={styles.path}
+                  title={path}
+                >
                   {path}
                 </div>
 
