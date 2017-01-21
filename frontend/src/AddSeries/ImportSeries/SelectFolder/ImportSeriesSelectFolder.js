@@ -1,9 +1,9 @@
 import React, { Component, PropTypes } from 'react';
 import { kinds, sizes } from 'Helpers/Props';
-import Button from 'Components/Button';
+import Button from 'Components/Link/Button';
 import FieldSet from 'Components/FieldSet';
 import Icon from 'Components/Icon';
-import LoadingIndicator from 'Components/LoadingIndicator';
+import LoadingIndicator from 'Components/Loading/LoadingIndicator';
 import FileBrowserModal from 'Components/FileBrowser/FileBrowserModal';
 import PageContent from 'Components/Page/PageContent';
 import PageContentBody from 'Components/Page/PageContentBody';

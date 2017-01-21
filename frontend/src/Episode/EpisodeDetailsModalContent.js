@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import episodeEntities from 'Episode/episodeEntities';
-import Button from 'Components/Button';
+import Button from 'Components/Link/Button';
 import ModalContent from 'Components/Modal/ModalContent';
 import ModalHeader from 'Components/Modal/ModalHeader';
 import ModalBody from 'Components/Modal/ModalBody';

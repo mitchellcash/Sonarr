@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import Link from 'Components/Link';
+import Link from 'Components/Link/Link';
 import RelativeDateCellConnector from 'Components/Table/Cells/RelativeDateCellConnector';
 import TableRow from 'Components/Table/TableRow';
 import TableRowCell from 'Components/Table/Cells/TableRowCell';

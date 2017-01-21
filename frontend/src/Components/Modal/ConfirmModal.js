@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import { kinds, sizes } from 'Helpers/Props';
-import Button from 'Components/Button';
+import Button from 'Components/Link/Button';
 import Modal from 'Components/Modal/Modal';
 import ModalContent from 'Components/Modal/ModalContent';
 import ModalHeader from 'Components/Modal/ModalHeader';

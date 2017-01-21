@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import { inputTypes, kinds } from 'Helpers/Props';
 import Alert from 'Components/Alert';
 import FieldSet from 'Components/FieldSet';
-import LoadingIndicator from 'Components/LoadingIndicator';
+import LoadingIndicator from 'Components/Loading/LoadingIndicator';
 import Form from 'Components/Form/Form';
 import FormGroup from 'Components/Form/FormGroup';
 import FormLabel from 'Components/Form/FormLabel';

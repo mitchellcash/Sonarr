@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import LoadingIndicator from 'Components/LoadingIndicator';
+import LoadingIndicator from 'Components/Loading/LoadingIndicator';
 
 function PageSectionContent(props) {
   const {

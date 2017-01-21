@@ -3,7 +3,7 @@ import classNames from 'classnames';
 import titleCase from 'Utilities/String/titleCase';
 import { icons, kinds } from 'Helpers/Props';
 import Icon from 'Components/Icon';
-import Link from 'Components/Link';
+import Link from 'Components/Link/Link';
 import TagList from 'Components/TagList';
 import ConfirmModal from 'Components/Modal/ConfirmModal';
 import EditDelayProfileModalConnector from './EditDelayProfileModalConnector';

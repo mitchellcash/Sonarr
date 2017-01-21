@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { kinds } from 'Helpers/Props';
 import Label from 'Components/Label';
-import Link from 'Components/Link';
+import Link from 'Components/Link/Link';
 import styles from './ImportSeriesSearchResult.css';
 
 class ImportSeriesSearchResult extends Component {

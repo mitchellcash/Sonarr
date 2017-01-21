@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { icons, kinds, sizes } from 'Helpers/Props';
-import Button from 'Components/Button';
+import Button from 'Components/Link/Button';
 import Icon from 'Components/Icon';
 import PathInputConnector from 'Components/Form/PathInputConnector';
 import ModalContent from 'Components/Modal/ModalContent';

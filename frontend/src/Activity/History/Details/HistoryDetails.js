@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import formatDateTime from 'Utilities/Date/formatDateTime';
 import formatAge from 'Utilities/Number/formatAge';
-import Link from 'Components/Link';
+import Link from 'Components/Link/Link';
 import DescriptionList from 'Components/DescriptionList/DescriptionList';
 import DescriptionListItem from 'Components/DescriptionList/DescriptionListItem';
 import DescriptionListItemTitle from 'Components/DescriptionList/DescriptionListItemTitle';

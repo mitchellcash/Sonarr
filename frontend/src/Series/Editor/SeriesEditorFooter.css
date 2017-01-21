@@ -16,7 +16,7 @@
 
 .saveSelectedButton,
 .organizeSelectedButton {
-  composes: button from 'Components/SpinnerButton.css';
+  composes: button from 'Components/Link/SpinnerButton.css';
 
   margin-right: 10px;
   height: 35px;

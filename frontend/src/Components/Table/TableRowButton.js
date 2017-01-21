@@ -1,5 +1,5 @@
 import React from 'react';
-import Link from 'Components/Link';
+import Link from 'Components/Link/Link';
 import TableRow from './TableRow';
 import styles from './TableRowButton.css';
 

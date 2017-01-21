@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import Link from 'Components/Link.js';
+import Link from 'Components/Link/Link';
 import EpisodeDetailsModal from 'Episode/EpisodeDetailsModal';
 import styles from './EpisodeTitleLink.css';
 

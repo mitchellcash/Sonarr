@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import { icons, inputTypes } from 'Helpers/Props';
 import Icon from 'Components/Icon';
-import Link from 'Components/Link';
+import Link from 'Components/Link/Link';
 import CaptchaInputConnector from './CaptchaInputConnector';
 import CheckInput from './CheckInput';
 import MonitorEpisodesSelectInput from './MonitorEpisodesSelectInput';

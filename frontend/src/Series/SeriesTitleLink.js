@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import Link from 'Components/Link.js';
+import Link from 'Components/Link/Link';
 
 function SeriesTitleLink({ titleSlug, title }) {
   const link = `/series/${titleSlug}`;

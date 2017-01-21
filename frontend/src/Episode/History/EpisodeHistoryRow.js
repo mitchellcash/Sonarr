@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import titleCase from 'Utilities/String/titleCase';
 import { icons, kinds, tooltipPositions } from 'Helpers/Props';
 import Icon from 'Components/Icon';
-import IconButton from 'Components/IconButton';
+import IconButton from 'Components/Link/IconButton';
 import ConfirmModal from 'Components/Modal/ConfirmModal';
 import RelativeDateCellConnector from 'Components/Table/Cells/RelativeDateCellConnector';
 import TableRow from 'Components/Table/TableRow';

@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import titleCase from 'Utilities/String/titleCase';
-import Button from 'Components/Button';
+import Button from 'Components/Link/Button';
 import * as calendarViews from 'Calendar/calendarViews';
 // import styles from './CalendarHeaderViewButton.css';
 

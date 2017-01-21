@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import Link from 'Components/Link';
+import Link from 'Components/Link/Link';
 import styles from './MenuButton.css';
 
 class MenuButton extends Component {

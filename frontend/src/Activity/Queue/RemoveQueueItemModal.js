@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { inputTypes, kinds, sizes } from 'Helpers/Props';
-import Button from 'Components/Button';
+import Button from 'Components/Link/Button';
 import Modal from 'Components/Modal/Modal';
 import FormGroup from 'Components/Form/FormGroup';
 import FormLabel from 'Components/Form/FormLabel';

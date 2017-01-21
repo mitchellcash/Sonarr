@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { inputTypes, kinds } from 'Helpers/Props';
-import Button from 'Components/Button';
-import LoadingIndicator from 'Components/LoadingIndicator';
+import Button from 'Components/Link/Button';
+import LoadingIndicator from 'Components/Loading/LoadingIndicator';
 import Form from 'Components/Form/Form';
 import FormGroup from 'Components/Form/FormGroup';
 import FormLabel from 'Components/Form/FormLabel';

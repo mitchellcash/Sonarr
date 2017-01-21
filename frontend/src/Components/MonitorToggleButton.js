@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { icons } from 'Helpers/Props';
 import Icon from 'Components/Icon';
-import SpinnerIconButton from 'Components/SpinnerIconButton';
+import SpinnerIconButton from 'Components/Link/SpinnerIconButton';
 import styles from './MonitorToggleButton.css';
 
 class MonitorToggleButton extends Component {

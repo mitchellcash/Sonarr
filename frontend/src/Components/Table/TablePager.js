@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import classNames from 'classnames';
 import { icons } from 'Helpers/Props';
-import Link from 'Components/Link';
+import Link from 'Components/Link/Link';
 import Icon from 'Components/Icon';
 import SelectInput from 'Components/Form/SelectInput';
 import styles from './TablePager.css';

@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import { icons, kinds, sizes } from 'Helpers/Props';
-import Button from 'Components/Button';
+import Button from 'Components/Link/Button';
 import Icon from 'Components/Icon';
 import styles from './EpisodeSearch.css';
 

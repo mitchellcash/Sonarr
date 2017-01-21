@@ -1,5 +1,5 @@
 import React from 'react';
-import Link from 'Components/Link';
+import Link from 'Components/Link/Link';
 import TableRowCell from './TableRowCell';
 
 function TableRowCellButton(props) {

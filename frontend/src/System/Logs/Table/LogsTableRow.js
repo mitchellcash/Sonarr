@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { icons, scrollDirections } from 'Helpers/Props';
 import Icon from 'Components/Icon';
-import Button from 'Components/Button';
+import Button from 'Components/Link/Button';
 import Scroller from 'Components/Scroller';
 import Modal from 'Components/Modal/Modal';
 import ModalContent from 'Components/Modal/ModalContent';

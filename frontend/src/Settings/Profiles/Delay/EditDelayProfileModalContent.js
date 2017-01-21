@@ -1,8 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import { inputTypes, kinds } from 'Helpers/Props';
 import { boolSettingShape, numberSettingShape, tagSettingShape } from 'Helpers/Props/settingShape';
-import Button from 'Components/Button';
-import LoadingIndicator from 'Components/LoadingIndicator';
+import Button from 'Components/Link/Button';
+import LoadingIndicator from 'Components/Loading/LoadingIndicator';
 import Alert from 'Components/Alert';
 import ModalContent from 'Components/Modal/ModalContent';
 import ModalHeader from 'Components/Modal/ModalHeader';

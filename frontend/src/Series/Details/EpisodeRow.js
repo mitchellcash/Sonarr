@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { icons } from 'Helpers/Props';
 import MonitorToggleButton from 'Components/MonitorToggleButton';
-import IconButton from 'Components/IconButton';
+import IconButton from 'Components/Link/IconButton';
 import RelativeDateCellConnector from 'Components/Table/Cells/RelativeDateCellConnector';
 import TableRow from 'Components/Table/TableRow';
 import TableRowCell from 'Components/Table/Cells/TableRowCell';

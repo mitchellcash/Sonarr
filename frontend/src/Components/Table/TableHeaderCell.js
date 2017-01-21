@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { icons, sortDirections } from 'Helpers/Props';
-import Link from 'Components/Link';
+import Link from 'Components/Link/Link';
 import Icon from 'Components/Icon';
 import styles from './TableHeaderCell.css';
 

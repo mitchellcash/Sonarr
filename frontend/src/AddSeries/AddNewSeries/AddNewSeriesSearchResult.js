@@ -3,7 +3,7 @@ import { icons, kinds, sizes } from 'Helpers/Props';
 import HeartRating from 'Components/HeartRating';
 import Icon from 'Components/Icon';
 import Label from 'Components/Label';
-import Link from 'Components/Link';
+import Link from 'Components/Link/Link';
 import SeriesPoster from 'Series/SeriesPoster';
 import AddNewSeriesModal from './AddNewSeriesModal';
 import styles from './AddNewSeriesSearchResult.css';

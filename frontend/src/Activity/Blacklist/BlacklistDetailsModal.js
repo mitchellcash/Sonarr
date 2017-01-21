@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import Button from 'Components/Button';
+import Button from 'Components/Link/Button';
 import DescriptionList from 'Components/DescriptionList/DescriptionList';
 import DescriptionListItem from 'Components/DescriptionList/DescriptionListItem';
 import Modal from 'Components/Modal/Modal';

@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import LoadingIndicator from 'Components/LoadingIndicator';
+import LoadingIndicator from 'Components/Loading/LoadingIndicator';
 import * as calendarViews from './calendarViews';
 import CalendarHeaderConnector from './Header/CalendarHeaderConnector';
 import DaysOfWeekConnector from './Day/DaysOfWeekConnector';

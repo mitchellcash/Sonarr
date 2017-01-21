@@ -1,9 +1,9 @@
 import React, { Component, PropTypes } from 'react';
 import { inputTypes, kinds } from 'Helpers/Props';
 import Alert from 'Components/Alert';
-import Button from 'Components/Button';
-import SpinnerButton from 'Components/SpinnerButton';
-import LoadingIndicator from 'Components/LoadingIndicator';
+import Button from 'Components/Link/Button';
+import SpinnerButton from 'Components/Link/SpinnerButton';
+import LoadingIndicator from 'Components/Loading/LoadingIndicator';
 import ModalContent from 'Components/Modal/ModalContent';
 import ModalHeader from 'Components/Modal/ModalHeader';
 import ModalBody from 'Components/Modal/ModalBody';

@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { sizes } from 'Helpers/Props';
-import Button from 'Components/Button';
-import Link from 'Components/Link';
+import Button from 'Components/Link/Button';
+import Link from 'Components/Link/Link';
 import Menu from 'Components/Menu/Menu';
 import MenuContent from 'Components/Menu/MenuContent';
 import AddDownloadClientPresetMenuItem from './AddDownloadClientPresetMenuItem';

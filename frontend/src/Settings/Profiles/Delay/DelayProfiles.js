@@ -3,7 +3,7 @@ import Measure from 'react-measure';
 import { icons } from 'Helpers/Props';
 import FieldSet from 'Components/FieldSet';
 import Icon from 'Components/Icon';
-import Link from 'Components/Link';
+import Link from 'Components/Link/Link';
 import PageSectionContent from 'Components/Page/PageSectionContent';
 import DelayProfileDragSource from './DelayProfileDragSource';
 import DelayProfileDragPreview from './DelayProfileDragPreview';

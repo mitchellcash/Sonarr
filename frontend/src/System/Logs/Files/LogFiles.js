@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { icons } from 'Helpers/Props';
-import LoadingIndicator from 'Components/LoadingIndicator';
+import LoadingIndicator from 'Components/Loading/LoadingIndicator';
 import Table from 'Components/Table/Table';
 import PageContent from 'Components/Page/PageContent';
 import PageContentBody from 'Components/Page/PageContentBody';

@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { scrollDirections } from 'Helpers/Props';
-import Button from 'Components/Button';
+import Button from 'Components/Link/Button';
 import Scroller from 'Components/Scroller';
 import TextInput from 'Components/Form/TextInput';
 import ModalContent from 'Components/Modal/ModalContent';

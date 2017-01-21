@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { kinds } from 'Helpers/Props';
-import SpinnerButton from 'Components/SpinnerButton';
+import SpinnerButton from 'Components/Link/SpinnerButton';
 import SelectInput from 'Components/Form/SelectInput';
 import QualityProfileSelectInputConnector from 'Components/Form/QualityProfileSelectInputConnector';
 import RootFolderSelectInputConnector from 'Components/Form/RootFolderSelectInputConnector';

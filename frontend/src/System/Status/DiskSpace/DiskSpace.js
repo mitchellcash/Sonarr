@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import formatBytes from 'Utilities/Number/formatBytes';
-import LoadingIndicator from 'Components/LoadingIndicator';
+import LoadingIndicator from 'Components/Loading/LoadingIndicator';
 import FieldSet from 'Components/FieldSet';
 import Table from 'Components/Table/Table';
 import TableBody from 'Components/Table/TableBody';

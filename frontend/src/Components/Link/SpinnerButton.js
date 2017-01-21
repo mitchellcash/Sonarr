@@ -1,8 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import classNames from 'classnames';
 import { icons } from 'Helpers/Props';
+import Icon from 'Components/Icon';
 import Button from './Button';
-import Icon from './Icon';
 import styles from './SpinnerButton.css';
 
 class SpinnerButton extends Component {

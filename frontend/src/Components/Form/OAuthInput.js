@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import { kinds } from 'Helpers/Props';
-import SpinnerButton from 'Components/SpinnerButton';
+import SpinnerButton from 'Components/Link/SpinnerButton';
 
 function OAuthInput(props) {
   const {

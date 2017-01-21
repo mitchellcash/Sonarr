@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { icons } from 'Helpers/Props';
 import episodeEntities from 'Episode/episodeEntities';
-import LoadingIndicator from 'Components/LoadingIndicator';
+import LoadingIndicator from 'Components/Loading/LoadingIndicator';
 import Table from 'Components/Table/Table';
 import TableBody from 'Components/Table/TableBody';
 import TablePager from 'Components/Table/TablePager';

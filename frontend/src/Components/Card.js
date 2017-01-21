@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import Link from './Link';
+import Link from 'Components/Link/Link';
 import styles from './Card.css';
 
 class Card extends Component {

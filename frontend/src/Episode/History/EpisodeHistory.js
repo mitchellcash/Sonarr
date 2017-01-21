@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import LoadingIndicator from 'Components/LoadingIndicator';
+import LoadingIndicator from 'Components/Loading/LoadingIndicator';
 import Table from 'Components/Table/Table';
 import TableBody from 'Components/Table/TableBody';
 import EpisodeHistoryRow from './EpisodeHistoryRow';

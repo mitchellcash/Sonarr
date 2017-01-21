@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { icons, kinds, inputTypes, tooltipPositions } from 'Helpers/Props';
 import Icon from 'Components/Icon';
-import SpinnerButton from 'Components/SpinnerButton';
+import SpinnerButton from 'Components/Link/SpinnerButton';
 import Form from 'Components/Form/Form';
 import FormGroup from 'Components/Form/FormGroup';
 import FormLabel from 'Components/Form/FormLabel';

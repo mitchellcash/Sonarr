@@ -7,7 +7,7 @@ import padNumber from 'Utilities/Number/padNumber';
 import getStatusStyle from 'Calendar/getStatusStyle';
 import episodeEntities from 'Episode/episodeEntities';
 import Icon from 'Components/Icon';
-import Link from 'Components/Link';
+import Link from 'Components/Link/Link';
 import EpisodeDetailsModal from 'Episode/EpisodeDetailsModal';
 import CalendarEventQueueDetails from './CalendarEventQueueDetails';
 import styles from './CalendarEvent.css';

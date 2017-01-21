@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import formatBytes from 'Utilities/Number/formatBytes';
 import { icons, kinds, sizes } from 'Helpers/Props';
-import IconButton from 'Components/IconButton';
+import IconButton from 'Components/Link/IconButton';
 import ConfirmModal from 'Components/Modal/ConfirmModal';
 import Label from 'Components/Label';
 import QualityProfileNameConnector from 'Settings/Profiles/Quality/QualityProfileNameConnector';

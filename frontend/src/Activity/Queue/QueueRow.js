@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { icons } from 'Helpers/Props';
-import IconButton from 'Components/IconButton';
-import SpinnerIconButton from 'Components/SpinnerIconButton';
+import IconButton from 'Components/Link/IconButton';
+import SpinnerIconButton from 'Components/Link/SpinnerIconButton';
 import ProgressBar from 'Components/ProgressBar';
 import TableRow from 'Components/Table/TableRow';
 import TableRowCell from 'Components/Table/Cells/TableRowCell';

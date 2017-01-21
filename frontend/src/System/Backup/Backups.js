@@ -1,8 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import { icons } from 'Helpers/Props';
 import Icon from 'Components/Icon';
-import Link from 'Components/Link';
-import LoadingIndicator from 'Components/LoadingIndicator';
+import Link from 'Components/Link/Link';
+import LoadingIndicator from 'Components/Loading/LoadingIndicator';
 import RelativeDateCellConnector from 'Components/Table/Cells/RelativeDateCellConnector';
 import Table from 'Components/Table/Table';
 import TableBody from 'Components/Table/TableBody';

@@ -1,5 +1,5 @@
 import React from 'react';
-import LoadingIndicator from 'Components/LoadingIndicator';
+import LoadingIndicator from 'Components/Loading/LoadingIndicator';
 import LoadingMessage from 'Components/Loading/LoadingMessage';
 import styles from './LoadingPage.css';
 

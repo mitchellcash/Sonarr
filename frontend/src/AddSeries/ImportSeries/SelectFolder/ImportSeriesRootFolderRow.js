@@ -1,8 +1,8 @@
 import React, { PropTypes } from 'react';
 import formatBytes from 'Utilities/Number/formatBytes';
 import { icons } from 'Helpers/Props';
-import IconButton from 'Components/IconButton';
-import Link from 'Components/Link';
+import IconButton from 'Components/Link/IconButton';
+import Link from 'Components/Link/Link';
 import TableRow from 'Components/Table/TableRow';
 import TableRowCell from 'Components/Table/Cells/TableRowCell';
 import styles from './ImportSeriesRootFolderRow.css';

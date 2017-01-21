@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { sizes } from 'Helpers/Props';
 import FieldSet from 'Components/FieldSet';
-import Button from 'Components/Button';
+import Button from 'Components/Link/Button';
 import SelectInput from 'Components/Form/SelectInput';
 import Modal from 'Components/Modal/Modal';
 import ModalContent from 'Components/Modal/ModalContent';

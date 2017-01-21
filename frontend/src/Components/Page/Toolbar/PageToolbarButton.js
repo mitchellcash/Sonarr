@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import classNames from 'classnames';
-import SpinnerIconButton from 'Components/SpinnerIconButton';
+import SpinnerIconButton from 'Components/Link/SpinnerIconButton';
 import styles from './PageToolbarButton.css';
 
 function PageToolbarButton(props) {

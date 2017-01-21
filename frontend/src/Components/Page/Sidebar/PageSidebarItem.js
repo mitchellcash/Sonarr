@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import classNames from 'classnames';
 import { map } from 'Helpers/elementChildren';
 import Icon from 'Components/Icon';
-import Link from 'Components/Link';
+import Link from 'Components/Link/Link';
 import styles from './PageSidebarItem.css';
 
 function PageSidebarItem(props) {

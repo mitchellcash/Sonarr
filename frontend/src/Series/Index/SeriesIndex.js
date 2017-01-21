@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { align, icons, sortDirections } from 'Helpers/Props';
-import LoadingIndicator from 'Components/LoadingIndicator';
+import LoadingIndicator from 'Components/Loading/LoadingIndicator';
 import PageContent from 'Components/Page/PageContent';
 import PageContentBody from 'Components/Page/PageContentBody';
 import PageToolbar from 'Components/Page/Toolbar/PageToolbar';

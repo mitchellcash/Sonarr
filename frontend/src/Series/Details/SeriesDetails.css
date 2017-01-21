@@ -56,7 +56,7 @@
 }
 
 .seriesNavigationButton {
-  composes: button from 'Components/IconButton.css';
+  composes: button from 'Components/Link/IconButton.css';
 
   margin-left: 5px;
   color: #e1e2e3;

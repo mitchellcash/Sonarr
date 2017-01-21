@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import { icons } from 'Helpers/Props';
-import Link from 'Components/Link';
+import Link from 'Components/Link/Link';
 import Icon from 'Components/Icon';
 import styles from './ModalContent.css';
 

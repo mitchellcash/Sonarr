@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import classNames from 'classnames';
 import { sizes } from 'Helpers/Props';
-import Link from 'Components/Link';
+import Link from 'Components/Link/Link';
 import styles from './NamingOption.css';
 
 class NamingOption extends Component {

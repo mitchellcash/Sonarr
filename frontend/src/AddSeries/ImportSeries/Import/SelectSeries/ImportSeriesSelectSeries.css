@@ -3,7 +3,7 @@
 }
 
 .button {
-  composes: link from 'Components/Link.css';
+  composes: link from 'Components/Link/Link.css';
 
   position: relative;
   display: inline-block;

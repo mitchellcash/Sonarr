@@ -15,7 +15,7 @@
 }
 
 .importButton {
-  composes: button from 'Components/SpinnerButton.css';
+  composes: button from 'Components/Link/SpinnerButton.css';
 
   height: 35px;
 }

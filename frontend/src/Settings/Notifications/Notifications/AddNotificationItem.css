@@ -41,7 +41,7 @@
 }
 
 .presetsMenuButton {
-  composes: button from 'Components/Button.css';
+  composes: button from 'Components/Link/Button.css';
 
   &::after {
     margin-left: 5px;

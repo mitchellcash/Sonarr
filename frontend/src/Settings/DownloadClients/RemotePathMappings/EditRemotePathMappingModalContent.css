@@ -5,7 +5,7 @@
 }
 
 .deleteButton {
-  composes: button from 'Components/Button.css';
+  composes: button from 'Components/Link/Button.css';
 
   margin-right: auto;
 }

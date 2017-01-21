@@ -1,4 +1,4 @@
 .link {
-  composes: link from 'Components/Link.css';
-  composes: to from 'Components/Link.css';
+  composes: link from 'Components/Link/Link.css';
+  composes: to from 'Components/Link/Link.css';
 }

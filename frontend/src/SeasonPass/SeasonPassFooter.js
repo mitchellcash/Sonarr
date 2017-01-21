@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { kinds } from 'Helpers/Props';
-import SpinnerButton from 'Components/SpinnerButton';
+import SpinnerButton from 'Components/Link/SpinnerButton';
 import MonitorEpisodesSelectInput from 'Components/Form/MonitorEpisodesSelectInput';
 import SelectInput from 'Components/Form/SelectInput';
 import PageContentFooter from 'Components/Page/PageContentFooter';

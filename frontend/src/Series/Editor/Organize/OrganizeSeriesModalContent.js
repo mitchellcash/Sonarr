@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import { icons, kinds } from 'Helpers/Props';
 import Alert from 'Components/Alert';
-import Button from 'Components/Button';
+import Button from 'Components/Link/Button';
 import Icon from 'Components/Icon';
 import ModalContent from 'Components/Modal/ModalContent';
 import ModalHeader from 'Components/Modal/ModalHeader';

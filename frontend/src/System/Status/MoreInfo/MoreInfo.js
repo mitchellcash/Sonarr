@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Link from 'Components/Link';
+import Link from 'Components/Link/Link';
 import FieldSet from 'Components/FieldSet';
 import DescriptionList from 'Components/DescriptionList/DescriptionList';
 import DescriptionListItemTitle from 'Components/DescriptionList/DescriptionListItemTitle';
