@@ -52,7 +52,7 @@ class Backups extends Component {
           <PageToolbarSection>
             <PageToolbarButton
               iconName={icons.BACKUP}
-              animate={backupExecuting}
+              isSpinning={backupExecuting}
               onPress={onBackupPress}
             />
           </PageToolbarSection>

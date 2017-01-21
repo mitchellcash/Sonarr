@@ -59,16 +59,16 @@ class SeriesIndex extends Component {
           <PageToolbarSection>
             <PageToolbarButton
               iconName={icons.REFRESH}
-              animateIconName={icons.REFRESH}
+              spinningName={icons.REFRESH}
               title="Update all series"
-              animate={isRefreshingSeries}
+              isSpinning={isRefreshingSeries}
               onPress={onRefreshSeriesPress}
             />
 
             <PageToolbarButton
               iconName={icons.RSS}
               title="Start RSS Sync"
-              animate={isRssSyncExecuting}
+              isSpinning={isRssSyncExecuting}
               onPress={onRssSyncPress}
             />
 

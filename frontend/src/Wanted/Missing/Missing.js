@@ -153,14 +153,14 @@ class Missing extends Component {
             <PageToolbarButton
               iconName={icons.SEARCH}
               title="Search selected"
-              animate={isSearchingForEpisodes}
+              isSpinning={isSearchingForEpisodes}
               onPress={this.onSearchSelectedPress}
             />
 
             <PageToolbarButton
               iconName={icons.MONITORED}
               title="Unmonitor selected"
-              animate={isSaving}
+              isSpinning={isSaving}
               onPress={this.onUnmonitorSelectedPress}
             />
 
@@ -169,7 +169,7 @@ class Missing extends Component {
             <PageToolbarButton
               iconName={icons.SEARCH}
               title="Search all missing"
-              animate={isSearchingForMissingEpisodes}
+              isSpinning={isSearchingForMissingEpisodes}
               onPress={this.onSearchAllMissingPress}
             />
 
@@ -178,7 +178,7 @@ class Missing extends Component {
             <PageToolbarButton
               iconName={icons.REFRESH}
               title="Rescan Drone Factory folder"
-              animate={isScanningDroneFactory}
+              isSpinning={isScanningDroneFactory}
               onPress={onRescanDroneFactoryPress}
             />
 

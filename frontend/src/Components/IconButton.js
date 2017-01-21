@@ -6,6 +6,7 @@ import styles from './IconButton.css';
 function IconButton(props) {
   const {
     className,
+    iconClassName,
     name,
     size,
     ...otherProps
@@ -17,6 +18,7 @@ function IconButton(props) {
       {...otherProps}
     >
       <Icon
+        className={iconClassName}
         name={name}
         size={size}
       />
@@ -26,6 +28,7 @@ function IconButton(props) {
 
 IconButton.propTypes = {
   className: PropTypes.string.isRequired,
+  iconClassName: PropTypes.string,
   name: PropTypes.string.isRequired,
   size: PropTypes.number
 };

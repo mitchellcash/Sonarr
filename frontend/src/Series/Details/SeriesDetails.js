@@ -179,16 +179,16 @@ class SeriesDetails extends Component {
           <PageToolbarSection>
             <PageToolbarButton
               iconName={icons.REFRESH}
-              animateIconName={icons.REFRESH}
+              spinningName={icons.REFRESH}
               title="Search for monitored episodes in this series"
-              animate={isRefreshing}
+              isSpinning={isRefreshing}
               onPress={onRefreshPress}
             />
 
             <PageToolbarButton
               iconName={icons.SEARCH}
               title="Search for monitored episodes in this series"
-              animate={isSearching}
+              isSpinning={isSearching}
               onPress={onSearchPress}
             />
 

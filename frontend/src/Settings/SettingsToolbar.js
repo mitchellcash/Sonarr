@@ -34,7 +34,7 @@ function SettingsToolbar(props) {
             <PageToolbarButton
               iconName={icons.SAVE}
               title="Save"
-              animate={saving}
+              isSpinning={saving}
               isDisabled={!hasPendingChanges}
               onPress={onSavePress}
             />

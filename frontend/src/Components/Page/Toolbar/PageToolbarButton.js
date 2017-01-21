@@ -1,62 +1,36 @@
-import React, { Component, PropTypes } from 'react';
+import React, { PropTypes } from 'react';
 import classNames from 'classnames';
-import { icons } from 'Helpers/Props';
-import Link from 'Components/Link';
-import Icon from 'Components/Icon';
+import SpinnerIconButton from 'Components/SpinnerIconButton';
 import styles from './PageToolbarButton.css';
 
-class PageToolbarButton extends Component {
+function PageToolbarButton(props) {
+  const {
+    iconName,
+    isDisabled,
+    ...otherProps
+  } = props;
 
-  //
-  // Render
+  var test = styles.toolbarButtonIcon;
 
-  render() {
-    const {
-      iconName,
-      animateIconName,
-      animate,
-      isDisabled,
-      onPress,
-      ...otherProps
-    } = this.props;
-
-    const icon = animate && !!animateIconName ? animateIconName : iconName;
-
-    return (
-      <Link
-        className={classNames(
-          styles.toolbarButton,
-          isDisabled && styles.isDisabled
-        )}
-        isDisabled={isDisabled}
-        onPress={onPress}
-        {...otherProps}
-      >
-        <Icon
-          className={styles.icon}
-          name={classNames(
-            icon,
-            animate && 'fa-spin'
-          )}
-          size={22}
-        />
-      </Link>
-    );
-  }
-
+  return (
+    <SpinnerIconButton
+      className={classNames(
+        styles.toolbarButton,
+        isDisabled && styles.isDisabled
+      )}
+      iconClassName={styles.toolbarButtonIcon}
+      name={iconName}
+      size={22}
+      {...otherProps}
+    />
+  );
 }
 
 PageToolbarButton.propTypes = {
   iconName: PropTypes.string.isRequired,
-  animateIconName: PropTypes.string,
-  animate: PropTypes.bool,
-  isDisabled: PropTypes.bool,
-  onPress: PropTypes.func.isRequired
-};
-
-PageToolbarButton.defaultProps = {
-  animateIconName: icons.SPINNER,
-  animate: false
+  spinningName: PropTypes.string,
+  isSpinning: PropTypes.bool,
+  isDisabled: PropTypes.bool
 };
 
 export default PageToolbarButton;

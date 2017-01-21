@@ -59,7 +59,7 @@ class Blacklist extends Component {
             <PageToolbarButton
               iconName={icons.CLEAR}
               title="Clear Blacklist"
-              animate={isClearingBlacklistExecuting}
+              isSpinning={isClearingBlacklistExecuting}
               onPress={onClearBlacklistPress}
             />
           </PageToolbarSection>

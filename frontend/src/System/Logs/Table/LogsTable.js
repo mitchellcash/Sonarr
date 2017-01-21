@@ -72,14 +72,14 @@ class LogsTable extends Component {
 
             <PageToolbarButton
               iconName={icons.REFRESH}
-              animateIconName={icons.REFRESH}
-              animate={fetching}
+              spinningName={icons.REFRESH}
+              isSpinning={fetching}
               onPress={onRefreshPress}
             />
 
             <PageToolbarButton
               iconName={icons.CLEAR}
-              animate={clearLogExecuting}
+              isSpinning={clearLogExecuting}
               onPress={onClearLogsPress}
             />
           </PageToolbarSection>

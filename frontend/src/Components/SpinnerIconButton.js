@@ -25,7 +25,8 @@ SpinnerIconButton.propTypes = {
 };
 
 SpinnerIconButton.defaultProps = {
-  spinningName: icons.SPINNER
+  spinningName: icons.SPINNER,
+  isSpinning: false
 };
 
 export default SpinnerIconButton;

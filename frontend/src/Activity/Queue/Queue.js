@@ -76,7 +76,7 @@ class Queue extends Component {
             <PageToolbarButton
               iconName={icons.REFRESH}
               title="Refresh"
-              animate={fetching}
+              isSpinning={fetching}
               onPress={onRefreshPress}
             />
           </PageToolbarSection>

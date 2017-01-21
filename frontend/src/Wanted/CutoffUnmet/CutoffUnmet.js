@@ -141,14 +141,14 @@ class CutoffUnmet extends Component {
             <PageToolbarButton
               iconName={icons.SEARCH}
               title="Search selected"
-              animate={isSearchingForEpisodes}
+              isSpinning={isSearchingForEpisodes}
               onPress={this.onSearchSelectedPress}
             />
 
             <PageToolbarButton
               iconName={icons.MONITORED}
               title="Unmonitor selected"
-              animate={isSaving}
+              isSpinning={isSaving}
               onPress={this.onUnmonitorSelectedPress}
             />
 
@@ -157,7 +157,7 @@ class CutoffUnmet extends Component {
             <PageToolbarButton
               iconName={icons.SEARCH}
               title="Search all cutoffUnmet"
-              animate={isSearchingForCutoffUnmetEpisodes}
+              isSpinning={isSearchingForCutoffUnmetEpisodes}
               onPress={this.onSearchAllCutoffUnmetPress}
             />
 

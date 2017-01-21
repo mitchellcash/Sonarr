@@ -53,14 +53,14 @@ class LogFiles extends Component {
 
             <PageToolbarButton
               iconName={icons.REFRESH}
-              animateIconName={icons.REFRESH}
-              animate={fetching}
+              spinningName={icons.REFRESH}
+              isSpinning={fetching}
               onPress={onRefreshPress}
             />
 
             <PageToolbarButton
               iconName={icons.CLEAR}
-              animate={deleteFilesExecuting}
+              isSpinning={deleteFilesExecuting}
               onPress={onDeleteFilesPress}
             />
           </PageToolbarSection>
