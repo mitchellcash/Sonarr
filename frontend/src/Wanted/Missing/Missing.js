@@ -132,6 +132,8 @@ class Missing extends Component {
       isSearchingForEpisodes,
       isSearchingForMissingEpisodes,
       isSaving,
+      filterKey,
+      filterValue,
       onRescanDroneFactoryPress,
       ...otherProps
     } = this.props;
@@ -194,7 +196,8 @@ class Missing extends Component {
                 <FilterMenuItem
                   name="monitored"
                   value={true}
-                  {...otherProps}
+                  filterKey={filterKey}
+                  filterValue={filterValue}
                   onPress={this.onFilterMenuItemPress}
                 >
                   Monitored
@@ -203,7 +206,8 @@ class Missing extends Component {
                 <FilterMenuItem
                   name="monitored"
                   value={false}
-                  {...otherProps}
+                  filterKey={filterKey}
+                  filterValue={filterValue}
                   onPress={this.onFilterMenuItemPress}
                 >
                   Unmonitored
@@ -290,6 +294,8 @@ Missing.propTypes = {
   isSearchingForEpisodes: PropTypes.bool.isRequired,
   isSearchingForMissingEpisodes: PropTypes.bool.isRequired,
   isSaving: PropTypes.bool.isRequired,
+  filterKey: PropTypes.string,
+  filterValue: PropTypes.oneOfType([PropTypes.bool, PropTypes.number, PropTypes.string]),
   onFilterSelect: PropTypes.func.isRequired,
   onSearchSelectedPress: PropTypes.func.isRequired,
   onUnmonitorSelectedPress: PropTypes.func.isRequired,

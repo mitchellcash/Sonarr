@@ -122,6 +122,8 @@ class CutoffUnmet extends Component {
       isSearchingForEpisodes,
       isSearchingForCutoffUnmetEpisodes,
       isSaving,
+      filterKey,
+      filterValue,
       ...otherProps
     } = this.props;
 
@@ -168,7 +170,8 @@ class CutoffUnmet extends Component {
                 <FilterMenuItem
                   name="monitored"
                   value={true}
-                  {...otherProps}
+                  filterKey={filterKey}
+                  filterValue={filterValue}
                   onPress={this.onFilterMenuItemPress}
                 >
                   Monitored
@@ -177,7 +180,8 @@ class CutoffUnmet extends Component {
                 <FilterMenuItem
                   name="monitored"
                   value={false}
-                  {...otherProps}
+                  filterKey={filterKey}
+                  filterValue={filterValue}
                   onPress={this.onFilterMenuItemPress}
                 >
                   Unmonitored
@@ -258,6 +262,8 @@ CutoffUnmet.propTypes = {
   isSearchingForEpisodes: PropTypes.bool.isRequired,
   isSearchingForCutoffUnmetEpisodes: PropTypes.bool.isRequired,
   isSaving: PropTypes.bool.isRequired,
+  filterKey: PropTypes.string,
+  filterValue: PropTypes.oneOfType([PropTypes.bool, PropTypes.number, PropTypes.string]),
   onFilterSelect: PropTypes.func.isRequired,
   onSearchSelectedPress: PropTypes.func.isRequired,
   onUnmonitorSelectedPress: PropTypes.func.isRequired,
