@@ -53,6 +53,14 @@ class SeriesIndex extends Component {
 
     const ViewComponent = getViewComponent(view);
 
+    // Specify an innerClassName for PageContentBody
+    // when the view is posters to accomodate
+    // poster's 5px margin.
+
+    const innerContentClassName = view === 'posters' ?
+      styles.innerContentBody :
+      undefined;
+
     return (
       <PageContent>
         <PageToolbar>
@@ -207,7 +215,7 @@ class SeriesIndex extends Component {
           </PageToolbarSection>
         </PageToolbar>
 
-        <PageContentBody>
+        <PageContentBody innerClassName={innerContentClassName}>
           {
             fetching && !populated &&
               <LoadingIndicator />
