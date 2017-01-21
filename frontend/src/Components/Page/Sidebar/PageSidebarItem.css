@@ -1,11 +1,11 @@
 .item {
   border-left: 3px solid transparent;
   color: $sidebarColor;
-  transition: border-left-color 0.4s ease;
+  transition: border-left 0.3s ease-in-out;
 }
 
 .isActiveItem {
-  border-left-color: $themeBlue;
+  border-left: 3px solid $themeBlue;
 }
 
 .link {
