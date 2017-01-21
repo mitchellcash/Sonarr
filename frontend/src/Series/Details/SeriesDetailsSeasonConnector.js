@@ -3,6 +3,7 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
 import { findCommand } from 'Utilities/Command';
+import createDimensionsSelector from 'Store/Selectors/createDimensionsSelector';
 import createSeriesSelector from 'Store/Selectors/createSeriesSelector';
 import createCommandsSelector from 'Store/Selectors/createCommandsSelector';
 import { toggleSeasonMonitored } from 'Store/Actions/seriesActions';
@@ -17,7 +18,8 @@ function createMapStateToProps() {
     (state) => state.episodes,
     createSeriesSelector(),
     createCommandsSelector(),
-    (seasonNumber, episodes, series, commands) => {
+    createDimensionsSelector(),
+    (seasonNumber, episodes, series, commands, dimensions) => {
       const isSearching = !!findCommand(commands, {
         name: commandNames.SEASON_SEARCH,
         seriesId: series.id,
@@ -30,7 +32,8 @@ function createMapStateToProps() {
       return {
         items: sortedEpisodes,
         isSearching,
-        seriesMonitored: series.monitored
+        seriesMonitored: series.monitored,
+        isSmallScreen: dimensions.isSmallScreen
       };
     }
   );

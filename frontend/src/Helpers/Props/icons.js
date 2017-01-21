@@ -1,3 +1,4 @@
+export const ACTIONS = 'fa fa-bolt';
 export const ACTIVITY = 'fa fa-clock-o';
 export const ADD = 'fa fa-plus';
 export const ADVANCED_SETTINGS = 'fa fa-cog';

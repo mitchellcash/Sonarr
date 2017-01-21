@@ -76,7 +76,7 @@ class PageConnector extends Component {
   // Listeners
 
   onResize = (dimensions) => {
-    this.props.saveDimensions({ dimensions });
+    this.props.saveDimensions(dimensions);
   }
 
   //

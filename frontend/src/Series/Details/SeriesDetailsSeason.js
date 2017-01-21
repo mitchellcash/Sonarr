@@ -3,13 +3,18 @@ import React, { Component, PropTypes } from 'react';
 import isAfter from 'Utilities/Date/isAfter';
 import isBefore from 'Utilities/Date/isBefore';
 import getToggledRange from 'Utilities/Table/getToggledRange';
-import { icons, kinds, sizes } from 'Helpers/Props';
+import { align, icons, kinds, sizes } from 'Helpers/Props';
 import Icon from 'Components/Icon';
 import IconButton from 'Components/IconButton';
 import Label from 'Components/Label';
 import Link from 'Components/Link';
 import MonitorToggleButton from 'Components/MonitorToggleButton';
+import SpinnerIcon from 'Components/SpinnerIcon';
 import SpinnerIconButton from 'Components/SpinnerIconButton';
+import Menu from 'Components/Menu/Menu';
+import MenuButton from 'Components/Menu/MenuButton';
+import MenuContent from 'Components/Menu/MenuContent';
+import MenuItem from 'Components/Menu/MenuItem';
 import Table from 'Components/Table/Table';
 import TableBody from 'Components/Table/TableBody';
 import EpisodeFileEditorModal from 'EpisodeFile/Editor/EpisodeFileEditorModal';
@@ -167,6 +172,7 @@ class SeriesDetailsSeason extends Component {
       isExpanded,
       isSearching,
       seriesMonitored,
+      isSmallScreen,
       onMonitorSeasonPress,
       onSearchPress
     } = this.props;
@@ -206,19 +212,17 @@ class SeriesDetailsSeason extends Component {
                 </span>
             }
 
-            <span className={styles.episodeCountContainer}>
-              <Label
-                title={`${totalEpisodeCount} episodes total. ${episodeFileCount} episodes with files.`}
-                kind={getEpisodeCountKind(monitored, episodeFileCount, episodeCount)}
-                size={sizes.LARGE}
-              >
-                {
-                  monitored || episodeFileCount ?
-                    <span>{episodeFileCount} / {episodeCount}</span> :
-                    <span>&nbsp;</span>
-                }
-              </Label>
-            </span>
+            <Label
+              title={`${totalEpisodeCount} episodes total. ${episodeFileCount} episodes with files.`}
+              kind={getEpisodeCountKind(monitored, episodeFileCount, episodeCount)}
+              size={sizes.LARGE}
+            >
+              {
+                monitored || episodeFileCount ?
+                  <span>{episodeFileCount} / {episodeCount}</span> :
+                  <span>&nbsp;</span>
+              }
+            </Label>
           </div>
 
           <Link
@@ -233,32 +237,86 @@ class SeriesDetailsSeason extends Component {
             />
           </Link>
 
-          <div className={styles.actions}>
-            <SpinnerIconButton
-              className={styles.actionButton}
-              name={icons.SEARCH}
-              title="Search for monitored episodes in this seasons"
-              size={24}
-              isSpinning={isSearching}
-              onPress={onSearchPress}
-            />
+          {
+            isSmallScreen ?
+              <Menu className={styles.actionsMenu}>
+                <MenuButton>
+                  <Icon
+                    name={icons.ACTIONS}
+                    size={22}
+                  />
+                </MenuButton>
 
-            <IconButton
-              className={styles.actionButton}
-              name={icons.ORGANIZE}
-              title="Preview rename for this season"
-              size={24}
-              onPress={this.onOrganizePress}
-            />
+                <MenuContent
+                  className={styles.actionsMenuContent}
+                  alignMenu={align.RIGHT}
+                >
+                  <MenuItem
+                    onPress={onSearchPress}
+                  >
+                    <SpinnerIcon
+                      className={styles.actionMenuIcon}
+                      name={icons.SEARCH}
+                      isSpinning={isSearching}
+                    />
 
-            <IconButton
-              className={styles.actionButton}
-              name={icons.EPISODE_FILE}
-              title="Manage episode files in this series"
-              size={24}
-              onPress={this.onManageEpisodesPress}
-            />
-          </div>
+                    Search
+                  </MenuItem>
+
+                  <MenuItem
+                    onPress={this.onOrganizePress}
+                  >
+                    <Icon
+                      className={styles.actionMenuIcon}
+                      name={icons.ORGANIZE}
+                      isSpinning={isSearching}
+                    />
+
+                    Preview Rename
+                  </MenuItem>
+
+                  <MenuItem
+                    onPress={this.onManageEpisodesPress}
+                  >
+                    <Icon
+                      className={styles.actionMenuIcon}
+                      name={icons.EPISODE_FILE}
+                      isSpinning={isSearching}
+                    />
+
+                    Manage Episodes
+                  </MenuItem>
+                </MenuContent>
+              </Menu> :
+
+              <div className={styles.actions}>
+                <SpinnerIconButton
+                  className={styles.actionButton}
+                  name={icons.SEARCH}
+                  title="Search for monitored episodes in this seasons"
+                  size={24}
+                  isSpinning={isSearching}
+                  onPress={onSearchPress}
+                />
+
+                <IconButton
+                  className={styles.actionButton}
+                  name={icons.ORGANIZE}
+                  title="Preview rename for this season"
+                  size={24}
+                  onPress={this.onOrganizePress}
+                />
+
+                <IconButton
+                  className={styles.actionButton}
+                  name={icons.EPISODE_FILE}
+                  title="Manage episode files in this series"
+                  size={24}
+                  onPress={this.onManageEpisodesPress}
+                />
+              </div>
+          }
+
         </div>
 
         <div>
@@ -324,6 +382,7 @@ SeriesDetailsSeason.propTypes = {
   isExpanded: PropTypes.bool,
   isSearching: PropTypes.bool.isRequired,
   seriesMonitored: PropTypes.bool.isRequired,
+  isSmallScreen: PropTypes.bool.isRequired,
   onMonitorSeasonPress: PropTypes.func.isRequired,
   onExpandPress: PropTypes.func.isRequired,
   onMonitorEpisodePress: PropTypes.func.isRequired,

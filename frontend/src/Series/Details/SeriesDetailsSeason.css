@@ -11,11 +11,13 @@
 
 .header {
   display: flex;
+  align-items: center;
   width: 100%;
   font-size: 24px;
 }
 
 .seasonNumber {
+  margin-right: 10px;
   margin-left: 5px;
 }
 
@@ -32,10 +34,32 @@
   text-align: center;
 }
 
+.left {
+  display: flex;
+  align-items: center;
+  flex: 0 0 225px;
+}
+
 .left,
 .actions {
-  flex-shrink: 0;
   padding: 15px 10px;
+}
+
+.actionsMenu {
+  composes: menu from 'Components/Menu/Menu.css';
+
+  flex: 0 0 45px;
+}
+
+.actionsMenuContent {
+  composes: menuContent from 'Components/Menu/MenuContent.css';
+
+  white-space: nowrap;
+  font-size: 14px;
+}
+
+.actionMenuIcon {
+  margin-right: 8px;
 }
 
 .actionButton {
@@ -57,4 +81,12 @@
   border-bottom-left-radius: 4px;
   background-color: #fafafa;
   text-align: center;
+}
+
+@media only screen and (max-width: $breakpointSmall) {
+  .season {
+    border-right: 0;
+    border-left: 0;
+    border-radius: 0;
+  }
 }

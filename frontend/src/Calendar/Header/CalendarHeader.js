@@ -149,6 +149,7 @@ function CalendarHeader(props) {
                   </ViewMenuItem>
                 </MenuContent>
               </Menu> :
+
               <div className={styles.viewButtons}>
                 <CalendarHeaderViewButton
                   view={calendarViews.MONTH}
