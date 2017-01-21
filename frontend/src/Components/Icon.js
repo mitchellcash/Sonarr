@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react';
-import { icons, kinds } from 'Helpers/Props';
+import * as icons from 'Helpers/Props/icons';
+import { kinds } from 'Helpers/Props';
 import classNames from 'classnames';
 import styles from './Icon.css';
 
@@ -30,7 +31,7 @@ function Icon(props) {
 
 Icon.propTypes = {
   className: PropTypes.string,
-  name: PropTypes.oneOf(icons.ALL).isRequired,
+  name: PropTypes.oneOf(Object.values(icons)).isRequired,
   kind: PropTypes.string.isRequired,
   size: PropTypes.number.isRequired,
   title: PropTypes.string

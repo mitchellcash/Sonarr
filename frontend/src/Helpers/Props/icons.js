@@ -75,7 +75,3 @@ export const UPDATE = 'fa fa-retweet';
 export const UNSAVED_SETTING = 'fa fa-dot-circle-o';
 export const VIEW = 'fa fa-eye';
 export const WARNING = 'fa fa-exclamation-triangle';
-
-export const all = [
-  // Add all icons
-];
