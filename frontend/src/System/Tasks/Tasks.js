@@ -1,18 +1,10 @@
-import moment from 'moment';
 import React, { Component, PropTypes } from 'react';
-import formatDate from 'Utilities/Date/formatDate';
-import formatDateTime from 'Utilities/Date/formatDateTime';
-import { icons } from 'Helpers/Props';
-import SpinnerIconButton from 'Components/SpinnerIconButton';
-import Link from 'Components/Link';
 import PageContent from 'Components/Page/PageContent';
 import PageContentBody from 'Components/Page/PageContentBody';
 import LoadingIndicator from 'Components/LoadingIndicator';
 import Table from 'Components/Table/Table';
 import TableBody from 'Components/Table/TableBody';
-import TableRow from 'Components/Table/TableRow';
-import TableRowCell from 'Components/Table/Cells/TableRowCell';
-import styles from './Tasks.css';
+import TaskRowConnector from './TaskRowConnector';
 
 const headers = [
   {
@@ -45,12 +37,7 @@ class Tasks extends Component {
   render() {
     const {
       fetching,
-      items,
-      showRelativeDates,
-      shortDateFormat,
-      longDateFormat,
-      timeFormat,
-      onExecutePress
+      items
     } = this.props;
 
     return (
@@ -69,70 +56,11 @@ class Tasks extends Component {
                 <TableBody>
                   {
                     items.map((item) => {
-                      const disabled = item.interval === 0;
-                      const executeNow = !disabled && moment().isAfter(item.nextExecution);
-                      const hasNextExecutionTime = !disabled && !executeNow;
-                      const duration = moment.duration(item.interval, 'minutes').humanize().replace(/an?(?=\s)/, '1');
-                      const lastExecution = item.lastExecution;
-                      const nextExecution = item.nextExecution;
-
-                      function onExecuteTaskPress(event) {
-                        onExecutePress(item.taskName);
-                      }
-
                       return (
-                        <TableRow key={item.id}>
-                          <TableRowCell>{item.name}</TableRowCell>
-                          <TableRowCell
-                            className={styles.interval}
-                          >
-                            {disabled ? 'disabled' : duration}
-                          </TableRowCell>
-
-                          <TableRowCell
-                            className={styles.lastExecution}
-                            title={formatDateTime(lastExecution, longDateFormat, timeFormat)}
-                          >
-                            {showRelativeDates ? moment(lastExecution).fromNow() : formatDate(lastExecution, shortDateFormat)}
-                          </TableRowCell>
-
-                          {
-                            disabled &&
-                              <TableRowCell className={styles.nextExecution}>-</TableRowCell>
-                          }
-
-                          {
-                            executeNow &&
-                              <TableRowCell className={styles.nextExecution}>now</TableRowCell>
-                          }
-
-                          {
-                            hasNextExecutionTime &&
-                              <TableRowCell
-                                className={styles.nextExecution}
-                                title={formatDateTime(nextExecution, longDateFormat, timeFormat, { includeSeconds: true })}
-                              >
-                                {showRelativeDates ? moment(nextExecution).fromNow() : formatDate(nextExecution, shortDateFormat)}
-                              </TableRowCell>
-                          }
-
-                          <TableRowCell
-                            className={styles.actions}
-                          >
-                            <Link
-                              onPress={onExecuteTaskPress}
-                              data-task-name={item.taskName}
-                            >
-                              {
-                                <SpinnerIconButton
-                                  name={icons.REFRESH}
-                                  spinningName={icons.REFRESH}
-                                  isSpinning={item.executing}
-                                />
-                              }
-                            </Link>
-                          </TableRowCell>
-                        </TableRow>
+                        <TaskRowConnector
+                          key={item.id}
+                          {...item}
+                        />
                       );
                     })
                   }
@@ -148,12 +76,7 @@ class Tasks extends Component {
 
 Tasks.propTypes = {
   fetching: PropTypes.bool.isRequired,
-  items: PropTypes.array.isRequired,
-  showRelativeDates: PropTypes.bool.isRequired,
-  shortDateFormat: PropTypes.string.isRequired,
-  longDateFormat: PropTypes.string.isRequired,
-  timeFormat: PropTypes.string.isRequired,
-  onExecutePress: PropTypes.func.isRequired
+  items: PropTypes.array.isRequired
 };
 
 export default Tasks;
