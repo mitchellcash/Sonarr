@@ -12,7 +12,6 @@ import FilterMenu from 'Components/Menu/FilterMenu';
 import MenuContent from 'Components/Menu/MenuContent';
 import FilterMenuItem from 'Components/Menu/FilterMenuItem';
 import HistoryRowConnector from './HistoryRowConnector';
-import styles from './History.css';
 
 const headers = [
   {
@@ -74,7 +73,8 @@ class History extends Component {
 
     return (
       <PageContent title="History">
-        <PageToolbar className={styles.toolbar}>
+        <PageToolbar>
+          <PageToolbarSection />
           <PageToolbarSection alignContent={align.RIGHT}>
             <FilterMenu>
               <MenuContent alignMenu={align.RIGHT}>

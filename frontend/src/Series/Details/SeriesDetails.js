@@ -219,8 +219,6 @@ class SeriesDetails extends Component {
               title="Delete series"
               onPress={this.onDeleteSeriesPress}
             />
-
-            <PageToolbarSeparator />
           </PageToolbarSection>
 
           <PageToolbarSection align={align.RIGHT}>

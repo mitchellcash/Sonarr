@@ -17,3 +17,9 @@
 .icon {
   vertical-align: middle;
 }
+
+@media only screen and (max-width: $breakpointSmall) {
+  .toolbarButton {
+    width: 50px;
+  }
+}

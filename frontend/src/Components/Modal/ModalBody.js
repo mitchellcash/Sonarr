@@ -29,13 +29,13 @@ class ModalBody extends Component {
         scrollDirection={scrollDirection}
         {...otherProps}
       >
-      {
-        hasScroller ?
-          <div className={innerClassName}>
-            {children}
-          </div> :
-          children
-      }
+        {
+          hasScroller ?
+            <div className={innerClassName}>
+              {children}
+            </div> :
+            children
+        }
       </Scroller>
     );
   }

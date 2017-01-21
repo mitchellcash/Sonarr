@@ -1,8 +1,9 @@
-.filterMenuButtonIcon {
-  vertical-align: text-bottom;
-  font-size: 22px;
+.filterMenu {
+  composes: menu from './Menu.css';
 }
 
-.filterMenuButtonText {
-  margin-left: 5px;
+@media only screen and (max-width: $breakpointSmall) {
+  .filterMenu {
+    margin-right: 10px;
+  }
 }
