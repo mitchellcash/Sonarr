@@ -47,6 +47,7 @@ function CalendarHeader(props) {
     end,
     view,
     longDateFormat,
+    isSmallScreen,
     onCalendarViewChange,
     onTodayPress,
     onPreviousPress,
@@ -57,9 +58,12 @@ function CalendarHeader(props) {
 
   return (
     <div>
-      <div className={styles.titleMobile}>
-        {title}
-      </div>
+      {
+        isSmallScreen &&
+          <div className={styles.titleMobile}>
+            {title}
+          </div>
+      }
 
       <div className={styles.header}>
         <div className={styles.navigationButtons}>
@@ -85,9 +89,12 @@ function CalendarHeader(props) {
           </Button>
         </div>
 
-        <div className={styles.titleDesktop}>
-          {title}
-        </div>
+        {
+          !isSmallScreen &&
+            <div className={styles.titleDesktop}>
+              {title}
+            </div>
+        }
 
         <div className={styles.viewButtonsContainer}>
           {
@@ -98,85 +105,87 @@ function CalendarHeader(props) {
               />
           }
 
-          <div className={styles.viewButtons}>
-            <CalendarHeaderViewButton
-              view={calendarViews.MONTH}
-              selectedView={view}
-              buttonGroupPosition={align.LEFT}
-              onPress={onCalendarViewChange}
-            />
+          {
+            isSmallScreen ?
+              <Menu className={styles.viewMenu}>
+                <MenuButton>
+                  <Icon
+                    name={icons.VIEW}
+                    size={22}
+                  />
+                </MenuButton>
 
-            <CalendarHeaderViewButton
-              view={calendarViews.WEEK}
-              selectedView={view}
-              buttonGroupPosition={align.CENTER}
-              onPress={onCalendarViewChange}
-            />
+                <MenuContent alignMenu={align.RIGHT}>
+                  <ViewMenuItem
+                    name={calendarViews.WEEK}
+                    selectedView={view}
+                    onPress={onCalendarViewChange}
+                  >
+                    Week
+                  </ViewMenuItem>
 
-            <CalendarHeaderViewButton
-              view={calendarViews.FORECAST}
-              selectedView={view}
-              buttonGroupPosition={align.CENTER}
-              onPress={onCalendarViewChange}
-            />
+                  <ViewMenuItem
+                    name={calendarViews.FORECAST}
+                    selectedView={view}
+                    onPress={onCalendarViewChange}
+                  >
+                    Forecast
+                  </ViewMenuItem>
 
-            <CalendarHeaderViewButton
-              view={calendarViews.DAY}
-              selectedView={view}
-              buttonGroupPosition={align.CENTER}
-              onPress={onCalendarViewChange}
-            />
+                  <ViewMenuItem
+                    name={calendarViews.DAY}
+                    selectedView={view}
+                    onPress={onCalendarViewChange}
+                  >
+                    Day
+                  </ViewMenuItem>
 
-            <CalendarHeaderViewButton
-              view={calendarViews.AGENDA}
-              selectedView={view}
-              buttonGroupPosition={align.RIGHT}
-              onPress={onCalendarViewChange}
-            />
-          </div>
+                  <ViewMenuItem
+                    name={calendarViews.AGENDA}
+                    selectedView={view}
+                    onPress={onCalendarViewChange}
+                  >
+                    Agenda
+                  </ViewMenuItem>
+                </MenuContent>
+              </Menu> :
+              <div className={styles.viewButtons}>
+                <CalendarHeaderViewButton
+                  view={calendarViews.MONTH}
+                  selectedView={view}
+                  buttonGroupPosition={align.LEFT}
+                  onPress={onCalendarViewChange}
+                />
 
-          <Menu className={styles.viewMenu}>
-            <MenuButton>
-              <Icon
-                name={icons.VIEW}
-                size={22}
-              />
-            </MenuButton>
+                <CalendarHeaderViewButton
+                  view={calendarViews.WEEK}
+                  selectedView={view}
+                  buttonGroupPosition={align.CENTER}
+                  onPress={onCalendarViewChange}
+                />
 
-            <MenuContent alignMenu={align.RIGHT}>
-              <ViewMenuItem
-                name={calendarViews.WEEK}
-                selectedView={view}
-                onPress={onCalendarViewChange}
-              >
-                Week
-              </ViewMenuItem>
+                <CalendarHeaderViewButton
+                  view={calendarViews.FORECAST}
+                  selectedView={view}
+                  buttonGroupPosition={align.CENTER}
+                  onPress={onCalendarViewChange}
+                />
 
-              <ViewMenuItem
-                name={calendarViews.FORECAST}
-                selectedView={view}
-                onPress={onCalendarViewChange}
-              >
-                Forecast
-              </ViewMenuItem>
+                <CalendarHeaderViewButton
+                  view={calendarViews.DAY}
+                  selectedView={view}
+                  buttonGroupPosition={align.CENTER}
+                  onPress={onCalendarViewChange}
+                />
 
-              <ViewMenuItem
-                name={calendarViews.DAY}
-                selectedView={view}
-                onPress={onCalendarViewChange}
-              >
-                Day
-              </ViewMenuItem>
-
-              <ViewMenuItem
-                name={calendarViews.AGENDA}
-                selectedView={view}
-                onPress={onCalendarViewChange}
-              >
-                Agenda
-              </ViewMenuItem>
-            </MenuContent>
-          </Menu>
+                <CalendarHeaderViewButton
+                  view={calendarViews.AGENDA}
+                  selectedView={view}
+                  buttonGroupPosition={align.RIGHT}
+                  onPress={onCalendarViewChange}
+                />
+              </div>
+          }
         </div>
       </div>
     </div>
@@ -189,6 +198,7 @@ CalendarHeader.propTypes = {
   start: PropTypes.string.isRequired,
   end: PropTypes.string.isRequired,
   view: PropTypes.oneOf(calendarViews.all).isRequired,
+  isSmallScreen: PropTypes.bool.isRequired,
   longDateFormat: PropTypes.string.isRequired,
   onCalendarViewChange: PropTypes.func.isRequired,
   onTodayPress: PropTypes.func.isRequired,

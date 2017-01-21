@@ -1,5 +1,6 @@
 import { combineReducers } from 'redux';
 import { routerReducer } from 'react-router-redux';
+import app, { defaultState as defaultappState } from './appReducers';
 import addSeries, { defaultState as defaultAddSeriesState } from './addSeriesReducers';
 import importSeries, { defaultState as defaultImportSeriesState } from './importSeriesReducers';
 import series, { defaultState as defaultSeriesState } from './seriesReducers';
@@ -28,6 +29,7 @@ import rootFolders, { defaultState as defaultRootFoldersState } from './rootFold
 import organizePreview, { defaultState as defaultOrganizePreviewState } from './organizePreviewReducers';
 
 export const defaultState = {
+  app: defaultappState,
   addSeries: defaultAddSeriesState,
   importSeries: defaultImportSeriesState,
   series: defaultSeriesState,
@@ -57,6 +59,7 @@ export const defaultState = {
 };
 
 export default combineReducers({
+  app,
   addSeries,
   importSeries,
   series,

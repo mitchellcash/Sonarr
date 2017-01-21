@@ -17,8 +17,7 @@ class RemotePathMappings extends Component {
     super(props, context);
 
     this.state = {
-      isAddRemotePathMappingModalOpen: false,
-      width: 0
+      isAddRemotePathMappingModalOpen: false
     };
   }
 
@@ -31,10 +30,6 @@ class RemotePathMappings extends Component {
 
   onModalClose = () => {
     this.setState({ isAddRemotePathMappingModalOpen: false });
-  }
-
-  onMeasure = ({ width }) => {
-    this.setState({ width });
   }
 
   //

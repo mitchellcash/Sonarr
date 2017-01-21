@@ -1,6 +1,4 @@
 import { handleActions } from 'redux-actions';
-import getSectionState from 'Utilities/State/getSectionState';
-import updateSectionState from 'Utilities/State/updateSectionState';
 import * as types from 'Store/Actions/actionTypes';
 import createSetReducer from './Creators/createSetReducer';
 import createUpdateReducer from './Creators/createUpdateReducer';
@@ -12,7 +10,7 @@ export const defaultState = {
   start: null,
   end: null,
   dates: [],
-  view: 'week',
+  view: window.innerWidth > 768 ? 'week' : 'day',
   unmonitored: false,
   showUpcoming: true,
   error: null,

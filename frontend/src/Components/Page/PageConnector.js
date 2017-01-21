@@ -1,7 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
-import { initSignalR } from 'Store/Actions/appActions';
+import createDimensionsSelector from 'Store/Selectors/createDimensionsSelector';
+import { initSignalR, saveDimensions } from 'Store/Actions/appActions';
 import { fetchSeries } from 'Store/Actions/seriesActions';
 import { fetchTags } from 'Store/Actions/tagActions';
 import { fetchQualityProfiles, fetchUISettings } from 'Store/Actions/settingsActions';
@@ -15,7 +16,8 @@ function createMapStateToProps() {
     (state) => state.series,
     (state) => state.tags,
     (state) => state.settings,
-    (series, tags, settings) => {
+    createDimensionsSelector(),
+    (series, tags, settings, dimensions) => {
       const isPopulated = series.populated &&
         tags.populated &&
         settings.qualityProfiles.populated &&
@@ -32,7 +34,8 @@ function createMapStateToProps() {
         seriesError: series.error,
         tagsError: tags.error,
         qualityProfilesError: settings.qualityProfiles.error,
-        uiSettingsError: settings.ui.error
+        uiSettingsError: settings.ui.error,
+        isSmallScreen: dimensions.isSmallScreen
       };
     }
   );
@@ -40,6 +43,7 @@ function createMapStateToProps() {
 
 const mapDispatchToProps = {
   initSignalR,
+  saveDimensions,
   fetchSeries,
   fetchTags,
   fetchQualityProfiles,
@@ -69,6 +73,13 @@ class PageConnector extends Component {
   }
 
   //
+  // Listeners
+
+  onResize = (dimensions) => {
+    this.props.saveDimensions({ dimensions });
+  }
+
+  //
   // Render
 
   render() {
@@ -88,7 +99,10 @@ class PageConnector extends Component {
 
     if (isPopulated) {
       return (
-        <Page {...otherProps} />
+        <Page
+          {...otherProps}
+          onResize={this.onResize}
+        />
       );
     }
 
@@ -102,6 +116,7 @@ PageConnector.propTypes = {
   isPopulated: PropTypes.bool.isRequired,
   hasError: PropTypes.bool.isRequired,
   initSignalR: PropTypes.func.isRequired,
+  saveDimensions: PropTypes.func.isRequired,
   fetchSeries: PropTypes.func.isRequired,
   fetchTags: PropTypes.func.isRequired,
   fetchQualityProfiles: PropTypes.func.isRequired,

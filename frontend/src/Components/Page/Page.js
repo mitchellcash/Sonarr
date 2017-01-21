@@ -13,12 +13,27 @@ class Page extends Component {
     super(props, context);
 
     this.state = {
-      isSidebarVisible: false
+      isSidebarVisible: !props.isSmallScreen
     };
+  }
+
+  componentDidMount() {
+    window.addEventListener('resize', this.onResize);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.onResize);
   }
 
   //
   // Listeners
+
+  onResize = () => {
+    this.props.onResize({
+      width: window.innerWidth,
+      height: window.innerHeight
+    });
+  }
 
   onSidebarToggle = () => {
     this.setState({ isSidebarVisible: !this.state.isSidebarVisible });
@@ -48,7 +63,6 @@ class Page extends Component {
 
           {children}
         </div>
-
       </div>
     );
   }
@@ -57,7 +71,9 @@ class Page extends Component {
 Page.propTypes = {
   className: PropTypes.string,
   location: locationShape.isRequired,
-  children: PropTypes.node.isRequired
+  children: PropTypes.node.isRequired,
+  isSmallScreen: PropTypes.bool.isRequired,
+  onResize: PropTypes.func.isRequired
 };
 
 Page.defaultProps = {

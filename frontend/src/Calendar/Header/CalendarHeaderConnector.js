@@ -2,6 +2,7 @@ import _ from 'lodash';
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
+import createDimensionsSelector from 'Store/Selectors/createDimensionsSelector';
 import createUISettingsSelector from 'Store/Selectors/createUISettingsSelector';
 import { setCalendarView, gotoCalendarToday, gotoCalendarPreviousRange, gotoCalendarNextRange } from 'Store/Actions/calendarActions';
 import CalendarHeader from './CalendarHeader';
@@ -9,8 +10,9 @@ import CalendarHeader from './CalendarHeader';
 function createMapStateToProps() {
   return createSelector(
     (state) => state.calendar,
+    createDimensionsSelector(),
     createUISettingsSelector(),
-    (calendar, UiSettings) => {
+    (calendar, dimensions, uiSettings) => {
       const result = _.pick(calendar, [
         'fetching',
         'view',
@@ -19,7 +21,8 @@ function createMapStateToProps() {
         'end'
       ]);
 
-      result.longDateFormat = UiSettings.longDateFormat;
+      result.isSmallScreen = dimensions.isSmallScreen;
+      result.longDateFormat = uiSettings.longDateFormat;
 
       return result;
     }

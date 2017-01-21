@@ -18,6 +18,7 @@ export const REMOVE_ITEM = 'REMOVE_ITEM';
 
 export const INIT_SIGNALR = 'INIT_SIGNALR';
 export const SHOW_MESSAGE = 'SHOW_MESSAGE';
+export const SAVE_DIMENSIONS = 'SAVE_DIMENSIONS';
 
 //
 // Add Series
