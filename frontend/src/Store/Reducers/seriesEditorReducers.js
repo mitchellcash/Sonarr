@@ -10,6 +10,8 @@ export const defaultState = {
   saveError: null,
   sortKey: 'sortTitle',
   sortDirection: sortDirections.ASCENDING,
+  secondarySortKey: 'sortTitle',
+  secondarySortDirection: sortDirections.ASCENDING,
   filterKey: null,
   filterValue: null,
   filterType: filterTypes.EQUAL

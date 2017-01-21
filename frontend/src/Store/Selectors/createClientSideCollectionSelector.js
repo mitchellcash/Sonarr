@@ -32,6 +32,18 @@ const filterTypePredicates = {
   }
 };
 
+function getSortClause(sortKey, sortDirection, sortPredicates) {
+  if (sortPredicates && sortPredicates.hasOwnProperty(sortKey)) {
+    return function(item) {
+      return sortPredicates[sortKey](item, sortDirection);
+    };
+  }
+
+  return function(item) {
+    return item[sortKey];
+  };
+}
+
 function filter(items, state) {
   const {
     filterKey,
@@ -57,6 +69,32 @@ function filter(items, state) {
   });
 }
 
+function sort(items, state) {
+  const {
+    sortKey,
+    sortDirection,
+    sortPredicates,
+    secondarySortKey,
+    secondarySortDirection
+  } = state;
+
+  const clauses = [];
+  const orders = [];
+
+  clauses.push(getSortClause(sortKey, sortDirection, sortPredicates));
+  orders.push(sortDirection === sortDirections.ASCENDING ? 'asc' : 'desc');
+
+  if (secondarySortKey &&
+      secondarySortDirection &&
+      (sortKey !== secondarySortKey ||
+       sortDirection !== secondarySortDirection)) {
+    clauses.push(getSortClause(secondarySortKey, secondarySortDirection, sortPredicates));
+    orders.push(secondarySortDirection === sortDirections.ASCENDING ? 'asc' : 'desc');
+  }
+
+  return _.orderBy(items, clauses, orders);
+}
+
 function createClientSideCollectionSelector() {
   return createSelector(
     (state, { section }) => state[section],
@@ -64,22 +102,8 @@ function createClientSideCollectionSelector() {
     (sectionState, uiSectionState = {}) => {
       const state = Object.assign({}, sectionState, uiSectionState);
 
-      const {
-        items,
-        sortKey,
-        sortDirection,
-        sortPredicates
-      } = state;
-
-      const filtered = filter(items, state);
-
-      const sorted = _.orderBy(filtered, (item) => {
-        if (sortPredicates && sortPredicates.hasOwnProperty(sortKey)) {
-          return sortPredicates[sortKey](item, sortDirection);
-        }
-
-        return item[sortKey];
-      }, sortDirection === sortDirections.ASCENDING ? 'asc' : 'desc');
+      const filtered = filter(state.items, state);
+      const sorted = sort(filtered, state);
 
       return {
         ...sectionState,
