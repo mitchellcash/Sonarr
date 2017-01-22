@@ -17,6 +17,7 @@ export const REMOVE_ITEM = 'REMOVE_ITEM';
 // App
 
 export const SHOW_MESSAGE = 'SHOW_MESSAGE';
+export const HIDE_MESSAGE = 'HIDE_MESSAGE';
 export const SAVE_DIMENSIONS = 'SAVE_DIMENSIONS';
 
 //

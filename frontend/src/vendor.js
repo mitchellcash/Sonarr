@@ -1,7 +1,6 @@
 /* Base */
 // require('jquery');
 require('lodash');
-require('messenger');
 require('moment');
 // require('signalR');
 // require('jquery-ui');

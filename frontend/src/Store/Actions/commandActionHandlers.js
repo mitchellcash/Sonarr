@@ -1,6 +1,6 @@
 import $ from 'jquery';
-import isSameCommand from 'Utilities/Command/isSameCommand';
-import { messengerTypes } from 'Helpers/Props';
+import { isSameCommand } from 'Utilities/Command';
+import { messageTypes } from 'Helpers/Props';
 import * as types from './actionTypes';
 import createFetchHandler from './Creators/createFetchHandler';
 import { showMessage } from './appActions';
@@ -16,28 +16,34 @@ function showCommandMessage(payload, dispatch) {
     name,
     manual,
     message,
-    sendUpdatesToClient,
+    body = {},
     state
   } = payload;
 
-  if (!message || !sendUpdatesToClient) {
+  const {
+    sendUpdatesToClient,
+    suppressMessages
+  } = body;
+
+  if (!message || !body || !sendUpdatesToClient || suppressMessages) {
     return;
   }
 
-  let type = messengerTypes.INFO;
+  let type = messageTypes.INFO;
   let hideAfter = 0;
 
   if (state === 'completed') {
-    type = messengerTypes.SUCCESS;
+    type = messageTypes.SUCCESS;
     hideAfter = 4;
   } else if (state === 'failed') {
-    type = messengerTypes.ERROR;
+    type = messageTypes.ERROR;
     hideAfter = manual ? 10 : 4;
   }
 
   dispatch(showMessage({
     id,
-    message: `[${name}] ${message}`,
+    name,
+    message,
     type,
     hideAfter
   }));

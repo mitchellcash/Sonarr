@@ -3,7 +3,6 @@ import React, { PropTypes } from 'react';
 import formatDate from 'Utilities/Date/formatDate';
 import formatDateTime from 'Utilities/Date/formatDateTime';
 import { icons } from 'Helpers/Props';
-import Link from 'Components/Link/Link';
 import SpinnerIconButton from 'Components/Link/SpinnerIconButton';
 import TableRow from 'Components/Table/TableRow';
 import TableRowCell from 'Components/Table/Cells/TableRowCell';
@@ -67,17 +66,12 @@ function TaskRow(props) {
       <TableRowCell
         className={styles.actions}
       >
-        <Link
+        <SpinnerIconButton
+          name={icons.REFRESH}
+          spinningName={icons.REFRESH}
+          isSpinning={isExecuting}
           onPress={onExecutePress}
-        >
-          {
-            <SpinnerIconButton
-              name={icons.REFRESH}
-              spinningName={icons.REFRESH}
-              isSpinning={isExecuting}
-            />
-          }
-        </Link>
+        />
       </TableRowCell>
     </TableRow>
   );
@@ -85,7 +79,7 @@ function TaskRow(props) {
 
 TaskRow.propTypes = {
   name: PropTypes.string.isRequired,
-  interval: PropTypes.string.isRequired,
+  interval: PropTypes.number.isRequired,
   lastExecution: PropTypes.string.isRequired,
   nextExecution: PropTypes.string.isRequired,
   isExecuting: PropTypes.bool.isRequired,

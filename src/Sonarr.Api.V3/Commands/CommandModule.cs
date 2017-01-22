@@ -47,6 +47,7 @@ namespace Sonarr.Api.V3.Commands
 
             dynamic command = Request.Body.FromJson(commandType);
             command.Trigger = CommandTrigger.Manual;
+            command.SuppressMessages = !command.SendUpdatesToClient;
             command.SendUpdatesToClient = true;
 
             var trackedCommand = _commandQueueManager.Push(command, CommandPriority.Normal, CommandTrigger.Manual);

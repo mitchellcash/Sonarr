@@ -1,12 +1,9 @@
 import $ from 'jquery';
 import { Component, PropTypes } from 'react';
-import Messenger from 'Shared/Messenger';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
 import { updateCommand, finishCommand } from 'Store/Actions/commandActions';
 require('signalR');
-
-const messengerId = 'signalR';
 
 function getStatus(status) {
   switch (status) {
@@ -121,23 +118,6 @@ class SignalRConnector extends Component {
       console.log('signalR disconnected');
 
       // TODO: update store and set isDisconnected or (isConnected)
-
-      // $('<div class="modal-backdrop fade in"></div>').appendTo(document.body);
-      //
-      // Messenger.show({
-      //   id: messengerId,
-      //   type: 'error',
-      //   hideAfter: 0,
-      //   message: 'Connection to backend lost',
-      //   actions: {
-      //     cancel: {
-      //       label: 'Reload',
-      //       action() {
-      //         window.location.reload();
-      //       }
-      //     }
-      //   }
-      // });
     }
   }
 

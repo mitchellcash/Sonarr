@@ -20,12 +20,12 @@ namespace NzbDrone.Core.Messaging.Commands
         }
 
         public virtual bool UpdateScheduledTask => true;
-
         public virtual string CompletionMessage => "Completed";
 
         public string Name { get; private set; }
         public DateTime? LastExecutionTime { get; set; }
         public CommandTrigger Trigger { get; set; }
+        public bool SuppressMessages { get; set; }
 
         public Command()
         {

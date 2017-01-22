@@ -1,6 +1,18 @@
 import { createAction } from 'redux-actions';
 import * as types from './actionTypes';
-import appActionHandlers from './appActionHandlers';
 
-export const showMessage = appActionHandlers[types.SHOW_MESSAGE];
 export const saveDimensions = createAction(types.SAVE_DIMENSIONS);
+
+export const showMessage = createAction(types.SHOW_MESSAGE, (payload) => {
+  return {
+    section: 'messages',
+    ...payload
+  };
+});
+
+export const hideMessage = createAction(types.HIDE_MESSAGE, (payload) => {
+  return {
+    section: 'messages',
+    ...payload
+  };
+});

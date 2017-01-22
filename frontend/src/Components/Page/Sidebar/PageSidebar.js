@@ -6,6 +6,7 @@ import { icons } from 'Helpers/Props';
 import Scroller from 'Components/Scroller';
 import QueueStatusConnector from 'Activity/Queue/Status/QueueStatusConnector';
 import HealthStatusConnector from 'System/Status/Health/HealthStatusConnector';
+import MessagesConnector from './Messages/MessagesConnector';
 import PageSidebarItem from './PageSidebarItem';
 import styles from './PageSidebar.css';
 
@@ -189,45 +190,49 @@ class PageSidebar extends Component {
         )}
       >
         <Scroller className={styles.sidebar}>
-          {
-            links.map((link) => {
-              const childWithStatusComponent = _.find(link.children, (child) => {
-                return !!child.statusComponent;
-              });
+          <div>
+            {
+              links.map((link) => {
+                const childWithStatusComponent = _.find(link.children, (child) => {
+                  return !!child.statusComponent;
+                });
 
-              const childStatusComponent = childWithStatusComponent ?
-                childWithStatusComponent.statusComponent :
-                null;
+                const childStatusComponent = childWithStatusComponent ?
+                  childWithStatusComponent.statusComponent :
+                  null;
 
-              const isActiveParent = activeParent === link.to;
+                const isActiveParent = activeParent === link.to;
 
-              return (
-                <PageSidebarItem
-                  key={link.to}
-                  iconName={link.iconName}
-                  title={link.title}
-                  to={link.to}
-                  statusComponent={isActiveParent || !childStatusComponent ? link.statusComponent : childStatusComponent}
-                  isActiveParent={isActiveParent}
-                >
-                  {
-                    link.children && link.to === activeParent &&
-                      link.children.map((child) => {
-                        return (
-                          <PageSidebarItem
-                            key={child.to}
-                            title={child.title}
-                            to={child.to}
-                            isChildItem={true}
-                            statusComponent={child.statusComponent}
-                          />
-                        );
-                      })
-                  }
-                </PageSidebarItem>
-              );
-            })
-          }
+                return (
+                  <PageSidebarItem
+                    key={link.to}
+                    iconName={link.iconName}
+                    title={link.title}
+                    to={link.to}
+                    statusComponent={isActiveParent || !childStatusComponent ? link.statusComponent : childStatusComponent}
+                    isActiveParent={isActiveParent}
+                  >
+                    {
+                      link.children && link.to === activeParent &&
+                        link.children.map((child) => {
+                          return (
+                            <PageSidebarItem
+                              key={child.to}
+                              title={child.title}
+                              to={child.to}
+                              isChildItem={true}
+                              statusComponent={child.statusComponent}
+                            />
+                          );
+                        })
+                    }
+                  </PageSidebarItem>
+                );
+              })
+            }
+          </div>
+
+          <MessagesConnector />
         </Scroller>
       </div>
     );
