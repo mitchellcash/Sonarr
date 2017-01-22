@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react';
+import React, { PropTypes } from 'react';
 import { align, icons, kinds } from 'Helpers/Props';
 import Icon from 'Components/Icon';
 import Menu from 'Components/Menu/Menu';
@@ -7,68 +7,62 @@ import MenuContent from 'Components/Menu/MenuContent';
 import MenuItem from 'Components/Menu/MenuItem';
 import styles from './PageHeaderActionsMenu.css';
 
-class PageHeaderActionsMenu extends Component {
+function PageHeaderActionsMenu(props) {
+  const {
+    formsAuth,
+    onRestartPress,
+    onShutdownPress
+  } = props;
 
-  //
-  // Render
+  return (
+    <div className={styles.menuContainer}>
+      <Menu>
+        <MenuButton className={styles.menuButton}>
+          <Icon
+            name={icons.INTERACTIVE}
+          />
+        </MenuButton>
 
-  render() {
-    const {
-      formsAuth,
-      onRestartPress,
-      onShutdownPress
-    } = this.props;
-
-    return (
-      <div className={styles.menuContainer}>
-        <Menu>
-          <MenuButton className={styles.menuButton}>
+        <MenuContent alignMenu={align.RIGHT}>
+          <MenuItem onPress={onRestartPress}>
             <Icon
-              name={icons.INTERACTIVE}
+              className={styles.itemIcon}
+              name={icons.RESTART}
             />
-          </MenuButton>
+            Restart
+          </MenuItem>
 
-          <MenuContent alignMenu={align.RIGHT}>
-            <MenuItem onPress={onRestartPress}>
-              <Icon
-                className={styles.itemIcon}
-                name={icons.RESTART}
-              />
-              Restart
-            </MenuItem>
+          <MenuItem onPress={onShutdownPress}>
+            <Icon
+              className={styles.itemIcon}
+              name={icons.SHUTDOWN}
+              kind={kinds.DANGER}
+            />
+            Shutdown
+          </MenuItem>
 
-            <MenuItem onPress={onShutdownPress}>
-              <Icon
-                className={styles.itemIcon}
-                name={icons.SHUTDOWN}
-                kind={kinds.DANGER}
-              />
-              Shutdown
-            </MenuItem>
+          {
+            formsAuth &&
+              <div className={styles.separator} />
+          }
 
-            {
-              formsAuth &&
-                <div className={styles.separator} />
-            }
-
-            {
-              formsAuth &&
-                <MenuItem
-                  to={`${window.Sonarr.UrlBase}/logout`}
-                  noRouter={true}
-                >
-                  <Icon
-                    className={styles.itemIcon}
-                    name={icons.LOGOUT}
-                  />
-                  Logout
-                </MenuItem>
-            }
-          </MenuContent>
-        </Menu>
-      </div>
-    );
-  }
+          {
+            formsAuth &&
+              <MenuItem
+                to={`${window.Sonarr.UrlBase}/logout`}
+                noRouter={true}
+              >
+                <Icon
+                  className={styles.itemIcon}
+                  name={icons.LOGOUT}
+                />
+                Logout
+              </MenuItem>
+          }
+        </MenuContent>
+      </Menu>
+    </div>
+  );
 }
 
 PageHeaderActionsMenu.propTypes = {
