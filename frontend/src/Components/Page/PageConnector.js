@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
 import createDimensionsSelector from 'Store/Selectors/createDimensionsSelector';
-import { initSignalR, saveDimensions } from 'Store/Actions/appActions';
+import { saveDimensions } from 'Store/Actions/appActions';
 import { fetchSeries } from 'Store/Actions/seriesActions';
 import { fetchTags } from 'Store/Actions/tagActions';
 import { fetchQualityProfiles, fetchUISettings } from 'Store/Actions/settingsActions';
@@ -42,7 +42,6 @@ function createMapStateToProps() {
 }
 
 const mapDispatchToProps = {
-  initSignalR,
   saveDimensions,
   fetchSeries,
   fetchTags,
@@ -63,12 +62,6 @@ class PageConnector extends Component {
       this.props.fetchQualityProfiles();
       this.props.fetchUISettings();
       this.props.fetchStatus();
-    }
-  }
-
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.isPopulated && !this.props.isPopulated) {
-      this.props.initSignalR();
     }
   }
 
@@ -115,7 +108,6 @@ class PageConnector extends Component {
 PageConnector.propTypes = {
   isPopulated: PropTypes.bool.isRequired,
   hasError: PropTypes.bool.isRequired,
-  initSignalR: PropTypes.func.isRequired,
   saveDimensions: PropTypes.func.isRequired,
   fetchSeries: PropTypes.func.isRequired,
   fetchTags: PropTypes.func.isRequired,

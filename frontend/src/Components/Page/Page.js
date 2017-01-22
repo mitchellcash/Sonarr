@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { locationShape } from 'react-router';
+import SignalRConnector from 'Components/SignalRConnector';
 import PageHeader from './Header/PageHeader';
 import PageSidebar from './Sidebar/PageSidebar';
 import styles from './Page.css';
@@ -51,6 +52,8 @@ class Page extends Component {
 
     return (
       <div className={className}>
+        <SignalRConnector />
+
         <PageHeader
           onSidebarToggle={this.onSidebarToggle}
         />
