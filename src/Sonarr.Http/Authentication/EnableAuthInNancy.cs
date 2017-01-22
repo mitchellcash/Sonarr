@@ -59,6 +59,8 @@ namespace Sonarr.Http.Authentication
 
         private void RegisterFormsAuth(IPipelines pipelines)
         {
+            FormsAuthentication.FormsAuthenticationCookieName = "SonarrAuth";
+
             var cryptographyConfiguration = new CryptographyConfiguration(
                     new RijndaelEncryptionProvider(new PassphraseKeyGenerator(_configService.RijndaelPassphrase, Encoding.ASCII.GetBytes(_configService.RijndaelSalt))),
                     new DefaultHmacProvider(new PassphraseKeyGenerator(_configService.HmacPassphrase, Encoding.ASCII.GetBytes(_configService.HmacSalt)))
