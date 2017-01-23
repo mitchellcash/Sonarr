@@ -3,6 +3,7 @@ import { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
 import { updateCommand, finishCommand } from 'Store/Actions/commandActions';
+import { setVersion } from 'Store/Actions/appActions';
 require('signalR');
 
 function getStatus(status) {
@@ -31,7 +32,8 @@ function createMapStateToProps() {
 
 const mapDispatchToProps = {
   updateCommand,
-  finishCommand
+  finishCommand,
+  setVersion
 };
 
 class SignalRConnector extends Component {
@@ -69,16 +71,24 @@ class SignalRConnector extends Component {
   // Control
 
   handleMessage = (message) => {
-    const name = message.name;
-    const resource = message.body.resource;
+    const {
+      name,
+      body
+    } = message;
 
     if (name === 'command') {
-      this.handleCommand(resource);
+      this.handleCommand(body);
+      return;
+    }
+
+    if (name === 'version') {
+      this.handleVersion(body);
       return;
     }
   }
 
-  handleCommand = (resource) => {
+  handleCommand = (body) => {
+    const resource = body.resource;
     const state = resource.state;
 
     if (state === 'completed') {
@@ -86,6 +96,12 @@ class SignalRConnector extends Component {
     } else {
       this.props.updateCommand(resource);
     }
+  }
+
+  handleVersion = (body) => {
+    const version = body.version;
+
+    this.props.setVersion({ version });
   }
 
   //
@@ -131,7 +147,8 @@ class SignalRConnector extends Component {
 
 SignalRConnector.propTypes = {
   updateCommand: PropTypes.func.isRequired,
-  finishCommand: PropTypes.func.isRequired
+  finishCommand: PropTypes.func.isRequired,
+  setVersion: PropTypes.func.isRequired
 };
 
 export default connect(createMapStateToProps, mapDispatchToProps)(SignalRConnector);

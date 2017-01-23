@@ -19,6 +19,7 @@ export const REMOVE_ITEM = 'REMOVE_ITEM';
 export const SHOW_MESSAGE = 'SHOW_MESSAGE';
 export const HIDE_MESSAGE = 'HIDE_MESSAGE';
 export const SAVE_DIMENSIONS = 'SAVE_DIMENSIONS';
+export const SET_VERSION = 'SET_VERSION';
 
 //
 // Add Series

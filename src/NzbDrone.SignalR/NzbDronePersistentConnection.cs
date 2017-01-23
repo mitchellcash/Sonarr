@@ -1,6 +1,8 @@
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Microsoft.AspNet.SignalR;
 using Microsoft.AspNet.SignalR.Infrastructure;
+using NzbDrone.Common.EnvironmentInfo;
 using NzbDrone.Common.Serializer;
 
 namespace NzbDrone.SignalR
@@ -36,6 +38,28 @@ namespace NzbDrone.SignalR
             _messageHistory[message.Name] = message.Body.ToJson();
 
             Context.Connection.Broadcast(message);
+        }
+
+        protected override Task OnConnected(IRequest request, string connectionId)
+        {
+            return SendVersion(connectionId);
+        }
+
+        protected override Task OnReconnected(IRequest request, string connectionId)
+        {
+            return SendVersion(connectionId);
+        }
+
+        private Task SendVersion(string connectionId)
+        {
+            return Context.Connection.Send(connectionId, new SignalRMessage
+            {
+                Name = "version",
+                Body = new
+                {
+                    Version = BuildInfo.Version.ToString()
+                }
+            });
         }
     }
 }

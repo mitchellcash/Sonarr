@@ -3,7 +3,7 @@ import { render } from 'react-dom';
 import { browserHistory } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
 import createAppStore from 'Store/createAppStore';
-import App from './App';
+import App from './App/App';
 import 'Styles/globals.css';
 import './index.css';
 

@@ -20,7 +20,9 @@ export const defaultState = {
   dimensions: getDimensions(window.innerWidth, window.innerHeight),
   messages: {
     items: []
-  }
+  },
+  version: window.Sonarr.Version,
+  isUpdated: false
 };
 
 const appReducers = handleActions({
@@ -37,7 +39,21 @@ const appReducers = handleActions({
   },
 
   [types.SHOW_MESSAGE]: createUpdateItemReducer('messages'),
-  [types.HIDE_MESSAGE]: createRemoveItemReducer('messages')
+  [types.HIDE_MESSAGE]: createRemoveItemReducer('messages'),
+
+  [types.SET_VERSION]: function(state, { payload }) {
+    const version = payload.version;
+
+    const newState = {
+      version
+    };
+
+    if (state.version !== version) {
+      newState.isUpdated = true;
+    }
+
+    return Object.assign({}, state, newState);
+  }
 
 }, defaultState);
 
