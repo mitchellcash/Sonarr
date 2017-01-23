@@ -16,9 +16,9 @@ function createMapStateToProps() {
     (state) => state.series,
     (state) => state.tags,
     (state) => state.settings,
-    (state) => state.app.isUpdated,
+    (state) => state.app,
     createDimensionsSelector(),
-    (series, tags, settings, isUpdated, dimensions) => {
+    (series, tags, settings, app, dimensions) => {
       const isPopulated = series.populated &&
         tags.populated &&
         settings.qualityProfiles.populated &&
@@ -37,7 +37,8 @@ function createMapStateToProps() {
         qualityProfilesError: settings.qualityProfiles.error,
         uiSettingsError: settings.ui.error,
         isSmallScreen: dimensions.isSmallScreen,
-        isUpdated
+        isUpdated: app.isUpdated,
+        isDisconnected: app.isDisconnected
       };
     }
   );

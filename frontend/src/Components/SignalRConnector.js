@@ -6,7 +6,7 @@ import { updateCommand, finishCommand } from 'Store/Actions/commandActions';
 import { setAppValue, setVersion } from 'Store/Actions/appActions';
 require('signalR');
 
-function getStatus(status) {
+function getState(status) {
   switch (status) {
     case 0:
       return 'connecting';
@@ -47,8 +47,10 @@ class SignalRConnector extends Component {
   constructor(props, context) {
     super(props, context);
 
-    this.tryingToReconnect = false;
+    this.signalRconnectionOptions = { transport: ['longPolling'] };
     this.signalRconnection = null;
+    this.retryInterval = 5;
+    this.retryTimeoutId = null;
   }
 
   componentDidMount() {
@@ -59,10 +61,9 @@ class SignalRConnector extends Component {
     this.signalRconnection.stateChanged(this.onStateChanged);
     this.signalRconnection.received(this.onReceived);
     this.signalRconnection.reconnecting(this.onReconnecting);
-    this.signalRconnection.reconnected(this.onReconnected);
     this.signalRconnection.disconnected(this.onDisconnected);
 
-    this.signalRconnection.start({ transport: ['longPolling'] });
+    this.signalRconnection.start(this.signalRconnectionOptions);
   }
 
   componentWillUnmount() {
@@ -72,6 +73,13 @@ class SignalRConnector extends Component {
 
   //
   // Control
+
+  retryConnection = () => {
+    this.retryTimeoutId = setTimeout(() => {
+      this.signalRconnection.start(this.signalRconnectionOptions);
+      this.retryInterval = Math.min(this.retryInterval + 5, 30);
+    }, this.retryInterval * 1000);
+  }
 
   handleMessage = (message) => {
     const {
@@ -111,7 +119,22 @@ class SignalRConnector extends Component {
   // Listeners
 
   onStateChanged = (change) => {
-    console.log(`SignalR: [${getStatus(change.newState)}]`);
+    const state = getState(change.newState);
+    console.log(`SignalR: [${state}]`);
+
+    if (state === 'connected') {
+      this.props.setAppValue({
+        isConnected: true,
+        isReconnecting: false,
+        isDisconnected: false
+      });
+
+      this.retryInterval = 5;
+
+      if (this.retryTimeoutId) {
+        clearTimeout(this.retryTimeoutId);
+      }
+    }
   }
 
   onReceived = (message) => {
@@ -130,23 +153,15 @@ class SignalRConnector extends Component {
     });
   }
 
-  onReconnected = () => {
-    this.props.setAppValue({
-      isConnected: true,
-      isReconnecting: false,
-      isDisconnected: false
-    });
-  }
-
   onDisconnected = () => {
     if (this.props.isReconnecting) {
-      console.log('signalR disconnected');
-
       this.props.setAppValue({
         isConnected: false,
-        isReconnecting: false,
+        isReconnecting: true,
         isDisconnected: true
       });
+
+      this.retryConnection();
     }
   }
 

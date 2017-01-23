@@ -1,8 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import { locationShape } from 'react-router';
 import SignalRConnector from 'Components/SignalRConnector';
-import ConfirmModal from 'Components/Modal/ConfirmModal';
 import AppUpdatedModalConnector from 'App/AppUpdatedModalConnector';
+import ConnectionLostModalConnector from 'App/ConnectionLostModalConnector';
 import PageHeader from './Header/PageHeader';
 import PageSidebar from './Sidebar/PageSidebar';
 import styles from './Page.css';
@@ -17,7 +17,8 @@ class Page extends Component {
 
     this.state = {
       isSidebarVisible: !props.isSmallScreen,
-      isUpdatedModalOpen: false
+      isUpdatedModalOpen: false,
+      isConnectionLostModalOpen: false
     };
   }
 
@@ -28,6 +29,10 @@ class Page extends Component {
   componentWillReceiveProps(nextProps) {
     if (nextProps.isUpdated && !this.props.isUpdated) {
       this.setState({ isUpdatedModalOpen: true });
+    }
+
+    if (nextProps.isDisconnected !== this.props.isDisconnected) {
+      this.setState({ isConnectionLostModalOpen: nextProps.isDisconnected });
     }
   }
 
@@ -51,6 +56,10 @@ class Page extends Component {
 
   onUpdatedModalClose = () => {
     this.setState({ isUpdatedModalOpen: false });
+  }
+
+  onConnectionLostModalClose = () => {
+    this.setState({ isConnectionLostModalOpen: false });
   }
 
   //
@@ -84,6 +93,11 @@ class Page extends Component {
           isOpen={this.state.isUpdatedModalOpen}
           onModalClose={this.onUpdatedModalClose}
         />
+
+        <ConnectionLostModalConnector
+          isOpen={this.state.isConnectionLostModalOpen}
+          onModalClose={this.onConnectionLostModalClose}
+        />
       </div>
     );
   }
@@ -95,6 +109,7 @@ Page.propTypes = {
   children: PropTypes.node.isRequired,
   isSmallScreen: PropTypes.bool.isRequired,
   isUpdated: PropTypes.bool.isRequired,
+  isDisconnected: PropTypes.bool.isRequired,
   onResize: PropTypes.func.isRequired
 };
 
