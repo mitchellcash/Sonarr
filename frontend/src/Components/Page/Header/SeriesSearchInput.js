@@ -1,6 +1,5 @@
 import _ from 'lodash';
 import React, { Component, PropTypes } from 'react';
-import { routerShape, withRouter } from 'react-router';
 import Autosuggest from 'react-autosuggest';
 import { icons } from 'Helpers/Props';
 import Icon from 'Components/Icon';
@@ -55,7 +54,7 @@ class SeriesSearchInput extends Component {
 
   goToSeries(series) {
     this.setState({ value: '' });
-    this.props.router.push(`${window.Sonarr.UrlBase}/series/${series.titleSlug}`);
+    this.props.onGoToSeries(series.titleSlug);
   }
 
   reset() {
@@ -159,7 +158,7 @@ class SeriesSearchInput extends Component {
 
 SeriesSearchInput.propTypes = {
   series: PropTypes.arrayOf(PropTypes.object).isRequired,
-  router: routerShape.isRequired
+  onGoToSeries: PropTypes.func.isRequired
 };
 
-export default withRouter(SeriesSearchInput);
+export default SeriesSearchInput;
