@@ -1,5 +1,6 @@
 import { handleActions } from 'redux-actions';
 import * as types from 'Store/Actions/actionTypes';
+import createSetReducer from './Creators/createSetReducer';
 import createUpdateItemReducer from './Creators/createUpdateItemReducer';
 import createRemoveItemReducer from './Creators/createRemoveItemReducer';
 
@@ -22,7 +23,10 @@ export const defaultState = {
     items: []
   },
   version: window.Sonarr.Version,
-  isUpdated: false
+  isUpdated: false,
+  isConnected: true,
+  isReconnecting: false,
+  isDisconnected: false
 };
 
 const appReducers = handleActions({
@@ -41,6 +45,7 @@ const appReducers = handleActions({
   [types.SHOW_MESSAGE]: createUpdateItemReducer('messages'),
   [types.HIDE_MESSAGE]: createRemoveItemReducer('messages'),
 
+  [types.SET_APP_VALUE]: createSetReducer('app'),
   [types.SET_VERSION]: function(state, { payload }) {
     const version = payload.version;
 

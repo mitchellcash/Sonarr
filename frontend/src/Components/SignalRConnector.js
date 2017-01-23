@@ -3,7 +3,7 @@ import { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
 import { updateCommand, finishCommand } from 'Store/Actions/commandActions';
-import { setVersion } from 'Store/Actions/appActions';
+import { setAppValue, setVersion } from 'Store/Actions/appActions';
 require('signalR');
 
 function getStatus(status) {
@@ -23,8 +23,10 @@ function getStatus(status) {
 
 function createMapStateToProps() {
   return createSelector(
-    () => {
+    (state) => state.app.isReconnecting,
+    (isReconnecting) => {
       return {
+        isReconnecting
       };
     }
   );
@@ -33,6 +35,7 @@ function createMapStateToProps() {
 const mapDispatchToProps = {
   updateCommand,
   finishCommand,
+  setAppValue,
   setVersion
 };
 
@@ -122,18 +125,28 @@ class SignalRConnector extends Component {
       return;
     }
 
-    this.tryingToReconnect = true;
+    this.props.setAppValue({
+      isReconnecting: true
+    });
   }
 
   onReconnected = () => {
-    this.tryingToReconnect = false;
+    this.props.setAppValue({
+      isConnected: true,
+      isReconnecting: false,
+      isDisconnected: false
+    });
   }
 
   onDisconnected = () => {
-    if (this.tryingToReconnect) {
+    if (this.props.isReconnecting) {
       console.log('signalR disconnected');
 
-      // TODO: update store and set isDisconnected or (isConnected)
+      this.props.setAppValue({
+        isConnected: false,
+        isReconnecting: false,
+        isDisconnected: true
+      });
     }
   }
 
@@ -146,8 +159,10 @@ class SignalRConnector extends Component {
 }
 
 SignalRConnector.propTypes = {
+  isReconnecting: PropTypes.bool.isRequired,
   updateCommand: PropTypes.func.isRequired,
   finishCommand: PropTypes.func.isRequired,
+  setAppValue: PropTypes.func.isRequired,
   setVersion: PropTypes.func.isRequired
 };
 
