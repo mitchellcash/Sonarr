@@ -29,16 +29,7 @@ const config = {
       root,
       path.join(root, 'Shims'),
       path.join(root, 'JsLibraries')
-    ],
-    alias: {
-      'backbone-pageable': 'JsLibraries/backbone.pageable',
-      'backbone.deepmodel': 'Shims/backbone.deep.model',
-      'backbone.sorted.collection': 'JsLibraries/backbone-sorted-collection',
-      'radio': 'JsLibraries/backbone.radio',
-      'backgrid.selectall': 'Shims/backbone.backgrid.selectall',
-      'marionette': 'Shims/backbone.marionette',
-      'momentRange': 'JsLibraries/moment-range'
-    }
+    ]
   },
   output: {
     filename: path.join('_output', uiFolder, '[name].js'),
