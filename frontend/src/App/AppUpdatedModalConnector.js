@@ -16,7 +16,7 @@ function createMapStateToProps() {
 function createMapDispatchToProps(dispatch, props) {
   return {
     onSeeChangesPress() {
-      window.location = `${window.Sonarr.UrlBase}/system/updates`;
+      window.location = `${window.Sonarr.urlBase}/system/updates`;
     },
 
     onModalClose() {

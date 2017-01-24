@@ -22,7 +22,7 @@ export const defaultState = {
   messages: {
     items: []
   },
-  version: window.Sonarr.Version,
+  version: window.Sonarr.version,
   isUpdated: false,
   isConnected: true,
   isReconnecting: false,

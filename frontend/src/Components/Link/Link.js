@@ -46,13 +46,13 @@ class Link extends Component {
         el = 'a';
         linkProps.href = to;
         linkProps.target = target || '_self';
-      } else if (to.startsWith(window.Sonarr.UrlBase)) {
+      } else if (to.startsWith(window.Sonarr.urlBase)) {
         el = RouterLink;
         linkProps.to = to;
         linkProps.target = target;
       } else {
         el = RouterLink;
-        linkProps.to = `${window.Sonarr.UrlBase}/${to.replace(/^\//, '')}`;
+        linkProps.to = `${window.Sonarr.urlBase}/${to.replace(/^\//, '')}`;
         linkProps.target = target;
       }
     }

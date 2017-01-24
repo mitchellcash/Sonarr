@@ -49,7 +49,7 @@ function PageHeaderActionsMenu(props) {
           {
             formsAuth &&
               <MenuItem
-                to={`${window.Sonarr.UrlBase}/logout`}
+                to={`${window.Sonarr.urlBase}/logout`}
                 noRouter={true}
               >
                 <Icon

@@ -19,7 +19,7 @@ function createMapStateToProps() {
 function createMapDispatchToProps(dispatch, props) {
   return {
     onGoToSeries(titleSlug) {
-      dispatch(push(`${window.Sonarr.UrlBase}/series/${titleSlug}`));
+      dispatch(push(`${window.Sonarr.urlBase}/series/${titleSlug}`));
     }
   };
 }

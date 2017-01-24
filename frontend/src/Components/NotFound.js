@@ -12,7 +12,7 @@ function NotFound() {
 
         <img
           className={styles.image}
-          src={`${window.Sonarr.UrlBase}/Content/Images/404.png`}
+          src={`${window.Sonarr.urlBase}/Content/Images/404.png`}
         />
       </div>
     </PageContent>

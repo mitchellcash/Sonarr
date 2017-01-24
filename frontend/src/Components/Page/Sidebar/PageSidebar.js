@@ -138,7 +138,7 @@ const links = [
 ];
 
 function getActiveParent(location) {
-  const urlBase = window.Sonarr.UrlBase;
+  const urlBase = window.Sonarr.urlBase;
   const pathname = urlBase ? location.pathname.substr(urlBase.length) || '/' : location.pathname;
   let activeParent = null;
 

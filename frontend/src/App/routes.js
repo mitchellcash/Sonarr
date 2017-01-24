@@ -33,7 +33,7 @@ import LogFilesConnector from 'System/Logs/Files/LogFilesConnector';
 import UpdateLogFilesConnector from 'System/Logs/Updates/UpdateLogFilesConnector';
 
 function getPath(path) {
-  return `${window.Sonarr.UrlBase}${path}`;
+  return `${window.Sonarr.urlBase}${path}`;
 }
 
 // TODO: share routes and sidebar links if we can.

@@ -47,7 +47,7 @@ var routeBinder = {
       if (event.ctrlKey) {
         window.open(href, '_blank');
       } else {
-        var relativeHref = href.replace(window.Sonarr.UrlBase, '');
+        var relativeHref = href.replace(window.Sonarr.urlBase, '');
 
         Backbone.history.navigate(relativeHref, { trigger: true });
       }

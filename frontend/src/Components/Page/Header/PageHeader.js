@@ -14,8 +14,8 @@ function PageHeader(props) {
   return (
     <div className={styles.header}>
       <div className={styles.logoContainer}>
-        <Link to={`${window.Sonarr.UrlBase}/`}>
-          <img src={`${window.Sonarr.UrlBase}/Content/Images/logos/32.png`} />
+        <Link to={`${window.Sonarr.urlBase}/`}>
+          <img src={`${window.Sonarr.urlBase}/Content/Images/logos/32.png`} />
         </Link>
       </div>
 
