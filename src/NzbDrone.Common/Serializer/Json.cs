@@ -35,7 +35,7 @@ namespace NzbDrone.Common.Serializer
             DeserializerSetting = new JsonSerializerSettings
             {
                 DateTimeZoneHandling = DateTimeZoneHandling.Utc,
-                NullValueHandling = NullValueHandling.Include,
+                NullValueHandling = NullValueHandling.Ignore,
                 Formatting = Formatting.Indented,
                 DefaultValueHandling = DefaultValueHandling.Include,
                 ContractResolver = new CamelCasePropertyNamesContractResolver()
