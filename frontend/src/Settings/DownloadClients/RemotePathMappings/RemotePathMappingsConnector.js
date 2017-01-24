@@ -7,7 +7,6 @@ import RemotePathMappings from './RemotePathMappings';
 function createMapStateToProps() {
   return createSelector(
     (state) => state.settings.remotePathMappings,
-    (state) => state.tags.items,
     (remotePathMappings) => {
       return {
         ...remotePathMappings

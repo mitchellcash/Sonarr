@@ -1,6 +1,7 @@
 export const ACTIONS = 'fa fa-bolt';
 export const ACTIVITY = 'fa fa-clock-o';
 export const ADD = 'fa fa-plus';
+export const ALTERNATE_TITLES = 'fa fa-clone';
 export const ADVANCED_SETTINGS = 'fa fa-cog';
 export const ARROW_LEFT = 'fa fa-arrow-circle-left';
 export const ARROW_RIGHT = 'fa fa-arrow-circle-right';
@@ -70,6 +71,7 @@ export const SPIN = 'fa-spin';
 export const SPINNER = 'fa fa-spinner';
 export const SUBTRACT = 'fa fa-minus';
 export const SYSTEM = 'fa fa-laptop';
+export const TAGS = 'fa fa-tags';
 export const TBA = 'fa fa-question-circle';
 export const UNKNOWN = 'fa fa-question';
 export const UNMONITORED = 'fa fa-bookmark-o';

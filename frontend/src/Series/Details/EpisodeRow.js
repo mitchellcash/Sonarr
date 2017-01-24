@@ -146,7 +146,7 @@ EpisodeRow.propTypes = {
   sceneSeasonNumber: PropTypes.number,
   sceneEpisodeNumber: PropTypes.number,
   sceneAbsoluteEpisodeNumber: PropTypes.number,
-  airDateUtc: PropTypes.string.isRequired,
+  airDateUtc: PropTypes.string,
   title: PropTypes.string.isRequired,
   isSaving: PropTypes.bool,
   unverifiedSceneNumbering: PropTypes.bool,

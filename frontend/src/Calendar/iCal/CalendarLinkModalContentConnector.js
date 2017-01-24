@@ -1,12 +1,11 @@
-import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
-import { fetchTags } from 'Store/Actions/tagActions';
+import createTagsSelector from 'Store/Selectors/createTagsSelector';
 import CalendarLinkModalContent from './CalendarLinkModalContent';
 
 function createMapStateToProps() {
   return createSelector(
-    (state) => state.tags.items,
+    createTagsSelector(),
     (tagList) => {
       return {
         tagList
@@ -15,33 +14,4 @@ function createMapStateToProps() {
   );
 }
 
-const mapDispatchToProps = {
-  fetchTags
-};
-
-class CalendarLinkModalContentConnector extends Component {
-
-  //
-  // Lifecycle
-
-  componentWillMount() {
-    this.props.fetchTags();
-  }
-
-  //
-  // Render
-
-  render() {
-    return (
-      <CalendarLinkModalContent
-        {...this.props}
-      />
-    );
-  }
-}
-
-CalendarLinkModalContentConnector.propTypes = {
-  fetchTags: PropTypes.func.isRequired
-};
-
-export default connect(createMapStateToProps, mapDispatchToProps)(CalendarLinkModalContentConnector);
+export default connect(createMapStateToProps)(CalendarLinkModalContent);

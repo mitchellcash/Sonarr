@@ -31,9 +31,18 @@ function createMapStateToProps() {
       const isPopulated = episodes.populated && episodeFiles.populated;
       const episodesError = episodes.error;
       const episodeFilesError = episodeFiles.error;
+      const alternateTitles = _.reduce(series.alternateTitles, (acc, alternateTitle) => {
+        if ((alternateTitle.seasonNumber === -1 || alternateTitle.seasonNumber === undefined) &&
+            (alternateTitle.sceneSeasonNumber === -1 || alternateTitle.sceneSeasonNumber === undefined)) {
+          acc.push(alternateTitle.title);
+        }
+
+        return acc;
+      }, []);
 
       return {
         ...series,
+        alternateTitles,
         isRefreshing,
         isSearching,
         isFetching,

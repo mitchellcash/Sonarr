@@ -3,7 +3,7 @@ import React, { Component, PropTypes } from 'react';
 import formatBytes from 'Utilities/Number/formatBytes';
 import selectAll from 'Utilities/Table/selectAll';
 import toggleSelected from 'Utilities/Table/toggleSelected';
-import { align, icons, sizes } from 'Helpers/Props';
+import { align, icons, sizes, tooltipPositions } from 'Helpers/Props';
 import HeartRating from 'Components/HeartRating';
 import Icon from 'Components/Icon';
 import IconButton from 'Components/Link/IconButton';
@@ -15,13 +15,17 @@ import PageToolbar from 'Components/Page/Toolbar/PageToolbar';
 import PageToolbarSection from 'Components/Page/Toolbar/PageToolbarSection';
 import PageToolbarSeparator from 'Components/Page/Toolbar/PageToolbarSeparator';
 import PageToolbarButton from 'Components/Page/Toolbar/PageToolbarButton';
+import Popover from 'Components/Tooltip/Popover';
+import Tooltip from 'Components/Tooltip/Tooltip';
 import EpisodeFileEditorModal from 'EpisodeFile/Editor/EpisodeFileEditorModal';
 import OrganizePreviewModalConnector from 'Organize/OrganizePreviewModalConnector';
 import QualityProfileNameConnector from 'Settings/Profiles/Quality/QualityProfileNameConnector';
 import SeriesPoster from 'Series/SeriesPoster';
 import EditSeriesModalConnector from 'Series/Edit/EditSeriesModalConnector';
 import DeleteSeriesModal from 'Series/Delete/DeleteSeriesModal';
+import SeriesAlternateTitles from './SeriesAlternateTitles';
 import SeriesDetailsSeasonConnector from './SeriesDetailsSeasonConnector';
+import SeriesTagsConnector from './SeriesTagsConnector';
 import styles from './SeriesDetails.css';
 
 function getFanartUrl(images) {
@@ -135,6 +139,8 @@ class SeriesDetails extends Component {
       overview,
       images,
       seasons,
+      alternateTitles,
+      tags,
       isRefreshing,
       isSearching,
       isFetching,
@@ -252,10 +258,27 @@ class SeriesDetails extends Component {
               <div className={styles.info}>
                 <div className={styles.titleContainer}>
                   <div className={styles.title}>
-                  {title}
+                    {title}
+
+                    {
+                      !!alternateTitles.length &&
+                        <span className={styles.alternateTitlesIconContainer}>
+                          <Popover
+                            anchor={
+                              <Icon
+                                name={icons.ALTERNATE_TITLES}
+                                size={20}
+                              />
+                            }
+                            title="Alternate Titles"
+                            body={<SeriesAlternateTitles alternateTitles={alternateTitles}/>}
+                            position={tooltipPositions.BOTTOM}
+                          />
+                        </span>
+                    }
                   </div>
 
-                  <div>
+                  <div className={styles.seriesNavigationButtons}>
                     <IconButton
                       className={styles.seriesNavigationButton}
                       name={icons.ARROW_LEFT}
@@ -326,6 +349,30 @@ class SeriesDetails extends Component {
                       }
                     </span>
                   </Label>
+
+                  {
+                    !!tags.length &&
+                      <Tooltip
+                        anchor={
+                          <Label
+                            className={styles.tagsLabel}
+                            size={sizes.LARGE}
+                          >
+                            <Icon
+                              name={icons.TAGS}
+                              size={17}
+                            />
+
+                            <span className={styles.tags}>
+                              Tags
+                            </span>
+                          </Label>
+                        }
+                        tooltip={<SeriesTagsConnector seriesId={id} />}
+                        position={tooltipPositions.BOTTOM}
+                      />
+
+                  }
                 </div>
 
                 <div>
@@ -413,6 +460,8 @@ SeriesDetails.propTypes = {
   overview: PropTypes.string.isRequired,
   images: PropTypes.arrayOf(PropTypes.object).isRequired,
   seasons: PropTypes.arrayOf(PropTypes.object).isRequired,
+  alternateTitles: PropTypes.arrayOf(PropTypes.string).isRequired,
+  tags: PropTypes.arrayOf(PropTypes.number).isRequired,
   isRefreshing: PropTypes.bool.isRequired,
   isSearching: PropTypes.bool.isRequired,
   isFetching: PropTypes.bool.isRequired,

@@ -3,12 +3,13 @@ import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
 import { fetchRestrictions, deleteRestriction } from 'Store/Actions/settingsActions';
 import { fetchTags } from 'Store/Actions/tagActions';
+import createTagsSelector from 'Store/Selectors/createTagsSelector';
 import Restrictions from './Restrictions';
 
 function createMapStateToProps() {
   return createSelector(
     (state) => state.settings.restrictions,
-    (state) => state.tags.items,
+    createTagsSelector(),
     (restrictions, tagList) => {
       return {
         ...restrictions,

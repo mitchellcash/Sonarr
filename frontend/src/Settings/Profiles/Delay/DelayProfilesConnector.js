@@ -4,12 +4,13 @@ import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
 import { fetchDelayProfiles, deleteDelayProfile, reorderDelayProfile } from 'Store/Actions/settingsActions';
 import { fetchTags } from 'Store/Actions/tagActions';
+import createTagsSelector from 'Store/Selectors/createTagsSelector';
 import DelayProfiles from './DelayProfiles';
 
 function createMapStateToProps() {
   return createSelector(
     (state) => state.settings.delayProfiles,
-    (state) => state.tags.items,
+    createTagsSelector(),
     (delayProfiles, tagList) => {
       const defaultProfile = _.find(delayProfiles.items, { id: 1 });
       const items = _.sortBy(_.reject(delayProfiles.items, { id: 1 }), ['order']);
