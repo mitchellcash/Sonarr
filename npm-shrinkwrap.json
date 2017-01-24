@@ -3791,6 +3791,11 @@
       "from": "require-from-string@>=1.1.0 <2.0.0",
       "resolved": "https://registry.npmjs.org/require-from-string/-/require-from-string-1.2.0.tgz"
     },
+    "require-nocache": {
+      "version": "1.0.0",
+      "from": "require-nocache@latest",
+      "resolved": "https://registry.npmjs.org/require-nocache/-/require-nocache-1.0.0.tgz"
+    },
     "require-uncached": {
       "version": "1.0.3",
       "from": "require-uncached@>=1.0.2 <2.0.0",

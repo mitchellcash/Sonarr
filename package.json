@@ -74,6 +74,7 @@
     "redux-actions": "1.2.0",
     "redux-localstorage": "0.4.1",
     "redux-thunk": "2.2.0",
+    "require-nocache": "1.0.0",
     "reselect": "2.5.4",
     "run-sequence": "1.2.0",
     "streamqueue": "1.1.1",

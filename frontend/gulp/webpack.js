@@ -8,11 +8,19 @@ const livereload = require('gulp-livereload');
 const path = require('path');
 const webpack = require('webpack');
 const errorHandler = require('./helpers/errorHandler');
+const reload = require('require-nocache')(module);
 
 const uiFolder = 'UI.Phantom';
 const root = path.join(__dirname, '..', 'src');
 
 console.log('ROOT:', root);
+
+const cssVariables = [
+  '../src/Styles/Variables/colors',
+  '../src/Styles/Variables/dimensions',
+  '../src/Styles/Variables/fonts',
+  '../src/Styles/Variables/animations'
+].map(require.resolve);
 
 const config = {
   devtool: '#source-map',
@@ -97,15 +105,14 @@ const config = {
     ]
   },
   postcss: function (webpack) {
+    cssVariables.forEach(webpack.addDependency);
+
     return [
       simpleVars({
-        variables: function () {
-          const colors = require('../src/Styles/Variables/colors');
-          const dimensions = require('../src/Styles/Variables/dimensions');
-          const fonts = require('../src/Styles/Variables/fonts');
-          const animations = require('../src/Styles/Variables/animations');
-
-          return _.extend({}, colors, dimensions, fonts, animations);
+        variables: function() {
+          return cssVariables.reduce(function(obj, vars) {
+            return _.extend(obj, reload(vars));
+          }, {});
         }
       }),
       nested(),
