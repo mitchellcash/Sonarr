@@ -1,6 +1,6 @@
 import $ from 'jquery';
 import getProviderState from 'Utilities/State/getProviderState';
-import { set, updateItem } from '../baseActions';
+import { set } from '../baseActions';
 
 function createTestProviderHandler(section, url, getFromState) {
   return function(payload) {
