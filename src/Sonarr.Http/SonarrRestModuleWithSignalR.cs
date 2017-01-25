@@ -45,7 +45,8 @@ namespace Sonarr.Http
             var signalRMessage = new SignalRMessage
             {
                 Name = Resource,
-                Body = new ResourceChangeMessage<TResource>(resource, action)
+                Body = new ResourceChangeMessage<TResource>(resource, action),
+                Action = action
             };
 
             _signalRBroadcaster.BroadcastMessage(signalRMessage);
@@ -59,7 +60,8 @@ namespace Sonarr.Http
                 var signalRMessage = new SignalRMessage
                 {
                     Name = Resource,
-                    Body = new ResourceChangeMessage<TResource>(action)
+                    Body = new ResourceChangeMessage<TResource>(action),
+                    Action = action
                 };
 
                 _signalRBroadcaster.BroadcastMessage(signalRMessage);

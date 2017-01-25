@@ -5,8 +5,9 @@ import { createSelector } from 'reselect';
 import { findCommand } from 'Utilities/Command';
 import createAllSeriesSelector from 'Store/Selectors/createAllSeriesSelector';
 import createCommandsSelector from 'Store/Selectors/createCommandsSelector';
-import { fetchEpisodes } from 'Store/Actions/episodeActions';
-import { fetchEpisodeFiles } from 'Store/Actions/episodeFileActions';
+import { fetchEpisodes, clearEpisodes } from 'Store/Actions/episodeActions';
+import { fetchEpisodeFiles, clearEpisodeFiles } from 'Store/Actions/episodeFileActions';
+import { fetchQueueDetails, clearQueueDetails } from 'Store/Actions/queueActions';
 import { executeCommand } from 'Store/Actions/commandActions';
 import * as commandNames from 'Commands/commandNames';
 import SeriesDetails from './SeriesDetails';
@@ -58,7 +59,11 @@ function createMapStateToProps() {
 
 const mapDispatchToProps = {
   fetchEpisodes,
+  clearEpisodes,
   fetchEpisodeFiles,
+  clearEpisodeFiles,
+  fetchQueueDetails,
+  clearQueueDetails,
   executeCommand
 };
 
@@ -77,6 +82,12 @@ class SeriesDetailsConnector extends Component {
     }
   }
 
+  componentWillUnmount() {
+    this.props.clearEpisodes();
+    this.props.clearEpisodeFiles();
+    this.props.clearQueueDetails();
+  }
+
   //
   // Control
 
@@ -85,6 +96,7 @@ class SeriesDetailsConnector extends Component {
 
     this.props.fetchEpisodes({ seriesId });
     this.props.fetchEpisodeFiles({ seriesId });
+    this.props.fetchQueueDetails({ seriesId });
   }
 
   //
@@ -127,7 +139,11 @@ SeriesDetailsConnector.propTypes = {
   id: PropTypes.number.isRequired,
   params: PropTypes.shape({ titleSlug: PropTypes.string.isRequired }).isRequired,
   fetchEpisodes: PropTypes.func.isRequired,
+  clearEpisodes: PropTypes.func.isRequired,
   fetchEpisodeFiles: PropTypes.func.isRequired,
+  clearEpisodeFiles: PropTypes.func.isRequired,
+  fetchQueueDetails: PropTypes.func.isRequired,
+  clearQueueDetails: PropTypes.func.isRequired,
   executeCommand: PropTypes.func.isRequired
 };
 

@@ -1,14 +1,37 @@
+import _ from 'lodash';
 import $ from 'jquery';
 import serverSideCollectionHandlers from 'Utilities/serverSideCollectionHandlers';
 import createFetchHandler from './Creators/createFetchHandler';
 import createServerSideCollectionHandlers from './Creators/createServerSideCollectionHandlers';
 import * as types from './actionTypes';
-import { updateItem } from './baseActions';
+import { set, updateItem } from './baseActions';
 import { fetchQueue } from './queueActions';
+
+const fetchQueueDetailsHandler = createFetchHandler('details', '/queue/details');
 
 const queueActionHandlers = {
   [types.FETCH_QUEUE_STATUS]: createFetchHandler('queueStatus', '/queue/status'),
-  [types.FETCH_QUEUE_DETAILS]: createFetchHandler('details', '/queue/details'),
+
+  [types.FETCH_QUEUE_DETAILS]: function(payload) {
+    return function(dispatch, getState) {
+      let params = payload;
+
+      // If the payload params are empty try to get params from state.
+
+      if (params && !_.isEmpty(params)) {
+        dispatch(set({ section: 'details', params }));
+      } else {
+        params = getState().queue.details.params;
+      }
+
+      // Ensure there are params before trying to fetch the queue
+      // so we don't make a bad request to the server.
+
+      if (params && !_.isEmpty(params)) {
+        fetchQueueDetailsHandler(params);
+      }
+    };
+  },
 
   ...createServerSideCollectionHandlers('paged', '/queue', (state) => state.queue, {
     [serverSideCollectionHandlers.FETCH]: types.FETCH_QUEUE,

@@ -4,6 +4,9 @@ import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
 import { updateCommand, finishCommand } from 'Store/Actions/commandActions';
 import { setAppValue, setVersion } from 'Store/Actions/appActions';
+import { update, updateItem, removeItem } from 'Store/Actions/baseActions';
+import { fetchHealth } from 'Store/Actions/systemActions';
+import { fetchQueue, fetchQueueDetails } from 'Store/Actions/queueActions';
 require('signalR');
 
 function getState(status) {
@@ -24,9 +27,11 @@ function getState(status) {
 function createMapStateToProps() {
   return createSelector(
     (state) => state.app.isReconnecting,
-    (isReconnecting) => {
+    (state) => state.queue.paged.populated,
+    (isReconnecting, isQueuePopulated) => {
       return {
-        isReconnecting
+        isReconnecting,
+        isQueuePopulated
       };
     }
   );
@@ -36,7 +41,13 @@ const mapDispatchToProps = {
   updateCommand,
   finishCommand,
   setAppValue,
-  setVersion
+  setVersion,
+  update,
+  updateItem,
+  removeItem,
+  fetchHealth,
+  fetchQueue,
+  fetchQueueDetails
 };
 
 class SignalRConnector extends Component {
@@ -87,14 +98,68 @@ class SignalRConnector extends Component {
       body
     } = message;
 
+    if (name === 'calendar') {
+      this.handleCalendar(body);
+      return;
+    }
+
     if (name === 'command') {
       this.handleCommand(body);
+      return;
+    }
+
+    if (name === 'episode') {
+      this.handleEpisode(body);
+      return;
+    }
+
+    if (name === 'health') {
+      this.handleHealth(body);
+      return;
+    }
+
+    if (name === 'series') {
+      this.handleSeries(body);
+      return;
+    }
+
+    if (name === 'queue') {
+      this.handleQueue(body);
+      return;
+    }
+
+    if (name === 'queue/details') {
+      this.handleQueueDetails(body);
+      return;
+    }
+
+    if (name === 'queue/status') {
+      this.handleQueueStatus(body);
       return;
     }
 
     if (name === 'version') {
       this.handleVersion(body);
       return;
+    }
+
+    if (name === 'wanted/cutoff') {
+      this.handleWantedCutoff(body);
+      return;
+    }
+
+    if (name === 'wanted/missing') {
+      this.handleWantedMissing(body);
+      return;
+    }
+  }
+
+  handleCalendar = (body) => {
+    if (body.action === 'updated') {
+      this.props.updateItem({
+        section: 'calendar',
+        updateOnly: true,
+        ...body.resource });
     }
   }
 
@@ -109,10 +174,66 @@ class SignalRConnector extends Component {
     }
   }
 
+  handleEpisode = (body) => {
+    if (body.action === 'updated') {
+      this.props.updateItem({
+        section: 'episodes',
+        updateOnly: true,
+        ...body.resource });
+    }
+  }
+
+  handleHealth = (body) => {
+    this.props.fetchHealth();
+  }
+
+  handleSeries = (body) => {
+    const action = body.action;
+    const section = 'series';
+
+    if (action === 'updated') {
+      this.props.updateItem({ section, ...body.resource });
+    } else if (action === 'deleted') {
+      this.props.removeItem({ section, id: body.resource.id });
+    }
+  }
+
+  handleQueue = (body) => {
+    if (this.props.isQueuePopulated) {
+      this.props.fetchQueue();
+    }
+  }
+
+  handleQueueDetails = (body) => {
+    this.props.fetchQueueDetails();
+  }
+
+  handleQueueStatus = (body) => {
+    this.props.update({ section: 'queueStatus', data: body.resource });
+  }
+
   handleVersion = (body) => {
     const version = body.version;
 
     this.props.setVersion({ version });
+  }
+
+  handleWantedCutoff = (body) => {
+    if (body.action === 'updated') {
+      this.props.updateItem({
+        section: 'cutoffUnmet',
+        updateOnly: true,
+        ...body.resource });
+    }
+  }
+
+  handleWantedMissing = (body) => {
+    if (body.action === 'updated') {
+      this.props.updateItem({
+        section: 'missing',
+        updateOnly: true,
+        ...body.resource });
+    }
   }
 
   //
@@ -175,10 +296,17 @@ class SignalRConnector extends Component {
 
 SignalRConnector.propTypes = {
   isReconnecting: PropTypes.bool.isRequired,
+  isQueuePopulated: PropTypes.bool.isRequired,
   updateCommand: PropTypes.func.isRequired,
   finishCommand: PropTypes.func.isRequired,
   setAppValue: PropTypes.func.isRequired,
-  setVersion: PropTypes.func.isRequired
+  setVersion: PropTypes.func.isRequired,
+  update: PropTypes.func.isRequired,
+  updateItem: PropTypes.func.isRequired,
+  removeItem: PropTypes.func.isRequired,
+  fetchHealth: PropTypes.func.isRequired,
+  fetchQueue: PropTypes.func.isRequired,
+  fetchQueueDetails: PropTypes.func.isRequired
 };
 
 export default connect(createMapStateToProps, mapDispatchToProps)(SignalRConnector);

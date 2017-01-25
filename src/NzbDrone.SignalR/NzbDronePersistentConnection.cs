@@ -4,6 +4,7 @@ using Microsoft.AspNet.SignalR;
 using Microsoft.AspNet.SignalR.Infrastructure;
 using NzbDrone.Common.EnvironmentInfo;
 using NzbDrone.Common.Serializer;
+using NzbDrone.Core.Datastore.Events;
 
 namespace NzbDrone.SignalR
 {
@@ -29,7 +30,7 @@ namespace NzbDrone.SignalR
             string lastMessage;
             if (_messageHistory.TryGetValue(message.Name, out lastMessage))
             {
-                if (message.Body.ToJson() == lastMessage)
+                if (message.Action == ModelAction.Updated && message.Body.ToJson() == lastMessage)
                 {
                     return;
                 }

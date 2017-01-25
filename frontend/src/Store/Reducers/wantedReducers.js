@@ -1,6 +1,7 @@
 import { handleActions } from 'redux-actions';
 import * as types from 'Store/Actions/actionTypes';
 import { sortDirections } from 'Helpers/Props';
+import createClearReducer from './Creators/createClearReducer';
 import createSetReducer from './Creators/createSetReducer';
 import createUpdateReducer from './Creators/createUpdateReducer';
 import createUpdateItemReducer from './Creators/createUpdateItemReducer';
@@ -54,7 +55,21 @@ const wantedReducers = handleActions({
   [types.SET]: createReducers(serverSideCollectionNames, createSetReducer),
   [types.UPDATE]: createReducers(serverSideCollectionNames, createUpdateReducer),
   [types.UPDATE_ITEM]: createReducers(serverSideCollectionNames, createUpdateItemReducer),
-  [types.UPDATE_SERVER_SIDE_COLLECTION]: createReducers(serverSideCollectionNames, createUpdateServerSideCollectionReducer)
+  [types.UPDATE_SERVER_SIDE_COLLECTION]: createReducers(serverSideCollectionNames, createUpdateServerSideCollectionReducer),
+
+  [types.CLEAR_MISSING]: createClearReducer('missing', {
+    fetching: false,
+    populated: false,
+    error: null,
+    items: []
+  }),
+
+  [types.CLEAR_CUTOFF_UNMET]: createClearReducer('cutoffUnmet', {
+    fetching: false,
+    populated: false,
+    error: null,
+    items: []
+  })
 
 }, defaultState);
 

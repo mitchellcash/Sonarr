@@ -73,6 +73,7 @@ class CutoffUnmetConnector extends Component {
   }
 
   componentWillUnmount() {
+    this.props.clearCutoffUnmet();
     this.props.clearQueueDetails();
     this.props.clearEpisodeFiles();
   }
@@ -161,6 +162,7 @@ CutoffUnmetConnector.propTypes = {
   setCutoffUnmetSort: PropTypes.func.isRequired,
   setCutoffUnmetFilter: PropTypes.func.isRequired,
   batchUnmonitorCutoffUnmetEpisodes: PropTypes.func.isRequired,
+  clearCutoffUnmet: PropTypes.func.isRequired,
   executeCommand: PropTypes.func.isRequired,
   fetchQueueDetails: PropTypes.func.isRequired,
   clearQueueDetails: PropTypes.func.isRequired,

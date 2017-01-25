@@ -6,6 +6,7 @@ function createUpdateItemReducer(section, idProp = 'id') {
   return (state, { payload }) => {
     const {
       section: payloadSection,
+      updateOnly = false,
       ...otherProps
     } = payload;
 
@@ -21,7 +22,7 @@ function createUpdateItemReducer(section, idProp = 'id') {
         const item = items[index];
 
         newState.items.splice(index, 1, { ...item, ...otherProps });
-      } else {
+      } else if (!updateOnly) {
         newState.items.push({ ...otherProps });
       }
 

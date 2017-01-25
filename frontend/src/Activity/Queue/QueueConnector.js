@@ -3,6 +3,7 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
 import * as queueActions from 'Store/Actions/queueActions';
+import { clearEpisodes } from 'Store/Actions/episodeActions';
 import Queue from './Queue';
 
 function createMapStateToProps() {
@@ -23,7 +24,8 @@ function createMapStateToProps() {
 }
 
 const mapDispatchToProps = {
-  ...queueActions
+  ...queueActions,
+  clearEpisodes
 };
 
 class QueueConnector extends Component {
@@ -45,6 +47,11 @@ class QueueConnector extends Component {
 
       this.props.setQueueEpisodes({ episodes });
     }
+  }
+
+  componentWillUnmount() {
+    this.props.clearQueue();
+    this.props.clearEpisodes();
   }
 
   //
@@ -106,7 +113,9 @@ QueueConnector.propTypes = {
   gotoQueueLastPage: PropTypes.func.isRequired,
   gotoQueuePage: PropTypes.func.isRequired,
   setQueueSort: PropTypes.func.isRequired,
-  setQueueEpisodes: PropTypes.func.isRequired
+  clearQueue: PropTypes.func.isRequired,
+  setQueueEpisodes: PropTypes.func.isRequired,
+  clearEpisodes: PropTypes.func.isRequired
 };
 
 export default connect(createMapStateToProps, mapDispatchToProps)(QueueConnector);

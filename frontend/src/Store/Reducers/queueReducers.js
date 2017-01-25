@@ -3,6 +3,7 @@ import getSectionState from 'Utilities/State/getSectionState';
 import updateSectionState from 'Utilities/State/updateSectionState';
 import { sortDirections } from 'Helpers/Props';
 import * as types from 'Store/Actions/actionTypes';
+import createClearReducer from './Creators/createClearReducer';
 import createSetReducer from './Creators/createSetReducer';
 import createUpdateReducer from './Creators/createUpdateReducer';
 import createUpdateItemReducer from './Creators/createUpdateItemReducer';
@@ -21,7 +22,8 @@ export const defaultState = {
     fetching: false,
     populated: false,
     error: null,
-    items: []
+    items: [],
+    params: {}
   },
 
   paged: {
@@ -58,14 +60,16 @@ const queueReducers = handleActions({
   [types.UPDATE]: createReducers([...propertyNames, paged], createUpdateReducer),
   [types.UPDATE_ITEM]: createReducers(['episodes', paged], createUpdateItemReducer),
 
-  [types.CLEAR_QUEUE_DETAILS]: function(state) {
-    const section = 'details';
-    const newState = Object.assign(getSectionState(state, section), defaultState.details);
-
-    return updateSectionState(state, section, newState);
-  },
+  [types.CLEAR_QUEUE_DETAILS]: createClearReducer('details', defaultState.details),
 
   [types.UPDATE_SERVER_SIDE_COLLECTION]: createUpdateServerSideCollectionReducer(paged),
+
+  [types.CLEAR_QUEUE]: createClearReducer('paged', {
+    fetching: false,
+    populated: false,
+    error: null,
+    items: []
+  }),
 
   [types.SET_QUEUE_EPISODES]: function(state, { payload }) {
     const section = 'episodes';

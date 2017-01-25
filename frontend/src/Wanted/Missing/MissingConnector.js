@@ -5,7 +5,7 @@ import { createSelector } from 'reselect';
 import createCommandsSelector from 'Store/Selectors/createCommandsSelector';
 import * as wantedActions from 'Store/Actions/wantedActions';
 import { executeCommand } from 'Store/Actions/commandActions';
-import { fetchQueueDetails } from 'Store/Actions/queueActions';
+import { fetchQueueDetails, clearQueueDetails } from 'Store/Actions/queueActions';
 import * as commandNames from 'Commands/commandNames';
 import Missing from './Missing';
 
@@ -43,7 +43,8 @@ function createMapStateToProps() {
 const mapDispatchToProps = {
   ...wantedActions,
   executeCommand,
-  fetchQueueDetails
+  fetchQueueDetails,
+  clearQueueDetails
 };
 
 class MissingConnector extends Component {
@@ -69,6 +70,11 @@ class MissingConnector extends Component {
 
       this.props.fetchQueueDetails({ episodeIds });
     }
+  }
+
+  componentWillUnmount() {
+    this.props.clearMissing();
+    this.props.clearQueueDetails();
   }
 
   //
@@ -161,9 +167,11 @@ MissingConnector.propTypes = {
   gotoMissingPage: PropTypes.func.isRequired,
   setMissingSort: PropTypes.func.isRequired,
   setMissingFilter: PropTypes.func.isRequired,
+  clearMissing: PropTypes.func.isRequired,
   batchUnmonitorMissingEpisodes: PropTypes.func.isRequired,
   executeCommand: PropTypes.func.isRequired,
-  fetchQueueDetails: PropTypes.func.isRequired
+  fetchQueueDetails: PropTypes.func.isRequired,
+  clearQueueDetails: PropTypes.func.isRequired
 };
 
 export default connect(createMapStateToProps, mapDispatchToProps)(MissingConnector);
