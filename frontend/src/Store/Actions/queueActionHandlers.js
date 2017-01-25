@@ -28,7 +28,8 @@ const queueActionHandlers = {
       // so we don't make a bad request to the server.
 
       if (params && !_.isEmpty(params)) {
-        fetchQueueDetailsHandler(params);
+        const fetchFunction = fetchQueueDetailsHandler(params);
+        fetchFunction(dispatch, getState);
       }
     };
   },
