@@ -8,7 +8,7 @@ import ImportSeriesSelectFolderConnector from 'AddSeries/ImportSeries/SelectFold
 import ImportSeriesConnector from 'AddSeries/ImportSeries/Import/ImportSeriesConnector';
 import SeriesEditorConnector from 'Series/Editor/SeriesEditorConnector';
 import SeasonPassConnector from 'SeasonPass/SeasonPassConnector';
-import SeriesDetailsConnector from 'Series/Details/SeriesDetailsConnector';
+import SeriesDetailsPageConnector from 'Series/Details/SeriesDetailsPageConnector';
 import CalendarPageConnector from 'Calendar/CalendarPageConnector';
 import HistoryConnector from 'Activity/History/HistoryConnector';
 import QueueConnector from 'Activity/Queue/QueueConnector';
@@ -77,7 +77,7 @@ const routes = (
 
     <Route
       path={getPath('/series/:titleSlug')}
-      component={SeriesDetailsConnector}
+      component={SeriesDetailsPageConnector}
     />
 
     {/*

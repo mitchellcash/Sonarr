@@ -2,6 +2,7 @@ import _ from 'lodash';
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
+import { push } from 'react-router-redux';
 import { findCommand } from 'Utilities/Command';
 import createAllSeriesSelector from 'Store/Selectors/createAllSeriesSelector';
 import createCommandsSelector from 'Store/Selectors/createCommandsSelector';
@@ -14,15 +15,20 @@ import SeriesDetails from './SeriesDetails';
 
 function createMapStateToProps() {
   return createSelector(
-    (state, { params }) => params,
+    (state, { titleSlug }) => titleSlug,
     (state) => state.episodes,
     (state) => state.episodeFiles,
     createAllSeriesSelector(),
     createCommandsSelector(),
-    (params, episodes, episodeFiles, allSeries, commands) => {
+    (titleSlug, episodes, episodeFiles, allSeries, commands) => {
       const sortedSeries = _.orderBy(allSeries, 'sortTitle');
-      const seriesIndex = _.findIndex(sortedSeries, { titleSlug: params.titleSlug });
+      const seriesIndex = _.findIndex(sortedSeries, { titleSlug });
       const series = sortedSeries[seriesIndex];
+
+      if (!series) {
+        return {};
+      }
+
       const previousSeries = sortedSeries[seriesIndex - 1] || _.last(sortedSeries);
       const nextSeries = sortedSeries[seriesIndex + 1] || _.first(sortedSeries);
       const isRefreshing = !!findCommand(commands, { name: commandNames.REFRESH_SERIES, seriesId: series.id });
@@ -64,7 +70,8 @@ const mapDispatchToProps = {
   clearEpisodeFiles,
   fetchQueueDetails,
   clearQueueDetails,
-  executeCommand
+  executeCommand,
+  push
 };
 
 class SeriesDetailsConnector extends Component {
@@ -77,6 +84,11 @@ class SeriesDetailsConnector extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
+    if (!nextProps.id) {
+      this.props.push(`${window.Sonarr.urlBase}/`);
+      return;
+    }
+
     if (nextProps.id !== this.props.id) {
       this._populate(nextProps);
     }
@@ -116,10 +128,6 @@ class SeriesDetailsConnector extends Component {
     });
   }
 
-  onDeletePress = () => {
-
-  }
-
   //
   // Render
 
@@ -129,7 +137,6 @@ class SeriesDetailsConnector extends Component {
         {...this.props}
         onRefreshPress={this.onRefreshPress}
         onSearchPress={this.onSearchPress}
-        onDeletePress={this.onDeletePress}
       />
     );
   }
@@ -137,14 +144,15 @@ class SeriesDetailsConnector extends Component {
 
 SeriesDetailsConnector.propTypes = {
   id: PropTypes.number.isRequired,
-  params: PropTypes.shape({ titleSlug: PropTypes.string.isRequired }).isRequired,
+  titleSlug: PropTypes.string.isRequired,
   fetchEpisodes: PropTypes.func.isRequired,
   clearEpisodes: PropTypes.func.isRequired,
   fetchEpisodeFiles: PropTypes.func.isRequired,
   clearEpisodeFiles: PropTypes.func.isRequired,
   fetchQueueDetails: PropTypes.func.isRequired,
   clearQueueDetails: PropTypes.func.isRequired,
-  executeCommand: PropTypes.func.isRequired
+  executeCommand: PropTypes.func.isRequired,
+  push: PropTypes.func.isRequired
 };
 
 export default connect(createMapStateToProps, mapDispatchToProps)(SeriesDetailsConnector);
