@@ -1,3 +1,4 @@
+import { createAction } from 'redux-actions';
 import * as types from './actionTypes';
 import historyActionHandlers from './historyActionHandlers';
 
@@ -9,5 +10,6 @@ export const gotoHistoryLastPage = historyActionHandlers[types.GOTO_LAST_HISTORY
 export const gotoHistoryPage = historyActionHandlers[types.GOTO_HISTORY_PAGE];
 export const setHistorySort = historyActionHandlers[types.SET_HISTORY_SORT];
 export const setHistoryFilter = historyActionHandlers[types.SET_HISTORY_FILTER];
+export const clearHistory = createAction(types.CLEAR_HISTORY);
 
 export const markAsFailed = historyActionHandlers[types.MARK_AS_FAILED];

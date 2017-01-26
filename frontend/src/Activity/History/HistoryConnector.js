@@ -3,7 +3,7 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
 import * as historyActions from 'Store/Actions/historyActions';
-import { fetchEpisodes } from 'Store/Actions/episodeActions';
+import { fetchEpisodes, clearEpisodes } from 'Store/Actions/episodeActions';
 import History from './History';
 
 function createMapStateToProps() {
@@ -36,7 +36,8 @@ function createMapStateToProps() {
 
 const mapDispatchToProps = {
   ...historyActions,
-  fetchEpisodes
+  fetchEpisodes,
+  clearEpisodes
 };
 
 class HistoryConnector extends Component {
@@ -58,6 +59,11 @@ class HistoryConnector extends Component {
 
       this.props.fetchEpisodes({ episodeIds });
     }
+  }
+
+  componentWillUnmount() {
+    this.props.clearHistory();
+    this.props.clearEpisodes();
   }
 
   //
@@ -120,7 +126,9 @@ HistoryConnector.propTypes = {
   gotoHistoryPage: PropTypes.func.isRequired,
   setHistorySort: PropTypes.func.isRequired,
   setHistoryFilter: PropTypes.func.isRequired,
-  fetchEpisodes: PropTypes.func.isRequired
+  clearHistory: PropTypes.func.isRequired,
+  fetchEpisodes: PropTypes.func.isRequired,
+  clearEpisodes: PropTypes.func.isRequired
 };
 
 export default connect(createMapStateToProps, mapDispatchToProps)(HistoryConnector);
