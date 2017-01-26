@@ -30,7 +30,9 @@ function createMapStateToProps() {
 
       const previousSeries = sortedSeries[seriesIndex - 1] || _.last(sortedSeries);
       const nextSeries = sortedSeries[seriesIndex + 1] || _.first(sortedSeries);
-      const isRefreshing = !!findCommand(commands, { name: commandNames.REFRESH_SERIES, seriesId: series.id });
+      const isSeriesRefreshing = !!findCommand(commands, { name: commandNames.REFRESH_SERIES, seriesId: series.id });
+      const allSeriesRefreshing = _.some(commands, (command) => !command.body.seriesId);
+      const isRefreshing = isSeriesRefreshing || allSeriesRefreshing;
       const isSearching = !!findCommand(commands, { name: commandNames.SERIES_SEARCH, seriesId: series.id });
 
       const isFetching = episodes.fetching || episodeFiles.fetching;
@@ -82,7 +84,12 @@ class SeriesDetailsConnector extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.id !== this.props.id) {
+    const {
+      id,
+      isRefreshing
+    } = this.props;
+
+    if (nextProps.id !== id || (!nextProps.isRefreshing && isRefreshing)) {
       this._populate(nextProps);
     }
   }
@@ -138,6 +145,7 @@ class SeriesDetailsConnector extends Component {
 SeriesDetailsConnector.propTypes = {
   id: PropTypes.number.isRequired,
   titleSlug: PropTypes.string.isRequired,
+  isRefreshing: PropTypes.bool.isRequired,
   fetchEpisodes: PropTypes.func.isRequired,
   clearEpisodes: PropTypes.func.isRequired,
   fetchEpisodeFiles: PropTypes.func.isRequired,
