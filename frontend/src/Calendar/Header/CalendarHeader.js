@@ -100,7 +100,7 @@ function CalendarHeader(props) {
           {
             fetching &&
               <LoadingIndicator
-                containerClassName={styles.loadingContainer}
+                className={styles.loading}
                 size={20}
               />
           }

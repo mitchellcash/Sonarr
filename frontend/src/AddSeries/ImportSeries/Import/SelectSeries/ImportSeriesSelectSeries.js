@@ -142,7 +142,7 @@ class ImportSeriesSelectSeries extends Component {
           {
             queued && !populated &&
               <LoadingIndicator
-                containerClassName={styles.loading}
+                className={styles.loading}
                 size={20}
               />
           }

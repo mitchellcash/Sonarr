@@ -1,5 +1,4 @@
 import { handleActions } from 'redux-actions';
-import getSectionState from 'Utilities/State/getSectionState';
 import updateSectionState from 'Utilities/State/updateSectionState';
 import { sortDirections } from 'Helpers/Props';
 import * as types from 'Store/Actions/actionTypes';

@@ -1,8 +1,9 @@
 import React, { Component, PropTypes } from 'react';
 import classNames from 'classnames';
 import { icons } from 'Helpers/Props';
-import Link from 'Components/Link/Link';
 import Icon from 'Components/Icon';
+import Link from 'Components/Link/Link';
+import LoadingIndicator from 'Components/Loading/LoadingIndicator';
 import SelectInput from 'Components/Form/SelectInput';
 import styles from './TablePager.css';
 
@@ -39,6 +40,7 @@ class TablePager extends Component {
       page,
       totalPages,
       totalRecords,
+      fetching,
       onFirstPagePress,
       onPreviousPagePress,
       onNextPagePress,
@@ -61,77 +63,90 @@ class TablePager extends Component {
 
     return (
       <div className={styles.pager}>
-        <div>{/* I'm a placeholder so flexbox sets things where I want them */}</div>
-        <div className={styles.controls}>
-          <Link
-            className={classNames(
-              styles.pageLink,
-              isFirstPage && styles.disabledPageButton
-            )}
-            isDisabled={isFirstPage}
-            onPress={onFirstPagePress}
-          >
-            <Icon name={icons.PAGE_FIRST} />
-          </Link>
-
-          <Link
-            className={classNames(
-              styles.pageLink,
-              isFirstPage && styles.disabledPageButton
-            )}
-            isDisabled={isFirstPage}
-            onPress={onPreviousPagePress}
-          >
-            <Icon name={icons.PAGE_PREVIOUS} />
-          </Link>
-
-          <div className={styles.pageNumber}>
-            {
-              !isShowingPageSelect &&
-                <Link
-                  isDisabled={totalPages === 1}
-                  onPress={this.onOpenPageSelectClick}
-                >
-                  {page} / {totalPages}
-                </Link>
-            }
-
-            {
-              isShowingPageSelect &&
-                <SelectInput
-                  name="pageSelect"
-                  value={page}
-                  values={pages}
-                  onChange={this.onPageSelect}
-                />
-            }
-          </div>
-
-          <Link
-            className={classNames(
-              styles.pageLink,
-              isLastPage && styles.disabledPageButton
-            )}
-            isDisabled={isLastPage}
-            onPress={onNextPagePress}
-          >
-            <Icon name={icons.PAGE_NEXT} />
-          </Link>
-
-          <Link
-            className={classNames(
-              styles.pageLink,
-              isLastPage && styles.disabledPageButton
-            )}
-            isDisabled={isLastPage}
-            onPress={onLastPagePress}
-          >
-            <Icon name={icons.PAGE_LAST} />
-          </Link>
+        <div className={styles.loadingContainer}>
+          {
+            fetching &&
+              <LoadingIndicator
+                className={styles.loading}
+                size={20}
+              />
+          }
         </div>
 
-        <div className={styles.records}>
-          Total records: {totalRecords}
+        <div className={styles.controlsContainer}>
+          <div className={styles.controls}>
+            <Link
+              className={classNames(
+                styles.pageLink,
+                isFirstPage && styles.disabledPageButton
+              )}
+              isDisabled={isFirstPage}
+              onPress={onFirstPagePress}
+            >
+              <Icon name={icons.PAGE_FIRST} />
+            </Link>
+
+            <Link
+              className={classNames(
+                styles.pageLink,
+                isFirstPage && styles.disabledPageButton
+              )}
+              isDisabled={isFirstPage}
+              onPress={onPreviousPagePress}
+            >
+              <Icon name={icons.PAGE_PREVIOUS} />
+            </Link>
+
+            <div className={styles.pageNumber}>
+              {
+                !isShowingPageSelect &&
+                  <Link
+                    isDisabled={totalPages === 1}
+                    onPress={this.onOpenPageSelectClick}
+                  >
+                    {page} / {totalPages}
+                  </Link>
+              }
+
+              {
+                isShowingPageSelect &&
+                  <SelectInput
+                    name="pageSelect"
+                    value={page}
+                    values={pages}
+                    onChange={this.onPageSelect}
+                  />
+              }
+            </div>
+
+            <Link
+              className={classNames(
+                styles.pageLink,
+                isLastPage && styles.disabledPageButton
+              )}
+              isDisabled={isLastPage}
+              onPress={onNextPagePress}
+            >
+              <Icon name={icons.PAGE_NEXT} />
+            </Link>
+
+            <Link
+              className={classNames(
+                styles.pageLink,
+                isLastPage && styles.disabledPageButton
+              )}
+              isDisabled={isLastPage}
+              onPress={onLastPagePress}
+            >
+              <Icon name={icons.PAGE_LAST} />
+            </Link>
+          </div>
+        </div>
+
+        <div className={styles.recordsContainer}>
+          <div className={styles.records}>
+            Total records: {totalRecords}
+          </div>
         </div>
       </div>
     );
@@ -143,6 +158,7 @@ TablePager.propTypes = {
   page: PropTypes.number,
   totalPages: PropTypes.number,
   totalRecords: PropTypes.number,
+  fetching: PropTypes.bool,
   onFirstPagePress: PropTypes.func.isRequired,
   onPreviousPagePress: PropTypes.func.isRequired,
   onNextPagePress: PropTypes.func.isRequired,

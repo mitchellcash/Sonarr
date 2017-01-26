@@ -2,8 +2,10 @@ import _ from 'lodash';
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
+import { executeCommand } from 'Store/Actions/commandActions';
 import * as queueActions from 'Store/Actions/queueActions';
 import { clearEpisodes } from 'Store/Actions/episodeActions';
+import * as commandNames from 'Commands/commandNames';
 import Queue from './Queue';
 
 function createMapStateToProps() {
@@ -12,6 +14,8 @@ function createMapStateToProps() {
     (queued, commands) => {
       return _.pick(queued, [
         'fetching',
+        'populated',
+        'error',
         'items',
         'page',
         'totalPages',
@@ -25,7 +29,8 @@ function createMapStateToProps() {
 
 const mapDispatchToProps = {
   ...queueActions,
-  clearEpisodes
+  clearEpisodes,
+  executeCommand
 };
 
 class QueueConnector extends Component {
@@ -82,7 +87,9 @@ class QueueConnector extends Component {
   }
 
   onRefreshPress = () => {
-    this.props.gotoQueueFirstPage();
+    this.props.executeCommand({
+      name: commandNames.CHECK_FOR_FINISHED_DOWNLOAD
+    });
   }
 
   //
@@ -115,7 +122,8 @@ QueueConnector.propTypes = {
   setQueueSort: PropTypes.func.isRequired,
   clearQueue: PropTypes.func.isRequired,
   setQueueEpisodes: PropTypes.func.isRequired,
-  clearEpisodes: PropTypes.func.isRequired
+  clearEpisodes: PropTypes.func.isRequired,
+  executeCommand: PropTypes.func.isRequired
 };
 
 export default connect(createMapStateToProps, mapDispatchToProps)(QueueConnector);

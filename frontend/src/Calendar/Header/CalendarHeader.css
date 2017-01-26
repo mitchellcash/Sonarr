@@ -31,8 +31,8 @@
   line-height: 31px;
 }
 
-.loadingContainer {
-  composes: container from 'Components/Loading/LoadingIndicator.css';
+.loading {
+  composes: loading from 'Components/Loading/LoadingIndicator.css';
 
   margin-top: 5px;
   margin-right: 10px;

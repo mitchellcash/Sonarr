@@ -63,6 +63,8 @@ class Queue extends Component {
   render() {
     const {
       fetching,
+      populated,
+      error,
       items,
       totalRecords,
       onRefreshPress,
@@ -84,12 +86,26 @@ class Queue extends Component {
 
         <PageContentBody>
           {
-            fetching &&
+            fetching && !populated &&
               <LoadingIndicator />
           }
 
           {
-            !fetching &&
+            !fetching && error &&
+              <div>
+                Failed to load Queue
+              </div>
+          }
+
+          {
+            populated && !error && !items.length &&
+              <div>
+                Queue is empty
+              </div>
+          }
+
+          {
+            populated && !error && !!items.length &&
               <div>
                 <Table
                   headers={headers}
@@ -113,6 +129,7 @@ class Queue extends Component {
 
                 <TablePager
                   totalRecords={totalRecords}
+                  fetching={fetching}
                   {...otherProps}
                 />
               </div>
@@ -125,6 +142,8 @@ class Queue extends Component {
 
 Queue.propTypes = {
   fetching: PropTypes.bool.isRequired,
+  populated: PropTypes.bool.isRequired,
+  error: PropTypes.object,
   items: PropTypes.array.isRequired,
   totalRecords: PropTypes.number,
   onRefreshPress: PropTypes.func.isRequired

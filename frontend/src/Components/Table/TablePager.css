@@ -4,6 +4,30 @@
   justify-content: space-between;
 }
 
+.loadingContainer,
+.controlsContainer,
+.recordsContainer {
+  flex: 0 1 33%;
+}
+
+.controlsContainer {
+  display: flex;
+  justify-content: center;
+}
+
+.recordsContainer {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.loading {
+  composes: loading from 'Components/Loading/LoadingIndicator.css';
+
+  margin: 0;
+  margin-left: 5px;
+  text-align: left;
+}
+
 .controls {
   display: flex;
   align-items: center;

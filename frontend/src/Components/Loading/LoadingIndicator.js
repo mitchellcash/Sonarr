@@ -8,8 +8,8 @@ class LoadingIndicator extends Component {
 
   render() {
     const {
-      size,
-      containerClassName
+      className,
+      size
     } = this.props;
 
     const sizeInPx = `${size}px`;
@@ -18,7 +18,7 @@ class LoadingIndicator extends Component {
 
     return (
       <div
-        className={containerClassName}
+        className={className}
         style={{ height }}
       >
         <div
@@ -47,13 +47,13 @@ class LoadingIndicator extends Component {
 }
 
 LoadingIndicator.propTypes = {
-  size: PropTypes.number,
-  containerClassName: PropTypes.string
+  className: PropTypes.string,
+  size: PropTypes.number
 };
 
 LoadingIndicator.defaultProps = {
-  size: 50,
-  containerClassName: styles.container
+  className: styles.loading,
+  size: 50
 };
 
 export default LoadingIndicator;
