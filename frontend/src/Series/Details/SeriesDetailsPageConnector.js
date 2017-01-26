@@ -1,7 +1,8 @@
 import _ from 'lodash';
-import React, { PropTypes } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
+import { push } from 'react-router-redux';
 import createAllSeriesSelector from 'Store/Selectors/createAllSeriesSelector';
 import NotFound from 'Components/NotFound';
 import SeriesDetailsConnector from './SeriesDetailsConnector';
@@ -26,29 +27,50 @@ function createMapStateToProps() {
   );
 }
 
-function SeriesDetailsPageConnector(props) {
-  const {
-    titleSlug
-  } = props;
+const mapDispatchToProps = {
+  push
+};
 
-  if (!titleSlug) {
+class SeriesDetailsPageConnector extends Component {
+
+  //
+  // Lifecycle
+
+  componentWillReceiveProps(nextProps) {
+    if (!nextProps.titleSlug) {
+      this.props.push(`${window.Sonarr.urlBase}/`);
+      return;
+    }
+  }
+
+  //
+  // Render
+
+  render() {
+    const {
+      titleSlug
+    } = this.props;
+
+    if (!titleSlug) {
+      return (
+        <NotFound
+          message="Sorry, that series cannot be found."
+        />
+      );
+    }
+
     return (
-      <NotFound
-        message="Sorry, that series cannot be found."
+      <SeriesDetailsConnector
+        titleSlug={titleSlug}
       />
     );
   }
-
-  return (
-    <SeriesDetailsConnector
-      titleSlug={titleSlug}
-    />
-  );
 }
 
 SeriesDetailsPageConnector.propTypes = {
   titleSlug: PropTypes.string,
-  params: PropTypes.shape({ titleSlug: PropTypes.string.isRequired }).isRequired
+  params: PropTypes.shape({ titleSlug: PropTypes.string.isRequired }).isRequired,
+  push: PropTypes.func.isRequired
 };
 
-export default connect(createMapStateToProps)(SeriesDetailsPageConnector);
+export default connect(createMapStateToProps, mapDispatchToProps)(SeriesDetailsPageConnector);

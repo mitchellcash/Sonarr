@@ -2,7 +2,6 @@ import _ from 'lodash';
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
-import { push } from 'react-router-redux';
 import { findCommand } from 'Utilities/Command';
 import createAllSeriesSelector from 'Store/Selectors/createAllSeriesSelector';
 import createCommandsSelector from 'Store/Selectors/createCommandsSelector';
@@ -70,8 +69,7 @@ const mapDispatchToProps = {
   clearEpisodeFiles,
   fetchQueueDetails,
   clearQueueDetails,
-  executeCommand,
-  push
+  executeCommand
 };
 
 class SeriesDetailsConnector extends Component {
@@ -84,11 +82,6 @@ class SeriesDetailsConnector extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (!nextProps.id) {
-      this.props.push(`${window.Sonarr.urlBase}/`);
-      return;
-    }
-
     if (nextProps.id !== this.props.id) {
       this._populate(nextProps);
     }
@@ -151,8 +144,7 @@ SeriesDetailsConnector.propTypes = {
   clearEpisodeFiles: PropTypes.func.isRequired,
   fetchQueueDetails: PropTypes.func.isRequired,
   clearQueueDetails: PropTypes.func.isRequired,
-  executeCommand: PropTypes.func.isRequired,
-  push: PropTypes.func.isRequired
+  executeCommand: PropTypes.func.isRequired
 };
 
 export default connect(createMapStateToProps, mapDispatchToProps)(SeriesDetailsConnector);
