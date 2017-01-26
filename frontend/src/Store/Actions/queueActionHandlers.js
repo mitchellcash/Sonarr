@@ -78,7 +78,7 @@ const queueActionHandlers = {
     } = payload;
 
     return function(dispatch, getState) {
-      dispatch(updateItem({ section, id, grabbing: true }));
+      dispatch(updateItem({ section, id, isGrabbing: true }));
 
       const promise = $.ajax({
         url: `/queue/grab/${id}`,
@@ -90,7 +90,7 @@ const queueActionHandlers = {
       });
 
       promise.fail((xhr) => {
-        dispatch(updateItem({ section, id, grabbing: false }));
+        dispatch(updateItem({ section, id, isGrabbing: false }));
       });
     };
   }

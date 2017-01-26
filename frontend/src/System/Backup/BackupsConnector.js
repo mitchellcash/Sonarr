@@ -14,14 +14,14 @@ function createMapStateToProps() {
     createCommandsSelector(),
     (backups, commands) => {
       const {
-        fetching,
+        isFetching,
         items
       } = backups;
 
       const backupExecuting = _.some(commands, { name: commandNames.BACKUP });
 
       return {
-        fetching,
+        isFetching,
         items,
         backupExecuting
       };

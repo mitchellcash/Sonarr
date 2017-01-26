@@ -9,13 +9,13 @@ function createMapStateToProps() {
     (state) => state.addSeries,
     (addSeriesState) => {
       const {
-        adding,
+        isAdding,
         addError,
         defaults
       } = addSeriesState;
 
       return {
-        adding,
+        isAdding,
         addError,
         ...defaults
       };
@@ -34,7 +34,7 @@ class AddNewSeriesModalContentConnector extends Component {
   // Lifecycle
 
   componentWillReceiveProps(nextProps) {
-    if (this.props.adding && !nextProps.adding && !nextProps.error) {
+    if (this.props.isAdding && !nextProps.isAdding && !nextProps.error) {
       this.props.onModalClose();
     }
   }
@@ -88,7 +88,7 @@ AddNewSeriesModalContentConnector.propTypes = {
   qualityProfileId: PropTypes.number,
   seriesType: PropTypes.string.isRequired,
   seasonFolder: PropTypes.bool.isRequired,
-  adding: PropTypes.bool.isRequired,
+  isAdding: PropTypes.bool.isRequired,
   addError: PropTypes.object,
   onModalClose: PropTypes.func.isRequired,
   setAddSeriesDefault: PropTypes.func.isRequired,

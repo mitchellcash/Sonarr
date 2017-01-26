@@ -717,7 +717,7 @@
 
     /**
        If the key pressed is `enter`, `tab`, `up`, or `down`, converts the value
-       in the editor to a raw value for saving into the model using the formatter.
+       in the editor to a raw value for isSaving into the model using the formatter.
 
        If the key pressed is `esc` the changes are undone.
 
@@ -1281,7 +1281,7 @@
 
     /**
        Event handler. Save the value into the model if the event is `change` or
-       one of the keyboard navigation key presses. Exit edit mode without saving
+       one of the keyboard navigation key presses. Exit edit mode without isSaving
        if `escape` was pressed.
     */
     saveOrCancel: function(e) {
@@ -1493,7 +1493,7 @@
      to an array of values whether the raw model value is a scalar or an
      array. Each value is compared with the `optionValues` values using
      Ecmascript's implicit type conversion rules. When exiting edit mode, no type
-     conversion is performed when saving into the model. This behavior is not
+     conversion is performed when isSaving into the model. This behavior is not
      always desirable when the value type is anything other than string. To
      control type conversion on the client-side, you should subclass SelectCell to
      provide a custom formatter or provide the formatter to your column

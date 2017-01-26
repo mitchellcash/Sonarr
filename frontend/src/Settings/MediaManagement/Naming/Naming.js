@@ -99,7 +99,7 @@ class Naming extends Component {
   render() {
     const {
       advancedSettings,
-      fetching,
+      isFetching,
       error,
       settings,
       hasSettings,
@@ -184,17 +184,17 @@ class Naming extends Component {
         legend="Episode Naming"
       >
         {
-          fetching &&
+          isFetching &&
             <LoadingIndicator />
         }
 
         {
-          !fetching && error &&
+          !isFetching && error &&
             <div>Unable to load Naming settings</div>
         }
 
         {
-          hasSettings && !fetching && !error &&
+          hasSettings && !isFetching && !error &&
             <Form>
               <FormGroup>
                 <FormLabel>Rename Episodes</FormLabel>
@@ -337,7 +337,7 @@ class Naming extends Component {
 
 Naming.propTypes = {
   advancedSettings: PropTypes.bool.isRequired,
-  fetching: PropTypes.bool.isRequired,
+  isFetching: PropTypes.bool.isRequired,
   error: PropTypes.object,
   settings: PropTypes.object.isRequired,
   hasSettings: PropTypes.bool.isRequired,

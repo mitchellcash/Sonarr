@@ -53,8 +53,8 @@ class History extends Component {
 
   render() {
     const {
-      fetching,
-      populated,
+      isFetching,
+      isPopulated,
       error,
       items,
       filterKey,
@@ -67,8 +67,8 @@ class History extends Component {
       ...otherProps
     } = this.props;
 
-    const isFetching = fetching || episodesFetching;
-    const isPopulated = populated && episodesPopulated;
+    const isFetchingAny = isFetching || episodesFetching;
+    const isAllPopulated = isPopulated && episodesPopulated;
     const hasError = error || episodesError;
 
     return (
@@ -132,7 +132,7 @@ class History extends Component {
 
         <PageContentBody>
           {
-            isFetching &&
+            isFetchingAny &&
               <LoadingIndicator />
           }
 
@@ -142,7 +142,7 @@ class History extends Component {
           }
 
           {
-            !isFetching && isPopulated && !hasError &&
+            !isFetchingAny && isAllPopulated && !hasError &&
               <div>
                 <Table
                   headers={headers}
@@ -175,8 +175,8 @@ class History extends Component {
 }
 
 History.propTypes = {
-  fetching: PropTypes.bool.isRequired,
-  populated: PropTypes.bool.isRequired,
+  isFetching: PropTypes.bool.isRequired,
+  isPopulated: PropTypes.bool.isRequired,
   error: PropTypes.object,
   items: PropTypes.array.isRequired,
   filterKey: PropTypes.string,

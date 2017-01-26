@@ -13,8 +13,8 @@ function createMapStateToProps() {
     (state) => state.queue.paged,
     (queued, commands) => {
       return _.pick(queued, [
-        'fetching',
-        'populated',
+        'isFetching',
+        'isPopulated',
         'error',
         'items',
         'page',

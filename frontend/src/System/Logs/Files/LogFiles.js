@@ -34,7 +34,7 @@ class LogFiles extends Component {
 
   render() {
     const {
-      fetching,
+      isFetching,
       items,
       deleteFilesExecuting,
       currentLogView,
@@ -54,7 +54,7 @@ class LogFiles extends Component {
             <PageToolbarButton
               iconName={icons.REFRESH}
               spinningName={icons.REFRESH}
-              isSpinning={fetching}
+              isSpinning={isFetching}
               onPress={onRefreshPress}
             />
 
@@ -67,12 +67,12 @@ class LogFiles extends Component {
         </PageToolbar>
         <PageContentBody>
           {
-            fetching &&
+            isFetching &&
               <LoadingIndicator />
           }
 
           {
-            !fetching &&
+            !isFetching &&
               <div>
                 <Table
                   headers={headers}
@@ -101,7 +101,7 @@ class LogFiles extends Component {
 }
 
 LogFiles.propTypes = {
-  fetching: PropTypes.bool.isRequired,
+  isFetching: PropTypes.bool.isRequired,
   items: PropTypes.array.isRequired,
   deleteFilesExecuting: PropTypes.bool.isRequired,
   currentLogView: PropTypes.string.isRequired,

@@ -58,8 +58,8 @@ const headers = [
 
 function InteractiveEpisodeSearch(props) {
   const {
-    fetching,
-    populated,
+    isFetching,
+    isPopulated,
     error,
     items,
     sortKey,
@@ -68,11 +68,11 @@ function InteractiveEpisodeSearch(props) {
     onGrabPress
   } = props;
 
-  if (fetching) {
+  if (isFetching) {
     return <LoadingIndicator />;
-  } else if (!fetching && !!error) {
+  } else if (!isFetching && !!error) {
     return <div>Unable to load results for this episode search. Try again later.</div>;
-  } else if (populated && !items.length) {
+  } else if (isPopulated && !items.length) {
     return <div>No results found.</div>;
   }
 
@@ -101,8 +101,8 @@ function InteractiveEpisodeSearch(props) {
 }
 
 InteractiveEpisodeSearch.propTypes = {
-  fetching: PropTypes.bool.isRequired,
-  populated: PropTypes.bool.isRequired,
+  isFetching: PropTypes.bool.isRequired,
+  isPopulated: PropTypes.bool.isRequired,
   error: PropTypes.object,
   items: PropTypes.arrayOf(PropTypes.object).isRequired,
   sortKey: PropTypes.string,

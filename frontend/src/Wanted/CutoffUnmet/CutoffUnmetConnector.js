@@ -21,7 +21,7 @@ function createMapStateToProps() {
       const isSearchingForCutoffUnmetEpisodes = _.some(commands, { name: commandNames.CUTOFF_UNMET_EPISODE_SEARCH });
 
       const result = _.pick(cutoffUnmet, [
-        'fetching',
+        'isFetching',
         'items',
         'page',
         'totalPages',

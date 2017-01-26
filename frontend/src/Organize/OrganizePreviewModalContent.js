@@ -69,8 +69,8 @@ class OrganizePreviewModalContent extends Component {
 
   render() {
     const {
-      fetching,
-      populated,
+      isFetching,
+      isPopulated,
       error,
       items,
       renameEpisodes,
@@ -95,17 +95,17 @@ class OrganizePreviewModalContent extends Component {
 
         <ModalBody>
           {
-            fetching &&
+            isFetching &&
               <LoadingIndicator />
           }
 
           {
-            !fetching && error &&
+            !isFetching && error &&
               <div>Error loading previews</div>
           }
 
           {
-            !fetching && populated && !items.length &&
+            !isFetching && isPopulated && !items.length &&
               <div>
                 {
                   renameEpisodes ?
@@ -116,7 +116,7 @@ class OrganizePreviewModalContent extends Component {
           }
 
           {
-            !fetching && populated && !!items.length &&
+            !isFetching && isPopulated && !!items.length &&
               <div>
                 <Alert>
                   <div>
@@ -156,7 +156,7 @@ class OrganizePreviewModalContent extends Component {
 
         <ModalFooter>
           {
-            populated && !!items.length &&
+            isPopulated && !!items.length &&
               <CheckInput
                 className={styles.selectAllInput}
                 containerClassName={styles.selectAllInputContainer}
@@ -185,8 +185,8 @@ class OrganizePreviewModalContent extends Component {
 }
 
 OrganizePreviewModalContent.propTypes = {
-  fetching: PropTypes.bool.isRequired,
-  populated: PropTypes.bool.isRequired,
+  isFetching: PropTypes.bool.isRequired,
+  isPopulated: PropTypes.bool.isRequired,
   error: PropTypes.object,
   items: PropTypes.arrayOf(PropTypes.object).isRequired,
   path: PropTypes.string.isRequired,

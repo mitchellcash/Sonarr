@@ -28,13 +28,13 @@ class InteractiveEpisodeSearchConnector extends Component {
   componentWillMount() {
     const {
       episodeId,
-      populated
+      isPopulated
     } = this.props;
 
-    // If search results are not yet populated fetch them,
+    // If search results are not yet isPopulated fetch them,
     // otherwise re-show the existing props.
 
-    if (!populated) {
+    if (!isPopulated) {
       this.props.fetchReleases({
         episodeId
       });
@@ -68,7 +68,7 @@ class InteractiveEpisodeSearchConnector extends Component {
 
 InteractiveEpisodeSearchConnector.propTypes = {
   episodeId: PropTypes.number.isRequired,
-  populated: PropTypes.bool.isRequired,
+  isPopulated: PropTypes.bool.isRequired,
   fetchReleases: PropTypes.func.isRequired,
   setReleasesSort: PropTypes.func.isRequired,
   grabRelease: PropTypes.func.isRequired

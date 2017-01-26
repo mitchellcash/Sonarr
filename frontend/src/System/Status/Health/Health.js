@@ -51,12 +51,12 @@ class Health extends Component {
 
   render() {
     const {
-      fetching,
+      isFetching,
       items
     } = this.props;
 
-    const healthOk = !fetching && items.length === 0;
-    const healthIssues = !fetching && !!items.length;
+    const healthOk = !isFetching && items.length === 0;
+    const healthIssues = !isFetching && !!items.length;
 
     const headers = [
       {
@@ -83,7 +83,7 @@ class Health extends Component {
         legend="Health"
       >
         {
-          fetching &&
+          isFetching &&
             <LoadingIndicator />
         }
 
@@ -144,7 +144,7 @@ class Health extends Component {
 }
 
 Health.propTypes = {
-  fetching: PropTypes.bool.isRequired,
+  isFetching: PropTypes.bool.isRequired,
   items: PropTypes.array.isRequired
 };
 

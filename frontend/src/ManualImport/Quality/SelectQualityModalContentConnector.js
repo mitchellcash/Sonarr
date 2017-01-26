@@ -11,15 +11,15 @@ function createMapStateToProps() {
     (state) => state.settings.qualityProfiles,
     (qualityProfiles) => {
       const {
-        fetchingSchema: fetching,
-        schemaPopulated: populated,
+        isFetchingSchema: isFetching,
+        schemaPopulated: isPopulated,
         schemaError: error,
         schema
       } = qualityProfiles;
 
       return {
-        fetching,
-        populated,
+        isFetching,
+        isPopulated,
         error,
         items: schema.items || []
       };
@@ -38,7 +38,7 @@ class SelectQualityModalContentConnector extends Component {
   // Lifecycle
 
   componentWillMount = () => {
-    if (!this.props.populated) {
+    if (!this.props.isPopulated) {
       this.props.fetchQualityProfileSchema();
     }
   }
@@ -81,8 +81,8 @@ class SelectQualityModalContentConnector extends Component {
 
 SelectQualityModalContentConnector.propTypes = {
   id: PropTypes.number.isRequired,
-  fetching: PropTypes.bool.isRequired,
-  populated: PropTypes.bool.isRequired,
+  isFetching: PropTypes.bool.isRequired,
+  isPopulated: PropTypes.bool.isRequired,
   error: PropTypes.object,
   items: PropTypes.arrayOf(PropTypes.object).isRequired,
   fetchQualityProfileSchema: PropTypes.func.isRequired,

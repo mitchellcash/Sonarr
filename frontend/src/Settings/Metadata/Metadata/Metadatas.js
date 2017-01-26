@@ -36,7 +36,7 @@ function Metadatas(props) {
 }
 
 Metadatas.propTypes = {
-  fetching: PropTypes.bool.isRequired,
+  isFetching: PropTypes.bool.isRequired,
   error: PropTypes.object,
   items: PropTypes.arrayOf(PropTypes.object).isRequired
 };

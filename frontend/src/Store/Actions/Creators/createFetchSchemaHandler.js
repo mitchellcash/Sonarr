@@ -4,7 +4,7 @@ import { set } from '../baseActions';
 function createFetchSchemaHandler(section, url) {
   return function(payload) {
     return function(dispatch, getState) {
-      dispatch(set({ section, fetchingSchema: true }));
+      dispatch(set({ section, isFetchingSchema: true }));
 
       const promise = $.ajax({
         url
@@ -13,7 +13,7 @@ function createFetchSchemaHandler(section, url) {
       promise.done((data) => {
         dispatch(set({
           section,
-          fetchingSchema: false,
+          isFetchingSchema: false,
           schemaPopulated: true,
           schemaError: null,
           schema: data
@@ -23,7 +23,7 @@ function createFetchSchemaHandler(section, url) {
       promise.fail((xhr) => {
         dispatch(set({
           section,
-          fetchingSchema: false,
+          isFetchingSchema: false,
           schemaPopulated: true,
           schemaError: xhr
         }));

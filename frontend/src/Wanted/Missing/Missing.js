@@ -125,7 +125,7 @@ class Missing extends Component {
 
   render() {
     const {
-      fetching,
+      isFetching,
       items,
       totalRecords,
       isScanningDroneFactory,
@@ -219,12 +219,12 @@ class Missing extends Component {
 
         <PageContentBody>
           {
-            fetching &&
+            isFetching &&
               <LoadingIndicator />
           }
 
           {
-            !fetching &&
+            !isFetching &&
               <div>
                 <Table
                   headers={headers}
@@ -287,7 +287,7 @@ class Missing extends Component {
 }
 
 Missing.propTypes = {
-  fetching: PropTypes.bool.isRequired,
+  isFetching: PropTypes.bool.isRequired,
   items: PropTypes.arrayOf(PropTypes.object).isRequired,
   totalRecords: PropTypes.number,
   isScanningDroneFactory: PropTypes.bool.isRequired,

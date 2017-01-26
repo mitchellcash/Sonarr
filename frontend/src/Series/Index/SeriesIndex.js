@@ -33,8 +33,8 @@ class SeriesIndex extends Component {
 
   render() {
     const {
-      fetching,
-      populated,
+      isFetching,
+      isPopulated,
       error,
       items,
       filterKey,
@@ -217,17 +217,17 @@ class SeriesIndex extends Component {
 
         <PageContentBody innerClassName={innerContentClassName}>
           {
-            fetching && !populated &&
+            isFetching && !isPopulated &&
               <LoadingIndicator />
           }
 
           {
-            !fetching && !!error &&
+            !isFetching && !!error &&
               <div>Unable to load series</div>
           }
 
           {
-            !error && populated && !!items.length &&
+            !error && isPopulated && !!items.length &&
               <div>
                 <ViewComponent />
 
@@ -238,7 +238,7 @@ class SeriesIndex extends Component {
           }
 
           {
-            !error && populated && !items.length &&
+            !error && isPopulated && !items.length &&
               <div>
                 No series found, import existing series or add a new series
               </div>
@@ -250,8 +250,8 @@ class SeriesIndex extends Component {
 }
 
 SeriesIndex.propTypes = {
-  fetching: PropTypes.bool.isRequired,
-  populated: PropTypes.bool.isRequired,
+  isFetching: PropTypes.bool.isRequired,
+  isPopulated: PropTypes.bool.isRequired,
   error: PropTypes.object,
   items: PropTypes.arrayOf(PropTypes.object).isRequired,
   filterKey: PropTypes.string,

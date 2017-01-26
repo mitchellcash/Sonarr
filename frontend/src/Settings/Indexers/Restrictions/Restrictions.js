@@ -89,7 +89,7 @@ class Restrictions extends Component {
 }
 
 Restrictions.propTypes = {
-  fetching: PropTypes.bool.isRequired,
+  isFetching: PropTypes.bool.isRequired,
   error: PropTypes.object,
   items: PropTypes.arrayOf(PropTypes.object).isRequired,
   tagList: PropTypes.arrayOf(PropTypes.object).isRequired,

@@ -20,7 +20,7 @@ class EditMetadataModalContent extends Component {
 
   render() {
     const {
-      saving,
+      isSaving,
       item,
       onInputChange,
       onFieldChange,
@@ -86,7 +86,7 @@ class EditMetadataModalContent extends Component {
           </Button>
 
           <SpinnerButton
-            isSpinning={saving}
+            isSpinning={isSaving}
             onPress={onSavePress}
           >
             Save
@@ -98,7 +98,7 @@ class EditMetadataModalContent extends Component {
 }
 
 EditMetadataModalContent.propTypes = {
-  saving: PropTypes.bool.isRequired,
+  isSaving: PropTypes.bool.isRequired,
   saveError: PropTypes.object,
   item: PropTypes.object.isRequired,
   onInputChange: PropTypes.func.isRequired,

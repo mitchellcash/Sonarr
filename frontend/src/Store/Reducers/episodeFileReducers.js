@@ -6,12 +6,12 @@ import createUpdateItemReducer from './Creators/createUpdateItemReducer';
 import createRemoveItemReducer from './Creators/createRemoveItemReducer';
 
 export const defaultState = {
-  fetching: false,
-  populated: false,
+  isFetching: false,
+  isPopulated: false,
   error: null,
-  deleting: false,
+  isDeleting: false,
   deleteError: null,
-  saving: false,
+  isSaving: false,
   saveError: null,
   items: []
 };

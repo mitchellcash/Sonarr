@@ -53,7 +53,7 @@ class AddNewSeriesModalContent extends Component {
       year,
       overview,
       images,
-      adding,
+      isAdding,
       addError,
       rootFolder,
       monitor,
@@ -181,7 +181,7 @@ class AddNewSeriesModalContent extends Component {
 
           <SpinnerButton
             kind={kinds.SUCCESS}
-            isSpinning={adding}
+            isSpinning={isAdding}
             onPress={this.onAddSeriesPress}
           >
             Add {title}
@@ -197,7 +197,7 @@ AddNewSeriesModalContent.propTypes = {
   year: PropTypes.number.isRequired,
   overview: PropTypes.string,
   images: PropTypes.arrayOf(PropTypes.object).isRequired,
-  adding: PropTypes.bool.isRequired,
+  isAdding: PropTypes.bool.isRequired,
   addError: PropTypes.object,
   rootFolder: PropTypes.string,
   monitor: PropTypes.string.isRequired,

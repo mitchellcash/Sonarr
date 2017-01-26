@@ -22,9 +22,9 @@ class EditIndexerModalContent extends Component {
   render() {
     const {
       advancedSettings,
-      fetching,
+      isFetching,
       error,
-      saving,
+      isSaving,
       testing,
       item,
       onInputChange,
@@ -54,17 +54,17 @@ class EditIndexerModalContent extends Component {
 
         <ModalBody>
           {
-            fetching &&
+            isFetching &&
               <LoadingIndicator />
           }
 
           {
-            !fetching && !!error &&
+            !isFetching && !!error &&
               <div>Unable to add a new indexer, please try again.</div>
           }
 
           {
-            !fetching && !error &&
+            !isFetching && !error &&
               <Form
                 {...otherProps}
               >
@@ -149,7 +149,7 @@ class EditIndexerModalContent extends Component {
           </Button>
 
           <SpinnerButton
-            isSpinning={saving}
+            isSpinning={isSaving}
             onPress={onSavePress}
           >
             Save
@@ -162,9 +162,9 @@ class EditIndexerModalContent extends Component {
 
 EditIndexerModalContent.propTypes = {
   advancedSettings: PropTypes.bool.isRequired,
-  fetching: PropTypes.bool.isRequired,
+  isFetching: PropTypes.bool.isRequired,
   error: PropTypes.object,
-  saving: PropTypes.bool.isRequired,
+  isSaving: PropTypes.bool.isRequired,
   saveError: PropTypes.object,
   testing: PropTypes.bool.isRequired,
   item: PropTypes.object.isRequired,

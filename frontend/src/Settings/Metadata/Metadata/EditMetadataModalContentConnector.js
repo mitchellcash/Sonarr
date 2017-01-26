@@ -12,7 +12,7 @@ function createMapStateToProps() {
     (state) => state.settings.metadata,
     (id, metadata) => {
       const {
-        saving,
+        isSaving,
         saveError,
         pendingChanges,
         items
@@ -22,7 +22,7 @@ function createMapStateToProps() {
 
       return {
         id,
-        saving,
+        isSaving,
         saveError,
         item: settings.settings,
         ...settings
@@ -43,7 +43,7 @@ class EditMetadataModalContentConnector extends Component {
   // Lifecycle
 
   componentDidUpdate(prevProps, prevState) {
-    if (prevProps.saving && !this.props.saving && !this.props.saveError) {
+    if (prevProps.isSaving && !this.props.isSaving && !this.props.saveError) {
       this.props.onModalClose();
     }
   }
@@ -80,7 +80,7 @@ class EditMetadataModalContentConnector extends Component {
 
 EditMetadataModalContentConnector.propTypes = {
   id: PropTypes.number,
-  saving: PropTypes.bool.isRequired,
+  isSaving: PropTypes.bool.isRequired,
   saveError: PropTypes.object,
   item: PropTypes.object.isRequired,
   setMetadataValue: PropTypes.func.isRequired,

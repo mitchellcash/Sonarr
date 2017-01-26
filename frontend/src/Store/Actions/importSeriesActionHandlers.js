@@ -22,8 +22,8 @@ const importSeriesActionHandlers = {
         id: name,
         term,
         path,
-        fetching: false,
-        populated: false,
+        isFetching: false,
+        isPopulated: false,
         error: null,
         items: []
       };
@@ -57,7 +57,7 @@ const importSeriesActionHandlers = {
       dispatch(updateItem({
         section,
         id: queued.id,
-        fetching: true
+        isFetching: true
       }));
 
       const promise = $.ajax({
@@ -71,8 +71,8 @@ const importSeriesActionHandlers = {
         dispatch(updateItem({
           section,
           id: queued.id,
-          fetching: false,
-          populated: true,
+          isFetching: false,
+          isPopulated: true,
           error: null,
           items: data,
           queued: false,
@@ -84,8 +84,8 @@ const importSeriesActionHandlers = {
         dispatch(updateItem({
           section,
           id: queued.id,
-          fetching: false,
-          populated: false,
+          isFetching: false,
+          isPopulated: false,
           error: xhr,
           queued: false
         }));

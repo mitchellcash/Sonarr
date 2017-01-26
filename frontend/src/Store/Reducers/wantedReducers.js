@@ -10,8 +10,8 @@ import createReducers from './Creators/createReducers';
 
 export const defaultState = {
   missing: {
-    fetching: false,
-    populated: false,
+    isFetching: false,
+    isPopulated: false,
     pageSize: 20,
     sortKey: 'airDateUtc',
     sortDirection: sortDirections.DESCENDING,
@@ -22,8 +22,8 @@ export const defaultState = {
   },
 
   cutoffUnmet: {
-    fetching: false,
-    populated: false,
+    isFetching: false,
+    isPopulated: false,
     pageSize: 20,
     sortKey: 'airDateUtc',
     sortDirection: sortDirections.DESCENDING,
@@ -58,15 +58,15 @@ const wantedReducers = handleActions({
   [types.UPDATE_SERVER_SIDE_COLLECTION]: createReducers(serverSideCollectionNames, createUpdateServerSideCollectionReducer),
 
   [types.CLEAR_MISSING]: createClearReducer('missing', {
-    fetching: false,
-    populated: false,
+    isFetching: false,
+    isPopulated: false,
     error: null,
     items: []
   }),
 
   [types.CLEAR_CUTOFF_UNMET]: createClearReducer('cutoffUnmet', {
-    fetching: false,
-    populated: false,
+    isFetching: false,
+    isPopulated: false,
     error: null,
     items: []
   })

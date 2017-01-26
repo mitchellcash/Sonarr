@@ -10,9 +10,9 @@ function createMapStateToProps() {
     (state) => state.settings.downloadClients,
     (downloadClients) => {
       const {
-        fetching,
+        isFetching,
         error,
-        populated,
+        isPopulated,
         schema
       } = downloadClients;
 
@@ -20,9 +20,9 @@ function createMapStateToProps() {
       const torrentDownloadClients = _.filter(schema, { protocol: 'torrent' });
 
       return {
-        fetching,
+        isFetching,
         error,
-        populated,
+        isPopulated,
         usenetDownloadClients,
         torrentDownloadClients
       };

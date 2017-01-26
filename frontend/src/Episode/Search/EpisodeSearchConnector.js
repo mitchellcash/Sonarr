@@ -11,7 +11,7 @@ function createMapStateToProps() {
     (state) => state.releases,
     (releases) => {
       return {
-        populated: releases.populated
+        isPopulated: releases.isPopulated
       };
     }
   );
@@ -35,7 +35,7 @@ class EpisodeSearchConnector extends Component {
   }
 
   componentWillMount() {
-    if (this.props.populated) {
+    if (this.props.isPopulated) {
       this.setState({ isInteractiveSearchOpen: true });
     }
   }
@@ -80,7 +80,7 @@ class EpisodeSearchConnector extends Component {
 
 EpisodeSearchConnector.propTypes = {
   episodeId: PropTypes.number.isRequired,
-  populated: PropTypes.bool.isRequired,
+  isPopulated: PropTypes.bool.isRequired,
   startInteractiveSearch: PropTypes.bool.isRequired,
   onModalClose: PropTypes.func.isRequired,
   executeCommand: PropTypes.func.isRequired

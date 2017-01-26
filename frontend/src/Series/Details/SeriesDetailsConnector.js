@@ -35,8 +35,8 @@ function createMapStateToProps() {
       const isRefreshing = isSeriesRefreshing || allSeriesRefreshing;
       const isSearching = !!findCommand(commands, { name: commandNames.SERIES_SEARCH, seriesId: series.id });
 
-      const isFetching = episodes.fetching || episodeFiles.fetching;
-      const isPopulated = episodes.populated && episodeFiles.populated;
+      const isFetching = episodes.isFetching || episodeFiles.isFetching;
+      const isPopulated = episodes.isPopulated && episodeFiles.isPopulated;
       const episodesError = episodes.error;
       const episodeFilesError = episodeFiles.error;
       const alternateTitles = _.reduce(series.alternateTitles, (acc, alternateTitle) => {

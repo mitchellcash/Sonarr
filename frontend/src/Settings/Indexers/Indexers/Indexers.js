@@ -106,7 +106,7 @@ class Indexers extends Component {
 }
 
 Indexers.propTypes = {
-  fetching: PropTypes.bool.isRequired,
+  isFetching: PropTypes.bool.isRequired,
   error: PropTypes.object,
   items: PropTypes.arrayOf(PropTypes.object).isRequired,
   onConfirmDeleteIndexer: PropTypes.func.isRequired

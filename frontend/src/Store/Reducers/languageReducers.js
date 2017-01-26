@@ -4,8 +4,8 @@ import createSetReducer from './Creators/createSetReducer';
 import createUpdateReducer from './Creators/createUpdateReducer';
 
 export const defaultState = {
-  fetching: false,
-  populated: false,
+  isFetching: false,
+  isPopulated: false,
   error: null,
   items: []
 };

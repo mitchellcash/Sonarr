@@ -7,8 +7,8 @@ import createUpdateItemReducer from './Creators/createUpdateItemReducer';
 import createUpdateServerSideCollectionReducer from './Creators/createUpdateServerSideCollectionReducer';
 
 export const defaultState = {
-  fetching: false,
-  populated: false,
+  isFetching: false,
+  isPopulated: false,
   pageSize: 20,
   sortKey: 'date',
   sortDirection: sortDirections.DESCENDING,

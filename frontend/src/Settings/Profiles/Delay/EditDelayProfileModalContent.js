@@ -22,7 +22,7 @@ class EditDelayProfileModalContent extends Component {
   render() {
     const {
       id,
-      fetching,
+      isFetching,
       error,
       item,
       protocol,
@@ -51,17 +51,17 @@ class EditDelayProfileModalContent extends Component {
 
         <ModalBody>
           {
-            fetching &&
+            isFetching &&
               <LoadingIndicator />
           }
 
           {
-            !fetching && !!error &&
+            !isFetching && !!error &&
               <div>Unable to add a new quality profile, please try again.</div>
           }
 
           {
-            !fetching && !error &&
+            !isFetching && !error &&
               <Form
                 {...otherProps}
               >
@@ -169,7 +169,7 @@ const delayProfileShape = {
 
 EditDelayProfileModalContent.propTypes = {
   id: PropTypes.number,
-  fetching: PropTypes.bool.isRequired,
+  isFetching: PropTypes.bool.isRequired,
   error: PropTypes.object,
   item: PropTypes.shape(delayProfileShape).isRequired,
   protocol: PropTypes.string.isRequired,

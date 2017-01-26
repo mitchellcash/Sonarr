@@ -9,12 +9,12 @@ function createMapStateToProps() {
     (state) => state.system.health,
     (health) => {
       const {
-        fetching,
+        isFetching,
         items
       } = health;
 
       return {
-        fetching,
+        isFetching,
         items
       };
     }

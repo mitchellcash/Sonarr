@@ -19,7 +19,7 @@ class MediaManagement extends Component {
   render() {
     const {
       advancedSettings,
-      fetching,
+      isFetching,
       error,
       settings,
       hasSettings,
@@ -45,17 +45,17 @@ class MediaManagement extends Component {
 
         <PageContentBody>
           {
-            fetching &&
+            isFetching &&
               <LoadingIndicator />
           }
 
           {
-            !fetching && error &&
+            !isFetching && error &&
               <div>Unable to load Media Management settings</div>
           }
 
           {
-            hasSettings && !fetching && !error &&
+            hasSettings && !isFetching && !error &&
               <Form
                 id="mediaManagementSettings"
                 {...otherProps}
@@ -298,7 +298,7 @@ class MediaManagement extends Component {
 
 MediaManagement.propTypes = {
   advancedSettings: PropTypes.bool.isRequired,
-  fetching: PropTypes.bool.isRequired,
+  isFetching: PropTypes.bool.isRequired,
   error: PropTypes.object,
   settings: PropTypes.object.isRequired,
   hasSettings: PropTypes.bool.isRequired,

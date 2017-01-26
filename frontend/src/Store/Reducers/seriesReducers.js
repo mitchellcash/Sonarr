@@ -9,10 +9,10 @@ import createUpdateItemReducer from './Creators/createUpdateItemReducer';
 import createRemoveItemReducer from './Creators/createRemoveItemReducer';
 
 export const defaultState = {
-  fetching: false,
-  populated: false,
+  isFetching: false,
+  isPopulated: false,
   error: null,
-  saving: false,
+  isSaving: false,
   saveError: null,
   items: [],
   sortKey: 'sortTitle',

@@ -23,7 +23,7 @@ function createMapStateToProps() {
       });
 
       return {
-        populated: health.populated,
+        isPopulated: health.isPopulated,
         count,
         errors,
         warnings
@@ -42,7 +42,7 @@ class HealthStatusConnector extends Component {
   // Lifecycle
 
   componentWillMount() {
-    if (!this.props.populated) {
+    if (!this.props.isPopulated) {
       this.props.fetchHealth();
     }
   }
@@ -60,7 +60,7 @@ class HealthStatusConnector extends Component {
 }
 
 HealthStatusConnector.propTypes = {
-  populated: PropTypes.bool.isRequired,
+  isPopulated: PropTypes.bool.isRequired,
   fetchHealth: PropTypes.func.isRequired
 };
 

@@ -4,7 +4,7 @@ import { set, update } from '../baseActions';
 function createFetchHandler(section, url) {
   return function(payload) {
     return function(dispatch, getState) {
-      dispatch(set({ section, fetching: true }));
+      dispatch(set({ section, isFetching: true }));
 
       const promise = $.ajax({
         url,
@@ -17,8 +17,8 @@ function createFetchHandler(section, url) {
 
         dispatch(set({
           section,
-          fetching: false,
-          populated: true,
+          isFetching: false,
+          isPopulated: true,
           error: null
         }));
       });
@@ -26,8 +26,8 @@ function createFetchHandler(section, url) {
       promise.fail((xhr) => {
         dispatch(set({
           section,
-          fetching: false,
-          populated: false,
+          isFetching: false,
+          isPopulated: false,
           error: xhr
         }));
       });

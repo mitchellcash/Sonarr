@@ -14,7 +14,7 @@ function createMapStateToProps() {
     createUISettingsSelector(),
     (calendar, dimensions, uiSettings) => {
       const result = _.pick(calendar, [
-        'fetching',
+        'isFetching',
         'view',
         'time',
         'start',

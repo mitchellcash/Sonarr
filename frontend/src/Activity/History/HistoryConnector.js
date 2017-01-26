@@ -12,8 +12,8 @@ function createMapStateToProps() {
     (state) => state.episodes,
     (history, episodes) => {
       const result = _.pick(history, [
-        'fetching',
-        'populated',
+        'isFetching',
+        'isPopulated',
         'error',
         'items',
         'page',
@@ -25,8 +25,8 @@ function createMapStateToProps() {
         'filterValue'
       ]);
 
-      result.episodesFetching = episodes.fetching;
-      result.episodesPopulated = episodes.populated;
+      result.episodesFetching = episodes.isFetching;
+      result.episodesPopulated = episodes.isPopulated;
       result.episodesError = episodes.error;
 
       return result;

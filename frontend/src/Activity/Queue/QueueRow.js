@@ -76,7 +76,7 @@ class QueueRow extends Component {
       showRelativeDates,
       shortDateFormat,
       timeFormat,
-      grabbing,
+      isGrabbing,
       removing,
       onGrabPress
     } = this.props;
@@ -175,7 +175,7 @@ class QueueRow extends Component {
             isPending &&
               <SpinnerIconButton
                 name={icons.DOWNLOAD}
-                isSpinning={grabbing}
+                isSpinning={isGrabbing}
                 onPress={onGrabPress}
               />
           }
@@ -224,14 +224,14 @@ QueueRow.propTypes = {
   showRelativeDates: PropTypes.bool.isRequired,
   shortDateFormat: PropTypes.string.isRequired,
   timeFormat: PropTypes.string.isRequired,
-  grabbing: PropTypes.bool.isRequired,
+  isGrabbing: PropTypes.bool.isRequired,
   removing: PropTypes.bool.isRequired,
   onGrabPress: PropTypes.func.isRequired,
   onRemoveQueueItemPress: PropTypes.func.isRequired
 };
 
 QueueRow.defaultProps = {
-  grabbing: false,
+  isGrabbing: false,
   removing: false
 };
 

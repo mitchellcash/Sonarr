@@ -41,7 +41,7 @@ function getTitle(time, start, end, view, longDateFormat) {
 
 function CalendarHeader(props) {
   const {
-    fetching,
+    isFetching,
     time,
     start,
     end,
@@ -98,7 +98,7 @@ function CalendarHeader(props) {
 
         <div className={styles.viewButtonsContainer}>
           {
-            fetching &&
+            isFetching &&
               <LoadingIndicator
                 className={styles.loading}
                 size={20}
@@ -194,7 +194,7 @@ function CalendarHeader(props) {
 }
 
 CalendarHeader.propTypes = {
-  fetching: PropTypes.bool.isRequired,
+  isFetching: PropTypes.bool.isRequired,
   time: PropTypes.string.isRequired,
   start: PropTypes.string.isRequired,
   end: PropTypes.string.isRequired,

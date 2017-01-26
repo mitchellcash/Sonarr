@@ -44,8 +44,8 @@ function createMapStateToProps() {
       return {
         items,
         seriesType: series.seriesType,
-        deleting: episodeFiles.deleting,
-        saving: episodeFiles.saving,
+        isDeleting: episodeFiles.isDeleting,
+        isSaving: episodeFiles.isSaving,
         qualities
       };
     }

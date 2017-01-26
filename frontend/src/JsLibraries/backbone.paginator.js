@@ -135,16 +135,16 @@
        @property {0|1} [state.firstPage=1] The first page index. Set to 0 if
        your server API uses 0-based indices. You should only override this value
        during extension, initialization or reset by the server after
-       fetching. This value should be read only at other times.
+       isFetching. This value should be read only at other times.
 
        @property {number} [state.lastPage=null] The last page index. This value
        is __read only__ and it's calculated based on whether `firstPage` is 0 or
-       1, during bootstrapping, fetching and resetting. Please don't change this
+       1, during bootstrapping, isFetching and resetting. Please don't change this
        value under any circumstances.
 
        @property {number} [state.currentPage=null] The current page index. You
        should only override this value during extension, initialization or reset
-       by the server after fetching. This value should be read only at other
+       by the server after isFetching. This value should be read only at other
        times. Can be a 0-based or 1-based index, depending on whether
        `firstPage` is 0 or 1. If left as default, it will be set to `firstPage`
        on initialization.
@@ -159,7 +159,7 @@
        @property {number} [state.totalRecords=null] How many records there
        are. This value is __required__ under server mode. This value is optional
        for client mode as the number will be the same as the number of models
-       during bootstrapping and during fetching, either supplied by the server
+       during bootstrapping and during isFetching, either supplied by the server
        in the metadata, or calculated from the size of the response.
 
        @property {string} [state.sortKey=null] The model attribute to use for
@@ -656,15 +656,15 @@
 
        If switching from client to server mode, the #fullCollection is emptied
        first and then deleted and a fetch is immediately issued for the current
-       page from the server. Pass `false` to `options.fetch` to skip fetching.
+       page from the server. Pass `false` to `options.fetch` to skip isFetching.
 
        If switching to infinite mode, and if `options.models` is given for an
-       array of models, #links will be populated with a URL per page, using the
+       array of models, #links will be isPopulated with a URL per page, using the
        default URL for this collection.
 
        If switching from server to client mode, all of the pages are immediately
        refetched. If you have too many pages, you can pass `false` to
-       `options.fetch` to skip fetching.
+       `options.fetch` to skip isFetching.
 
        If switching to any mode from infinite mode, the #links will be deleted.
 
@@ -672,7 +672,7 @@
 
        @param {Object} [options]
 
-       @param {boolean} [options.fetch=true] If `false`, no fetching is done.
+       @param {boolean} [options.fetch=true] If `false`, no isFetching is done.
 
        @param {boolean} [options.resetState=true] If 'false', the state is not
        reset, but checked for sanity instead.
@@ -822,7 +822,7 @@
        infinite mode, if the index is less than the current page, a reset is
        done as in client mode. If the index is greater than the current page
        number, a fetch is made with the results **appended** to #fullCollection.
-       The current page will then be reset after fetching.
+       The current page will then be reset after isFetching.
 
        @param {number|string} index The page index to go to, or the page name to
        look up from #links in infinite mode.

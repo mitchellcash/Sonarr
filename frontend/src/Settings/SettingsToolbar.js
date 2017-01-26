@@ -10,7 +10,7 @@ function SettingsToolbar(props) {
   const {
     advancedSettings,
     showSave,
-    saving,
+    isSaving,
     hasPendingChanges,
     onSavePress,
     onAdvancedSettingsPress
@@ -34,7 +34,7 @@ function SettingsToolbar(props) {
             <PageToolbarButton
               iconName={icons.SAVE}
               title="Save"
-              isSpinning={saving}
+              isSpinning={isSaving}
               isDisabled={!hasPendingChanges}
               onPress={onSavePress}
             />
@@ -47,7 +47,7 @@ function SettingsToolbar(props) {
 SettingsToolbar.propTypes = {
   advancedSettings: PropTypes.bool.isRequired,
   showSave: PropTypes.bool.isRequired,
-  saving: PropTypes.bool,
+  isSaving: PropTypes.bool,
   hasPendingChanges: PropTypes.bool,
   onSavePress: PropTypes.func,
   onAdvancedSettingsPress: PropTypes.func.isRequired

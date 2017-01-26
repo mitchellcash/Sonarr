@@ -36,7 +36,7 @@ class Tasks extends Component {
 
   render() {
     const {
-      fetching,
+      isFetching,
       items
     } = this.props;
 
@@ -44,12 +44,12 @@ class Tasks extends Component {
       <PageContent title="Tasks">
         <PageContentBody>
           {
-            fetching &&
+            isFetching &&
               <LoadingIndicator />
           }
 
           {
-            !fetching &&
+            !isFetching &&
               <Table
                 headers={headers}
               >
@@ -75,7 +75,7 @@ class Tasks extends Component {
 }
 
 Tasks.propTypes = {
-  fetching: PropTypes.bool.isRequired,
+  isFetching: PropTypes.bool.isRequired,
   items: PropTypes.array.isRequired
 };
 

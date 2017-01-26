@@ -4,7 +4,7 @@ import { set, update } from '../baseActions';
 function createSaveHandler(section, url, getFromState) {
   return function(payload) {
     return function(dispatch, getState) {
-      dispatch(set({ section, saving: true }));
+      dispatch(set({ section, isSaving: true }));
 
       const state = getFromState(getState());
       const saveData = Object.assign({}, state.item, state.pendingChanges);
@@ -21,7 +21,7 @@ function createSaveHandler(section, url, getFromState) {
 
         dispatch(set({
           section,
-          saving: false,
+          isSaving: false,
           saveError: null,
           pendingChanges: {}
         }));
@@ -30,7 +30,7 @@ function createSaveHandler(section, url, getFromState) {
       promise.fail((xhr) => {
         dispatch(set({
           section,
-          saving: false,
+          isSaving: false,
           saveError: xhr
         }));
       });

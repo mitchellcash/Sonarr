@@ -44,7 +44,7 @@ class Blacklist extends Component {
 
   render() {
     const {
-      fetching,
+      isFetching,
       items,
       totalRecords,
       isClearingBlacklistExecuting,
@@ -67,12 +67,12 @@ class Blacklist extends Component {
 
         <PageContentBody>
           {
-            fetching &&
+            isFetching &&
               <LoadingIndicator />
           }
 
           {
-            !fetching &&
+            !isFetching &&
               <div>
                 <Table
                   headers={headers}
@@ -105,7 +105,7 @@ class Blacklist extends Component {
 }
 
 Blacklist.propTypes = {
-  fetching: PropTypes.bool.isRequired,
+  isFetching: PropTypes.bool.isRequired,
   items: PropTypes.array.isRequired,
   totalRecords: PropTypes.number,
   isClearingBlacklistExecuting: PropTypes.bool.isRequired,

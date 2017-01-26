@@ -116,7 +116,7 @@ class CutoffUnmet extends Component {
 
   render() {
     const {
-      fetching,
+      isFetching,
       items,
       totalRecords,
       isSearchingForEpisodes,
@@ -193,12 +193,12 @@ class CutoffUnmet extends Component {
 
         <PageContentBody>
           {
-            fetching &&
+            isFetching &&
               <LoadingIndicator />
           }
 
           {
-            !fetching &&
+            !isFetching &&
               <div>
                 <Table
                   headers={headers}
@@ -256,7 +256,7 @@ class CutoffUnmet extends Component {
 }
 
 CutoffUnmet.propTypes = {
-  fetching: PropTypes.bool.isRequired,
+  isFetching: PropTypes.bool.isRequired,
   items: PropTypes.array.isRequired,
   totalRecords: PropTypes.number,
   isSearchingForEpisodes: PropTypes.bool.isRequired,

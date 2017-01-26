@@ -18,14 +18,14 @@ class Updates extends Component {
 
   render() {
     const {
-      fetching,
+      isFetching,
       items,
       shortDateFormat,
       onInstallLatestPress
     } = this.props;
 
-    const hasUpdates = !fetching && items.length > 0;
-    const noUpdates = !fetching && !items.length;
+    const hasUpdates = !isFetching && items.length > 0;
+    const noUpdates = !isFetching && !items.length;
     const hasUpdateToInstall = hasUpdates && _.some(items, { installable: true, latest: true });
     const noUpdateToInstall = hasUpdates && !hasUpdateToInstall;
 
@@ -33,7 +33,7 @@ class Updates extends Component {
       <PageContent title="Updates">
         <PageContentBody>
           {
-            fetching &&
+            isFetching &&
               <LoadingIndicator />
           }
 
@@ -127,7 +127,7 @@ class Updates extends Component {
 }
 
 Updates.propTypes = {
-  fetching: PropTypes.bool.isRequired,
+  isFetching: PropTypes.bool.isRequired,
   items: PropTypes.array.isRequired,
   shortDateFormat: PropTypes.string.isRequired,
   onInstallLatestPress: PropTypes.func.isRequired

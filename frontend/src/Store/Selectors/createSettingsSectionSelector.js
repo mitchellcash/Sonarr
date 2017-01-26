@@ -6,22 +6,22 @@ function createSettingsSectionSelector() {
     (state, { section }) => state.settings[section],
     (sectionSettings) => {
       const {
-        fetching,
-        populated,
+        isFetching,
+        isPopulated,
         error,
         item,
         pendingChanges,
-        saving,
+        isSaving,
         saveError
       } = sectionSettings;
 
       const settings = selectSettings(item, pendingChanges, saveError);
 
       return {
-        fetching,
-        populated,
+        isFetching,
+        isPopulated,
         error,
-        saving,
+        isSaving,
         ...settings
       };
     }

@@ -14,14 +14,14 @@ function createMapStateToProps() {
     createCommandsSelector(),
     (logFiles, commands) => {
       const {
-        fetching,
+        isFetching,
         items
       } = logFiles;
 
       const deleteFilesExecuting = _.some(commands, { name: commandNames.DELETE_LOG_FILES });
 
       return {
-        fetching,
+        isFetching,
         items,
         deleteFilesExecuting,
         currentLogView: 'Log Files'

@@ -106,7 +106,7 @@ class DownloadClients extends Component {
 }
 
 DownloadClients.propTypes = {
-  fetching: PropTypes.bool.isRequired,
+  isFetching: PropTypes.bool.isRequired,
   error: PropTypes.object,
   items: PropTypes.arrayOf(PropTypes.object).isRequired,
   onConfirmDeleteDownloadClient: PropTypes.func.isRequired

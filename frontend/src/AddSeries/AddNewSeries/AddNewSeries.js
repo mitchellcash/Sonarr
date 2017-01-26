@@ -63,7 +63,7 @@ class AddNewSeries extends Component {
 
   render() {
     const {
-      fetching,
+      isFetching,
       error,
       items
     } = this.props;
@@ -101,17 +101,17 @@ class AddNewSeries extends Component {
           </div>
 
           {
-            fetching &&
+            isFetching &&
               <LoadingIndicator />
           }
 
           {
-            !fetching && !!error &&
+            !isFetching && !!error &&
               <div>Failed to load search results, please try again.</div>
           }
 
           {
-            !fetching && !!items.length &&
+            !isFetching && !!items.length &&
               <div className={styles.searchResults}>
                 {
                   items.map((item) => {
@@ -127,7 +127,7 @@ class AddNewSeries extends Component {
           }
 
           {
-            !fetching && !items.length && !!term &&
+            !isFetching && !items.length && !!term &&
               <div className={styles.message}>
                 <div className={styles.noResults}>Couldn't find any results for '{term}'</div>
                 <div>You can also search using TVDB ID of a show. eg. tvdb:71663</div>
@@ -152,9 +152,9 @@ class AddNewSeries extends Component {
 }
 
 AddNewSeries.propTypes = {
-  fetching: PropTypes.bool.isRequired,
+  isFetching: PropTypes.bool.isRequired,
   error: PropTypes.object,
-  adding: PropTypes.bool.isRequired,
+  isAdding: PropTypes.bool.isRequired,
   addError: PropTypes.object,
   items: PropTypes.arrayOf(PropTypes.object).isRequired,
   onSeriesLookupChange: PropTypes.func.isRequired,

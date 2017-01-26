@@ -111,8 +111,8 @@ class SeriesEditor extends Component {
 
   render() {
     const {
-      fetching,
-      populated,
+      isFetching,
+      isPopulated,
       error,
       items,
       filterKey,
@@ -193,17 +193,17 @@ class SeriesEditor extends Component {
 
         <PageContentBody>
           {
-            fetching && !populated &&
+            isFetching && !isPopulated &&
               <LoadingIndicator />
           }
 
           {
-            !fetching && !!error &&
+            !isFetching && !!error &&
               <div>Unable to load the calendar</div>
           }
 
           {
-            !error && populated && !!items.length &&
+            !error && isPopulated && !!items.length &&
               <div>
                 <Table
                   headers={headers}
@@ -234,7 +234,7 @@ class SeriesEditor extends Component {
           }
 
           {
-            !error && populated && !items.length &&
+            !error && isPopulated && !items.length &&
               <div>
                 No series found, import existing series or add a new series
               </div>
@@ -261,8 +261,8 @@ class SeriesEditor extends Component {
 }
 
 SeriesEditor.propTypes = {
-  fetching: PropTypes.bool.isRequired,
-  populated: PropTypes.bool.isRequired,
+  isFetching: PropTypes.bool.isRequired,
+  isPopulated: PropTypes.bool.isRequired,
   error: PropTypes.object,
   items: PropTypes.arrayOf(PropTypes.object).isRequired,
   sortKey: PropTypes.string,

@@ -15,8 +15,8 @@ function createMapStateToProps() {
     createSeriesSelector(),
     (organizePreview, naming, series) => {
       const props = { ...organizePreview };
-      props.fetching = organizePreview.fetching || naming.fetching;
-      props.populated = organizePreview.populated && naming.populated;
+      props.isFetching = organizePreview.isFetching || naming.isFetching;
+      props.isPopulated = organizePreview.isPopulated && naming.isPopulated;
       props.error = organizePreview.error || naming.error;
       props.renameEpisodes = naming.item.renameEpisodes;
       props.episodeFormat = naming.item[`${series.seriesType}EpisodeFormat`];

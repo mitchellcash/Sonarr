@@ -37,7 +37,7 @@ class EditNotificationModalContentConnector extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if (prevProps.saving && !this.props.saving && !this.props.saveError) {
+    if (prevProps.isSaving && !this.props.isSaving && !this.props.saveError) {
       this.props.onModalClose();
     }
   }
@@ -79,8 +79,8 @@ class EditNotificationModalContentConnector extends Component {
 
 EditNotificationModalContentConnector.propTypes = {
   id: PropTypes.number,
-  fetching: PropTypes.bool.isRequired,
-  saving: PropTypes.bool.isRequired,
+  isFetching: PropTypes.bool.isRequired,
+  isSaving: PropTypes.bool.isRequired,
   saveError: PropTypes.object,
   item: PropTypes.object.isRequired,
   setNotificationValue: PropTypes.func.isRequired,

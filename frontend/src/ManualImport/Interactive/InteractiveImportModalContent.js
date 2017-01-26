@@ -107,8 +107,8 @@ class InteractiveImportModalContent extends Component {
     const {
       title,
       folder,
-      fetching,
-      populated,
+      isFetching,
+      isPopulated,
       error,
       items,
       sortKey,
@@ -140,7 +140,7 @@ class InteractiveImportModalContent extends Component {
 
         <ModalBody>
           {
-            fetching &&
+            isFetching &&
               <LoadingIndicator />
           }
 
@@ -150,7 +150,7 @@ class InteractiveImportModalContent extends Component {
           }
 
           {
-            populated && !!items.length &&
+            isPopulated && !!items.length &&
               <Table
                 headers={headers}
                 selectAll={true}
@@ -179,7 +179,7 @@ class InteractiveImportModalContent extends Component {
           }
 
           {
-            populated && !items.length &&
+            isPopulated && !items.length &&
               'No video files were found in the selected folder'
           }
         </ModalBody>
@@ -220,8 +220,8 @@ InteractiveImportModalContent.propTypes = {
   importMode: PropTypes.string,
   title: PropTypes.string,
   folder: PropTypes.string,
-  fetching: PropTypes.bool.isRequired,
-  populated: PropTypes.bool.isRequired,
+  isFetching: PropTypes.bool.isRequired,
+  isPopulated: PropTypes.bool.isRequired,
   error: PropTypes.object,
   items: PropTypes.arrayOf(PropTypes.object).isRequired,
   sortKey: PropTypes.string,

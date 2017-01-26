@@ -38,8 +38,8 @@ class EpisodeHistory extends Component {
 
   render() {
     const {
-      fetching,
-      populated,
+      isFetching,
+      isPopulated,
       error,
       items,
       onMarkAsFailedPress
@@ -47,25 +47,25 @@ class EpisodeHistory extends Component {
 
     const hasItems = !!items.length;
 
-    if (fetching) {
+    if (isFetching) {
       return (
         <LoadingIndicator />
       );
     }
 
-    if (!fetching && !!error) {
+    if (!isFetching && !!error) {
       return (
         <div>Unable to load episode history.</div>
       );
     }
 
-    if (populated && !hasItems && !error) {
+    if (isPopulated && !hasItems && !error) {
       return (
         <div>No episode history.</div>
       );
     }
 
-    if (populated && hasItems && !error) {
+    if (isPopulated && hasItems && !error) {
       return (
         <Table
           headers={headers}
@@ -92,8 +92,8 @@ class EpisodeHistory extends Component {
 }
 
 EpisodeHistory.propTypes = {
-  fetching: PropTypes.bool.isRequired,
-  populated: PropTypes.bool.isRequired,
+  isFetching: PropTypes.bool.isRequired,
+  isPopulated: PropTypes.bool.isRequired,
   error: PropTypes.object,
   items: PropTypes.arrayOf(PropTypes.object).isRequired,
   onMarkAsFailedPress: PropTypes.func.isRequired

@@ -52,7 +52,7 @@ class LogsTable extends Component {
 
   render() {
     const {
-      fetching,
+      isFetching,
       items,
       filterKey,
       filterValue,
@@ -73,7 +73,7 @@ class LogsTable extends Component {
             <PageToolbarButton
               iconName={icons.REFRESH}
               spinningName={icons.REFRESH}
-              isSpinning={fetching}
+              isSpinning={isFetching}
               onPress={onRefreshPress}
             />
 
@@ -131,12 +131,12 @@ class LogsTable extends Component {
 
         <PageContentBody>
           {
-            fetching &&
+            isFetching &&
               <LoadingIndicator />
           }
 
           {
-            !fetching &&
+            !isFetching &&
               <div>
                 <Table
                   headers={headers}
@@ -167,7 +167,7 @@ class LogsTable extends Component {
 }
 
 LogsTable.propTypes = {
-  fetching: PropTypes.bool.isRequired,
+  isFetching: PropTypes.bool.isRequired,
   items: PropTypes.array.isRequired,
   filterKey: PropTypes.string,
   filterValue: PropTypes.string,

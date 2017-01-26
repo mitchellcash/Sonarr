@@ -3,18 +3,18 @@ import getSectionState from 'Utilities/State/getSectionState';
 import updateSectionState from 'Utilities/State/updateSectionState';
 
 const whitelistedProperties = [
-  'fetching',
-  'populated',
+  'isFetching',
+  'isPopulated',
   'error',
-  'fetchingSchema',
+  'isFetchingSchema',
   'schemaPopulated',
   'schemaError',
   'schema',
   'selectedSchema',
-  'saving',
+  'isSaving',
   'saveError',
   'testing',
-  'deleting',
+  'isDeleting',
   'deleteError',
   'pendingChanges',
   'filterKey',

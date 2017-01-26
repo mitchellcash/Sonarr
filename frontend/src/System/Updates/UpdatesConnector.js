@@ -13,12 +13,12 @@ function createMapStateToProps() {
     createUISettingsSelector(),
     (updates, uiSettings) => {
       const {
-        fetching,
+        isFetching,
         items
       } = updates;
 
       return {
-        fetching,
+        isFetching,
         items,
         shortDateFormat: uiSettings.shortDateFormat
       };

@@ -19,7 +19,7 @@ class EditRestrictionModalContent extends Component {
 
   render() {
     const {
-      saving,
+      isSaving,
       item,
       onInputChange,
       onModalClose,
@@ -105,7 +105,7 @@ class EditRestrictionModalContent extends Component {
           </Button>
 
           <SpinnerButton
-            isSpinning={saving}
+            isSpinning={isSaving}
             onPress={onSavePress}
           >
             Save
@@ -117,7 +117,7 @@ class EditRestrictionModalContent extends Component {
 }
 
 EditRestrictionModalContent.propTypes = {
-  saving: PropTypes.bool.isRequired,
+  isSaving: PropTypes.bool.isRequired,
   saveError: PropTypes.object,
   item: PropTypes.object.isRequired,
   onInputChange: PropTypes.func.isRequired,

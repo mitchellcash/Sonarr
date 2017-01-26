@@ -9,7 +9,7 @@ function createMapStateToProps() {
     (state) => state.queue.queueStatus,
     (status) => {
       return {
-        populated: status.populated,
+        isPopulated: status.isPopulated,
         ...status.item
       };
     }
@@ -26,7 +26,7 @@ class QueueStatusConnector extends Component {
   // Lifecycle
 
   componentWillMount() {
-    if (!this.props.populated) {
+    if (!this.props.isPopulated) {
       this.props.fetchQueueStatus();
     }
   }
@@ -44,7 +44,7 @@ class QueueStatusConnector extends Component {
 }
 
 QueueStatusConnector.propTypes = {
-  populated: PropTypes.bool.isRequired,
+  isPopulated: PropTypes.bool.isRequired,
   fetchQueueStatus: PropTypes.func.isRequired
 };
 

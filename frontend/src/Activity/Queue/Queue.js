@@ -62,8 +62,8 @@ class Queue extends Component {
 
   render() {
     const {
-      fetching,
-      populated,
+      isFetching,
+      isPopulated,
       error,
       items,
       totalRecords,
@@ -78,7 +78,7 @@ class Queue extends Component {
             <PageToolbarButton
               iconName={icons.REFRESH}
               title="Refresh"
-              isSpinning={fetching}
+              isSpinning={isFetching}
               onPress={onRefreshPress}
             />
           </PageToolbarSection>
@@ -86,26 +86,26 @@ class Queue extends Component {
 
         <PageContentBody>
           {
-            fetching && !populated &&
+            isFetching && !isPopulated &&
               <LoadingIndicator />
           }
 
           {
-            !fetching && error &&
+            !isFetching && error &&
               <div>
                 Failed to load Queue
               </div>
           }
 
           {
-            populated && !error && !items.length &&
+            isPopulated && !error && !items.length &&
               <div>
                 Queue is empty
               </div>
           }
 
           {
-            populated && !error && !!items.length &&
+            isPopulated && !error && !!items.length &&
               <div>
                 <Table
                   headers={headers}
@@ -129,7 +129,7 @@ class Queue extends Component {
 
                 <TablePager
                   totalRecords={totalRecords}
-                  fetching={fetching}
+                  isFetching={isFetching}
                   {...otherProps}
                 />
               </div>
@@ -141,8 +141,8 @@ class Queue extends Component {
 }
 
 Queue.propTypes = {
-  fetching: PropTypes.bool.isRequired,
-  populated: PropTypes.bool.isRequired,
+  isFetching: PropTypes.bool.isRequired,
+  isPopulated: PropTypes.bool.isRequired,
   error: PropTypes.object,
   items: PropTypes.array.isRequired,
   totalRecords: PropTypes.number,

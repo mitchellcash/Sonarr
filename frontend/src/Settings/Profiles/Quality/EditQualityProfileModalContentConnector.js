@@ -70,7 +70,7 @@ class EditQualityProfileModalContentConnector extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if (prevProps.saving && !this.props.saving && !this.props.saveError) {
+    if (prevProps.isSaving && !this.props.isSaving && !this.props.saveError) {
       this.props.onModalClose();
     }
   }
@@ -151,7 +151,7 @@ class EditQualityProfileModalContentConnector extends Component {
   // Render
 
   render() {
-    if (_.isEmpty(this.props.item.items) && !this.props.fetching) {
+    if (_.isEmpty(this.props.item.items) && !this.props.isFetching) {
       return null;
     }
 
@@ -172,8 +172,8 @@ class EditQualityProfileModalContentConnector extends Component {
 
 EditQualityProfileModalContentConnector.propTypes = {
   id: PropTypes.number,
-  fetching: PropTypes.bool.isRequired,
-  saving: PropTypes.bool.isRequired,
+  isFetching: PropTypes.bool.isRequired,
+  isSaving: PropTypes.bool.isRequired,
   saveError: PropTypes.object,
   item: PropTypes.object.isRequired,
   setQualityProfileValue: PropTypes.func.isRequired,

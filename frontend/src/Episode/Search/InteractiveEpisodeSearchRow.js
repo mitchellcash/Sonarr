@@ -13,8 +13,8 @@ import EpisodeQuality from 'Episode/EpisodeQuality';
 import ProtocolLabel from 'Activity/Queue/ProtocolLabel';
 import styles from './InteractiveEpisodeSearchRow.css';
 
-function getDownloadIcon(grabbing, grabbed, grabError) {
-  if (grabbing) {
+function getDownloadIcon(isGrabbing, grabbed, grabError) {
+  if (isGrabbing) {
     return icons.SPINNER;
   } else if (grabbed) {
     return icons.DOWNLOADING;
@@ -25,8 +25,8 @@ function getDownloadIcon(grabbing, grabbed, grabError) {
   return icons.DOWNLOAD;
 }
 
-function getDownloadTooltip(grabbing, grabbed, grabError) {
-  if (grabbing) {
+function getDownloadTooltip(isGrabbing, grabbed, grabError) {
+  if (isGrabbing) {
     return '';
   } else if (grabbed) {
     return 'Added to downloaded queue';
@@ -64,7 +64,7 @@ class InteractiveEpisodeSearchRow extends Component {
       quality,
       rejections,
       downloadAllowed,
-      grabbing,
+      isGrabbing,
       grabbed,
       grabError
     } = this.props;
@@ -140,10 +140,10 @@ class InteractiveEpisodeSearchRow extends Component {
           {
             downloadAllowed &&
               <SpinnerIconButton
-                name={getDownloadIcon(grabbing, grabbed, grabError)}
+                name={getDownloadIcon(isGrabbing, grabbed, grabError)}
                 kind={grabError ? kinds.DANGER : kinds.DEFAULT}
-                title={getDownloadTooltip(grabbing, grabbed, grabError)}
-                isSpinning={grabbing}
+                title={getDownloadTooltip(isGrabbing, grabbed, grabError)}
+                isSpinning={isGrabbing}
                 onPress={this.onGrabPress}
               />
           }
@@ -168,14 +168,14 @@ InteractiveEpisodeSearchRow.propTypes = {
   quality: PropTypes.object.isRequired,
   rejections: PropTypes.arrayOf(PropTypes.string).isRequired,
   downloadAllowed: PropTypes.bool.isRequired,
-  grabbing: PropTypes.bool.isRequired,
+  isGrabbing: PropTypes.bool.isRequired,
   grabbed: PropTypes.bool.isRequired,
   grabError: PropTypes.string,
   onGrabPress: PropTypes.func.isRequired
 };
 
 InteractiveEpisodeSearchRow.defaultProps = {
-  grabbing: false,
+  isGrabbing: false,
   grabbed: false
 };
 

@@ -12,18 +12,18 @@ function createProviderSettingsSelector() {
         const settings = selectSettings(Object.assign({ name: '' }, item), section.pendingChanges, section.saveError);
 
         const {
-          fetchingSchema: fetching,
+          isFetchingSchema: isFetching,
           schemaError: error,
-          saving,
+          isSaving,
           saveError,
           testing,
           pendingChanges
         } = section;
 
         return {
-          fetching,
+          isFetching,
           error,
-          saving,
+          isSaving,
           saveError,
           testing,
           pendingChanges,
@@ -33,9 +33,9 @@ function createProviderSettingsSelector() {
       }
 
       const {
-        fetching,
+        isFetching,
         error,
-        saving,
+        isSaving,
         saveError,
         testing,
         pendingChanges
@@ -44,9 +44,9 @@ function createProviderSettingsSelector() {
       const settings = selectSettings(_.find(section.items, { id }), pendingChanges, saveError);
 
       return {
-        fetching,
+        isFetching,
         error,
-        saving,
+        isSaving,
         saveError,
         testing,
         item: settings.settings,

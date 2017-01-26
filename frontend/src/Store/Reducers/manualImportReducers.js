@@ -8,8 +8,8 @@ import createUpdateReducer from './Creators/createUpdateReducer';
 import createSetClientSideCollectionSortReducer from './Creators/createSetClientSideCollectionSortReducer';
 
 export const defaultState = {
-  fetching: false,
-  populated: false,
+  isFetching: false,
+  isPopulated: false,
   error: null,
   items: [],
   sortKey: 'quality',

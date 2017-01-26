@@ -14,7 +14,7 @@ function createMapStateToProps() {
     createCommandsSelector(),
     (logs, commands) => {
       const result = _.pick(logs, [
-        'fetching',
+        'isFetching',
         'items',
         'page',
         'totalPages',

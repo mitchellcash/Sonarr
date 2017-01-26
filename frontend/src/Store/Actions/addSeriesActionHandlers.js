@@ -9,7 +9,7 @@ const section = 'addSeries';
 const addSeriesActionHandlers = {
   [types.LOOKUP_SERIES]: function(payload) {
     return function(dispatch, getState) {
-      dispatch(set({ section, fetching: true }));
+      dispatch(set({ section, isFetching: true }));
 
       const promise = $.ajax({
         url: '/series/lookup',
@@ -23,8 +23,8 @@ const addSeriesActionHandlers = {
 
         dispatch(set({
           section,
-          fetching: false,
-          populated: true,
+          isFetching: false,
+          isPopulated: true,
           error: null
         }));
       });
@@ -32,8 +32,8 @@ const addSeriesActionHandlers = {
       promise.fail((xhr) => {
         dispatch(set({
           section,
-          fetching: false,
-          populated: false,
+          isFetching: false,
+          isPopulated: false,
           error: xhr
         }));
       });
@@ -42,7 +42,7 @@ const addSeriesActionHandlers = {
 
   [types.ADD_SERIES]: function(payload) {
     return function(dispatch, getState) {
-      dispatch(set({ section, adding: true }));
+      dispatch(set({ section, isAdding: true }));
 
       const tvdbId = payload.tvdbId;
       const items = getState().addSeries.items;
@@ -60,8 +60,8 @@ const addSeriesActionHandlers = {
 
         dispatch(set({
           section,
-          adding: false,
-          added: true,
+          isAdding: false,
+          isAdded: true,
           addError: null
         }));
       });
@@ -69,8 +69,8 @@ const addSeriesActionHandlers = {
       promise.fail((xhr) => {
         dispatch(set({
           section,
-          adding: false,
-          added: false,
+          isAdding: false,
+          isAdded: false,
           addError: xhr
         }));
       });

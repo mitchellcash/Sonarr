@@ -22,9 +22,9 @@ class EditNotificationModalContent extends Component {
   render() {
     const {
       advancedSettings,
-      fetching,
+      isFetching,
       error,
-      saving,
+      isSaving,
       testing,
       item,
       onInputChange,
@@ -59,17 +59,17 @@ class EditNotificationModalContent extends Component {
 
         <ModalBody>
           {
-            fetching &&
+            isFetching &&
               <LoadingIndicator />
           }
 
           {
-            !fetching && !!error &&
+            !isFetching && !!error &&
               <div>Unable to add a new notification, please try again.</div>
           }
 
           {
-            !fetching && !error &&
+            !isFetching && !error &&
               <Form
                 {...otherProps}
               >
@@ -195,7 +195,7 @@ class EditNotificationModalContent extends Component {
           </Button>
 
           <SpinnerButton
-            isSpinning={saving}
+            isSpinning={isSaving}
             onPress={onSavePress}
           >
             Save
@@ -208,9 +208,9 @@ class EditNotificationModalContent extends Component {
 
 EditNotificationModalContent.propTypes = {
   advancedSettings: PropTypes.bool.isRequired,
-  fetching: PropTypes.bool.isRequired,
+  isFetching: PropTypes.bool.isRequired,
   error: PropTypes.object,
-  saving: PropTypes.bool.isRequired,
+  isSaving: PropTypes.bool.isRequired,
   saveError: PropTypes.object,
   testing: PropTypes.bool.isRequired,
   item: PropTypes.object.isRequired,

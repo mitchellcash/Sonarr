@@ -8,7 +8,7 @@ const section = 'paths';
 const pathActionHandlers = {
   [types.FETCH_PATHS](payload) {
     return (dispatch, getState) => {
-      dispatch(set({ section, fetching: true }));
+      dispatch(set({ section, isFetching: true }));
 
       const promise = $.ajax({
         url: '/filesystem',
@@ -22,8 +22,8 @@ const pathActionHandlers = {
 
         dispatch(set({
           section,
-          fetching: false,
-          populated: true,
+          isFetching: false,
+          isPopulated: true,
           error: null
         }));
       });
@@ -31,8 +31,8 @@ const pathActionHandlers = {
       promise.fail((xhr) => {
         dispatch(set({
           section,
-          fetching: false,
-          populated: false,
+          isFetching: false,
+          isPopulated: false,
           error: xhr
         }));
       });

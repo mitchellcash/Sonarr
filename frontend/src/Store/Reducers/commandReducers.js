@@ -6,8 +6,8 @@ import createUpdateReducer from './Creators/createUpdateReducer';
 import createUpdateItemReducer from './Creators/createUpdateItemReducer';
 
 export const defaultState = {
-  fetching: false,
-  populated: false,
+  isFetching: false,
+  isPopulated: false,
   error: null,
   items: [],
   handlers: {}

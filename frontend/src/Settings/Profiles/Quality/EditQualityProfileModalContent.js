@@ -20,7 +20,7 @@ class EditQualityProfileModalContent extends Component {
 
   render() {
     const {
-      fetching,
+      isFetching,
       error,
       languages,
       qualities,
@@ -55,17 +55,17 @@ class EditQualityProfileModalContent extends Component {
 
         <ModalBody>
           {
-            fetching &&
+            isFetching &&
               <LoadingIndicator />
           }
 
           {
-            !fetching && !!error &&
+            !isFetching && !!error &&
               <div>Unable to add a new quality profile, please try again.</div>
           }
 
           {
-            !fetching && !error &&
+            !isFetching && !error &&
               <Form
                 {...otherProps}
               >
@@ -145,11 +145,11 @@ class EditQualityProfileModalContent extends Component {
 }
 
 EditQualityProfileModalContent.propTypes = {
-  fetching: PropTypes.bool.isRequired,
+  isFetching: PropTypes.bool.isRequired,
   error: PropTypes.object,
   languages: PropTypes.arrayOf(PropTypes.object).isRequired,
   qualities: PropTypes.arrayOf(PropTypes.object).isRequired,
-  saving: PropTypes.bool.isRequired,
+  isSaving: PropTypes.bool.isRequired,
   saveError: PropTypes.object,
   item: PropTypes.object.isRequired,
   onInputChange: PropTypes.func.isRequired,

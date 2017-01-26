@@ -13,8 +13,8 @@ class Calendar extends Component {
 
   render() {
     const {
-      fetching,
-      populated,
+      isFetching,
+      isPopulated,
       error,
       view
     } = this.props;
@@ -22,17 +22,17 @@ class Calendar extends Component {
     return (
       <div>
         {
-          fetching && !populated &&
+          isFetching && !isPopulated &&
             <LoadingIndicator />
         }
 
         {
-          !fetching && !!error &&
+          !isFetching && !!error &&
             <div>Unable to load the calendar</div>
         }
 
         {
-          !error && populated &&
+          !error && isPopulated &&
             <div>
               {
                 view === calendarViews.AGENDA ?
@@ -56,8 +56,8 @@ class Calendar extends Component {
 }
 
 Calendar.propTypes = {
-  fetching: PropTypes.bool.isRequired,
-  populated: PropTypes.bool.isRequired,
+  isFetching: PropTypes.bool.isRequired,
+  isPopulated: PropTypes.bool.isRequired,
   error: PropTypes.object,
   view: PropTypes.string.isRequired
 };

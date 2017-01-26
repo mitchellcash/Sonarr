@@ -16,7 +16,7 @@ function createMapStateToProps() {
       const isClearingBlacklistExecuting = _.some(commands, { name: commandNames.CLEAR_BLACKLIST });
 
       const result = _.pick(blacklist, [
-        'fetching',
+        'isFetching',
         'items',
         'page',
         'totalPages',

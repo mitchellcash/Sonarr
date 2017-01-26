@@ -4,8 +4,8 @@ import createSetReducer from './Creators/createSetReducer';
 
 export const defaultState = {
   currentPath: '',
-  populated: false,
-  fetching: false,
+  isPopulated: false,
+  isFetching: false,
   error: null,
   directories: [],
   files: [],

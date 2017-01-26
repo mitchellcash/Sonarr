@@ -9,12 +9,12 @@ function createMapStateToProps() {
     (state) => state.system.diskSpace,
     (diskSpace) => {
       const {
-        fetching,
+        isFetching,
         items
       } = diskSpace;
 
       return {
-        fetching,
+        isFetching,
         items
       };
     }

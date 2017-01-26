@@ -12,7 +12,7 @@ const manualImportActionHandlers = {
         return;
       }
 
-      dispatch(set({ section, fetching: true }));
+      dispatch(set({ section, isFetching: true }));
 
       const promise = $.ajax({
         url: '/manualimport',
@@ -24,8 +24,8 @@ const manualImportActionHandlers = {
 
         dispatch(set({
           section,
-          fetching: false,
-          populated: true,
+          isFetching: false,
+          isPopulated: true,
           error: null
         }));
       });
@@ -33,8 +33,8 @@ const manualImportActionHandlers = {
       promise.fail((xhr) => {
         dispatch(set({
           section,
-          fetching: false,
-          populated: false,
+          isFetching: false,
+          isPopulated: false,
           error: xhr
         }));
       });

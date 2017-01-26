@@ -5,7 +5,7 @@ import { set, updateServerSideCollection } from '../baseActions';
 function createFetchServerSideCollectionHandler(section, url, getFromState) {
   return function(payload) {
     return function(dispatch, getState) {
-      dispatch(set({ section, fetching: true }));
+      dispatch(set({ section, isFetching: true }));
 
       const state = getFromState(getState());
       const sectionState = state.hasOwnProperty(section) ? state[section] : state;
@@ -30,8 +30,8 @@ function createFetchServerSideCollectionHandler(section, url, getFromState) {
 
         dispatch(set({
           section,
-          fetching: false,
-          populated: true,
+          isFetching: false,
+          isPopulated: true,
           error: null
         }));
       });
@@ -39,8 +39,8 @@ function createFetchServerSideCollectionHandler(section, url, getFromState) {
       promise.fail((xhr) => {
         dispatch(set({
           section,
-          fetching: false,
-          populated: false,
+          isFetching: false,
+          isPopulated: false,
           error: xhr
         }));
       });

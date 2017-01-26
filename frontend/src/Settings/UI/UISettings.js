@@ -17,7 +17,7 @@ class UISettings extends Component {
 
   render() {
     const {
-      fetching,
+      isFetching,
       error,
       settings,
       hasSettings,
@@ -61,17 +61,17 @@ class UISettings extends Component {
 
         <PageContentBody>
           {
-            fetching &&
+            isFetching &&
               <LoadingIndicator />
           }
 
           {
-            !fetching && error &&
+            !isFetching && error &&
               <div>Unable to load UI settings</div>
           }
 
           {
-            hasSettings && !fetching && !error &&
+            hasSettings && !isFetching && !error &&
               <Form
                 id="uiSettings"
                 {...otherProps}
@@ -180,7 +180,7 @@ class UISettings extends Component {
 }
 
 UISettings.propTypes = {
-  fetching: PropTypes.bool.isRequired,
+  isFetching: PropTypes.bool.isRequired,
   error: PropTypes.object,
   settings: PropTypes.object.isRequired,
   hasSettings: PropTypes.bool.isRequired,

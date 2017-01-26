@@ -7,8 +7,8 @@ import createUpdateItemReducer from './Creators/createUpdateItemReducer';
 import createSetClientSideCollectionSortReducer from './Creators/createSetClientSideCollectionSortReducer';
 
 export const defaultState = {
-  fetching: false,
-  populated: false,
+  isFetching: false,
+  isPopulated: false,
   error: null,
   items: [],
   sortKey: 'episodeNumber',

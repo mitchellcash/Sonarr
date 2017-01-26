@@ -94,8 +94,8 @@ class EpisodeFileEditorModalContent extends Component {
 
   render() {
     const {
-      deleting,
-      saving,
+      isDeleting,
+      isSaving,
       items,
       qualities,
       seriesType,
@@ -171,7 +171,7 @@ class EpisodeFileEditorModalContent extends Component {
 
           <SpinnerButton
             kind={kinds.DANGER}
-            isSpinning={deleting}
+            isSpinning={isDeleting}
             onPress={this.onDeletePress}
           >
             Delete
@@ -189,8 +189,8 @@ class EpisodeFileEditorModalContent extends Component {
 }
 
 EpisodeFileEditorModalContent.propTypes = {
-  deleting: PropTypes.bool.isRequired,
-  saving: PropTypes.bool.isRequired,
+  isDeleting: PropTypes.bool.isRequired,
+  isSaving: PropTypes.bool.isRequired,
   items: PropTypes.arrayOf(PropTypes.object).isRequired,
   qualities: PropTypes.arrayOf(PropTypes.object).isRequired,
   seriesType: PropTypes.string.isRequired,

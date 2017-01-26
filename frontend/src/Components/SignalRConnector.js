@@ -27,7 +27,7 @@ function getState(status) {
 function createMapStateToProps() {
   return createSelector(
     (state) => state.app.isReconnecting,
-    (state) => state.queue.paged.populated,
+    (state) => state.queue.paged.isPopulated,
     (isReconnecting, isQueuePopulated) => {
       return {
         isReconnecting,

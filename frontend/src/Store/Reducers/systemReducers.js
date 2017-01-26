@@ -8,50 +8,50 @@ import createReducers from './Creators/createReducers';
 
 export const defaultState = {
   status: {
-    fetching: false,
-    populated: false,
+    isFetching: false,
+    isPopulated: false,
     error: null,
     item: {}
   },
 
   health: {
-    fetching: false,
-    populated: false,
+    isFetching: false,
+    isPopulated: false,
     error: null,
     items: []
   },
 
   diskSpace: {
-    fetching: false,
-    populated: false,
+    isFetching: false,
+    isPopulated: false,
     error: null,
     items: []
   },
 
   tasks: {
-    fetching: false,
-    populated: false,
+    isFetching: false,
+    isPopulated: false,
     error: null,
     items: []
   },
 
   backups: {
-    fetching: false,
-    populated: false,
+    isFetching: false,
+    isPopulated: false,
     error: null,
     items: []
   },
 
   updates: {
-    fetching: false,
-    populated: false,
+    isFetching: false,
+    isPopulated: false,
     error: null,
     items: []
   },
 
   logs: {
-    fetching: false,
-    populated: false,
+    isFetching: false,
+    isPopulated: false,
     pageSize: 50,
     sortKey: 'time',
     sortDirection: sortDirections.DESCENDING,
@@ -62,15 +62,15 @@ export const defaultState = {
   },
 
   logFiles: {
-    fetching: false,
-    populated: false,
+    isFetching: false,
+    isPopulated: false,
     error: null,
     items: []
   },
 
   updateLogFiles: {
-    fetching: false,
-    populated: false,
+    isFetching: false,
+    isPopulated: false,
     error: null,
     items: []
   }

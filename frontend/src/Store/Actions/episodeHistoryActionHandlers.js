@@ -9,7 +9,7 @@ const episodeHistoryActionHandlers = {
     const section = 'episodeHistory';
 
     return function(dispatch, getState) {
-      dispatch(set({ section, fetching: true }));
+      dispatch(set({ section, isFetching: true }));
 
       const queryParams = {
         pageSize: 1000,
@@ -30,8 +30,8 @@ const episodeHistoryActionHandlers = {
 
         dispatch(set({
           section,
-          fetching: false,
-          populated: true,
+          isFetching: false,
+          isPopulated: true,
           error: null
         }));
       });
@@ -39,8 +39,8 @@ const episodeHistoryActionHandlers = {
       promise.fail((xhr) => {
         dispatch(set({
           section,
-          fetching: false,
-          populated: false,
+          isFetching: false,
+          isPopulated: false,
           error: xhr
         }));
       });

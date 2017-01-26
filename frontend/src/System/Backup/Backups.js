@@ -37,14 +37,14 @@ class Backups extends Component {
 
   render() {
     const {
-      fetching,
+      isFetching,
       items,
       backupExecuting,
       onBackupPress
     } = this.props;
 
-    const hasBackups = !fetching && items.length > 0;
-    const noBackups = !fetching && !items.length;
+    const hasBackups = !isFetching && items.length > 0;
+    const noBackups = !isFetching && !items.length;
 
     return (
       <PageContent title="Backups">
@@ -60,7 +60,7 @@ class Backups extends Component {
 
         <PageContentBody>
           {
-            fetching &&
+            isFetching &&
               <LoadingIndicator />
           }
 
@@ -134,7 +134,7 @@ class Backups extends Component {
 }
 
 Backups.propTypes = {
-  fetching: PropTypes.bool.isRequired,
+  isFetching: PropTypes.bool.isRequired,
   items: PropTypes.array.isRequired,
   backupExecuting: PropTypes.bool.isRequired,
   onBackupPress: PropTypes.func.isRequired

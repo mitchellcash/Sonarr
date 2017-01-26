@@ -92,7 +92,7 @@ class RemotePathMappings extends Component {
 }
 
 RemotePathMappings.propTypes = {
-  fetching: PropTypes.bool.isRequired,
+  isFetching: PropTypes.bool.isRequired,
   error: PropTypes.object,
   items: PropTypes.arrayOf(PropTypes.object).isRequired,
   onConfirmDeleteRemotePathMapping: PropTypes.func.isRequired

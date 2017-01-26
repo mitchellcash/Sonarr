@@ -18,9 +18,9 @@ function createRemotePathMappingSelector() {
     (state) => state.settings.remotePathMappings,
     (id, remotePathMappings) => {
       const {
-        fetching,
+        isFetching,
         error,
-        saving,
+        isSaving,
         saveError,
         pendingChanges,
         items
@@ -31,9 +31,9 @@ function createRemotePathMappingSelector() {
 
       return {
         id,
-        fetching,
+        isFetching,
         error,
-        saving,
+        isSaving,
         saveError,
         item: settings.settings,
         ...settings
@@ -75,7 +75,7 @@ class EditRemotePathMappingModalContentConnector extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if (prevProps.saving && !this.props.saving && !this.props.saveError) {
+    if (prevProps.isSaving && !this.props.isSaving && !this.props.saveError) {
       this.props.onModalClose();
     }
   }
@@ -107,7 +107,7 @@ class EditRemotePathMappingModalContentConnector extends Component {
 
 EditRemotePathMappingModalContentConnector.propTypes = {
   id: PropTypes.number,
-  saving: PropTypes.bool.isRequired,
+  isSaving: PropTypes.bool.isRequired,
   saveError: PropTypes.object,
   item: PropTypes.object.isRequired,
   setRemotePathMappingValue: PropTypes.func.isRequired,

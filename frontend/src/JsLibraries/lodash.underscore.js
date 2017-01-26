@@ -281,7 +281,7 @@
     });
   };
 
-  // Convenience version of a common use case of `map`: fetching a property.
+  // Convenience version of a common use case of `map`: isFetching a property.
   _.pluck = function(obj, key) {
     return _.map(obj, _.property(key));
   };

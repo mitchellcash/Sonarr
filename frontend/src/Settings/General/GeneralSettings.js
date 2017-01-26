@@ -48,8 +48,8 @@ class GeneralSettings extends Component {
   render() {
     const {
       advancedSettings,
-      fetching,
-      populated,
+      isFetching,
+      isPopulated,
       error,
       settings,
       hasSettings,
@@ -123,17 +123,17 @@ class GeneralSettings extends Component {
 
         <PageContentBody>
           {
-            fetching && !populated &&
+            isFetching && !isPopulated &&
               <LoadingIndicator />
           }
 
           {
-            !fetching && error &&
+            !isFetching && error &&
               <div>Unable to load General settings</div>
           }
 
           {
-            hasSettings && populated && !error &&
+            hasSettings && isPopulated && !error &&
               <Form
                 id="generalSettings"
                 {...otherProps}
@@ -552,8 +552,8 @@ class GeneralSettings extends Component {
 
 GeneralSettings.propTypes = {
   advancedSettings: PropTypes.bool.isRequired,
-  fetching: PropTypes.bool.isRequired,
-  populated: PropTypes.bool.isRequired,
+  isFetching: PropTypes.bool.isRequired,
+  isPopulated: PropTypes.bool.isRequired,
   error: PropTypes.object,
   settings: PropTypes.object.isRequired,
   isResettingApiKey: PropTypes.bool.isRequired,

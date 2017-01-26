@@ -9,7 +9,7 @@ function createRemoveItemHandler(section, url, getFromState) {
         ...queryParms
       } = payload;
 
-      dispatch(set({ section, deleting: true }));
+      dispatch(set({ section, isDeleting: true }));
 
       const ajaxOptions = {
         url: `${url}/${id}?${$.param(queryParms, true)}`,
@@ -23,7 +23,7 @@ function createRemoveItemHandler(section, url, getFromState) {
 
         dispatch(set({
           section,
-          deleting: false,
+          isDeleting: false,
           deleteError: null
         }));
       });
@@ -31,7 +31,7 @@ function createRemoveItemHandler(section, url, getFromState) {
       promise.fail((xhr) => {
         dispatch(set({
           section,
-          deleting: false,
+          isDeleting: false,
           deleteError: xhr
         }));
       });

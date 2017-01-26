@@ -136,7 +136,7 @@ class DelayProfiles extends Component {
 }
 
 DelayProfiles.propTypes = {
-  fetching: PropTypes.bool.isRequired,
+  isFetching: PropTypes.bool.isRequired,
   error: PropTypes.object,
   defaultProfile: PropTypes.object,
   items: PropTypes.arrayOf(PropTypes.object).isRequired,

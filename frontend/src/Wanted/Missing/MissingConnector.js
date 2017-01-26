@@ -19,7 +19,7 @@ function createMapStateToProps() {
       const isSearchingForMissingEpisodes = _.some(commands, { name: commandNames.MISSING_EPISODE_SEARCH });
 
       const result = _.pick(missing, [
-        'fetching',
+        'isFetching',
         'items',
         'page',
         'totalPages',

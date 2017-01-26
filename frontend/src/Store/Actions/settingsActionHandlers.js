@@ -23,7 +23,7 @@ const settingsActionHandlers = {
     const section = 'namingExamples';
 
     return function(dispatch, getState) {
-      dispatch(set({ section, fetching: true }));
+      dispatch(set({ section, isFetching: true }));
 
       const naming = getState().settings.naming;
 
@@ -37,8 +37,8 @@ const settingsActionHandlers = {
 
         dispatch(set({
           section,
-          fetching: false,
-          populated: true,
+          isFetching: false,
+          isPopulated: true,
           error: null
         }));
       });
@@ -46,8 +46,8 @@ const settingsActionHandlers = {
       promise.fail((xhr) => {
         dispatch(set({
           section,
-          fetching: false,
-          populated: false,
+          isFetching: false,
+          isPopulated: false,
           error: xhr
         }));
       });
@@ -120,7 +120,7 @@ const settingsActionHandlers = {
         return Object.assign({}, item, pendingChanges);
       });
 
-      // If there is nothing to save don't bother saving
+      // If there is nothing to save don't bother isSaving
       if (!upatedDefinitions || !upatedDefinitions.length) {
         return;
       }

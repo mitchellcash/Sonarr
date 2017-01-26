@@ -51,7 +51,7 @@ class QualityDefinitions extends Component {
 }
 
 QualityDefinitions.propTypes = {
-  fetching: PropTypes.bool.isRequired,
+  isFetching: PropTypes.bool.isRequired,
   error: PropTypes.object,
   defaultProfile: PropTypes.object,
   items: PropTypes.arrayOf(PropTypes.object).isRequired

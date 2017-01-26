@@ -56,8 +56,8 @@ class SelectQualityModalContent extends Component {
 
   render() {
     const {
-      fetching,
-      populated,
+      isFetching,
+      isPopulated,
       error,
       items,
       onModalClose
@@ -83,17 +83,17 @@ class SelectQualityModalContent extends Component {
 
         <ModalBody>
           {
-            fetching &&
+            isFetching &&
               <LoadingIndicator />
           }
 
           {
-            !fetching && !!error &&
+            !isFetching && !!error &&
               <div>Unable to load qualities</div>
           }
 
           {
-            populated && !error &&
+            isPopulated && !error &&
               <Form>
                 <FormGroup>
                   <FormLabel>Quality</FormLabel>
@@ -153,8 +153,8 @@ SelectQualityModalContent.propTypes = {
   qualityId: PropTypes.number.isRequired,
   proper: PropTypes.bool.isRequired,
   real: PropTypes.bool.isRequired,
-  fetching: PropTypes.bool.isRequired,
-  populated: PropTypes.bool.isRequired,
+  isFetching: PropTypes.bool.isRequired,
+  isPopulated: PropTypes.bool.isRequired,
   error: PropTypes.object,
   items: PropTypes.arrayOf(PropTypes.object).isRequired,
   onQualitySelect: PropTypes.func.isRequired,

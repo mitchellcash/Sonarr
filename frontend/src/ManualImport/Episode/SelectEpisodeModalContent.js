@@ -74,8 +74,8 @@ class SelectEpisodeModalContent extends Component {
 
   render() {
     const {
-      fetching,
-      populated,
+      isFetching,
+      isPopulated,
       error,
       items,
       sortKey,
@@ -100,7 +100,7 @@ class SelectEpisodeModalContent extends Component {
 
         <ModalBody>
           {
-            fetching &&
+            isFetching &&
               <LoadingIndicator />
           }
 
@@ -110,7 +110,7 @@ class SelectEpisodeModalContent extends Component {
           }
 
           {
-            populated && !!items.length &&
+            isPopulated && !!items.length &&
               <Table
                 headers={headers}
                 selectAll={true}
@@ -142,7 +142,7 @@ class SelectEpisodeModalContent extends Component {
           }
 
           {
-            populated && !items.length &&
+            isPopulated && !items.length &&
               'No episodes were found for the selected season'
           }
         </ModalBody>
@@ -165,8 +165,8 @@ class SelectEpisodeModalContent extends Component {
 }
 
 SelectEpisodeModalContent.propTypes = {
-  fetching: PropTypes.bool.isRequired,
-  populated: PropTypes.bool.isRequired,
+  isFetching: PropTypes.bool.isRequired,
+  isPopulated: PropTypes.bool.isRequired,
   error: PropTypes.object,
   items: PropTypes.arrayOf(PropTypes.object).isRequired,
   sortKey: PropTypes.string,

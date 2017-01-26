@@ -40,7 +40,7 @@ class TablePager extends Component {
       page,
       totalPages,
       totalRecords,
-      fetching,
+      isFetching,
       onFirstPagePress,
       onPreviousPagePress,
       onNextPagePress,
@@ -65,7 +65,7 @@ class TablePager extends Component {
       <div className={styles.pager}>
         <div className={styles.loadingContainer}>
           {
-            fetching &&
+            isFetching &&
               <LoadingIndicator
                 className={styles.loading}
                 size={20}
@@ -158,7 +158,7 @@ TablePager.propTypes = {
   page: PropTypes.number,
   totalPages: PropTypes.number,
   totalRecords: PropTypes.number,
-  fetching: PropTypes.bool,
+  isFetching: PropTypes.bool,
   onFirstPagePress: PropTypes.func.isRequired,
   onPreviousPagePress: PropTypes.func.isRequired,
   onNextPagePress: PropTypes.func.isRequired,

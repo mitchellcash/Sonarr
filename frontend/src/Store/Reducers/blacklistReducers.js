@@ -8,8 +8,8 @@ import createUpdateServerSideCollectionReducer from './Creators/createUpdateServ
 const reducerSection = 'blacklist';
 
 export const defaultState = {
-  fetching: false,
-  populated: false,
+  isFetching: false,
+  isPopulated: false,
   pageSize: 20,
   sortKey: 'date',
   sortDirection: sortDirections.DESCENDING,

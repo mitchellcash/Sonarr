@@ -65,7 +65,7 @@ const section = 'calendar';
 const calendarActionHandlers = {
   [types.FETCH_CALENDAR]: function(payload) {
     return function(dispatch, getState) {
-      dispatch(set({ section, fetching: true }));
+      dispatch(set({ section, isFetching: true }));
 
       const state = getState().calendar;
 
@@ -89,8 +89,8 @@ const calendarActionHandlers = {
 
         dispatch(set({
           section,
-          fetching: false,
-          populated: true,
+          isFetching: false,
+          isPopulated: true,
           error: null
         }));
       });
@@ -98,8 +98,8 @@ const calendarActionHandlers = {
       promise.fail((xhr) => {
         dispatch(set({
           section,
-          fetching: false,
-          populated: false,
+          isFetching: false,
+          isPopulated: false,
           error: xhr
         }));
       });

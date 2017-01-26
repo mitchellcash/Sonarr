@@ -1,6 +1,4 @@
 import { handleActions } from 'redux-actions';
-import getSectionState from 'Utilities/State/getSectionState';
-import updateSectionState from 'Utilities/State/updateSectionState';
 import * as types from 'Store/Actions/actionTypes';
 import createSetReducer from './Creators/createSetReducer';
 import createUpdateReducer from './Creators/createUpdateReducer';
@@ -8,8 +6,8 @@ import createUpdateItemReducer from './Creators/createUpdateItemReducer';
 import createRemoveItemReducer from './Creators/createRemoveItemReducer';
 
 export const defaultState = {
-  fetching: false,
-  populated: false,
+  isFetching: false,
+  isPopulated: false,
   error: null,
   isImporting: false,
   isImported: false,

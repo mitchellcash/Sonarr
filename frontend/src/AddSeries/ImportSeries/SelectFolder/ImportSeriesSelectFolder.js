@@ -70,8 +70,8 @@ class ImportSeriesSelectFolder extends Component {
 
   render() {
     const {
-      fetching,
-      populated,
+      isFetching,
+      isPopulated,
       error,
       items
     } = this.props;
@@ -80,17 +80,17 @@ class ImportSeriesSelectFolder extends Component {
       <PageContent title="Import Series">
         <PageContentBody>
           {
-            fetching && !populated &&
+            isFetching && !isPopulated &&
               <LoadingIndicator />
           }
 
           {
-            !fetching && !!error &&
+            !isFetching && !!error &&
               <div>Unable to load root folders</div>
           }
 
           {
-            !error && populated &&
+            !error && isPopulated &&
               <div>
                 <div className={styles.header}>
                   Import series you already have
@@ -179,8 +179,8 @@ class ImportSeriesSelectFolder extends Component {
 }
 
 ImportSeriesSelectFolder.propTypes = {
-  fetching: PropTypes.bool.isRequired,
-  populated: PropTypes.bool.isRequired,
+  isFetching: PropTypes.bool.isRequired,
+  isPopulated: PropTypes.bool.isRequired,
   error: PropTypes.object,
   isSaving: PropTypes.bool.isRequired,
   saveError: PropTypes.object,

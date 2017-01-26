@@ -114,8 +114,8 @@ class ImportSeriesSelectSeries extends Component {
     const {
       selectedSeries,
       isExistingSeries,
-      fetching,
-      populated,
+      isFetching,
+      isPopulated,
       error,
       items,
       queued,
@@ -140,7 +140,7 @@ class ImportSeriesSelectSeries extends Component {
           onPress={this.onPress}
         >
           {
-            queued && !populated &&
+            queued && !isPopulated &&
               <LoadingIndicator
                 className={styles.loading}
                 size={20}
@@ -148,7 +148,7 @@ class ImportSeriesSelectSeries extends Component {
           }
 
           {
-            populated && selectedSeries &&
+            isPopulated && selectedSeries &&
               <span>
                 {
                   isExistingSeries &&
@@ -171,7 +171,7 @@ class ImportSeriesSelectSeries extends Component {
           }
 
           {
-            populated && !selectedSeries &&
+            isPopulated && !selectedSeries &&
               <span>
                 <Icon
                   className={styles.warningIcon}
@@ -184,7 +184,7 @@ class ImportSeriesSelectSeries extends Component {
           }
 
           {
-            !fetching && !!error &&
+            !isFetching && !!error &&
               <span>
                 <Icon
                   className={styles.warningIcon}
@@ -254,8 +254,8 @@ ImportSeriesSelectSeries.propTypes = {
   name: PropTypes.string.isRequired,
   selectedSeries: PropTypes.object,
   isExistingSeries: PropTypes.bool.isRequired,
-  fetching: PropTypes.bool.isRequired,
-  populated: PropTypes.bool.isRequired,
+  isFetching: PropTypes.bool.isRequired,
+  isPopulated: PropTypes.bool.isRequired,
   error: PropTypes.object,
   items: PropTypes.arrayOf(PropTypes.object).isRequired,
   queued: PropTypes.bool.isRequired,

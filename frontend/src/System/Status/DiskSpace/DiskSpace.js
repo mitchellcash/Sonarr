@@ -14,7 +14,7 @@ class DiskSpace extends Component {
 
   render() {
     const {
-      fetching,
+      isFetching,
       items
     } = this.props;
 
@@ -38,12 +38,12 @@ class DiskSpace extends Component {
         legend="Disk Space"
       >
         {
-          fetching &&
+          isFetching &&
             <LoadingIndicator />
         }
 
         {
-          !fetching &&
+          !isFetching &&
             <Table
               headers={headers}
             >
@@ -76,7 +76,7 @@ class DiskSpace extends Component {
 }
 
 DiskSpace.propTypes = {
-  fetching: PropTypes.bool.isRequired,
+  isFetching: PropTypes.bool.isRequired,
   items: PropTypes.array.isRequired
 };
 

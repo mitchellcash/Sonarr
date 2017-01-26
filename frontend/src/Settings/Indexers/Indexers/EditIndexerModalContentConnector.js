@@ -31,7 +31,7 @@ class EditIndexerModalContentConnector extends Component {
   // Lifecycle
 
   componentDidUpdate(prevProps, prevState) {
-    if (prevProps.saving && !this.props.saving && !this.props.saveError) {
+    if (prevProps.isSaving && !this.props.isSaving && !this.props.saveError) {
       this.props.onModalClose();
     }
   }
@@ -73,8 +73,8 @@ class EditIndexerModalContentConnector extends Component {
 
 EditIndexerModalContentConnector.propTypes = {
   id: PropTypes.number,
-  fetching: PropTypes.bool.isRequired,
-  saving: PropTypes.bool.isRequired,
+  isFetching: PropTypes.bool.isRequired,
+  isSaving: PropTypes.bool.isRequired,
   saveError: PropTypes.object,
   item: PropTypes.object.isRequired,
   setIndexerValue: PropTypes.func.isRequired,

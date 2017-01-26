@@ -427,7 +427,7 @@ jQuery.extend( {
 			length = elems.length,
 			callbackExpect = !invert;
 
-		// Go through the array, only saving the items
+		// Go through the array, only isSaving the items
 		// that pass the validator function
 		for ( ; i < length; i++ ) {
 			callbackInverse = !callback( elems[ i ], i );
@@ -873,7 +873,7 @@ function Sizzle( selector, context, results, seed ) {
  * Create key-value caches of limited size
  * @returns {function(string, object)} Returns the Object data after storing it on itself with
  *	property name the (space-suffixed) string and (if the cache is larger than Expr.cacheLength)
- *	deleting the oldest entry
+ *	isDeleting the oldest entry
  */
 function createCache() {
 	var keys = [];
@@ -3833,7 +3833,7 @@ Data.prototype = {
 		if ( key === undefined || jQuery.isEmptyObject( cache ) ) {
 
 			// Support: Chrome <= 35-45+
-			// Webkit & Blink performance suffers when deleting properties
+			// Webkit & Blink performance suffers when isDeleting properties
 			// from DOM nodes, so set to undefined instead
 			// https://code.google.com/p/chromium/issues/detail?id=378607
 			if ( owner.nodeType ) {

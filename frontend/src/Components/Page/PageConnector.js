@@ -19,10 +19,10 @@ function createMapStateToProps() {
     (state) => state.app,
     createDimensionsSelector(),
     (series, tags, settings, app, dimensions) => {
-      const isPopulated = series.populated &&
-        tags.populated &&
-        settings.qualityProfiles.populated &&
-        settings.ui.populated;
+      const isPopulated = series.isPopulated &&
+        tags.isPopulated &&
+        settings.qualityProfiles.isPopulated &&
+        settings.ui.isPopulated;
 
       const hasError = !!series.error ||
         !!tags.error ||

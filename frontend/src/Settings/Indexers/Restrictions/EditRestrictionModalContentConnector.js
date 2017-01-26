@@ -18,9 +18,9 @@ function createMapStateToProps() {
     (state) => state.settings.restrictions,
     (id, restrictions) => {
       const {
-        fetching,
+        isFetching,
         error,
-        saving,
+        isSaving,
         saveError,
         pendingChanges,
         items
@@ -31,9 +31,9 @@ function createMapStateToProps() {
 
       return {
         id,
-        fetching,
+        isFetching,
         error,
-        saving,
+        isSaving,
         saveError,
         item: settings.settings,
         ...settings
@@ -64,7 +64,7 @@ class EditRestrictionModalContentConnector extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if (prevProps.saving && !this.props.saving && !this.props.saveError) {
+    if (prevProps.isSaving && !this.props.isSaving && !this.props.saveError) {
       this.props.onModalClose();
     }
   }
@@ -98,8 +98,8 @@ class EditRestrictionModalContentConnector extends Component {
 
 EditRestrictionModalContentConnector.propTypes = {
   id: PropTypes.number,
-  fetching: PropTypes.bool.isRequired,
-  saving: PropTypes.bool.isRequired,
+  isFetching: PropTypes.bool.isRequired,
+  isSaving: PropTypes.bool.isRequired,
   saveError: PropTypes.object,
   item: PropTypes.object.isRequired,
   setRestrictionValue: PropTypes.func.isRequired,

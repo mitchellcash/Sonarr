@@ -16,7 +16,7 @@ const episodeFileActionHandlers = {
         episodeFileIds
       } = payload;
 
-      dispatch(set({ section, deleting: true }));
+      dispatch(set({ section, isDeleting: true }));
 
       const promise = $.ajax({
         url: '/episodeFile/bulk',
@@ -32,7 +32,7 @@ const episodeFileActionHandlers = {
 
         dispatch(set({
           section,
-          deleting: false,
+          isDeleting: false,
           deleteError: null
         }));
       });
@@ -40,7 +40,7 @@ const episodeFileActionHandlers = {
       promise.fail((xhr) => {
         dispatch(set({
           section,
-          deleting: false,
+          isDeleting: false,
           deleteError: xhr
         }));
       });
@@ -54,7 +54,7 @@ const episodeFileActionHandlers = {
         quality
       } = payload;
 
-      dispatch(set({ section, saving: true }));
+      dispatch(set({ section, isSaving: true }));
 
       const promise = $.ajax({
         url: '/episodeFile/editor',
@@ -70,7 +70,7 @@ const episodeFileActionHandlers = {
 
         dispatch(set({
           section,
-          saving: false,
+          isSaving: false,
           saveError: null
         }));
       });
@@ -78,7 +78,7 @@ const episodeFileActionHandlers = {
       promise.fail((xhr) => {
         dispatch(set({
           section,
-          saving: false,
+          isSaving: false,
           saveError: xhr
         }));
       });

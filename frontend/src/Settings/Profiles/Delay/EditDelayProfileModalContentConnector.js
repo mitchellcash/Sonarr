@@ -21,9 +21,9 @@ function createDelayProfileSelector() {
     (state) => state.settings.delayProfiles,
     (id, delayProfiles) => {
       const {
-        fetching,
+        isFetching,
         error,
-        saving,
+        isSaving,
         saveError,
         pendingChanges,
         items
@@ -34,9 +34,9 @@ function createDelayProfileSelector() {
 
       return {
         id,
-        fetching,
+        isFetching,
         error,
-        saving,
+        isSaving,
         saveError,
         item: settings.settings,
         ...settings
@@ -106,7 +106,7 @@ class EditDelayProfileModalContentConnector extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if (prevProps.saving && !this.props.saving && !this.props.saveError) {
+    if (prevProps.isSaving && !this.props.isSaving && !this.props.saveError) {
       this.props.onModalClose();
     }
   }
@@ -166,7 +166,7 @@ class EditDelayProfileModalContentConnector extends Component {
 
 EditDelayProfileModalContentConnector.propTypes = {
   id: PropTypes.number,
-  saving: PropTypes.bool.isRequired,
+  isSaving: PropTypes.bool.isRequired,
   saveError: PropTypes.object,
   item: PropTypes.object.isRequired,
   setDelayProfileValue: PropTypes.func.isRequired,

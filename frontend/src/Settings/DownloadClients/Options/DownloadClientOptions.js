@@ -12,7 +12,7 @@ import styles from './DownloadClientOptions.css';
 function DownloadClientOptions(props) {
   const {
     advancedSettings,
-    fetching,
+    isFetching,
     error,
     settings,
     hasSettings,
@@ -22,17 +22,17 @@ function DownloadClientOptions(props) {
   return (
     <div>
       {
-        fetching &&
+        isFetching &&
           <LoadingIndicator />
       }
 
       {
-        !fetching && error &&
+        !isFetching && error &&
           <div>Unable to load download client options</div>
       }
 
       {
-        hasSettings && !fetching && !error &&
+        hasSettings && !isFetching && !error &&
           <div>
             <FieldSet
               legend="Completed Download Handling"
@@ -156,7 +156,7 @@ function DownloadClientOptions(props) {
 
 DownloadClientOptions.propTypes = {
   advancedSettings: PropTypes.bool.isRequired,
-  fetching: PropTypes.bool.isRequired,
+  isFetching: PropTypes.bool.isRequired,
   error: PropTypes.object,
   settings: PropTypes.object.isRequired,
   hasSettings: PropTypes.bool.isRequired,

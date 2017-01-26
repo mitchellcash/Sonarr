@@ -12,7 +12,7 @@ const releaseActionHandlers = {
     return function(dispatch, getState) {
       const guid = payload.guid;
 
-      dispatch(updateRelease({ guid, grabbing: true }));
+      dispatch(updateRelease({ guid, isGrabbing: true }));
 
       const promise = $.ajax({
         url: '/release',
@@ -24,7 +24,7 @@ const releaseActionHandlers = {
       promise.done((data) => {
         dispatch(updateRelease({
           guid,
-          grabbing: false,
+          isGrabbing: false,
           grabbed: true,
           grabError: null
         }));
@@ -35,7 +35,7 @@ const releaseActionHandlers = {
 
         dispatch(updateRelease({
           guid,
-          grabbing: false,
+          isGrabbing: false,
           grabbed: false,
           grabError
         }));

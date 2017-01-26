@@ -15,9 +15,9 @@ class AddNotificationModalContent extends Component {
 
   render() {
     const {
-      fetching,
+      isFetching,
       error,
-      populated,
+      isPopulated,
       schema,
       onNotificationSelect,
       onModalClose
@@ -31,17 +31,17 @@ class AddNotificationModalContent extends Component {
 
         <ModalBody>
           {
-            fetching &&
+            isFetching &&
               <LoadingIndicator />
           }
 
           {
-            !fetching && !!error &&
+            !isFetching && !!error &&
               <div>Unable to add a new notification, please try again.</div>
           }
 
           {
-            !fetching && !error &&
+            !isFetching && !error &&
               <div>
                 <div className={styles.notifications}>
                   {
@@ -73,9 +73,9 @@ class AddNotificationModalContent extends Component {
 }
 
 AddNotificationModalContent.propTypes = {
-  fetching: PropTypes.bool.isRequired,
+  isFetching: PropTypes.bool.isRequired,
   error: PropTypes.object,
-  populated: PropTypes.bool.isRequired,
+  isPopulated: PropTypes.bool.isRequired,
   schema: PropTypes.arrayOf(PropTypes.object).isRequired,
   onNotificationSelect: PropTypes.func.isRequired,
   onModalClose: PropTypes.func.isRequired

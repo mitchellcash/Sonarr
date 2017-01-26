@@ -11,23 +11,23 @@ import createUpdateServerSideCollectionReducer from './Creators/createUpdateServ
 
 export const defaultState = {
   queueStatus: {
-    fetching: false,
-    populated: false,
+    isFetching: false,
+    isPopulated: false,
     error: null,
     item: {}
   },
 
   details: {
-    fetching: false,
-    populated: false,
+    isFetching: false,
+    isPopulated: false,
     error: null,
     items: [],
     params: {}
   },
 
   paged: {
-    fetching: false,
-    populated: false,
+    isFetching: false,
+    isPopulated: false,
     pageSize: 20,
     sortKey: 'timeleft',
     sortDirection: sortDirections.ASCENDING,
@@ -64,8 +64,8 @@ const queueReducers = handleActions({
   [types.UPDATE_SERVER_SIDE_COLLECTION]: createUpdateServerSideCollectionReducer(paged),
 
   [types.CLEAR_QUEUE]: createClearReducer('paged', {
-    fetching: false,
-    populated: false,
+    isFetching: false,
+    isPopulated: false,
     error: null,
     items: []
   }),

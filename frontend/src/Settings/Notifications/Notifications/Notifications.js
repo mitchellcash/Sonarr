@@ -106,7 +106,7 @@ class Notifications extends Component {
 }
 
 Notifications.propTypes = {
-  fetching: PropTypes.bool.isRequired,
+  isFetching: PropTypes.bool.isRequired,
   error: PropTypes.object,
   items: PropTypes.arrayOf(PropTypes.object).isRequired,
   onConfirmDeleteNotification: PropTypes.func.isRequired

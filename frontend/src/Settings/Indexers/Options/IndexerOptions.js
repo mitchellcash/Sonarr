@@ -10,7 +10,7 @@ import FormInputGroup from 'Components/Form/FormInputGroup';
 function IndexerOptions(props) {
   const {
     advancedSettings,
-    fetching,
+    isFetching,
     error,
     settings,
     hasSettings,
@@ -22,17 +22,17 @@ function IndexerOptions(props) {
       legend="Options"
     >
       {
-        fetching &&
+        isFetching &&
           <LoadingIndicator />
       }
 
       {
-        !fetching && error &&
+        !isFetching && error &&
           <div>Unable to load indexer options</div>
       }
 
       {
-        hasSettings && !fetching && !error &&
+        hasSettings && !isFetching && !error &&
           <Form>
             <FormGroup>
               <FormLabel>Minimum Age</FormLabel>
@@ -81,7 +81,7 @@ function IndexerOptions(props) {
 
 IndexerOptions.propTypes = {
   advancedSettings: PropTypes.bool.isRequired,
-  fetching: PropTypes.bool.isRequired,
+  isFetching: PropTypes.bool.isRequired,
   error: PropTypes.object,
   settings: PropTypes.object.isRequired,
   hasSettings: PropTypes.bool.isRequired,

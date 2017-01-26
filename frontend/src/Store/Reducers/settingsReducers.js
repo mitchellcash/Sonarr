@@ -15,86 +15,86 @@ import createReducers from './Creators/createReducers';
 
 export const defaultState = {
   ui: {
-    fetching: false,
-    populated: false,
+    isFetching: false,
+    isPopulated: false,
     error: null,
     pendingChanges: {},
-    saving: false,
+    isSaving: false,
     saveError: null,
     item: {}
   },
 
   mediaManagement: {
-    fetching: false,
-    populated: false,
+    isFetching: false,
+    isPopulated: false,
     error: null,
     pendingChanges: {},
-    saving: false,
+    isSaving: false,
     saveError: null,
     item: {}
   },
 
   naming: {
-    fetching: false,
-    populated: false,
+    isFetching: false,
+    isPopulated: false,
     error: null,
     pendingChanges: {},
-    saving: false,
+    isSaving: false,
     saveError: null,
     item: {}
   },
 
   namingExamples: {
-    fetching: false,
-    populated: false,
+    isFetching: false,
+    isPopulated: false,
     error: null,
     item: {}
   },
 
   qualityProfiles: {
-    fetching: false,
-    populated: false,
+    isFetching: false,
+    isPopulated: false,
     error: null,
-    fetchingSchema: false,
+    isFetchingSchema: false,
     schemaPopulated: false,
     schemaError: null,
     schema: {},
-    saving: false,
+    isSaving: false,
     saveError: null,
     items: [],
     pendingChanges: {}
   },
 
   delayProfiles: {
-    fetching: false,
-    populated: false,
+    isFetching: false,
+    isPopulated: false,
     error: null,
     items: [],
-    saving: false,
+    isSaving: false,
     saveError: null,
     pendingChanges: {}
   },
 
   qualityDefinitions: {
-    fetching: false,
-    populated: false,
+    isFetching: false,
+    isPopulated: false,
     error: null,
     items: [],
-    saving: false,
+    isSaving: false,
     saveError: null,
     pendingChanges: {}
   },
 
   indexers: {
-    fetching: false,
-    populated: false,
+    isFetching: false,
+    isPopulated: false,
     error: null,
-    fetchingSchema: false,
+    isFetchingSchema: false,
     schemaPopulated: false,
     schemaError: null,
     schema: [],
     selectedSchema: {},
-    saving: false,
+    isSaving: false,
     saveError: null,
     testing: false,
     items: [],
@@ -102,35 +102,35 @@ export const defaultState = {
   },
 
   indexerOptions: {
-    fetching: false,
-    populated: false,
+    isFetching: false,
+    isPopulated: false,
     error: null,
     pendingChanges: {},
-    saving: false,
+    isSaving: false,
     saveError: null,
     item: {}
   },
 
   restrictions: {
-    fetching: false,
-    populated: false,
+    isFetching: false,
+    isPopulated: false,
     error: null,
-    saving: false,
+    isSaving: false,
     saveError: null,
     items: [],
     pendingChanges: {}
   },
 
   downloadClients: {
-    fetching: false,
-    populated: false,
+    isFetching: false,
+    isPopulated: false,
     error: null,
-    fetchingSchema: false,
+    isFetchingSchema: false,
     schemaPopulated: false,
     schemaError: null,
     schema: [],
     selectedSchema: {},
-    saving: false,
+    isSaving: false,
     saveError: null,
     testing: false,
     items: [],
@@ -138,35 +138,35 @@ export const defaultState = {
   },
 
   downloadClientOptions: {
-    fetching: false,
-    populated: false,
+    isFetching: false,
+    isPopulated: false,
     error: null,
     pendingChanges: {},
-    saving: false,
+    isSaving: false,
     saveError: null,
     item: {}
   },
 
   remotePathMappings: {
-    fetching: false,
-    populated: false,
+    isFetching: false,
+    isPopulated: false,
     error: null,
     items: [],
-    saving: false,
+    isSaving: false,
     saveError: null,
     pendingChanges: {}
   },
 
   notifications: {
-    fetching: false,
-    populated: false,
+    isFetching: false,
+    isPopulated: false,
     error: null,
-    fetchingSchema: false,
+    isFetchingSchema: false,
     schemaPopulated: false,
     schemaError: null,
     schema: [],
     selectedSchema: {},
-    saving: false,
+    isSaving: false,
     saveError: null,
     testing: false,
     items: [],
@@ -174,21 +174,21 @@ export const defaultState = {
   },
 
   metadata: {
-    fetching: false,
-    populated: false,
+    isFetching: false,
+    isPopulated: false,
     error: null,
-    saving: false,
+    isSaving: false,
     saveError: null,
     items: [],
     pendingChanges: {}
   },
 
   general: {
-    fetching: false,
-    populated: false,
+    isFetching: false,
+    isPopulated: false,
     error: null,
     pendingChanges: {},
-    saving: false,
+    isSaving: false,
     saveError: null,
     item: {}
   },

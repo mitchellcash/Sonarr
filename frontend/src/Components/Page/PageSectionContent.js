@@ -3,22 +3,22 @@ import LoadingIndicator from 'Components/Loading/LoadingIndicator';
 
 function PageSectionContent(props) {
   const {
-    fetching,
-    populated,
+    isFetching,
+    isPopulated,
     error,
     errorMessage,
     children
   } = props;
 
-  if (fetching) {
+  if (isFetching) {
     return (
       <LoadingIndicator />
     );
-  } else if (!fetching && !!error) {
+  } else if (!isFetching && !!error) {
     return (
       <div>{errorMessage}</div>
     );
-  } else if (populated && !error) {
+  } else if (isPopulated && !error) {
     return (
       <div>{children}</div>
     );
@@ -28,8 +28,8 @@ function PageSectionContent(props) {
 }
 
 PageSectionContent.propTypes = {
-  fetching: PropTypes.bool.isRequired,
-  populated: PropTypes.bool.isRequired,
+  isFetching: PropTypes.bool.isRequired,
+  isPopulated: PropTypes.bool.isRequired,
   error: PropTypes.object,
   errorMessage: PropTypes.string.isRequired,
   children: PropTypes.node.isRequired

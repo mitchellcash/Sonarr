@@ -13,7 +13,7 @@ function createMapStateToProps() {
     createSeriesSelector(),
     (seriesState, series) => {
       const {
-        saving,
+        isSaving,
         saveError,
         pendingChanges
       } = seriesState;
@@ -31,7 +31,7 @@ function createMapStateToProps() {
 
       return {
         title: series.title,
-        saving,
+        isSaving,
         saveError,
         pendingChanges,
         item: settings.settings,
@@ -52,7 +52,7 @@ class EditSeriesModalContentConnector extends Component {
   // Lifecycle
 
   componentDidUpdate(prevProps, prevState) {
-    if (prevProps.saving && !this.props.saving && !this.props.saveError) {
+    if (prevProps.isSaving && !this.props.isSaving && !this.props.saveError) {
       this.props.onModalClose();
     }
   }
@@ -84,7 +84,7 @@ class EditSeriesModalContentConnector extends Component {
 
 EditSeriesModalContentConnector.propTypes = {
   seriesId: PropTypes.number,
-  saving: PropTypes.bool.isRequired,
+  isSaving: PropTypes.bool.isRequired,
   saveError: PropTypes.object,
   setSeriesValue: PropTypes.func.isRequired,
   saveSeries: PropTypes.func.isRequired,
