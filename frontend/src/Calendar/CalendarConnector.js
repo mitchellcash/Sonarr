@@ -8,6 +8,8 @@ import { fetchEpisodeFiles, clearEpisodeFiles } from 'Store/Actions/episodeFileA
 import { fetchQueueDetails, clearQueueDetails } from 'Store/Actions/queueActions';
 import Calendar from './Calendar';
 
+const UPDATE_DELAY = 3600000; // 1 hour
+
 function createMapStateToProps() {
   return createSelector(
     (state) => state.calendar,
@@ -30,8 +32,15 @@ class CalendarConnector extends Component {
   //
   // Lifecycle
 
+  constructor(props, context) {
+    super(props, context);
+
+    this.updateTimeoutId = null;
+  }
+
   componentDidMount() {
     this.props.gotoCalendarToday();
+    this.scheduleUpdate();
   }
 
   componentWillReceiveProps(nextProps) {
@@ -45,12 +54,37 @@ class CalendarConnector extends Component {
         this.props.fetchEpisodeFiles({ episodeFileIds });
       }
     }
+
+    if (nextProps.time !== this.props.time) {
+      this.scheduleUpdate();
+    }
   }
 
   componentWillUnmount() {
     this.props.clearCalendar();
     this.props.clearQueueDetails();
     this.props.clearEpisodeFiles();
+    this.clearUpdateTimeout();
+  }
+
+  //
+  // Control
+
+  scheduleUpdate = () => {
+    this.clearUpdateTimeout();
+
+    this.updateTimeoutId = setTimeout(this.scheduleUpdate, UPDATE_DELAY);
+  }
+
+  clearUpdateTimeout = () => {
+    if (this.updateTimeoutId) {
+      clearTimeout(this.updateTimeoutId);
+    }
+  }
+
+  updateCalendar = () => {
+    this.props.gotoCalendarToday();
+    this.scheduleUpdate();
   }
 
   //
@@ -89,6 +123,7 @@ class CalendarConnector extends Component {
 }
 
 CalendarConnector.propTypes = {
+  time: PropTypes.string,
   items: PropTypes.arrayOf(PropTypes.object).isRequired,
   setCalendarView: PropTypes.func.isRequired,
   gotoCalendarToday: PropTypes.func.isRequired,

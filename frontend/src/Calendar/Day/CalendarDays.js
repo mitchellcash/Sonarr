@@ -1,5 +1,6 @@
 import moment from 'moment';
 import React, { Component, PropTypes } from 'react';
+import * as calendarViews from 'Calendar/calendarViews';
 import CalendarDayConnector from './CalendarDayConnector';
 import styles from './CalendarDays.css';
 
@@ -14,9 +15,44 @@ class CalendarDays extends Component {
     this.state = {
       todaysDate: moment().startOf('day').toISOString()
     };
+
+    this.updateTimeoutId = null;
   }
 
-  // TODO: Schedule update to update selected day if view is MONTH
+  // Lifecycle
+
+  componentDidMount() {
+    const view = this.props.view;
+
+    if (view === calendarViews.MONTH) {
+      this.scheduleUpdate();
+    }
+  }
+
+  componentWillUnmount() {
+    this.clearUpdateTimeout();
+  }
+
+  //
+  // Control
+
+  scheduleUpdate = () => {
+    this.clearUpdateTimeout();
+    const todaysDate = moment().startOf('day');
+    const diff = moment().diff(todaysDate.add(1, 'day'));
+
+    this.setState({
+      todaysDate: todaysDate.toISOString()
+    });
+
+    this.updateTimeoutId = setTimeout(this.scheduleUpdate, diff);
+  }
+
+  clearUpdateTimeout = () => {
+    if (this.updateTimeoutId) {
+      clearTimeout(this.updateTimeoutId);
+    }
+  }
 
   //
   // Render

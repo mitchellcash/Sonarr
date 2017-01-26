@@ -1,7 +1,5 @@
-import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
-import { gotoCalendarToday } from 'Store/Actions/calendarActions';
 import Agenda from './Agenda';
 
 function createMapStateToProps() {
@@ -13,28 +11,4 @@ function createMapStateToProps() {
   );
 }
 
-const mapDispatchToProps = {
-  gotoCalendarToday
-};
-
-class AgendaConnector extends Component {
-
-  // TODO: schedule update
-
-  //
-  // Render
-
-  render() {
-    return (
-      <Agenda
-        {...this.props}
-      />
-    );
-  }
-}
-
-AgendaConnector.propTypes = {
-  gotoCalendarToday: PropTypes.func.isRequired
-};
-
-export default connect(createMapStateToProps, mapDispatchToProps)(AgendaConnector);
+export default connect(createMapStateToProps)(Agenda);
