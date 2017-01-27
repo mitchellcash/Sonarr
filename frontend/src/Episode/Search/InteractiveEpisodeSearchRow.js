@@ -13,10 +13,10 @@ import EpisodeQuality from 'Episode/EpisodeQuality';
 import ProtocolLabel from 'Activity/Queue/ProtocolLabel';
 import styles from './InteractiveEpisodeSearchRow.css';
 
-function getDownloadIcon(isGrabbing, grabbed, grabError) {
+function getDownloadIcon(isGrabbing, isGrabbed, grabError) {
   if (isGrabbing) {
     return icons.SPINNER;
-  } else if (grabbed) {
+  } else if (isGrabbed) {
     return icons.DOWNLOADING;
   } else if (grabError) {
     return icons.DOWNLOADING;
@@ -25,10 +25,10 @@ function getDownloadIcon(isGrabbing, grabbed, grabError) {
   return icons.DOWNLOAD;
 }
 
-function getDownloadTooltip(isGrabbing, grabbed, grabError) {
+function getDownloadTooltip(isGrabbing, isGrabbed, grabError) {
   if (isGrabbing) {
     return '';
-  } else if (grabbed) {
+  } else if (isGrabbed) {
     return 'Added to downloaded queue';
   } else if (grabError) {
     return grabError;
@@ -65,7 +65,7 @@ class InteractiveEpisodeSearchRow extends Component {
       rejections,
       downloadAllowed,
       isGrabbing,
-      grabbed,
+      isGrabbed,
       grabError
     } = this.props;
 
@@ -140,9 +140,9 @@ class InteractiveEpisodeSearchRow extends Component {
           {
             downloadAllowed &&
               <SpinnerIconButton
-                name={getDownloadIcon(isGrabbing, grabbed, grabError)}
+                name={getDownloadIcon(isGrabbing, isGrabbed, grabError)}
                 kind={grabError ? kinds.DANGER : kinds.DEFAULT}
-                title={getDownloadTooltip(isGrabbing, grabbed, grabError)}
+                title={getDownloadTooltip(isGrabbing, isGrabbed, grabError)}
                 isSpinning={isGrabbing}
                 onPress={this.onGrabPress}
               />
@@ -169,14 +169,14 @@ InteractiveEpisodeSearchRow.propTypes = {
   rejections: PropTypes.arrayOf(PropTypes.string).isRequired,
   downloadAllowed: PropTypes.bool.isRequired,
   isGrabbing: PropTypes.bool.isRequired,
-  grabbed: PropTypes.bool.isRequired,
+  isGrabbed: PropTypes.bool.isRequired,
   grabError: PropTypes.string,
   onGrabPress: PropTypes.func.isRequired
 };
 
 InteractiveEpisodeSearchRow.defaultProps = {
   isGrabbing: false,
-  grabbed: false
+  isGrabbed: false
 };
 
 export default InteractiveEpisodeSearchRow;

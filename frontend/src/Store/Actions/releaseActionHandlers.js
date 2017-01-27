@@ -25,7 +25,7 @@ const releaseActionHandlers = {
         dispatch(updateRelease({
           guid,
           isGrabbing: false,
-          grabbed: true,
+          isGrabbed: true,
           grabError: null
         }));
       });
@@ -36,7 +36,7 @@ const releaseActionHandlers = {
         dispatch(updateRelease({
           guid,
           isGrabbing: false,
-          grabbed: false,
+          isGrabbed: false,
           grabError
         }));
       });
