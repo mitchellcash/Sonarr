@@ -13,6 +13,7 @@ import MenuContent from 'Components/Menu/MenuContent';
 import FilterMenuItem from 'Components/Menu/FilterMenuItem';
 import SortMenuItem from 'Components/Menu/SortMenuItem';
 import ViewMenuItem from 'Components/Menu/ViewMenuItem';
+import NoSeries from 'Series/NoSeries';
 import SeriesIndexTableConnector from './Table/SeriesIndexTableConnector';
 import SeriesIndexPostersConnector from './Posters/SeriesIndexPostersConnector';
 import SeriesIndexFooter from './SeriesIndexFooter';
@@ -239,9 +240,7 @@ class SeriesIndex extends Component {
 
           {
             !error && isPopulated && !items.length &&
-              <div>
-                No series found, import existing series or add a new series
-              </div>
+              <NoSeries />
           }
         </PageContentBody>
       </PageContent>

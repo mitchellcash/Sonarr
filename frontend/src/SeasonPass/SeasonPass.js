@@ -13,6 +13,7 @@ import MenuContent from 'Components/Menu/MenuContent';
 import FilterMenuItem from 'Components/Menu/FilterMenuItem';
 import Table from 'Components/Table/Table';
 import TableBody from 'Components/Table/TableBody';
+import NoSeries from 'Series/NoSeries';
 import SeasonPassRowConnector from './SeasonPassRowConnector';
 import SeasonPassFooter from './SeasonPassFooter';
 
@@ -214,9 +215,7 @@ class SeasonPass extends Component {
 
           {
             !error && isPopulated && !items.length &&
-              <div>
-                No series found, import existing series or add a new series
-              </div>
+              <NoSeries />
           }
         </PageContentBody>
 

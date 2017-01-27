@@ -13,6 +13,7 @@ import MenuContent from 'Components/Menu/MenuContent';
 import FilterMenuItem from 'Components/Menu/FilterMenuItem';
 import Table from 'Components/Table/Table';
 import TableBody from 'Components/Table/TableBody';
+import NoSeries from 'Series/NoSeries';
 import SeriesEditorRowConnector from './SeriesEditorRowConnector';
 import SeriesEditorFooter from './SeriesEditorFooter';
 import OrganizeSeriesModal from './Organize/OrganizeSeriesModal';
@@ -235,9 +236,7 @@ class SeriesEditor extends Component {
 
           {
             !error && isPopulated && !items.length &&
-              <div>
-                No series found, import existing series or add a new series
-              </div>
+              <NoSeries />
           }
         </PageContentBody>
 
