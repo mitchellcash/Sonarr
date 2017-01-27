@@ -24,7 +24,7 @@ function getIconName(eventType) {
 function getIconKind(eventType) {
   switch (eventType) {
     case 'downloadFailed':
-      return icons.DANGER;
+      return kinds.DANGER;
     default:
       return kinds.DEFAULT;
   }
@@ -59,7 +59,7 @@ function HistoryEventTypeCell({ eventType, data }) {
     >
       <Icon
         name={iconName}
-        kinds={iconKind}
+        kind={iconKind}
       />
     </TableRowCell>
   );
