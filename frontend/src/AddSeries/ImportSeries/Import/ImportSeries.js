@@ -85,6 +85,7 @@ class ImportSeries extends Component {
   render() {
     const {
       rootFolderId,
+      path,
       rootFoldersFetching,
       rootFoldersPopulated,
       rootFoldersError,
@@ -111,7 +112,14 @@ class ImportSeries extends Component {
           }
 
           {
-            !rootFoldersError && rootFoldersPopulated &&
+            !rootFoldersError && rootFoldersPopulated && !unmappedFolders.length &&
+              <div>
+                All series in {path} have been imported
+              </div>
+          }
+
+          {
+            !rootFoldersError && rootFoldersPopulated && !!unmappedFolders.length &&
               <Table
                 headers={headers}
                 selectAll={true}
@@ -139,11 +147,14 @@ class ImportSeries extends Component {
           }
         </PageContentBody>
 
-        <ImportSeriesFooterConnector
-          selectedCount={this.getSelectedIds().length}
-          onInputChange={this.onInputChange}
-          onImportPress={this.onImportPress}
-        />
+        {
+          !rootFoldersError && rootFoldersPopulated && !!unmappedFolders.length &&
+            <ImportSeriesFooterConnector
+              selectedCount={this.getSelectedIds().length}
+              onInputChange={this.onInputChange}
+              onImportPress={this.onImportPress}
+            />
+        }
       </PageContent>
     );
   }
@@ -151,6 +162,7 @@ class ImportSeries extends Component {
 
 ImportSeries.propTypes = {
   rootFolderId: PropTypes.number.isRequired,
+  path: PropTypes.string,
   rootFoldersFetching: PropTypes.bool.isRequired,
   rootFoldersPopulated: PropTypes.bool.isRequired,
   rootFoldersError: PropTypes.object,
