@@ -19,6 +19,6 @@
 
 .series {
   composes: cell from 'Components/Table/Cells/TableRowCell.css';
-  
+
   width: 400px;
 }

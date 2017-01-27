@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import { kinds, sizes } from 'Helpers/Props';
 import formatBytes from 'Utilities/Number/formatBytes';
 import LoadingIndicator from 'Components/Loading/LoadingIndicator';
 import FieldSet from 'Components/FieldSet';
@@ -6,6 +7,8 @@ import Table from 'Components/Table/Table';
 import TableBody from 'Components/Table/TableBody';
 import TableRow from 'Components/Table/TableRow';
 import TableRowCell from 'Components/Table/Cells/TableRowCell';
+import ProgressBar from 'Components/ProgressBar';
+import styles from './DiskSpace.css';
 
 class DiskSpace extends Component {
 
@@ -30,6 +33,10 @@ class DiskSpace extends Component {
       {
         name: 'totalSpace',
         label: 'Total Space'
+      },
+      {
+        name: 'progress',
+        label: ''
       }
     ];
 
@@ -50,6 +57,20 @@ class DiskSpace extends Component {
               <TableBody>
                 {
                   items.map((item) => {
+                    const {
+                      freeSpace,
+                      totalSpace
+                    } = item;
+
+                    const diskUsage = (100 - freeSpace / totalSpace * 100);
+                    let diskUsageKind = kinds.PRIMARY;
+
+                    if (diskUsage > 90) {
+                      diskUsageKind = kinds.DANGER;
+                    } else if (diskUsage > 80) {
+                      diskUsageKind = kinds.WARNING;
+                    }
+
                     return (
                       <TableRow key={item.path}>
                         <TableRowCell>
@@ -60,8 +81,22 @@ class DiskSpace extends Component {
                               ` (${item.label})`
                           }
                         </TableRowCell>
-                        <TableRowCell>{formatBytes(item.freeSpace)}</TableRowCell>
-                        <TableRowCell>{formatBytes(item.totalSpace)}</TableRowCell>
+
+                        <TableRowCell className={styles.space}>
+                          {formatBytes(freeSpace)}
+                        </TableRowCell>
+
+                        <TableRowCell className={styles.space}>
+                          {formatBytes(totalSpace)}
+                        </TableRowCell>
+
+                        <TableRowCell className={styles.space}>
+                          <ProgressBar
+                            progress={diskUsage}
+                            kind={diskUsageKind}
+                            size={sizes.MEDIUM}
+                          />
+                        </TableRowCell>
                       </TableRow>
                     );
                   })
