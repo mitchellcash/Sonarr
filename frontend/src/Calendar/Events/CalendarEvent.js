@@ -60,6 +60,7 @@ class CalendarEvent extends Component {
     const downloading = !!(queueItem || grabbed);
     const isMonitored = series.monitored && monitored;
     const statusStyle = getStatusStyle(episodeNumber, hasFile, downloading, startTime, endTime, isMonitored);
+    const missingAbsoluteNumber = series.seriesType === 'anime' && seasonNumber > 0 && !absoluteEpisodeNumber;
 
     return (
       <div>
@@ -77,18 +78,26 @@ class CalendarEvent extends Component {
             </div>
 
             {
-              !!queueItem &&
-                <CalendarEventQueueDetails
-                  seriesType={series.seriesType}
-                  seasonNumber={seasonNumber}
-                  absoluteEpisodeNumber={absoluteEpisodeNumber}
-                  {...queueItem}
+              missingAbsoluteNumber &&
+                <Icon
+                  name={icons.WARNING}
+                  title="Episode does not have an absolute episode number"
                 />
+            }
+
+            {
+              !!queueItem &&
+                <span className={styles.statusIcon}>
+                  <CalendarEventQueueDetails
+                    {...queueItem}
+                  />
+                </span>
             }
 
             {
               !queueItem && grabbed &&
                 <Icon
+                  className={styles.statusIcon}
                   name={icons.DOWNLOADING}
                   title="Episode is downloading"
                 />

@@ -3,6 +3,7 @@ import isBefore from 'Utilities/Date/isBefore';
 import { icons, kinds, sizes } from 'Helpers/Props';
 import Icon from 'Components/Icon';
 import ProgressBar from 'Components/ProgressBar';
+import QueueDetails from 'Activity/Queue/QueueDetails';
 import EpisodeQuality from './EpisodeQuality';
 import styles from './EpisodeStatus.css';
 
@@ -19,43 +20,26 @@ function EpisodeStatus(props) {
   const isQueued = !!queueItem;
   const hasAired = isBefore(airDateUtc);
 
-  if (hasEpisodeFile) {
-    const quality = episodeFile.quality;
-    const isCutoffNotMet = episodeFile.qualityCutoffNotMet;
-
-    return (
-      <div className={styles.center}>
-        <EpisodeQuality
-          quality={quality}
-          size={episodeFile.size}
-          isCutoffNotMet={isCutoffNotMet}
-          title="Episode Downloaded"
-        />
-      </div>
-    );
-  }
-
   if (isQueued) {
-    const progress = 100 - (queueItem.sizeleft / queueItem.size * 100);
+    const {
+      sizeleft,
+      size
+    } = queueItem;
 
-    if (progress === 0) {
-      return (
-        <div className={styles.center}>
-          <Icon
-            name={icons.DOWNLOADING}
-            title="Episode is downloading"
-          />
-        </div>
-      );
-    }
+    const progress = (100 - sizeleft / size * 100);
 
     return (
       <div className={styles.center}>
-        <ProgressBar
-          title={`Episode is downloading - ${progress.toFixed(1)}% ${queueItem.title}`}
-          progress={progress}
-          kind={kinds.PURPLE}
-          size={sizes.MEDIUM}
+        <QueueDetails
+          {...queueItem}
+          progressBar={
+            <ProgressBar
+              title={`Episode is downloading - ${progress.toFixed(1)}% ${queueItem.title}`}
+              progress={progress}
+              kind={kinds.PURPLE}
+              size={sizes.MEDIUM}
+            />
+          }
         />
       </div>
     );
@@ -67,6 +51,22 @@ function EpisodeStatus(props) {
         <Icon
           name={icons.DOWNLOADING}
           title="Episode is downloading"
+        />
+      </div>
+    );
+  }
+
+  if (hasEpisodeFile) {
+    const quality = episodeFile.quality;
+    const isCutoffNotMet = episodeFile.qualityCutoffNotMet;
+
+    return (
+      <div className={styles.center}>
+        <EpisodeQuality
+          quality={quality}
+          size={episodeFile.size}
+          isCutoffNotMet={isCutoffNotMet}
+          title="Episode Downloaded"
         />
       </div>
     );
