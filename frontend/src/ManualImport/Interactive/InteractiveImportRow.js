@@ -31,6 +31,20 @@ class InteractiveImportRow extends Component {
     };
   }
 
+  componentDidMount() {
+    const {
+      id,
+      series,
+      seasonNumber,
+      episodes,
+      quality
+    } = this.props;
+
+    if (series && seasonNumber !== undefined && episodes.length && quality) {
+      this.props.onSelectedChange({ id, value: true });
+    }
+  }
+
   //
   // Control
 
