@@ -108,7 +108,7 @@ class FileBrowserModalContent extends Component {
                       type="computer"
                       name="My Computer"
                       path={parent}
-                      onClick={this.onRowClick}
+                      onPress={this.onRowPress}
                     />
                 }
 
@@ -118,7 +118,7 @@ class FileBrowserModalContent extends Component {
                       type="parent"
                       name="..."
                       path={parent}
-                      onClick={this.onRowClick}
+                      onPress={this.onRowPress}
                     />
                 }
 
@@ -130,7 +130,7 @@ class FileBrowserModalContent extends Component {
                         type={directory.type}
                         name={directory.name}
                         path={directory.path}
-                        onClick={this.onRowClick}
+                        onPress={this.onRowPress}
                       />
                     );
                   })
