@@ -26,6 +26,15 @@ class HistoryRow extends Component {
     };
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (!nextProps.isMarkingAsFailed &&
+        this.props.isMarkingAsFailed &&
+        !nextProps.markAsFailedError
+    ) {
+      this.setState({ isDetailsModalOpen: false });
+    }
+  }
+
   //
   // Listeners
 
@@ -34,11 +43,6 @@ class HistoryRow extends Component {
   }
 
   onDetailsModalClose = () => {
-    this.setState({ isDetailsModalOpen: false });
-  }
-
-  onMarkAsFailedPress = () => {
-    this.props.onMarkAsFailedPress();
     this.setState({ isDetailsModalOpen: false });
   }
 
@@ -55,8 +59,10 @@ class HistoryRow extends Component {
       sourceTitle,
       date,
       data,
+      isMarkingAsFailed,
       shortDateFormat,
-      timeFormat
+      timeFormat,
+      onMarkAsFailedPress
     } = this.props;
 
     if (!episode) {
@@ -121,9 +127,10 @@ class HistoryRow extends Component {
           eventType={eventType}
           sourceTitle={sourceTitle}
           data={data}
+          isMarkingAsFailed={isMarkingAsFailed}
           shortDateFormat={shortDateFormat}
           timeFormat={timeFormat}
-          onMarkAsFailedPress={this.onMarkAsFailedPress}
+          onMarkAsFailedPress={onMarkAsFailedPress}
           onModalClose={this.onDetailsModalClose}
         />
       </TableRow>
@@ -141,6 +148,7 @@ HistoryRow.propTypes = {
   sourceTitle: PropTypes.string.isRequired,
   date: PropTypes.string.isRequired,
   data: PropTypes.object.isRequired,
+  isMarkingAsFailed: PropTypes.bool,
   shortDateFormat: PropTypes.string.isRequired,
   timeFormat: PropTypes.string.isRequired,
   onMarkAsFailedPress: PropTypes.func.isRequired

@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react';
 import { kinds } from 'Helpers/Props';
 import Button from 'Components/Link/Button';
+import SpinnerButton from 'Components/Link/SpinnerButton';
 import Modal from 'Components/Modal/Modal';
 import ModalContent from 'Components/Modal/ModalContent';
 import ModalHeader from 'Components/Modal/ModalHeader';
@@ -30,6 +31,7 @@ function HistoryDetailsModal(props) {
     eventType,
     sourceTitle,
     data,
+    isMarkingAsFailed,
     shortDateFormat,
     timeFormat,
     onMarkAsFailedPress,
@@ -59,13 +61,14 @@ function HistoryDetailsModal(props) {
         <ModalFooter>
           {
             eventType === 'grabbed' &&
-              <Button
+              <SpinnerButton
                 className={styles.markAsFailedButton}
                 kind={kinds.DANGER}
+                isSpinning={isMarkingAsFailed}
                 onPress={onMarkAsFailedPress}
               >
                 Mark as Failed
-              </Button>
+              </SpinnerButton>
           }
 
           <Button
@@ -84,10 +87,15 @@ HistoryDetailsModal.propTypes = {
   eventType: PropTypes.string.isRequired,
   sourceTitle: PropTypes.string.isRequired,
   data: PropTypes.object.isRequired,
+  isMarkingAsFailed: PropTypes.bool.isRequired,
   shortDateFormat: PropTypes.string.isRequired,
   timeFormat: PropTypes.string.isRequired,
   onMarkAsFailedPress: PropTypes.func.isRequired,
   onModalClose: PropTypes.func.isRequired
 };
+
+HistoryDetailsModal.defaultProps = {
+  isMarkingAsFailed: false
+}
 
 export default HistoryDetailsModal;

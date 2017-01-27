@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
-import { markAsFailed } from 'Store/Actions/historyActions';
+import { fetchHistory, markAsFailed } from 'Store/Actions/historyActions';
 import createEpisodeSelector from 'Store/Selectors/createEpisodeSelector';
 import createUISettingsSelector from 'Store/Selectors/createUISettingsSelector';
 import HistoryRow from './HistoryRow';
@@ -21,10 +21,20 @@ function createMapStateToProps() {
 }
 
 const mapDispatchToProps = {
+  fetchHistory,
   markAsFailed
 };
 
 class HistoryRowConnector extends Component {
+
+  componentWillReceiveProps(nextProps) {
+    if (!nextProps.isMarkingAsFailed &&
+        this.props.isMarkingAsFailed &&
+        !nextProps.markAsFailedError
+    ) {
+      this.props.fetchHistory();
+    }
+  }
 
   //
   // Listeners
@@ -48,6 +58,8 @@ class HistoryRowConnector extends Component {
 
 HistoryRowConnector.propTypes = {
   id: PropTypes.number.isRequired,
+  isMarkingAsFailed: PropTypes.bool,
+  fetchHistory: PropTypes.func.isRequired,
   markAsFailed: PropTypes.func.isRequired
 };
 

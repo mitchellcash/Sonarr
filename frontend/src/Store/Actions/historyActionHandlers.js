@@ -2,6 +2,9 @@ import $ from 'jquery';
 import serverSideCollectionHandlers from 'Utilities/serverSideCollectionHandlers';
 import createServerSideCollectionHandlers from './Creators/createServerSideCollectionHandlers';
 import * as types from './actionTypes';
+import { updateItem } from './baseActions';
+
+const section = 'history';
 
 const historyActionHandlers = {
   ...createServerSideCollectionHandlers('history', '/history', (state) => state.history, {
@@ -17,12 +20,38 @@ const historyActionHandlers = {
 
   [types.MARK_AS_FAILED]: function(payload) {
     return function(dispatch, getState) {
-      $.ajax({
+      const id = payload.id;
+
+      dispatch(updateItem({
+        section,
+        id,
+        isMarkingAsFailed: true
+      }));
+
+      const promise = $.ajax({
         url: '/history/failed',
         type: 'POST',
         data: {
-          id: payload.id
+          id
         }
+      });
+
+      promise.done(() => {
+        dispatch(updateItem({
+          section,
+          id,
+          isMarkingAsFailed: false,
+          markAsFailedError: null
+        }));
+      });
+
+      promise.fail((xhr) => {
+        dispatch(updateItem({
+          section,
+          id,
+          isMarkingAsFailed: false,
+          markAsFailedError: xhr
+        }));
       });
     };
   }
