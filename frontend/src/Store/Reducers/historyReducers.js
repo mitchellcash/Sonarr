@@ -10,12 +10,12 @@ import createUpdateServerSideCollectionReducer from './Creators/createUpdateServ
 export const defaultState = {
   isFetching: false,
   isPopulated: false,
+  error: null,
   pageSize: 20,
   sortKey: 'date',
   sortDirection: sortDirections.DESCENDING,
   filterKey: null,
   filterValue: null,
-  error: null,
   items: []
 };
 
