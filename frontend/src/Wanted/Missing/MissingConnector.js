@@ -20,6 +20,7 @@ function createMapStateToProps() {
 
       const result = _.pick(missing, [
         'isFetching',
+        'isPopulated',
         'items',
         'page',
         'totalPages',

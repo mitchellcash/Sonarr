@@ -105,7 +105,7 @@ class Health extends Component {
                     const internalLink = getInternalLink(item.source);
 
                     return (
-                      <TableRow key={`health${item.id}`}>
+                      <TableRow key={`health${item.message}`}>
                         <TableRowCell>
                           <Icon
                             name={icons.DANGER}

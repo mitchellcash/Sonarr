@@ -142,7 +142,14 @@ class History extends Component {
           }
 
           {
-            !isFetchingAny && isAllPopulated && !hasError &&
+            !isFetchingAny && isPopulated && !hasError && !items.length &&
+              <div>
+                No history found
+              </div>
+          }
+
+          {
+            !isFetchingAny && isAllPopulated && !hasError && !!items.length &&
               <div>
                 <Table
                   headers={headers}

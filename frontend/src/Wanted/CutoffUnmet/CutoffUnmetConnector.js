@@ -22,6 +22,7 @@ function createMapStateToProps() {
 
       const result = _.pick(cutoffUnmet, [
         'isFetching',
+        'isPopulated',
         'items',
         'page',
         'totalPages',

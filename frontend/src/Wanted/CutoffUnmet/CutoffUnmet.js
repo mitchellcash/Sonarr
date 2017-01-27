@@ -117,6 +117,8 @@ class CutoffUnmet extends Component {
   render() {
     const {
       isFetching,
+      isPopulated,
+      error,
       items,
       totalRecords,
       isSearchingForEpisodes,
@@ -198,7 +200,21 @@ class CutoffUnmet extends Component {
           }
 
           {
-            !isFetching &&
+            !isFetching && error &&
+              <div>
+                Error fetching cutoff unmet
+              </div>
+          }
+
+          {
+            isPopulated && !error && !items.length &&
+              <div>
+                No cutoff unmet items
+              </div>
+          }
+
+          {
+            isPopulated && !error && !!items.length &&
               <div>
                 <Table
                   headers={headers}
@@ -257,6 +273,8 @@ class CutoffUnmet extends Component {
 
 CutoffUnmet.propTypes = {
   isFetching: PropTypes.bool.isRequired,
+  isPopulated: PropTypes.bool.isRequired,
+  error: PropTypes.object,
   items: PropTypes.array.isRequired,
   totalRecords: PropTypes.number,
   isSearchingForEpisodes: PropTypes.bool.isRequired,
