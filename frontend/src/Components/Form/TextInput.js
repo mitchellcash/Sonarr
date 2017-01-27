@@ -19,9 +19,10 @@ class TextInput extends Component {
 
   render() {
     const {
+      className,
       type,
       readOnly,
-      className,
+      autoFocus,
       placeholder,
       name,
       value,
@@ -35,6 +36,7 @@ class TextInput extends Component {
       <input
         type={type}
         readOnly={readOnly}
+        autoFocus={autoFocus}
         placeholder={placeholder}
         className={classNames(
           className,
@@ -52,9 +54,10 @@ class TextInput extends Component {
 }
 
 TextInput.propTypes = {
+  className: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
   readOnly: PropTypes.bool,
-  className: PropTypes.string.isRequired,
+  autoFocus: PropTypes.bool,
   placeholder: PropTypes.string,
   name: PropTypes.string.isRequired,
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.array]).isRequired,
@@ -66,9 +69,10 @@ TextInput.propTypes = {
 };
 
 TextInput.defaultProps = {
+  className: styles.text,
   type: 'text',
   readOnly: false,
-  className: styles.text,
+  autoFocus: false,
   value: ''
 };
 

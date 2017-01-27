@@ -57,6 +57,7 @@ class SelectSeriesModalContent extends Component {
             placeholder="Filter series"
             name="filter"
             value={filter}
+            autoFocus={true}
             onChange={this.onFilterChange}
           />
 
