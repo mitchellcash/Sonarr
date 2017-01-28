@@ -13,8 +13,10 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 const uiFolder = 'UI.Phantom';
 const root = path.join(__dirname, '..', 'src');
+const isProduction = process.argv.indexOf('--production') > -1;
 
 console.log('ROOT:', root);
+console.log('isProduction:', isProduction);
 
 const cssVariables = [
   '../src/Styles/Variables/colors',
@@ -53,7 +55,10 @@ const config = {
       name: 'vendor'
     }),
     new webpack.DefinePlugin({
-      __DEV__: true
+      __DEV__: !isProduction,
+      'process.env': {
+        NODE_ENV: isProduction ? JSON.stringify('production') : JSON.stringify('development')
+      }
     })
   ],
   resolveLoader: {
