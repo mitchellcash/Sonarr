@@ -34,12 +34,6 @@
   margin: 0 5px;
 }
 
-.presetsMenuContent {
-  composes: menuContent from 'Components/Menu/MenuContent.css';
-
-  z-index: 1;
-}
-
 .presetsMenuButton {
   composes: button from 'Components/Link/Button.css';
 

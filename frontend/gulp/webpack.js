@@ -9,6 +9,7 @@ const path = require('path');
 const webpack = require('webpack');
 const errorHandler = require('./helpers/errorHandler');
 const reload = require('require-nocache')(module);
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 const uiFolder = 'UI.Phantom';
 const root = path.join(__dirname, '..', 'src');
@@ -24,6 +25,9 @@ const cssVariables = [
 
 const config = {
   devtool: '#source-map',
+  stats: {
+    children: false
+  },
   watchOptions: {
     ignored: /node_modules/
   },
@@ -44,6 +48,7 @@ const config = {
     sourceMapFilename: path.join('_output', uiFolder, '[name].map')
   },
   plugins: [
+    new ExtractTextPlugin(path.join('_output', uiFolder, 'Content', 'styles.css'), { allChunks: true }),
     new webpack.optimize.CommonsChunkPlugin({
       name: 'vendor'
     }),
@@ -83,7 +88,7 @@ const config = {
       {
         test: /\.css$/,
         exclude: /(node_modules|globals.css)/,
-        loader: 'style!css-loader?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!postcss-loader'
+        loader: ExtractTextPlugin.extract('style', 'css-loader?modules&importLoaders=1&sourceMap&localIdentName=[name]__[local]___[hash:base64:5]!postcss-loader')
       },
 
       // Global styles
@@ -104,8 +109,8 @@ const config = {
       }
     ]
   },
-  postcss: function (webpack) {
-    cssVariables.forEach(webpack.addDependency);
+  postcss: function(wpack) {
+    cssVariables.forEach(wpack.addDependency);
 
     return [
       simpleVars({

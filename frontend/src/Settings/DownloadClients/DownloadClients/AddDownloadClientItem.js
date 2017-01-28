@@ -67,7 +67,7 @@ class AddDownloadClientItem extends Component {
                       Presets
                     </Button>
 
-                    <MenuContent className={styles.presetsMenuContent}>
+                    <MenuContent>
                       {
                         presets.map((preset) => {
                           return (
