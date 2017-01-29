@@ -125,7 +125,7 @@ class DelayProfiles extends Component {
             </div>
 
             <EditDelayProfileModalConnector
-              isOpen={this.state.isAddDelayProfileModalOpen}
+              isOpen={isAddDelayProfileModalOpen}
               onModalClose={this.onModalClose}
             />
           </PageSectionContent>
