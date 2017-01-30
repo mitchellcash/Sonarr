@@ -1,8 +1,11 @@
 $hoverScale: 1.05;
 
 .container {
+  padding: 10px;
+}
+
+.content {
   position: relative;
-  margin: 10px;
   background-color: #333;
   transition: all 200ms ease-in;
 

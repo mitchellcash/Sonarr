@@ -50,6 +50,7 @@ class SeriesIndexPoster extends Component {
 
   render() {
     const {
+      style,
       id,
       monitored,
       status,
@@ -75,92 +76,95 @@ class SeriesIndexPoster extends Component {
     const progress = episodeCount ? episodeFileCount / episodeCount * 100 : 100;
 
     return (
-      <div className={styles.container}>
-        <Label className={styles.controls}>
-          <SpinnerIconButton
-            className={styles.action}
-            name={icons.REFRESH}
-            title="Refresh series"
-            isSpinning={isRefreshingSeries}
-            onPress={onRefreshSeriesPress}
-          />
+      <div className={styles.container} style={style}>
+        <div className={styles.content}>
+          <Label className={styles.controls}>
+            <SpinnerIconButton
+              className={styles.action}
+              name={icons.REFRESH}
+              title="Refresh series"
+              isSpinning={isRefreshingSeries}
+              onPress={onRefreshSeriesPress}
+            />
 
-          <IconButton
-            className={styles.action}
-            name={icons.EDIT}
-            title="Edit Series"
-            onPress={this.onEditSeriesPress}
-          />
-        </Label>
+            <IconButton
+              className={styles.action}
+              name={icons.EDIT}
+              title="Edit Series"
+              onPress={this.onEditSeriesPress}
+            />
+          </Label>
 
-        {
-          status === 'ended' &&
-            <Label
-              className={styles.ended}
-              kind={kinds.DANGER}
-            >
-              Ended
-            </Label>
-        }
-
-        <div className={styles.title}>
-          {title}
-        </div>
-
-        <Link
-          className={styles.link}
-          to={link}
-        >
-          <SeriesPoster
-            className={styles.poster}
-            images={images}
-            size={250}
-            lazy={true}
-            overflow={true}
-          />
-        </Link>
-
-        <ProgressBar
-          className={styles.progressBar}
-          containerClassName={styles.progress}
-          progress={progress}
-          kind={getProgressBarKind(status, monitored, progress)}
-          showText={true}
-          text={`${episodeFileCount} / ${episodeCount}`}
-          width={161.9}
-        />
-
-        <div className={styles.nextAiring}>
           {
-            getRelativeDate(
-              nextAiring,
-              shortDateFormat,
-              showRelativeDates,
-              {
-                timeFormat,
-                timeForToday: true
-              })
+            status === 'ended' &&
+              <Label
+                className={styles.ended}
+                kind={kinds.DANGER}
+              >
+                Ended
+              </Label>
           }
+
+          <div className={styles.title}>
+            {title}
+          </div>
+
+          <Link
+            className={styles.link}
+            to={link}
+          >
+            <SeriesPoster
+              className={styles.poster}
+              images={images}
+              size={250}
+              lazy={false}
+              overflow={true}
+            />
+          </Link>
+
+          <ProgressBar
+            className={styles.progressBar}
+            containerClassName={styles.progress}
+            progress={progress}
+            kind={getProgressBarKind(status, monitored, progress)}
+            showText={true}
+            text={`${episodeFileCount} / ${episodeCount}`}
+            width={161.9}
+          />
+
+          <div className={styles.nextAiring}>
+            {
+              getRelativeDate(
+                nextAiring,
+                shortDateFormat,
+                showRelativeDates,
+                {
+                  timeFormat,
+                  timeForToday: true
+                })
+            }
+          </div>
+
+          <EditSeriesModalConnector
+            isOpen={isEditSeriesModalOpen}
+            seriesId={id}
+            onModalClose={this.onEditSeriesModalClose}
+            onDeleteSeriesPress={this.onDeleteSeriesPress}
+          />
+
+          <DeleteSeriesModal
+            isOpen={isDeleteSeriesModalOpen}
+            seriesId={id}
+            onModalClose={this.onDeleteSeriesModalClose}
+          />
         </div>
-
-        <EditSeriesModalConnector
-          isOpen={isEditSeriesModalOpen}
-          seriesId={id}
-          onModalClose={this.onEditSeriesModalClose}
-          onDeleteSeriesPress={this.onDeleteSeriesPress}
-        />
-
-        <DeleteSeriesModal
-          isOpen={isDeleteSeriesModalOpen}
-          seriesId={id}
-          onModalClose={this.onDeleteSeriesModalClose}
-        />
       </div>
     );
   }
 }
 
 SeriesIndexPoster.propTypes = {
+  style: PropTypes.object.isRequired,
   id: PropTypes.number.isRequired,
   monitored: PropTypes.bool.isRequired,
   status: PropTypes.string.isRequired,

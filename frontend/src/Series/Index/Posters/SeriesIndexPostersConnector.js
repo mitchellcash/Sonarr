@@ -6,13 +6,15 @@ import SeriesIndexPosters from './SeriesIndexPosters';
 
 function createMapStateToProps() {
   return createSelector(
+    (state) => state.app.dimensions,
     createClientSideCollectionSelector(),
     createUISettingsSelector(),
-    (series, uiSettings) => {
+    (dimensions, series, uiSettings) => {
       return {
         showRelativeDates: uiSettings.showRelativeDates,
         shortDateFormat: uiSettings.shortDateFormat,
         timeFormat: uiSettings.timeFormat,
+        isSmallScreen: dimensions.isSmallScreen,
         ...series
       };
     }

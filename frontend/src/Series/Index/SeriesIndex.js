@@ -30,6 +30,24 @@ function getViewComponent(view) {
 class SeriesIndex extends Component {
 
   //
+  // Lifecycle
+
+  constructor(props, context) {
+    super(props, context);
+
+    this.state = {
+      contentBody: null
+    };
+  }
+
+  //
+  // Control
+
+  setContentBodyRef = (ref) => {
+    this.setState({ contentBody: ref });
+  }
+
+  //
   // Render
 
   render() {
@@ -51,6 +69,8 @@ class SeriesIndex extends Component {
       onRefreshSeriesPress,
       onRssSyncPress
     } = this.props;
+
+    const contentBody = this.state.contentBody;
 
     const ViewComponent = getViewComponent(view);
 
@@ -216,7 +236,10 @@ class SeriesIndex extends Component {
           </PageToolbarSection>
         </PageToolbar>
 
-        <PageContentBody innerClassName={innerContentClassName}>
+        <PageContentBody
+          ref={this.setContentBodyRef}
+          innerClassName={innerContentClassName}
+        >
           {
             isFetching && !isPopulated &&
               <LoadingIndicator />
@@ -228,9 +251,11 @@ class SeriesIndex extends Component {
           }
 
           {
-            !error && isPopulated && !!items.length &&
+            !error && isPopulated && !!items.length && contentBody &&
               <div>
-                <ViewComponent />
+                <ViewComponent
+                  contentBody={contentBody}
+                />
 
                 <SeriesIndexFooter
                   series={items}
