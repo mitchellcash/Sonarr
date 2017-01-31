@@ -18,7 +18,7 @@ const dsn = isProduction ? 'https://b80ca60625b443c38b242e0d21681eb7@sentry.sona
 
 const middlewares = [];
 
-if (analytics || !isProduction) {
+if (analytics) {
   middlewares.push(ravenMiddleware(dsn, {
     environment: isProduction ? 'production' : 'development',
     release,
