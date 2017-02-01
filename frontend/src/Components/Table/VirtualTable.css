@@ -1,0 +1,5 @@
+.headerRow {
+  &:hover {
+    background-color: transparent !important;
+  }
+}

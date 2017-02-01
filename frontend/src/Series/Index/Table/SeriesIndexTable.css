@@ -1,0 +1,16 @@
+.tableContainer {
+  position: relative;
+  width: 100%;
+}
+
+.row {
+  composes: row from 'Components/Table/TableRow.css';
+
+  display: flex;
+}
+
+@media only screen and (max-width: $breakpointMedium) {
+  .row {
+    overflow: visible !important;
+  }
+}

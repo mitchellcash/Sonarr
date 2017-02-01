@@ -7,9 +7,11 @@ import SeriesIndexTable from './SeriesIndexTable';
 
 function createMapStateToProps() {
   return createSelector(
+    (state) => state.app.dimensions,
     createClientSideCollectionSelector(),
-    (series) => {
+    (dimensions, series) => {
       return {
+        isSmallScreen: dimensions.isSmallScreen,
         ...series
       };
     }

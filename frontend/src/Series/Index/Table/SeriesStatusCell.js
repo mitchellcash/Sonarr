@@ -4,9 +4,19 @@ import Icon from 'Components/Icon';
 import TableRowCell from 'Components/Table/Cells/TableRowCell';
 import styles from './SeriesStatusCell.css';
 
-function SeriesStatusCell(monitored, status) {
+function SeriesStatusCell(props) {
+  const {
+    monitored,
+    status,
+    component: Component,
+    ...otherProps
+  } = props;
+
   return (
-    <TableRowCell className={styles.status}>
+    <Component
+      className={styles.status}
+      {...otherProps}
+    >
       <Icon
         className={styles.statusIcon}
         name={monitored ? icons.MONITORED : icons.UNMONITORED}
@@ -19,13 +29,18 @@ function SeriesStatusCell(monitored, status) {
         title={status === 'ended' ? 'Ended' : 'Continuing'}
 
       />
-    </TableRowCell>
+    </Component>
   );
 }
 
 SeriesStatusCell.propTypes = {
   monitored: PropTypes.bool.isRequired,
-  status: PropTypes.string.isRequired
+  status: PropTypes.string.isRequired,
+  component: PropTypes.func
+};
+
+SeriesStatusCell.defaultProps = {
+  component: TableRowCell
 };
 
 export default SeriesStatusCell;

@@ -29,7 +29,7 @@ namespace Sonarr.Http.Frontend
             }
 
             if (context.Request.Path.StartsWith("/signalr", StringComparison.CurrentCultureIgnoreCase)) return false;
-            if (context.Request.Path.EndsWith("main.js")) return false;
+            if (context.Request.Path.EndsWith("index.js")) return false;
             if (context.Request.Path.StartsWith("/feed", StringComparison.CurrentCultureIgnoreCase)) return false;
 
             if (context.Request.Path.StartsWith("/log", StringComparison.CurrentCultureIgnoreCase) &&

@@ -12,20 +12,28 @@ function RelativeDateCell(props) {
     showRelativeDates,
     shortDateFormat,
     longDateFormat,
-    timeFormat
+    timeFormat,
+    component: Component,
+    ...otherProps
   } = props;
 
   if (!date) {
-    return <TableRowCell className={className} />;
+    return (
+      <Component
+        className={className}
+        {...otherProps}
+      />
+    );
   }
 
   return (
-    <TableRowCell
+    <Component
       className={className}
       title={formatDateTime(date, longDateFormat, timeFormat, { includeSeconds })}
+      {...otherProps}
     >
       {getRelativeDate(date, shortDateFormat, showRelativeDates, { timeFormat, includeSeconds, timeForToday: true })}
-    </TableRowCell>
+    </Component>
   );
 }
 
@@ -36,12 +44,14 @@ RelativeDateCell.propTypes = {
   showRelativeDates: PropTypes.bool.isRequired,
   shortDateFormat: PropTypes.string.isRequired,
   longDateFormat: PropTypes.string.isRequired,
-  timeFormat: PropTypes.string.isRequired
+  timeFormat: PropTypes.string.isRequired,
+  component: PropTypes.func
 };
 
 RelativeDateCell.defaultProps = {
   className: styles.cell,
-  includeSeconds: false
+  includeSeconds: false,
+  component: TableRowCell
 };
 
 export default RelativeDateCell;

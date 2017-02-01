@@ -2,9 +2,26 @@ import React, { Component, PropTypes } from 'react';
 import { icons, sortDirections } from 'Helpers/Props';
 import Link from 'Components/Link/Link';
 import Icon from 'Components/Icon';
-import styles from './TableHeaderCell.css';
+import styles from './VirtualTableHeaderCell.css';
 
-class TableHeaderCell extends Component {
+export function headerRenderer(headerProps) {
+  const {
+    columnData = {},
+    dataKey,
+    label
+  } = headerProps;
+
+  return (
+    <VirtualTableHeaderCell
+      name={dataKey}
+      {...columnData}
+    >
+      {label}
+    </VirtualTableHeaderCell>
+  );
+}
+
+class VirtualTableHeaderCell extends Component {
 
   //
   // Listeners
@@ -46,7 +63,7 @@ class TableHeaderCell extends Component {
     return (
       sortable ?
         <Link
-          component="th"
+          component="div"
           className={className}
           onPress={this.onPress}
           {...otherProps}
@@ -62,14 +79,14 @@ class TableHeaderCell extends Component {
           }
         </Link> :
 
-        <th className={className}>
+        <div className={className}>
           {children}
-        </th>
+        </div>
     );
   }
 }
 
-TableHeaderCell.propTypes = {
+VirtualTableHeaderCell.propTypes = {
   className: PropTypes.string,
   name: PropTypes.string.isRequired,
   label: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
@@ -81,9 +98,9 @@ TableHeaderCell.propTypes = {
   onSortPress: PropTypes.func
 };
 
-TableHeaderCell.defaultProps = {
+VirtualTableHeaderCell.defaultProps = {
   className: styles.headerCell,
   sortable: false
 };
 
-export default TableHeaderCell;
+export default VirtualTableHeaderCell;

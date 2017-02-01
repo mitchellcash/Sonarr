@@ -114,7 +114,6 @@ class SeriesIndexPosters extends Component {
     return (
       <Measure onMeasure={this.onMeasure}>
         <WindowScroller
-          ref={this.setWindowScrollerRef}
           scrollElement={isSmallScreen ? null : this._contentBodyNode}
         >
           {({ height, isScrolling, scrollTop }) => {

@@ -111,7 +111,6 @@
     "no-else-return": "error",
     "no-empty-function": ["error", {"allow": ["arrowFunctions"]}],
     no-empty-pattern: "error",
-    no-eq-null: "error",
     "no-eval": "error",
     "no-extend-native": "error",
     "no-extra-bind": "error",
