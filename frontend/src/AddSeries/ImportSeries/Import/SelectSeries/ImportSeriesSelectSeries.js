@@ -68,7 +68,7 @@ class ImportSeriesSelectSeries extends Component {
       return;
     }
 
-    if (!button.contains(event.target) && !content.contains(event.target) && this.state.isOpen) {
+    if (!button.contains(event.target) && content && !content.contains(event.target) && this.state.isOpen) {
       this.setState({ isOpen: false });
       this._removeListener();
     }
@@ -261,6 +261,13 @@ ImportSeriesSelectSeries.propTypes = {
   queued: PropTypes.bool.isRequired,
   onSearchInputChange: PropTypes.func.isRequired,
   onSeriesSelect: PropTypes.func.isRequired
+};
+
+ImportSeriesSelectSeries.defaultProps = {
+  isFetching: true,
+  isPopulated: false,
+  items: [],
+  queued: true
 };
 
 export default ImportSeriesSelectSeries;

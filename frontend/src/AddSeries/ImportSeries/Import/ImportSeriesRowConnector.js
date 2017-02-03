@@ -9,19 +9,14 @@ import ImportSeriesRow from './ImportSeriesRow';
 function createMapStateToProps() {
   return createSelector(
     (state, { name }) => name,
-    (state) => state.addSeries,
     (state) => state.importSeries,
     createAllSeriesSelector(),
-    (name, addSeries, importSeries, series) => {
+    (name, importSeries, series) => {
       const item = _.find(importSeries.items, { id: name }) || {};
       const selectedSeries = item && item.selectedSeries;
       const isExistingSeries = !!selectedSeries && _.some(series, { tvdbId: selectedSeries.tvdbId });
 
       return {
-        defaultMonitor: addSeries.defaults.monitor,
-        defaultQualityProfileId: addSeries.defaults.qualityProfileId,
-        defaultSeriesType: addSeries.defaults.seriesType,
-        defaultSeasonFolder: addSeries.defaults.seasonFolder,
         ...item,
         isExistingSeries
       };
@@ -35,36 +30,6 @@ const mapDispatchToProps = {
 };
 
 class ImportSeriesRowConnector extends Component {
-
-  //
-  // Lifecycle
-
-  componentWillMount() {
-    const {
-      name,
-      path,
-      defaultMonitor,
-      defaultQualityProfileId,
-      defaultSeriesType,
-      defaultSeasonFolder
-    } = this.props;
-
-    this.props.queueLookupSeries({
-      name,
-      path,
-      term: name
-    });
-
-    const values = {
-      id: name,
-      monitor: defaultMonitor,
-      qualityProfileId: defaultQualityProfileId,
-      seriesType: defaultSeriesType,
-      seasonFolder: defaultSeasonFolder
-    };
-
-    this.props.setImportSeriesValue(values);
-  }
 
   //
   // Listeners
@@ -82,7 +47,15 @@ class ImportSeriesRowConnector extends Component {
   render() {
     // Don't show the row until we have the information we require for it.
 
-    if (!this.props.items) {
+    const {
+      items,
+      monitor,
+      qualityProfileId,
+      seriesType,
+      seasonFolder
+    } = this.props;
+
+    if (!items || !monitor || !qualityProfileId || !seriesType || !seasonFolder == null) {
       return null;
     }
 
@@ -102,10 +75,8 @@ ImportSeriesRowConnector.propTypes = {
   path: PropTypes.string.isRequired,
   monitor: PropTypes.string,
   qualityProfileId: PropTypes.number,
-  defaultMonitor: PropTypes.string.isRequired,
-  defaultQualityProfileId: PropTypes.number,
-  defaultSeriesType: PropTypes.string.isRequired,
-  defaultSeasonFolder: PropTypes.bool.isRequired,
+  seriesType: PropTypes.string,
+  seasonFolder: PropTypes.bool,
   items: PropTypes.arrayOf(PropTypes.object),
   queueLookupSeries: PropTypes.func.isRequired,
   setImportSeriesValue: PropTypes.func.isRequired

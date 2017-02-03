@@ -5,37 +5,8 @@ import toggleSelected from 'Utilities/Table/toggleSelected';
 import LoadingIndicator from 'Components/Loading/LoadingIndicator';
 import PageContent from 'Components/Page/PageContent';
 import PageContentBody from 'Components/Page/PageContentBody';
-import Table from 'Components/Table/Table';
-import TableBody from 'Components/Table/TableBody';
-import ImportSeriesRowConnector from './ImportSeriesRowConnector';
+import ImportSeriesTableConnector from './ImportSeriesTableConnector';
 import ImportSeriesFooterConnector from './ImportSeriesFooterConnector';
-
-const headers = [
-  {
-    name: 'folder',
-    label: 'Folder'
-  },
-  {
-    name: 'monitor',
-    label: 'Monitor'
-  },
-  {
-    name: 'qualityProfile',
-    label: 'Quality Profile'
-  },
-  {
-    name: 'seriesType',
-    label: 'Series Type'
-  },
-  {
-    name: 'seasonFolder',
-    label: 'Season Folder'
-  },
-  {
-    name: 'series',
-    label: 'Series'
-  }
-];
 
 class ImportSeries extends Component {
 
@@ -49,8 +20,22 @@ class ImportSeries extends Component {
       allSelected: false,
       allUnselected: false,
       lastToggled: null,
-      selectedState: {}
+      selectedState: {},
+      contentBody: null
     };
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.selectedState !== this.state.selectedState) {
+      // this._table.forceUpdateGrid();
+    }
+  }
+
+  //
+  // Control
+
+  setContentBodyRef = (ref) => {
+    this.setState({ contentBody: ref });
   }
 
   //
@@ -95,12 +80,13 @@ class ImportSeries extends Component {
     const {
       allSelected,
       allUnselected,
-      selectedState
+      selectedState,
+      contentBody
     } = this.state;
 
     return (
       <PageContent title="Import Series">
-        <PageContentBody>
+        <PageContentBody ref={this.setContentBodyRef}>
           {
             rootFoldersFetching && !rootFoldersPopulated &&
               <LoadingIndicator />
@@ -119,31 +105,17 @@ class ImportSeries extends Component {
           }
 
           {
-            !rootFoldersError && rootFoldersPopulated && !!unmappedFolders.length &&
-              <Table
-                headers={headers}
-                selectAll={true}
+            !rootFoldersError && rootFoldersPopulated && !!unmappedFolders.length && contentBody &&
+              <ImportSeriesTableConnector
+                rootFolderId={rootFolderId}
+                unmappedFolders={unmappedFolders}
                 allSelected={allSelected}
                 allUnselected={allUnselected}
+                selectedState={selectedState}
+                contentBody={contentBody}
                 onSelectAllChange={this.onSelectAllChange}
-              >
-                <TableBody>
-                  {
-                    unmappedFolders.map((unmappedFolder) => {
-                      return (
-                        <ImportSeriesRowConnector
-                          key={unmappedFolder.name}
-                          rootFolderId={rootFolderId}
-                          name={unmappedFolder.name}
-                          path={unmappedFolder.path}
-                          isSelected={selectedState[unmappedFolder.name]}
-                          onSelectedChange={this.onSelectedChange}
-                        />
-                      );
-                    })
-                  }
-                </TableBody>
-              </Table>
+                onSelectedChange={this.onSelectedChange}
+              />
           }
         </PageContentBody>
 

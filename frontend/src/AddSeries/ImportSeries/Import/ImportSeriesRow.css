@@ -1,24 +1,35 @@
+.selectInput {
+  composes: input from 'Components/Form/CheckInput.css';
+}
+
+.folder {
+  composes: cell from 'Components/Table/Cells/VirtualTableRowCell.css';
+
+  flex: 1 0 200px;
+  line-height: 36px;
+}
+
 .monitor,
 .seriesType {
-  composes: cell from 'Components/Table/Cells/TableRowCell.css';
+  composes: cell from 'Components/Table/Cells/VirtualTableRowCell.css';
 
-  width: 200px;
+  flex: 0 0 200px;
 }
 
 .qualityProfile {
-  composes: cell from 'Components/Table/Cells/TableRowCell.css';
+  composes: cell from 'Components/Table/Cells/VirtualTableRowCell.css';
 
-  width: 250px;
+  flex: 0 0 250px;
 }
 
 .seasonFolder {
-  composes: cell from 'Components/Table/Cells/TableRowCell.css';
+  composes: cell from 'Components/Table/Cells/VirtualTableRowCell.css';
 
-  width: 150px;
+  flex: 0 0 150px;
 }
 
 .series {
-  composes: cell from 'Components/Table/Cells/TableRowCell.css';
+  composes: cell from 'Components/Table/Cells/VirtualTableRowCell.css';
 
-  width: 400px;
+  flex: 0 0 400px;
 }

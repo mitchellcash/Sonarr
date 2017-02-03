@@ -1,12 +1,10 @@
-.tableContainer {
-  position: relative;
-  width: 100%;
-}
-
 .row {
-  composes: row from 'Components/Table/TableRow.css';
-
   display: flex;
+  transition: background-color 500ms;
+
+  &:hover {
+    background-color: #fafbfc;
+  }
 }
 
 @media only screen and (max-width: $breakpointMedium) {

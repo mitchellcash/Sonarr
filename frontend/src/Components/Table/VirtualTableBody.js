@@ -1,29 +1,50 @@
 import React from 'react';
 import { Grid } from 'react-virtualized';
+import styles from './VirtualTableBody.css';
 
 class VirtualTableBody extends Grid {
 
   //
-  // Control
-
-  cellRenderer({ rowIndex, style, ...rest }) {
-    const { rowRenderer } = this.props;
-
-    // By default, List cells should be 100% width.
-    // This prevents them from flowing under a scrollbar (if present).
-    style.width = '100%';
-
-    return rowRenderer({
-      index: rowIndex,
-      style,
-      ...rest
-    });
-  }
-
-  //
   // Render
 
+  render() {
+    const {
+      autoContainerWidth,
+      autoHeight,
+      containerStyle,
+      height,
+      width
+    } = this.props;
 
+    const { isScrolling } = this.state;
+
+    const totalColumnsWidth = this._columnSizeAndPositionManager.getTotalSize();
+    const totalRowsHeight = this._rowSizeAndPositionManager.getTotalSize();
+    const childrenToDisplay = this._childrenToDisplay;
+
+    if (childrenToDisplay.length > 0) {
+      return (
+        <div
+          className={styles.tableBody}
+          style={{
+            width: autoContainerWidth ? 'auto' : totalColumnsWidth,
+            height: totalRowsHeight,
+            maxWidth: totalColumnsWidth,
+            maxHeight: totalRowsHeight,
+            overflow: 'hidden',
+            pointerEvents: isScrolling ? 'none' : '',
+            ...containerStyle
+          }}
+        >
+          {childrenToDisplay}
+        </div>
+      );
+    }
+
+    return (
+      <div />
+    );
+  }
 }
 
 export default VirtualTableBody;

@@ -1,13 +1,9 @@
-import React, { Component, PropTypes } from 'react';
-import ReactDOM from 'react-dom';
-import Measure from 'react-measure';
-import { Column, WindowScroller } from 'react-virtualized';
-import { scrollDirections, sortDirections } from 'Helpers/Props';
-import Scroller from 'Components/Scroller';
+import React, { PropTypes } from 'react';
+import { Column } from 'react-virtualized';
+import { sortDirections } from 'Helpers/Props';
 import VirtualTable from 'Components/Table/VirtualTable';
 import { headerRenderer } from 'Components/Table/VirtualTableHeaderCell';
 import seriesIndexCellRenderers from './seriesIndexCellRenderers';
-import styles from './SeriesIndexTable.css';
 
 const columns = [
   {
@@ -67,120 +63,54 @@ const columns = [
   }
 ];
 
-class SeriesIndexTable extends Component {
+function SeriesIndexTable(props) {
+  const {
+    items,
+    sortKey,
+    sortDirection,
+    isSmallScreen,
+    contentBody,
+    onSortPress
+  } = props;
 
-  //
-  // Lifecycle
+  return (
+    <VirtualTable
+      items={items}
+      contentBody={contentBody}
+      isSmallScreen={isSmallScreen}
+    >
+      {
+        columns.map((column) => {
+          const {
+            name,
+            label,
+            sortable,
+            width: columnWidth,
+            flexGrow
+          } = column;
 
-  constructor(props, context) {
-    super(props, context);
-
-    this.state = {
-      width: 0
-    };
-
-    this._table = null;
-  }
-
-  componentDidMount() {
-    this._contentBodyNode = ReactDOM.findDOMNode(this.props.contentBody);
-  }
-
-  //
-  // Control
-
-  rowGetter = ({ index }) => {
-    return this.props.items[index];
-  }
-
-  //
-  // Listeners
-
-  onMeasure = ({ width }) => {
-    this.setState({
-      width
-    });
-  }
-
-  //
-  // Render
-
-  render() {
-    const {
-      items,
-      sortKey,
-      sortDirection,
-      isSmallScreen,
-      onSortPress
-    } = this.props;
-
-    const {
-      width
-    } = this.state;
-
-    return (
-      <Measure onMeasure={this.onMeasure}>
-        <WindowScroller
-          scrollElement={isSmallScreen ? null : this._contentBodyNode}
-        >
-          {({ height, isScrolling, scrollTop }) => {
-            return (
-              <Scroller
-                className={styles.tableContainer}
-                scrollDirection={scrollDirections.HORIZONTAL}
-              >
-                <VirtualTable
-                  autoHeight={true}
-                  headerHeight={38}
-                  height={height}
-                  overscanRowCount={2}
-                  rowClassName={styles.row}
-                  rowHeight={38}
-                  rowGetter={this.rowGetter}
-                  rowCount={items.length}
-                  width={width}
-                  scrollTop={scrollTop}
-                >
-                  {
-                    columns.map((column) => {
-                      const {
-                        name,
-                        label,
-                        sortable,
-                        width: columnWidth,
-                        flexGrow
-                      } = column;
-
-                      return (
-                        <Column
-                          key={name}
-                          dataKey={name}
-                          label={label}
-                          disableSort={!sortable}
-                          width={columnWidth}
-                          flexGrow={flexGrow}
-                          flexShrink={0}
-                          columnData={{
-                            sortable,
-                            sortKey,
-                            sortDirection,
-                            onSortPress
-                          }}
-                          cellRenderer={seriesIndexCellRenderers}
-                          headerRenderer={headerRenderer}
-                        />
-                      );
-                    })
-                  }
-                </VirtualTable>
-              </Scroller>
-            );
-          }
-        }
-        </WindowScroller>
-      </Measure>
-    );
-  }
+          return (
+            <Column
+              key={name}
+              dataKey={name}
+              label={label}
+              width={columnWidth}
+              flexGrow={flexGrow}
+              flexShrink={0}
+              columnData={{
+                sortable,
+                sortKey,
+                sortDirection,
+                onSortPress
+              }}
+              cellRenderer={seriesIndexCellRenderers}
+              headerRenderer={headerRenderer}
+            />
+          );
+        })
+      }
+    </VirtualTable>
+  );
 }
 
 SeriesIndexTable.propTypes = {

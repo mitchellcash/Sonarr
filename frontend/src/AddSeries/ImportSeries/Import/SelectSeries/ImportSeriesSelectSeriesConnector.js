@@ -3,15 +3,13 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
 import { queueLookupSeries, setImportSeriesValue } from 'Store/Actions/importSeriesActions';
+import createImportSeriesItemSelector from 'Store/Selectors/createImportSeriesItemSelector';
 import ImportSeriesSelectSeries from './ImportSeriesSelectSeries';
 
 function createMapStateToProps() {
   return createSelector(
-    (state, { name }) => name,
-    (state) => state.importSeries,
-    (name, importSeries) => {
-      const item = _.find(importSeries.items, { id: name });
-
+    createImportSeriesItemSelector(),
+    (item) => {
       return item;
     }
   );
@@ -62,7 +60,10 @@ class ImportSeriesSelectSeriesConnector extends Component {
 
 ImportSeriesSelectSeriesConnector.propTypes = {
   name: PropTypes.string.isRequired,
+  path: PropTypes.string.isRequired,
   items: PropTypes.arrayOf(PropTypes.object),
+  selectedSeries: PropTypes.object,
+  isSelected: PropTypes.bool,
   queueLookupSeries: PropTypes.func.isRequired,
   setImportSeriesValue: PropTypes.func.isRequired
 };

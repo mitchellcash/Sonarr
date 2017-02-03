@@ -1,5 +1,4 @@
-.headerRow {
-  &:hover {
-    background-color: transparent !important;
-  }
+.tableContainer {
+  position: relative;
+  width: 100%;
 }

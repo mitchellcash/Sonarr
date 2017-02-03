@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import CheckInput from 'Components/Form/CheckInput';
-import VirtualTableHeaderCell from './TableHeaderCell';
-import styles from './TableSelectAllHeaderCell.css';
+import VirtualTableHeaderCell from './VirtualTableHeaderCell';
+import styles from './VirtualTableSelectAllHeaderCell.css';
 
 function getValue(allSelected, allUnselected) {
   if (allSelected) {
@@ -13,12 +13,12 @@ function getValue(allSelected, allUnselected) {
   return null;
 }
 
-function TableSelectAllHeaderCell() {
+function VirtualTableSelectAllHeaderCell(props) {
   const {
     allSelected,
     allUnselected,
     onSelectAllChange
-  } = this.props;
+  } = props;
 
   const value = getValue(allSelected, allUnselected);
 
@@ -37,10 +37,10 @@ function TableSelectAllHeaderCell() {
   );
 }
 
-TableSelectAllHeaderCell.propTypes = {
+VirtualTableSelectAllHeaderCell.propTypes = {
   allSelected: PropTypes.bool.isRequired,
   allUnselected: PropTypes.bool.isRequired,
   onSelectAllChange: PropTypes.func.isRequired
 };
 
-export default TableSelectAllHeaderCell;
+export default VirtualTableSelectAllHeaderCell;

@@ -4,14 +4,12 @@ import styles from './VirtualTableRowCell.css';
 function VirtualTableRowCell(props) {
   const {
     className,
-    children,
-    style
+    children
   } = props;
 
   return (
     <div
       className={className}
-      style={style}
     >
       {children}
     </div>
@@ -20,7 +18,6 @@ function VirtualTableRowCell(props) {
 
 VirtualTableRowCell.propTypes = {
   className: PropTypes.string.isRequired,
-  style: PropTypes.object.isRequired,
   children: PropTypes.oneOfType([PropTypes.string, PropTypes.node])
 };
 
