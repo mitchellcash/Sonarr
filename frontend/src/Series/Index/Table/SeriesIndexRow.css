@@ -1,0 +1,47 @@
+.status {
+  composes: cell from 'Components/Table/Cells/VirtualTableRowCell.css';
+
+  flex: 0 0 60px;
+}
+
+.title {
+  composes: cell from 'Components/Table/Cells/VirtualTableRowCell.css';
+
+  flex: 3 0 110px;
+}
+
+.network {
+  composes: cell from 'Components/Table/Cells/VirtualTableRowCell.css';
+
+  flex: 2 0 90px;
+}
+
+.qualityProfile {
+  composes: cell from 'Components/Table/Cells/VirtualTableRowCell.css';
+
+  flex: 1 0 125px;
+}
+
+.relativeDate {
+  composes: cell from 'Components/Table/Cells/VirtualTableRowCell.css';
+
+  flex: 0 0 180px;
+}
+
+.seasonCount {
+  composes: cell from 'Components/Table/Cells/VirtualTableRowCell.css';
+
+  flex: 0 0 100px;
+}
+
+.episodeProgress {
+  composes: cell from 'Components/Table/Cells/VirtualTableRowCell.css';
+
+  flex: 0 0 150px;
+}
+
+.actions {
+  composes: cell from 'Components/Table/Cells/VirtualTableRowCell.css';
+
+  flex: 0 0 70px;
+}

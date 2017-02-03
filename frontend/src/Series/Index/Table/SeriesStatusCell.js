@@ -1,11 +1,12 @@
 import React, { PropTypes } from 'react';
 import { icons } from 'Helpers/Props';
 import Icon from 'Components/Icon';
-import TableRowCell from 'Components/Table/Cells/TableRowCell';
+import VirtualTableRowCell from 'Components/Table/Cells/TableRowCell';
 import styles from './SeriesStatusCell.css';
 
 function SeriesStatusCell(props) {
   const {
+    className,
     monitored,
     status,
     component: Component,
@@ -14,7 +15,7 @@ function SeriesStatusCell(props) {
 
   return (
     <Component
-      className={styles.status}
+      className={className}
       {...otherProps}
     >
       <Icon
@@ -34,13 +35,15 @@ function SeriesStatusCell(props) {
 }
 
 SeriesStatusCell.propTypes = {
+  className: PropTypes.string.isRequired,
   monitored: PropTypes.bool.isRequired,
   status: PropTypes.string.isRequired,
   component: PropTypes.func
 };
 
 SeriesStatusCell.defaultProps = {
-  component: TableRowCell
+  className: styles.status,
+  component: VirtualTableRowCell
 };
 
 export default SeriesStatusCell;

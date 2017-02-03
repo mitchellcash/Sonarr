@@ -9,6 +9,6 @@
 
 @media only screen and (max-width: $breakpointMedium) {
   .row {
-    overflow: visible !important;
+    overflow-x: visible !important;
   }
 }

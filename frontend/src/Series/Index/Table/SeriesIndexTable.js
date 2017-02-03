@@ -1,116 +1,93 @@
-import React, { PropTypes } from 'react';
-import { Column } from 'react-virtualized';
+import React, { Component, PropTypes } from 'react';
 import { sortDirections } from 'Helpers/Props';
 import VirtualTable from 'Components/Table/VirtualTable';
-import { headerRenderer } from 'Components/Table/VirtualTableHeaderCell';
-import seriesIndexCellRenderers from './seriesIndexCellRenderers';
+import SeriesIndexItemConnector from 'Series/Index/SeriesIndexItemConnector';
+import SeriesIndexHeader from './SeriesIndexHeader';
+import SeriesIndexRow from './SeriesIndexRow';
 
-const columns = [
-  {
-    name: 'status',
-    label: '',
-    width: 60
-  },
-  {
-    name: 'sortTitle',
-    label: 'Series Title',
-    sortable: true,
-    width: 110,
-    flexGrow: 3
-  },
-  {
-    name: 'network',
-    label: 'Network',
-    sortable: true,
-    width: 90,
-    flexGrow: 2
-  },
-  {
-    name: 'qualityProfileId',
-    label: 'Quality Profile',
-    sortable: true,
-    width: 125,
-    flexGrow: 1
-  },
-  {
-    name: 'nextAiring',
-    label: 'Next Airing',
-    sortable: true,
-    width: 180
-  },
-  // {
-  //   name: 'previousAiring',
-  //   label: 'Previous Airing',
-  //   sortable: true,
-  //   width: 180
-  // },
-  {
-    name: 'seasonCount',
-    label: 'Seasons',
-    sortable: true,
-    width: 100
-  },
-  {
-    name: 'episodeProgress',
-    label: 'Episodes',
-    sortable: true,
-    width: 150
-  },
-  {
-    name: 'actions',
-    label: 'Actions',
-    width: 70
+class SeriesIndexTable extends Component {
+
+  //
+  // Lifecycle
+
+  constructor(props, context) {
+    super(props, context);
+
+    this._table = null;
   }
-];
 
-function SeriesIndexTable(props) {
-  const {
-    items,
-    sortKey,
-    sortDirection,
-    isSmallScreen,
-    contentBody,
-    onSortPress
-  } = props;
+  componentDidUpdate(prevProps) {
+    const {
+      filterKey,
+      filterValue,
+      sortKey,
+      sortDirection
+    } = this.props;
 
-  return (
-    <VirtualTable
-      items={items}
-      contentBody={contentBody}
-      isSmallScreen={isSmallScreen}
-    >
-      {
-        columns.map((column) => {
-          const {
-            name,
-            label,
-            sortable,
-            width: columnWidth,
-            flexGrow
-          } = column;
+    if (prevProps.filterKey !== filterKey ||
+        prevProps.filterValue !== filterValue ||
+        prevProps.sortKey !== sortKey ||
+        prevProps.sortDirection !== sortDirection
+    ) {
+      this._table.forceUpdateGrid();
+    }
+  }
 
-          return (
-            <Column
-              key={name}
-              dataKey={name}
-              label={label}
-              width={columnWidth}
-              flexGrow={flexGrow}
-              flexShrink={0}
-              columnData={{
-                sortable,
-                sortKey,
-                sortDirection,
-                onSortPress
-              }}
-              cellRenderer={seriesIndexCellRenderers}
-              headerRenderer={headerRenderer}
-            />
-          );
-        })
-      }
-    </VirtualTable>
-  );
+  //
+  // Control
+
+  setTableRef = (ref) => {
+    this._table = ref;
+  }
+
+  rowRenderer = ({ key, rowIndex, style }) => {
+    const {
+      items
+    } = this.props;
+
+    const series = items[rowIndex];
+
+    return (
+      <SeriesIndexItemConnector
+        key={key}
+        component={SeriesIndexRow}
+        style={style}
+        {...series}
+      />
+    );
+  }
+
+  //
+  // Render
+
+  render() {
+    const {
+      items,
+      sortKey,
+      sortDirection,
+      isSmallScreen,
+      contentBody,
+      onSortPress
+    } = this.props;
+
+    return (
+      <VirtualTable
+        ref={this.setTableRef}
+        items={items}
+        contentBody={contentBody}
+        isSmallScreen={isSmallScreen}
+        rowHeight={38}
+        rowRenderer={this.rowRenderer}
+        header={
+          <SeriesIndexHeader
+            sortKey={sortKey}
+            sortDirection={sortDirection}
+            onSortPress={onSortPress}
+          />
+        }
+      />
+    );
+  }
 }
 
 SeriesIndexTable.propTypes = {
