@@ -1,6 +1,4 @@
-﻿using NzbDrone.Common.Disk;
-
-namespace NzbDrone.Core.Download.Clients.DownloadStation
+﻿namespace NzbDrone.Core.Download.Clients.DownloadStation
 {
     public interface ISharedFolderResolver
     {        

@@ -1,10 +1,10 @@
-﻿using NLog;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Net;
+using NLog;
 using NzbDrone.Common.Http;
 using NzbDrone.Common.Serializer;
 using NzbDrone.Core.Download.Clients.DownloadStation.Responses;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
 
 namespace NzbDrone.Core.Download.Clients.DownloadStation.Proxies
 {

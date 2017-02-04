@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace NzbDrone.Core.Download.Clients.DownloadStation.Responses
+﻿namespace NzbDrone.Core.Download.Clients.DownloadStation.Responses
 {
     public class DiskStationResponse<T> where T:new()
     {

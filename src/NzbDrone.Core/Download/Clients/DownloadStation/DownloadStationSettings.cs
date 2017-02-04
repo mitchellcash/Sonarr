@@ -1,9 +1,9 @@
-﻿using NzbDrone.Core.ThingiProvider;
-using NzbDrone.Core.Validation;
+﻿using System.Text.RegularExpressions;
 using FluentValidation;
-using NzbDrone.Core.Annotations;
-using System.Text.RegularExpressions;
 using NzbDrone.Common.Extensions;
+using NzbDrone.Core.Annotations;
+using NzbDrone.Core.ThingiProvider;
+using NzbDrone.Core.Validation;
 
 namespace NzbDrone.Core.Download.Clients.DownloadStation
 {

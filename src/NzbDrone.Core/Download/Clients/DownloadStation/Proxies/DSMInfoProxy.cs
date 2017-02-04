@@ -1,7 +1,7 @@
-﻿using NLog;
+﻿using System.Collections.Generic;
+using NLog;
 using NzbDrone.Common.Http;
 using NzbDrone.Core.Download.Clients.DownloadStation.Responses;
-using System.Collections.Generic;
 
 namespace NzbDrone.Core.Download.Clients.DownloadStation.Proxies
 {

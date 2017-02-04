@@ -1,4 +1,9 @@
-﻿using FluentValidation.Results;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Net;
+using FluentValidation.Results;
 using NLog;
 using NzbDrone.Common.Cache;
 using NzbDrone.Common.Crypto;
@@ -11,11 +16,6 @@ using NzbDrone.Core.MediaFiles.TorrentInfo;
 using NzbDrone.Core.Parser.Model;
 using NzbDrone.Core.RemotePathMappings;
 using NzbDrone.Core.Validation;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Net;
 using static NzbDrone.Core.Download.Clients.DownloadStation.DownloadStationTorrent;
 
 namespace NzbDrone.Core.Download.Clients.DownloadStation
