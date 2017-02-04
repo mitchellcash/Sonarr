@@ -44,6 +44,7 @@ class ImportSeriesFooter extends Component {
     const {
       selectedCount,
       isImporting,
+      isLookingUpSeries,
       onImportPress
     } = this.props;
 
@@ -122,7 +123,7 @@ class ImportSeriesFooter extends Component {
             className={styles.importButton}
             kind={kinds.PRIMARY}
             isSpinning={isImporting}
-            isDisabled={!selectedCount}
+            isDisabled={!selectedCount || isLookingUpSeries}
             onPress={onImportPress}
           >
             Import {selectedCount} Series
@@ -136,6 +137,7 @@ class ImportSeriesFooter extends Component {
 ImportSeriesFooter.propTypes = {
   selectedCount: PropTypes.number.isRequired,
   isImporting: PropTypes.bool.isRequired,
+  isLookingUpSeries: PropTypes.bool.isRequired,
   defaultMonitor: PropTypes.string.isRequired,
   defaultQualityProfileId: PropTypes.number,
   defaultSeriesType: PropTypes.string.isRequired,

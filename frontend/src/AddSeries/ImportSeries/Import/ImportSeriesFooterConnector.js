@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
 import ImportSeriesFooter from './ImportSeriesFooter';
@@ -9,6 +10,7 @@ function createMapStateToProps() {
     (addSeries, importSeries) => {
       return {
         isImporting: importSeries.isImporting,
+        isLookingUpSeries: _.some(importSeries.items, { isFetching: true }),
         defaultMonitor: addSeries.defaults.monitor,
         defaultQualityProfileId: addSeries.defaults.qualityProfileId,
         defaultSeriesType: addSeries.defaults.seriesType,
