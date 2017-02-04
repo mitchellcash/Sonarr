@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import TetherComponent from 'react-tether';
 import { icons, kinds } from 'Helpers/Props';
 import Icon from 'Components/Icon';
+import SpinnerIcon from 'Components/SpinnerIcon';
 import Link from 'Components/Link/Link';
 import LoadingIndicator from 'Components/Loading/LoadingIndicator';
 import TextInput from 'Components/Form/TextInput';
@@ -213,8 +214,9 @@ class ImportSeriesSelectSeries extends Component {
               <div className={styles.content}>
                 <div className={styles.searchContainer}>
                   <div className={styles.searchIconContainer}>
-                    <Icon
+                    <SpinnerIcon
                       name={icons.SEARCH}
+                      isSpinning={isFetching}
                     />
                   </div>
 
