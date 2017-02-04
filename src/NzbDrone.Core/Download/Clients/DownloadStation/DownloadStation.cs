@@ -256,13 +256,13 @@ namespace NzbDrone.Core.Download.Clients.DownloadStation
 
         protected long GetRemainingSize(DownloadStationTorrent torrent)
         {
-            return torrent.Size - Convert.ToInt64(torrent.Additional.Transfer["size_downloaded"]);
+            return torrent.Size - Math.Max(Convert.ToInt64(torrent.Additional.Transfer["size_downloaded"] ?? "0"), 0);
         }
-
+        
         protected TimeSpan? GetRemainingTime(DownloadStationTorrent torrent)
         {
             var remainingSize = GetRemainingSize(torrent);
-            var donwloadSpeed = Convert.ToInt64(torrent.Additional.Transfer["speed_download"]);
+            var donwloadSpeed = Math.Max(Convert.ToInt64(torrent.Additional.Transfer["speed_download"] ?? "0"), 0);
 
             return (donwloadSpeed > 0) ? (TimeSpan?)TimeSpan.FromSeconds(remainingSize / donwloadSpeed) : null;
         }
