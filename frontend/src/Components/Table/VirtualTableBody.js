@@ -10,10 +10,7 @@ class VirtualTableBody extends Grid {
   render() {
     const {
       autoContainerWidth,
-      autoHeight,
-      containerStyle,
-      height,
-      width
+      containerStyle
     } = this.props;
 
     const { isScrolling } = this.state;
@@ -24,19 +21,20 @@ class VirtualTableBody extends Grid {
 
     if (childrenToDisplay.length > 0) {
       return (
-        <div
-          className={styles.tableBody}
-          style={{
-            width: autoContainerWidth ? 'auto' : totalColumnsWidth,
-            height: totalRowsHeight,
-            maxWidth: totalColumnsWidth,
-            maxHeight: totalRowsHeight,
-            overflow: 'hidden',
-            pointerEvents: isScrolling ? 'none' : '',
-            ...containerStyle
-          }}
-        >
-          {childrenToDisplay}
+        <div className={styles.tableBodyContainer}>
+          <div
+            style={{
+              width: autoContainerWidth ? 'auto' : totalColumnsWidth,
+              height: totalRowsHeight,
+              maxWidth: totalColumnsWidth,
+              maxHeight: totalRowsHeight,
+              overflow: 'hidden',
+              pointerEvents: isScrolling ? 'none' : '',
+              ...containerStyle
+            }}
+          >
+            {childrenToDisplay}
+          </div>
         </div>
       );
     }

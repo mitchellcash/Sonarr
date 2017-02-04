@@ -78,9 +78,7 @@ class VirtualTable extends Component {
                 className={styles.tableContainer}
                 scrollDirection={scrollDirections.HORIZONTAL}
               >
-                <div>
-                  {header}
-                </div>
+                {header}
 
                 <VirtualTableBody
                   ref={this.setTableRef}

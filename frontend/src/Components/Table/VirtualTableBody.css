@@ -1,9 +1,3 @@
-.tableBody {
+.tableBodyContainer {
   position: relative;
-}
-
-@media only screen and (max-width: $breakpointMedium) {
-  .tableBody {
-    overflow-x: visible !important;
-  }
 }
