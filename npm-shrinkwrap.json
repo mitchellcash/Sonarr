@@ -1194,6 +1194,11 @@
       "from": "ee-first@1.1.1",
       "resolved": "https://registry.npmjs.org/ee-first/-/ee-first-1.1.1.tgz"
     },
+    "element-class": {
+      "version": "0.2.2",
+      "from": "element-class@latest",
+      "resolved": "https://registry.npmjs.org/element-class/-/element-class-0.2.2.tgz"
+    },
     "emojis-list": {
       "version": "2.0.1",
       "from": "emojis-list@>=2.0.0 <3.0.0",

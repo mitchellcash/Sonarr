@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
 import Portal from 'react-portal';
 import classNames from 'classnames';
+import elementClass from 'element-class';
 import { sizes } from 'Helpers/Props';
 import * as keyCodes from 'Utilities/Constants/keyCodes';
 import styles from './Modal.css';
@@ -36,12 +37,14 @@ class Modal extends Component {
 
   _openModal() {
     document.addEventListener('keydown', this.onKeyDown);
+    elementClass(document.body).add(styles.modalOpen);
   }
 
   _closeModal() {
     clearTimeout(this._autoFocusTimeoutID);
 
     document.removeEventListener('keydown', this.onKeyDown);
+    elementClass(document.body).remove(styles.modalOpen);
   }
 
   _isBackdropTarget(event) {
