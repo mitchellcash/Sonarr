@@ -56,9 +56,7 @@ class ImportSeriesFooter extends Component {
     } = this.state;
 
     return (
-      <PageContentFooter
-        className={styles.footer}
-      >
+      <PageContentFooter>
         <div className={styles.inputContainer}>
           <div className={styles.label}>
             Monitor

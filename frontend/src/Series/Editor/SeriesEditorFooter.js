@@ -106,9 +106,7 @@ class SeriesEditorFooter extends Component {
     const noChanges = monitored === NO_CHANGE && monitor === NO_CHANGE;
 
     return (
-      <PageContentFooter
-        className={styles.footer}
-      >
+      <PageContentFooter>
         <div className={styles.inputContainer}>
           <div className={styles.label}>
             Monitor Series
