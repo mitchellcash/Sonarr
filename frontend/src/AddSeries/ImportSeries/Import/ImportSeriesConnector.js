@@ -11,7 +11,8 @@ function createMapStateToProps() {
     (state, { params }) => params,
     (state) => state.rootFolders,
     (state) => state.addSeries,
-    (params, rootFolders, addSeries) => {
+    (state) => state.importSeries,
+    (params, rootFolders, addSeries, importSeriesState) => {
       const {
         isFetching: rootFoldersFetching,
         isPopulated: rootFoldersPopulated,
@@ -33,7 +34,8 @@ function createMapStateToProps() {
 
         return {
           ...result,
-          ...rootFolder
+          ...rootFolder,
+          items: importSeriesState.items
         };
       }
 

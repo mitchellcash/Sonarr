@@ -25,12 +25,6 @@ class ImportSeries extends Component {
     };
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    if (prevState.selectedState !== this.state.selectedState) {
-      // this._table.forceUpdateGrid();
-    }
-  }
-
   //
   // Control
 
@@ -52,7 +46,7 @@ class ImportSeries extends Component {
 
   onSelectedChange = ({ id, value, shiftKey = false }) => {
     this.setState((state) => {
-      return toggleSelected(state, this.props.unmappedFolders, id, value, shiftKey);
+      return toggleSelected(state, this.props.items, id, value, shiftKey);
     });
   }
 
@@ -139,6 +133,7 @@ ImportSeries.propTypes = {
   rootFoldersPopulated: PropTypes.bool.isRequired,
   rootFoldersError: PropTypes.object,
   unmappedFolders: PropTypes.arrayOf(PropTypes.object),
+  items: PropTypes.arrayOf(PropTypes.object),
   onInputChange: PropTypes.func.isRequired,
   onImportPress: PropTypes.func.isRequired
 };
