@@ -65,27 +65,42 @@ class ImportSeriesTable extends Component {
         selectedSeries
       } = item;
 
+      // Forces the table to re-render if the selected state
+      // has changed otherwise it will be stale.
+
+      if (selectedState !== nextProps.selectedState) {
+        this._table.forceUpdateGrid();
+      }
+
       const nextItem = _.find(nextItems, { id });
 
       if (!nextItem) {
         return;
       }
 
-      const {
-        selectedSeries: nextSelectedSeries
-      } = nextItem;
+      const nextSelectedSeries = nextItem.selectedSeries;
+      const nextIsSelected = nextProps.selectedState[id];
 
-      const isExistingSeries =
-        !!nextSelectedSeries &&
-        !selectedSeries &&
+      const isExistingSeries = !!nextSelectedSeries &&
         _.some(allSeries, { tvdbId: nextSelectedSeries.tvdbId });
 
-      if ((!nextSelectedSeries && selectedSeries) || isExistingSeries) {
+      // Next Props don't have a selected series or
+      // the next selected series is an existing series.
+      if ((!nextSelectedSeries && selectedSeries) || (isExistingSeries && !selectedSeries)) {
         onSelectedChange({ id, value: false });
 
         return;
       }
 
+      // Next state is selected, but a series isn't selected or
+      // the selected series is an existing series.
+      if (nextIsSelected && (!nextSelectedSeries || isExistingSeries)) {
+        onSelectedChange({ id, value: false });
+
+        return;
+      }
+
+      // A series is being selected that wasn't previously selected.
       if (nextSelectedSeries && nextSelectedSeries !== selectedSeries) {
         onSelectedChange({ id, value: true });
 
@@ -93,12 +108,7 @@ class ImportSeriesTable extends Component {
       }
     });
 
-    // Forces the table to re-render if the selected state
-    // has changed otherwise it will be stale.
 
-    if (selectedState !== nextProps.selectedState) {
-      this._table.forceUpdateGrid();
-    }
   }
 
   //
