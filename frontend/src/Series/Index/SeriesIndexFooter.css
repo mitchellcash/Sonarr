@@ -43,14 +43,23 @@
 }
 
 .statistics {
-  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
 }
 
-@media (min-width: 768px) {
+@media (max-width: $breakpointLarge) {
   .statistics {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    margin-top: 0;
+    display: block;
+  }
+}
+
+@media (max-width: $breakpointSmall) {
+  .footer {
+    display: block;
+  }
+
+  .statistics {
+    margin-top: 20px;
   }
 }
