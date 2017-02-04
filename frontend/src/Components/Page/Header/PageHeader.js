@@ -28,7 +28,14 @@ function PageHeader(props) {
 
       <SeriesSearchInputConnector />
 
-      <PageHeaderActionsMenuConnector />
+      <div className={styles.right}>
+        <IconButton
+          className={styles.donate}
+          name={icons.HEART}
+          to="https://sonarr.tv/donate.html"
+        />
+        <PageHeaderActionsMenuConnector />
+      </div>
     </div>
   );
 }

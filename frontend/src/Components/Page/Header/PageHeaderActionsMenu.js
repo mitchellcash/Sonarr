@@ -15,7 +15,7 @@ function PageHeaderActionsMenu(props) {
   } = props;
 
   return (
-    <div className={styles.menuContainer}>
+    <div>
       <Menu>
         <MenuButton className={styles.menuButton}>
           <Icon

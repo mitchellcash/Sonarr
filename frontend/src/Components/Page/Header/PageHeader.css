@@ -20,6 +20,25 @@
   flex: 0 0 60px;
 }
 
+.right {
+  display: flex;
+  justify-content: flex-end;
+  flex-grow: 1;
+}
+
+.donate {
+  composes: link from 'Components/Link/Link.css';
+
+  width: 30px;
+  color: $themeRed;
+  text-align: center;
+  line-height: 60px;
+
+  &:hover {
+    color: #9c1f30;
+  }
+}
+
 @media only screen and (max-device-width: $breakpointSmall) {
   .logoContainer {
     flex: 0 0 60px;
