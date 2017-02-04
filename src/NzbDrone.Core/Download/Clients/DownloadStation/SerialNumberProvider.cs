@@ -1,6 +1,7 @@
 ﻿using System;
 using NLog;
 using NzbDrone.Common.Cache;
+using NzbDrone.Core.Download.Clients.DownloadStation.Exceptions;
 using NzbDrone.Core.Download.Clients.DownloadStation.Proxies;
 
 namespace NzbDrone.Core.Download.Clients.DownloadStation
@@ -28,7 +29,7 @@ namespace NzbDrone.Core.Download.Clients.DownloadStation
                                              () =>  _proxy.GetSerialNumber(settings),
                                              TimeSpan.FromMinutes(5));
             }
-            catch (Exception e)
+            catch (SerialNumberException e)
             {
                 _logger.Error(e, "Could not get the serial number from {0}:{1}", settings.Host, settings.Port);
                 throw e;

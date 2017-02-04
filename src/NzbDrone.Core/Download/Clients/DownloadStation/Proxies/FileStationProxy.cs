@@ -39,7 +39,7 @@ namespace NzbDrone.Core.Download.Clients.DownloadStation.Proxies
                 {
                     return response.Data.Files.First().Additional["real_path"].ToString();
                 }
-
+                _logger.Debug("Failed to get shared folder {0}", sharedFolder);
                 throw new EntryPointNotFoundException($"There is no shared folder: { sharedFolder }");
             }
             catch (DownloadClientException e)

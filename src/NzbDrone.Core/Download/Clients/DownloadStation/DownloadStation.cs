@@ -11,6 +11,7 @@ using NzbDrone.Common.Disk;
 using NzbDrone.Common.Extensions;
 using NzbDrone.Common.Http;
 using NzbDrone.Core.Configuration;
+using NzbDrone.Core.Download.Clients.DownloadStation.Exceptions;
 using NzbDrone.Core.Download.Clients.DownloadStation.Proxies;
 using NzbDrone.Core.MediaFiles.TorrentInfo;
 using NzbDrone.Core.Parser.Model;
@@ -66,9 +67,7 @@ namespace NzbDrone.Core.Download.Clients.DownloadStation
                 return Enumerable.Empty<DownloadClientItem>();
             }
 
-            var items = new List<DownloadClientItem>();
-
-            var serialNumber = GetHashedSerialNumber();
+            var items = new List<DownloadClientItem>();           
 
             foreach (var torrent in torrents)
             {
@@ -90,35 +89,54 @@ namespace NzbDrone.Core.Download.Clients.DownloadStation
                     }
                 }
 
-                try
-                {
-                    var sharedFolderMapping = _sharedFolderResolver.ResolvePhysicalPath(outputPath.FullPath, Settings, serialNumber);
-
-                    outputPath = GetOutputPath(outputPath, torrent, sharedFolderMapping.PhysicalPath);
-                }
-                catch (Exception e)
-                {
-                    _logger.Error(e, $"The torrent could not be imported. Returning an empty output path for {torrent.ToString()}");
-                    outputPath = new OsPath();
-                }
-
                 var item = new DownloadClientItem()
                 {
                     Category = Settings.TvCategory,
                     DownloadClient = Definition.Name,
-                    DownloadId = GetID(torrent.Id, serialNumber),
-                    OutputPath = outputPath,
                     Title = torrent.Title,
                     TotalSize = torrent.Size,
-                    RemainingSize = GetRemainingSize(torrent),
-                    RemainingTime = GetRemainingTime(torrent),
                     Status = GetTorrentStatus(torrent.Status),
                     Message = GetMessage(torrent)
                 };
 
+                string serialNumber = null;
+
+                try
+                {
+                    serialNumber = _serialNumberProvider.GetSerialNumber(Settings);
+                    item.DownloadId = GetID(torrent.Id, serialNumber);
+                }
+                catch (SerialNumberException s)
+                {
+                    _logger.Error(s, "{0} could not be imported.", torrent.Title);
+                    continue;
+                }
+
+                try
+                {
+                    var sharedFolderMapping = _sharedFolderResolver.ResolvePhysicalPath(outputPath.FullPath, Settings, serialNumber);
+
+                    item.OutputPath = GetOutputPath(outputPath, torrent, sharedFolderMapping.PhysicalPath);
+                }
+                catch (EntryPointNotFoundException e)
+                {
+                    _logger.Error(e, "{0} could not be imported.", torrent.Title);
+                    continue;
+                }
+
+                try
+                {
+                    item.RemainingSize = GetRemainingSize(torrent);
+                    item.RemainingTime = GetRemainingTime(torrent);                                                    
+                }
+                catch (Exception x)
+                {
+                    _logger.Warn(x, "Unknown error importing {0}", torrent.Title);
+                }
+
                 items.Add(item);
             }
-
+            
             return items;
         }
 
@@ -147,11 +165,10 @@ namespace NzbDrone.Core.Download.Clients.DownloadStation
             if (_proxy.RemoveTorrent(ParseID(downloadId), deleteData, Settings))
             {
                 _logger.Debug("{0} removed correctly", downloadId);
+                return;
             }
 
-            var e = new DownloadClientException("Failed to remove {0}", downloadId);
-            _logger.Error(e);
-            throw e;
+            _logger.Error("Failed to remove {0}", downloadId);
         }
 
         protected OsPath GetOutputPath(OsPath outputPath, DownloadStationTorrent torrent, OsPath physicalPath)
@@ -287,7 +304,6 @@ namespace NzbDrone.Core.Download.Clients.DownloadStation
         {
             switch (status)
             {
-
                 case DownloadStationTorrent.DownloadStationTaskStatus.Waiting:
                     return DownloadItemStatus.Queued;
                 case DownloadStationTorrent.DownloadStationTaskStatus.Error:

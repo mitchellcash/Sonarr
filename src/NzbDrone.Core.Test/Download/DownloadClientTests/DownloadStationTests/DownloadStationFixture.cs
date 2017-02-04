@@ -1,17 +1,16 @@
-﻿using FluentAssertions;
+﻿using System;
+using System.Collections.Generic;
+using FluentAssertions;
 using Moq;
 using NUnit.Framework;
 using NzbDrone.Common.Http;
 using NzbDrone.Core.Download;
 using NzbDrone.Core.Download.Clients.DownloadStation;
+using NzbDrone.Core.Download.Clients.DownloadStation.Exceptions;
 using NzbDrone.Core.Download.Clients.DownloadStation.Proxies;
 using NzbDrone.Core.MediaFiles.TorrentInfo;
-using NzbDrone.Core.Test.Download.DownloadClientTests;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using NzbDrone.Core.Parser.Model;
+using NzbDrone.Test.Common;
 
 namespace NzbDrone.Core.Test.Download.DownloadClientTests.DownloadStationTests
 {
@@ -24,6 +23,11 @@ namespace NzbDrone.Core.Test.Download.DownloadClientTests.DownloadStationTests
         protected DownloadStationTorrent _failed;
         protected DownloadStationTorrent _completed;
         protected DownloadStationTorrent _magnet;
+
+        protected string _serialNumber = "SERIALNUMBER";
+        protected string _category = "sonarr";
+        protected string _tvDirectory = @"video/Series";
+        protected string _defaulDestination = "somepath";
 
         protected Dictionary<string, object> _downloadStationConfigItems;
 
@@ -55,7 +59,7 @@ namespace NzbDrone.Core.Test.Download.DownloadClientTests.DownloadStationTests
                 {
                     Detail = new Dictionary<string, string>
                     {
-                        { "destination","somepath" },
+                        { "destination","shared/folder" },
                         { "uri", DownloadURL }
                     },
                     Transfer = new Dictionary<string, string>
@@ -78,7 +82,7 @@ namespace NzbDrone.Core.Test.Download.DownloadClientTests.DownloadStationTests
                 {
                     Detail = new Dictionary<string, string>
                     {
-                        { "destination","somepath" },
+                        { "destination","shared/folder" },
                         { "uri", DownloadURL }
                     },
                     Transfer = new Dictionary<string, string>
@@ -101,7 +105,7 @@ namespace NzbDrone.Core.Test.Download.DownloadClientTests.DownloadStationTests
                 {
                     Detail = new Dictionary<string, string>
                     {
-                        { "destination","somepath" },
+                        { "destination","shared/folder" },
                         { "uri", DownloadURL }
                     },
                     Transfer = new Dictionary<string, string>
@@ -124,7 +128,7 @@ namespace NzbDrone.Core.Test.Download.DownloadClientTests.DownloadStationTests
                 {
                     Detail = new Dictionary<string, string>
                     {
-                        { "destination","somepath" },
+                        { "destination","shared/folder" },
                         { "uri", DownloadURL }
                     },
                     Transfer = new Dictionary<string, string>
@@ -134,7 +138,7 @@ namespace NzbDrone.Core.Test.Download.DownloadClientTests.DownloadStationTests
                     }
                 }
             };
-
+          
             Mocker.GetMock<ITorrentFileInfoReader>()
                   .Setup(s => s.GetHashFromTorrentFile(It.IsAny<byte[]>()))
                   .Returns("CBC2F069FE8BB2F544EAE707D75BCD3DE9DCF951");
@@ -145,7 +149,7 @@ namespace NzbDrone.Core.Test.Download.DownloadClientTests.DownloadStationTests
 
             _downloadStationConfigItems = new Dictionary<string, object>
             {
-                { "default_destination", "somepath" },
+                { "default_destination", _defaulDestination },
             };
 
             Mocker.GetMock<IDownloadStationProxy>()
@@ -153,14 +157,28 @@ namespace NzbDrone.Core.Test.Download.DownloadClientTests.DownloadStationTests
               .Returns(_downloadStationConfigItems);
         }
 
+        protected void GivenSharedFolder()
+        {
+            Mocker.GetMock<ISharedFolderResolver>()
+                  .Setup(s => s.ResolvePhysicalPath(It.IsAny<string>(), _settings, It.IsAny<string>()))
+                  .Returns(new SharedFolderMapping(It.IsAny<string>(), It.IsAny<string>()));
+        }
+
+        protected void GivenSerialNumber()
+        {
+            Mocker.GetMock<ISerialNumberProvider>()
+                .Setup(s => s.GetSerialNumber(It.IsAny<DownloadStationSettings>()))
+                .Returns(_serialNumber);
+        }
+
         protected void GivenTvCategory()
         {
-            _settings.TvCategory = "sonarr";
+            _settings.TvCategory = _category;
         }
 
         protected void GivenTvDirectory()
         {
-            _settings.TvDirectory = @"video/Series";
+            _settings.TvDirectory = _tvDirectory;
         }
 
         protected virtual void GivenTorrents(List<DownloadStationTorrent> torrents)
@@ -191,10 +209,12 @@ namespace NzbDrone.Core.Test.Download.DownloadClientTests.DownloadStationTests
 
             Mocker.GetMock<IDownloadStationProxy>()
                   .Setup(s => s.AddTorrentFromUrl(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<DownloadStationSettings>()))
+                  .Returns(true)
                   .Callback(PrepareClientToReturnQueuedItem);
 
             Mocker.GetMock<IDownloadStationProxy>()
                   .Setup(s => s.AddTorrentFromData(It.IsAny<byte[]>(), It.IsAny<string>(), It.IsAny<string>(), It.IsAny<DownloadStationSettings>()))
+                  .Returns(true)
                   .Callback(PrepareClientToReturnQueuedItem);
         }
 
@@ -207,9 +227,21 @@ namespace NzbDrone.Core.Test.Download.DownloadClientTests.DownloadStationTests
             return episode;
         }
 
+        protected int GivenAllKindOfTasks()
+        {
+            var tasks = new List<DownloadStationTorrent>() { _queued, _completed, _failed, _downloading };
+
+            Mocker.GetMock<IDownloadStationProxy>()
+                  .Setup(d => d.GetTorrents(_settings))
+                  .Returns(tasks);
+
+            return tasks.Count;
+        }
+
         [Test]
         public void DownloadStation_Download_with_TvDirectory_should_force_directory()
         {
+            GivenSerialNumber();
             GivenTvDirectory();
             GivenSuccessfulDownload();
 
@@ -220,12 +252,13 @@ namespace NzbDrone.Core.Test.Download.DownloadClientTests.DownloadStationTests
             id.Should().NotBeNullOrEmpty();
 
             Mocker.GetMock<IDownloadStationProxy>()
-                  .Verify(v => v.AddTorrentFromUrl(It.IsAny<string>(), @"video/Series", It.IsAny<DownloadStationSettings>()), Times.Once());
+                  .Verify(v => v.AddTorrentFromUrl(It.IsAny<string>(), _tvDirectory, It.IsAny<DownloadStationSettings>()), Times.Once());
         }
 
         [Test]
         public void DownloadStation_Download_with_category_should_force_directory()
         {
+            GivenSerialNumber();
             GivenTvCategory();
             GivenSuccessfulDownload();
 
@@ -236,12 +269,13 @@ namespace NzbDrone.Core.Test.Download.DownloadClientTests.DownloadStationTests
             id.Should().NotBeNullOrEmpty();
 
             Mocker.GetMock<IDownloadStationProxy>()
-                  .Verify(v => v.AddTorrentFromUrl(It.IsAny<string>(), @"video/TvCategory", It.IsAny<DownloadStationSettings>()), Times.Once());
+                  .Verify(v => v.AddTorrentFromUrl(It.IsAny<string>(), $"{_defaulDestination}/{_category}", It.IsAny<DownloadStationSettings>()), Times.Once());
         }
 
         [Test]
         public void DownloadStation_Download_without_TvDirectory_and_Category_should_use_default()
         {
+            GivenSerialNumber();
             GivenSuccessfulDownload();
 
             var remoteEpisode = CreateRemoteEpisode();
@@ -252,6 +286,34 @@ namespace NzbDrone.Core.Test.Download.DownloadClientTests.DownloadStationTests
 
             Mocker.GetMock<IDownloadStationProxy>()
                   .Verify(v => v.AddTorrentFromUrl(It.IsAny<string>(), null, It.IsAny<DownloadStationSettings>()), Times.Once());
+        }
+
+        [Test]
+        public void DonwloadStation_Should_log_error_and_return_empty_list_when_cannot_resolve_shared_folder()
+        {
+            Mocker.GetMock<ISharedFolderResolver>()
+                  .Setup(s => s.ResolvePhysicalPath(It.IsAny<string>(), _settings, It.IsAny<string>()))
+                  .Throws(new EntryPointNotFoundException());
+
+            GivenSerialNumber();
+            var quantity = GivenAllKindOfTasks();
+            
+            Subject.GetItems().Should().BeEmpty();
+            ExceptionVerification.ExpectedErrors(quantity);
+        }
+
+        [Test]
+        public void DonwloadStation_Should_log_error_and_return_empty_list_when_cannot_get_serial_number()
+        {
+            Mocker.GetMock<ISerialNumberProvider>()
+                 .Setup(s => s.GetSerialNumber(_settings))
+                 .Throws(new SerialNumberException());
+
+            GivenSharedFolder();
+            var quantity = GivenAllKindOfTasks();
+
+            Subject.GetItems().Should().BeEmpty();
+            ExceptionVerification.ExpectedErrors(quantity);
         }
     }
 }
