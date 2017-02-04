@@ -84,9 +84,9 @@ namespace NzbDrone.Core.Download.Clients.DownloadStation
 
                 try
                 {
-                    var physicalPath = _sharedFolderResolver.ResolvePhysicalPath(outputPath.FullPath, Settings, serialNumber);
+                    var sharedFolderMapping = _sharedFolderResolver.ResolvePhysicalPath(outputPath.FullPath, Settings, serialNumber);
 
-                    outputPath = GetOutputPath(outputPath, torrent, physicalPath);
+                    outputPath = GetOutputPath(outputPath, torrent, sharedFolderMapping.PhysicalPath);
                 }
                 catch (Exception e)
                 {

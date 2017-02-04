@@ -9,7 +9,7 @@ namespace NzbDrone.Core.Download.Clients.DownloadStation
     public class SharedFolderResolver : ISharedFolderResolver
     {
         private readonly IFileStationProxy _proxy;
-        private ICached<SharedFolderCache> _cache;
+        private ICached<SharedFolderMapping> _cache;
         private readonly ILogger _logger;
 
         public SharedFolderResolver(ICacheManager cacheManager,
@@ -17,22 +17,22 @@ namespace NzbDrone.Core.Download.Clients.DownloadStation
                                     Logger logger)
         {
             _proxy = proxy;
-            _cache = cacheManager.GetCache<SharedFolderCache>(GetType());
+            _cache = cacheManager.GetCache<SharedFolderMapping>(GetType());
             _logger = logger;
         }
 
-        private SharedFolderCache GetPhysicalPath(string sharedFolder, DownloadStationSettings settings)
+        private SharedFolderMapping GetPhysicalPath(string sharedFolder, DownloadStationSettings settings)
         {
-            return new SharedFolderCache(_proxy.GetPhysicalPath(sharedFolder, settings));
+            return new SharedFolderMapping(_proxy.GetPhysicalPath(sharedFolder, settings), sharedFolder);
         }
 
-        public OsPath ResolvePhysicalPath(string sharedFolder, DownloadStationSettings settings, string serialNumber)
+        public SharedFolderMapping ResolvePhysicalPath(string sharedFolder, DownloadStationSettings settings, string serialNumber)
         {
             try
             {
-                return new OsPath(_cache.Get($"{serialNumber}:{sharedFolder}",
+                return _cache.Get($"{serialNumber}:{sharedFolder}",
                                              () => GetPhysicalPath(sharedFolder, settings),
-                                             TimeSpan.FromHours(1)).PhysicalPath);
+                                             TimeSpan.FromHours(1));
             }
             catch (EntryPointNotFoundException e)
             {

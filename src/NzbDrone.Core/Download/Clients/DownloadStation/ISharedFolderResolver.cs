@@ -4,6 +4,6 @@ namespace NzbDrone.Core.Download.Clients.DownloadStation
 {
     public interface ISharedFolderResolver
     {        
-        OsPath ResolvePhysicalPath(string sharedFolder, DownloadStationSettings settings, string serialNumber);
+        SharedFolderMapping ResolvePhysicalPath(string sharedFolder, DownloadStationSettings settings, string serialNumber);
     }
 }
