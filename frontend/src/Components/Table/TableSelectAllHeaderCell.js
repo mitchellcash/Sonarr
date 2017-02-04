@@ -13,12 +13,12 @@ function getValue(allSelected, allUnselected) {
   return null;
 }
 
-function TableSelectAllHeaderCell() {
+function TableSelectAllHeaderCell(props) {
   const {
     allSelected,
     allUnselected,
     onSelectAllChange
-  } = this.props;
+  } = props;
 
   const value = getValue(allSelected, allUnselected);
 
