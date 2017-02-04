@@ -10,7 +10,7 @@ import styles from './ImportSeriesRow.css';
 function ImportSeriesRow(props) {
   const {
     style,
-    name,
+    id,
     monitor,
     qualityProfileId,
     seasonFolder,
@@ -26,14 +26,14 @@ function ImportSeriesRow(props) {
     <VirtualTableRow style={style}>
       <VirtualTableSelectCell
         inputClassName={styles.selectInput}
-        id={name}
+        id={id}
         isSelected={isSelected}
         isDisabled={!selectedSeries || isExistingSeries}
         onSelectedChange={onSelectedChange}
       />
 
       <VirtualTableRowCell className={styles.folder}>
-        {name}
+        {id}
       </VirtualTableRowCell>
 
       <VirtualTableRowCell className={styles.monitor}>
@@ -74,7 +74,7 @@ function ImportSeriesRow(props) {
 
       <VirtualTableRowCell className={styles.series}>
         <ImportSeriesSelectSeriesConnector
-          name={name}
+          id={id}
           isExistingSeries={isExistingSeries}
         />
       </VirtualTableRowCell>
@@ -84,7 +84,7 @@ function ImportSeriesRow(props) {
 
 ImportSeriesRow.propTypes = {
   style: PropTypes.object.isRequired,
-  name: PropTypes.string.isRequired,
+  id: PropTypes.string.isRequired,
   isSelected: PropTypes.bool,
   monitor: PropTypes.string.isRequired,
   qualityProfileId: PropTypes.number.isRequired,

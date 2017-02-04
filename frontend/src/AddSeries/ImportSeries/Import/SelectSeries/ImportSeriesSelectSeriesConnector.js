@@ -27,14 +27,14 @@ class ImportSeriesSelectSeriesConnector extends Component {
 
   onSearchInputChange = (term) => {
     this.props.queueLookupSeries({
-      name: this.props.name,
+      name: this.props.id,
       term
     });
   }
 
   onSeriesSelect = (tvdbId) => {
     const {
-      name: id,
+      id,
       items
     } = this.props;
 
@@ -59,8 +59,7 @@ class ImportSeriesSelectSeriesConnector extends Component {
 }
 
 ImportSeriesSelectSeriesConnector.propTypes = {
-  name: PropTypes.string.isRequired,
-  path: PropTypes.string.isRequired,
+  id: PropTypes.string.isRequired,
   items: PropTypes.arrayOf(PropTypes.object),
   selectedSeries: PropTypes.object,
   isSelected: PropTypes.bool,

@@ -8,11 +8,11 @@ import ImportSeriesRow from './ImportSeriesRow';
 
 function createMapStateToProps() {
   return createSelector(
-    (state, { name }) => name,
+    (state, { id }) => id,
     (state) => state.importSeries,
     createAllSeriesSelector(),
-    (name, importSeries, series) => {
-      const item = _.find(importSeries.items, { id: name }) || {};
+    (id, importSeries, series) => {
+      const item = _.find(importSeries.items, { id }) || {};
       const selectedSeries = item && item.selectedSeries;
       const isExistingSeries = !!selectedSeries && _.some(series, { tvdbId: selectedSeries.tvdbId });
 
@@ -36,7 +36,7 @@ class ImportSeriesRowConnector extends Component {
 
   onInputChange = ({ name, value }) => {
     this.props.setImportSeriesValue({
-      id: this.props.name,
+      id: this.props.id,
       [name]: value
     });
   }
@@ -71,8 +71,7 @@ class ImportSeriesRowConnector extends Component {
 
 ImportSeriesRowConnector.propTypes = {
   rootFolderId: PropTypes.number.isRequired,
-  name: PropTypes.string.isRequired,
-  path: PropTypes.string.isRequired,
+  id: PropTypes.string.isRequired,
   monitor: PropTypes.string,
   qualityProfileId: PropTypes.number,
   seriesType: PropTypes.string,

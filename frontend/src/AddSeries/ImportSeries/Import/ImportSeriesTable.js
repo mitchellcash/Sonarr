@@ -107,8 +107,6 @@ class ImportSeriesTable extends Component {
         return;
       }
     });
-
-
   }
 
   //
@@ -121,19 +119,19 @@ class ImportSeriesTable extends Component {
   rowRenderer = ({ key, rowIndex, style }) => {
     const {
       rootFolderId,
-      unmappedFolders,
+      items,
       selectedState,
       onSelectedChange
     } = this.props;
 
-    const unmappedFolder = unmappedFolders[rowIndex];
+    const unmappedFolder = items[rowIndex];
 
     return (
       <ImportSeriesRowConnector
         key={key}
         style={style}
         rootFolderId={rootFolderId}
-        isSelected={selectedState[unmappedFolder.name]}
+        isSelected={selectedState[unmappedFolder.id]}
         onSelectedChange={onSelectedChange}
         {...unmappedFolder}
       />
@@ -145,7 +143,7 @@ class ImportSeriesTable extends Component {
 
   render() {
     const {
-      unmappedFolders,
+      items,
       allSelected,
       allUnselected,
       isSmallScreen,
@@ -156,7 +154,7 @@ class ImportSeriesTable extends Component {
     return (
       <VirtualTable
         ref={this.setTableRef}
-        items={unmappedFolders}
+        items={items}
         contentBody={contentBody}
         isSmallScreen={isSmallScreen}
         rowHeight={52}

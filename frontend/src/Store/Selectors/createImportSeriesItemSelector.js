@@ -4,12 +4,12 @@ import createAllSeriesSelector from './createAllSeriesSelector';
 
 function createImportSeriesItemSelector() {
   return createSelector(
-    (state, { name }) => name,
+    (state, { id }) => id,
     (state) => state.addSeries,
     (state) => state.importSeries,
     createAllSeriesSelector(),
-    (name, addSeries, importSeries, series) => {
-      const item = _.find(importSeries.items, { id: name }) || {};
+    (id, addSeries, importSeries, series) => {
+      const item = _.find(importSeries.items, { id }) || {};
       const selectedSeries = item && item.selectedSeries;
       const isExistingSeries = !!selectedSeries && _.some(series, { tvdbId: selectedSeries.tvdbId });
 

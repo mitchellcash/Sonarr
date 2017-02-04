@@ -33,7 +33,7 @@ class ImportSeriesSelectSeries extends Component {
     this._seriesLookupTimeout = null;
 
     this.state = {
-      term: props.name,
+      term: props.id,
       isOpen: false
     };
   }
@@ -251,7 +251,7 @@ class ImportSeriesSelectSeries extends Component {
 }
 
 ImportSeriesSelectSeries.propTypes = {
-  name: PropTypes.string.isRequired,
+  id: PropTypes.string.isRequired,
   selectedSeries: PropTypes.object,
   isExistingSeries: PropTypes.bool.isRequired,
   isFetching: PropTypes.bool.isRequired,
