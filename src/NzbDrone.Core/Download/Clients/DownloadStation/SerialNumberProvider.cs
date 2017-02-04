@@ -26,7 +26,7 @@ namespace NzbDrone.Core.Download.Clients.DownloadStation
             {
                 return _cache.Get(settings.Host,
                                              () =>  _proxy.GetSerialNumber(settings),
-                                             TimeSpan.FromMinutes(15));
+                                             TimeSpan.FromMinutes(5));
             }
             catch (Exception e)
             {
