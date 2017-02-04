@@ -50,6 +50,18 @@ class ImportSeries extends Component {
     });
   }
 
+  onRemoveSelectedStateItem = (id) => {
+    this.setState((state) => {
+      const selectedState = Object.assign({}, state.selectedState);
+      delete selectedState[id];
+
+      return {
+        ...state,
+        selectedState
+      };
+    });
+  }
+
   onInputChange = ({ name, value }) => {
     this.props.onInputChange(this.getSelectedIds(), name, value);
   }
@@ -109,6 +121,7 @@ class ImportSeries extends Component {
                 contentBody={contentBody}
                 onSelectAllChange={this.onSelectAllChange}
                 onSelectedChange={this.onSelectedChange}
+                onRemoveSelectedStateItem={this.onRemoveSelectedStateItem}
               />
           }
         </PageContentBody>

@@ -54,7 +54,8 @@ class ImportSeriesTable extends Component {
       items,
       selectedState,
       allSeries,
-      onSelectedChange
+      onSelectedChange,
+      onRemoveSelectedStateItem
     } = this.props;
 
     const nextItems = nextProps.items;
@@ -75,6 +76,7 @@ class ImportSeriesTable extends Component {
       const nextItem = _.find(nextItems, { id });
 
       if (!nextItem) {
+        onRemoveSelectedStateItem(id);
         return;
       }
 
@@ -187,6 +189,7 @@ ImportSeriesTable.propTypes = {
   contentBody: PropTypes.object.isRequired,
   onSelectAllChange: PropTypes.func.isRequired,
   onSelectedChange: PropTypes.func.isRequired,
+  onRemoveSelectedStateItem: PropTypes.func.isRequired,
   onSeriesLookup: PropTypes.func.isRequired,
   onSetImportSeriesValue: PropTypes.func.isRequired
 };
