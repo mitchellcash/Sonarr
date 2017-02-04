@@ -1,6 +1,7 @@
 ﻿using FluentValidation.Results;
 using NLog;
 using NzbDrone.Common.Cache;
+using NzbDrone.Common.Crypto;
 using NzbDrone.Common.Disk;
 using NzbDrone.Common.Extensions;
 using NzbDrone.Common.Http;
@@ -44,6 +45,13 @@ namespace NzbDrone.Core.Download.Clients.DownloadStation
 
         public override string Name => "Download Station";
 
+        private string GetHashedSerialNumber()
+        {
+            var serialNumber = _serialNumberProvider.GetSerialNumber(Settings);
+
+            return HashConverter.GetHash(serialNumber).ToHexString();
+        }
+
         public override IEnumerable<DownloadClientItem> GetItems()
         {
             IEnumerable<DownloadStationTorrent> torrents;
@@ -60,7 +68,7 @@ namespace NzbDrone.Core.Download.Clients.DownloadStation
 
             var items = new List<DownloadClientItem>();
 
-            var serialNumber = _serialNumberProvider.GetSerialNumber(Settings);
+            var serialNumber = GetHashedSerialNumber();
 
             foreach (var torrent in torrents)
             {
@@ -314,7 +322,7 @@ namespace NzbDrone.Core.Download.Clients.DownloadStation
 
         protected string GetID(string id, string serialNumber = null)
         {
-            return $"{serialNumber ?? _serialNumberProvider.GetSerialNumber(Settings)}:{id}";
+            return $"{serialNumber ?? GetHashedSerialNumber()}:{id}";
         }
 
         protected string GetDefaultDir()
