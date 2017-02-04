@@ -8,7 +8,7 @@ namespace NzbDrone.Core.Download.Clients.DownloadStation
     public class SerialNumberProvider : ISerialNumberProvider
     {
         private readonly IDSMInfoProxy _proxy;
-        private ICached<SerialNumberCache> _cache;
+        private ICached<string> _cache;
         private readonly ILogger _logger;
 
         public SerialNumberProvider(ICacheManager cacheManager,
@@ -16,7 +16,7 @@ namespace NzbDrone.Core.Download.Clients.DownloadStation
                                    Logger logger)
         {
             _proxy = proxy;
-            _cache = cacheManager.GetCache<SerialNumberCache>(GetType());
+            _cache = cacheManager.GetCache<string>(GetType());
             _logger = logger;
         }
 
@@ -25,8 +25,8 @@ namespace NzbDrone.Core.Download.Clients.DownloadStation
             try
             {
                 return _cache.Get(settings.Host,
-                                             () => { return new SerialNumberCache(_proxy.GetSerialNumber(settings)); },
-                                             TimeSpan.FromHours(1)).SerialNumber;
+                                             () =>  _proxy.GetSerialNumber(settings),
+                                             TimeSpan.FromMinutes(15));
             }
             catch (Exception e)
             {

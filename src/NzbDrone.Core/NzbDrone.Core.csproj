@@ -373,9 +373,8 @@
     <Compile Include="Download\Clients\DownloadStation\Responses\DownloadStationTaskInfoResponse.cs" />
     <Compile Include="Download\Clients\DownloadStation\DiskStationApiInfo.cs" />
     <Compile Include="Download\Clients\DownloadStation\ISerialNumberProvider.cs" />
-    <Compile Include="Download\Clients\DownloadStation\SerialNumberCache.cs" />
     <Compile Include="Download\Clients\DownloadStation\SerialNumberProvider.cs" />
-    <Compile Include="Download\Clients\DownloadStation\SharedFolderCache.cs" />
+    <Compile Include="Download\Clients\DownloadStation\SharedFolderMapping.cs" />
     <Compile Include="Download\Clients\DownloadStation\SharedFolderResolver.cs" />
     <Compile Include="Download\Clients\DownloadStation\DiskStationApi.cs" />
     <Compile Include="Download\Clients\Hadouken\Hadouken.cs" />
