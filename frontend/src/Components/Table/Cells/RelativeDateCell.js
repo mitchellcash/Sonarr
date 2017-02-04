@@ -14,6 +14,7 @@ function RelativeDateCell(props) {
     longDateFormat,
     timeFormat,
     component: Component,
+    dispatch,
     ...otherProps
   } = props;
 
@@ -45,7 +46,8 @@ RelativeDateCell.propTypes = {
   shortDateFormat: PropTypes.string.isRequired,
   longDateFormat: PropTypes.string.isRequired,
   timeFormat: PropTypes.string.isRequired,
-  component: PropTypes.func
+  component: PropTypes.func,
+  dispatch: PropTypes.func
 };
 
 RelativeDateCell.defaultProps = {
