@@ -95,9 +95,7 @@ class ImportSeriesSelectSeries extends Component {
 
     this.setState({ term: value }, () => {
       this._seriesLookupTimeout = setTimeout(() => {
-        if (value && value.length > 2) {
-          this.props.onSearchInputChange(value);
-        }
+        this.props.onSearchInputChange(value);
       }, 200);
     });
   }

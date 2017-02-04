@@ -24,18 +24,20 @@ const importSeriesActionHandlers = {
         path,
         isFetching: false,
         isPopulated: false,
-        error: null,
-        items: []
+        error: null
       };
 
       dispatch(updateItem({
         section,
         ...item,
         term,
-        queued: true
+        queued: true,
+        items: []
       }));
 
-      dispatch(startLookupSeries());
+      if (term && term.length > 2) {
+        dispatch(startLookupSeries());
+      }
     };
   },
 
