@@ -116,7 +116,7 @@ namespace NzbDrone.Core.Download.Clients.DownloadStation.Proxies
                 GetApiVersion(settings, api);
             }
 
-            var requestBuilder = new HttpRequestBuilder(false, settings.Host, settings.Port).Resource($"webapi/{Resources[api]}");
+            var requestBuilder = new HttpRequestBuilder(settings.UseSsl, settings.Host, settings.Port).Resource($"webapi/{Resources[api]}");
             requestBuilder.Method = method;
             requestBuilder.LogResponseContent = true;
             requestBuilder.SuppressHttpError = true;
