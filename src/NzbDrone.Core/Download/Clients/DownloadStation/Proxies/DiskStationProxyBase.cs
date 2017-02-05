@@ -55,8 +55,7 @@ namespace NzbDrone.Core.Download.Clients.DownloadStation.Proxies
                 AuthenticateClient(settings);
             }
 
-            var requestBuilder = BuildRequest(settings, api, arguments, method);                               
-            var request = requestBuilder.Build();
+            var request = BuildRequest(settings, api, arguments, method).Build();
             var response = _httpClient.Execute(request);
 
             if (response.StatusCode == HttpStatusCode.OK)
