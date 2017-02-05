@@ -87,8 +87,16 @@ class SeriesSearchInput extends Component {
   }
 
   onSuggestionsFetchRequested = ({ value }) => {
+    const lowerCaseValue = value.toLowerCase();
+
     const suggestions = _.filter(this.props.series, (series) => {
-      return series.title.toLowerCase().contains(value.toLowerCase());
+      const titleMatch = series.title.toLowerCase().contains(lowerCaseValue);
+
+      const alternateTitleMatch = _.some(series.alternateTitles, (alternateTitle) => {
+        return alternateTitle.title.toLowerCase().contains(lowerCaseValue);
+      });
+
+      return titleMatch || alternateTitleMatch;
     });
 
     this.setState({ suggestions });
