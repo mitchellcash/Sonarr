@@ -11,6 +11,7 @@ using NzbDrone.Core.Download.Clients.DownloadStation.Proxies;
 using NzbDrone.Core.MediaFiles.TorrentInfo;
 using NzbDrone.Core.Parser.Model;
 using NzbDrone.Test.Common;
+using NzbDrone.Core.Download.Clients;
 
 namespace NzbDrone.Core.Test.Download.DownloadClientTests.DownloadStationTests
 {
@@ -289,7 +290,7 @@ namespace NzbDrone.Core.Test.Download.DownloadClientTests.DownloadStationTests
         }
 
         [Test]
-        public void DonwloadStation_Should_log_error_and_return_empty_list_when_cannot_resolve_shared_folder()
+        public void DownloadStation_Should_log_error_and_return_empty_list_when_cannot_resolve_shared_folder()
         {
             Mocker.GetMock<ISharedFolderResolver>()
                   .Setup(s => s.ResolvePhysicalPath(It.IsAny<string>(), _settings, It.IsAny<string>()))
@@ -303,7 +304,7 @@ namespace NzbDrone.Core.Test.Download.DownloadClientTests.DownloadStationTests
         }
 
         [Test]
-        public void DonwloadStation_Should_log_error_and_return_empty_list_when_cannot_get_serial_number()
+        public void DownloadStation_Should_log_error_and_return_empty_list_when_cannot_get_serial_number()
         {
             Mocker.GetMock<ISerialNumberProvider>()
                  .Setup(s => s.GetSerialNumber(_settings))
@@ -314,6 +315,21 @@ namespace NzbDrone.Core.Test.Download.DownloadClientTests.DownloadStationTests
 
             Subject.GetItems().Should().BeEmpty();
             ExceptionVerification.ExpectedErrors(quantity);
+        }
+
+        [Test]
+        public void DownloadStation_Should_throw_and_not_add_torrent_if_cannot_get_serial_number()
+        {
+            var remoteEpisode = CreateRemoteEpisode();
+
+            Mocker.GetMock<ISerialNumberProvider>()
+               .Setup(s => s.GetSerialNumber(_settings))
+               .Throws(new SerialNumberException());
+
+            Assert.Throws<DownloadClientException>(() => Subject.Download(remoteEpisode));
+
+            Mocker.GetMock<IDownloadStationProxy>()
+                  .Verify(v => v.AddTorrentFromUrl(It.IsAny<string>(), null, _settings), Times.Never());
         }
     }
 }
