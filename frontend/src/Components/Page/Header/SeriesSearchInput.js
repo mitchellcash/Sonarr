@@ -3,6 +3,7 @@ import React, { Component, PropTypes } from 'react';
 import Autosuggest from 'react-autosuggest';
 import { icons } from 'Helpers/Props';
 import Icon from 'Components/Icon';
+import SeriesSearchResult from './SeriesSearchResult';
 import styles from './SeriesSearchInput.css';
 
 class SeriesSearchInput extends Component {
@@ -26,29 +27,12 @@ class SeriesSearchInput extends Component {
     return title;
   }
 
-  renderSuggestion({ title }, { query }) {
-    const index = title.toLowerCase().indexOf(query.toLowerCase());
-
-    if (index === -1) {
-      return (
-        <span>
-          {title}
-        </span>
-      );
-    }
-
-    const preMatch = title.substr(0, index);
-    const match = title.substr(index, query.length);
-    const postMatch = title.substr(index + query.length);
-
+  renderSuggestion(series, { query }) {
     return (
-      <span>
-        {preMatch}
-        <span className={styles.match}>
-          {match}
-        </span>
-        {postMatch}
-      </span>
+      <SeriesSearchResult
+        query={query}
+        {...series}
+      />
     );
   }
 
