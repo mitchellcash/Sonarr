@@ -53,7 +53,8 @@ class AddNewSeriesModalContentConnector extends Component {
       monitor,
       qualityProfileId,
       seriesType,
-      seasonFolder
+      seasonFolder,
+      tags
     } = this.props;
 
     this.props.addSeries({
@@ -63,6 +64,7 @@ class AddNewSeriesModalContentConnector extends Component {
       qualityProfileId,
       seriesType,
       seasonFolder,
+      tags,
       searchForMissingEpisodes
     });
   }
@@ -88,6 +90,7 @@ AddNewSeriesModalContentConnector.propTypes = {
   qualityProfileId: PropTypes.number,
   seriesType: PropTypes.string.isRequired,
   seasonFolder: PropTypes.bool.isRequired,
+  tags: PropTypes.arrayOf(PropTypes.number).isRequired,
   isAdding: PropTypes.bool.isRequired,
   addError: PropTypes.object,
   onModalClose: PropTypes.func.isRequired,

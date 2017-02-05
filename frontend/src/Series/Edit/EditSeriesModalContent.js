@@ -110,7 +110,6 @@ class EditSeriesModalContent extends Component {
                 type={inputTypes.TAG}
                 name="tags"
                 {...tags}
-                helpText="Applies to series with at least one matching tag"
                 onChange={onInputChange}
               />
             </FormGroup>

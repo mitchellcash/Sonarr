@@ -333,7 +333,7 @@ class SeriesDetails extends Component {
 
                   <Label
                     className={styles.detailsLabel}
-                    title={episodeFilesCountMessage}
+                    title="Quality Profile"
                     size={sizes.LARGE}
                   >
                     <Icon

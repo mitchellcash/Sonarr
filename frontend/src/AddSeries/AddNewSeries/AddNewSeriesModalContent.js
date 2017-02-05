@@ -60,6 +60,7 @@ class AddNewSeriesModalContent extends Component {
       qualityProfileId,
       seriesType,
       seasonFolder,
+      tags,
       onModalClose,
       onInputChange
     } = this.props;
@@ -159,6 +160,17 @@ class AddNewSeriesModalContent extends Component {
                     onChange={onInputChange}
                   />
                 </FormGroup>
+
+                <FormGroup>
+                  <FormLabel>Tags</FormLabel>
+
+                  <FormInputGroup
+                    type={inputTypes.TAG}
+                    name="tags"
+                    value={tags}
+                    onChange={onInputChange}
+                  />
+                </FormGroup>
               </Form>
             </div>
           </div>
@@ -204,6 +216,7 @@ AddNewSeriesModalContent.propTypes = {
   qualityProfileId: PropTypes.number,
   seriesType: PropTypes.string.isRequired,
   seasonFolder: PropTypes.bool.isRequired,
+  tags: PropTypes.arrayOf(PropTypes.number).isRequired,
   onModalClose: PropTypes.func.isRequired,
   onInputChange: PropTypes.func.isRequired,
   onAddSeriesPress: PropTypes.func.isRequired

@@ -22,7 +22,8 @@ export const defaultState = {
     monitor: 'allEpisodes',
     qualityProfileId: 0,
     seriesType: 'standard',
-    seasonFolder: true
+    seasonFolder: true,
+    tags: []
   }
 };
 
