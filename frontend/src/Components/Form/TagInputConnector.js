@@ -24,14 +24,18 @@ function createMapStateToProps() {
       const filteredTagList = _.filter(tagList, (tag) => _.indexOf(tags, tag.id) === -1);
 
       return {
-        tags: tags.map((tag) => {
+        tags: tags.reduce((acc, tag) => {
           const matchingTag = _.find(tagList, { id: tag });
 
-          return {
-            id: tag,
-            name: matchingTag.label
-          };
-        }),
+          if (matchingTag) {
+            acc.push({
+              id: tag,
+              name: matchingTag.label
+            });
+          }
+
+          return acc;
+        }, []),
 
         tagList: filteredTagList.map(({ id, label: name }) => {
           return {
@@ -49,6 +53,22 @@ const mapDispatchToProps = {
 };
 
 class TagInputConnector extends Component {
+
+  //
+  // Lifecycle
+
+  componentDidMount() {
+    const {
+      name,
+      value,
+      tags,
+      onChange
+    } = this.props;
+
+    if (value.length !== tags.length) {
+      onChange({ name, value: tags.map((tag) => tag.id) });
+    }
+  }
 
   //
   // Listeners
@@ -120,6 +140,7 @@ class TagInputConnector extends Component {
 TagInputConnector.propTypes = {
   name: PropTypes.string.isRequired,
   value: PropTypes.arrayOf(PropTypes.number).isRequired,
+  tags: PropTypes.arrayOf(PropTypes.object).isRequired,
   onChange: PropTypes.func.isRequired,
   addTag: PropTypes.func.isRequired
 };
