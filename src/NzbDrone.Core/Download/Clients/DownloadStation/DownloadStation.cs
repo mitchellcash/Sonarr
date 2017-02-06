@@ -234,15 +234,37 @@ namespace NzbDrone.Core.Download.Clients.DownloadStation
 
         protected long GetRemainingSize(DownloadStationTorrent torrent)
         {
-            return torrent.Size - Math.Max(Convert.ToInt64(torrent.Additional.Transfer["size_downloaded"] ?? "0"), 0);
+            var downloadedString = torrent.Additional.Transfer["size_downloaded"];
+            long downloadedSize;
+
+            if (downloadedString.IsNullOrWhiteSpace() || !long.TryParse(downloadedString, out downloadedSize))
+            {
+                _logger.Debug("Torrent {0} has invalid size_downloaded: {1}", torrent.Title, downloadedString);
+                downloadedSize = 0;
+            }
+
+            return torrent.Size - Math.Max(0, downloadedSize);
         }
 
         protected TimeSpan? GetRemainingTime(DownloadStationTorrent torrent)
         {
-            var remainingSize = GetRemainingSize(torrent);
-            var donwloadSpeed = Math.Max(Convert.ToInt64(torrent.Additional.Transfer["speed_download"] ?? "0"), 0);
+            var speedString = torrent.Additional.Transfer["speed_download"];
+            long downloadSpeed;
 
-            return (donwloadSpeed > 0) ? (TimeSpan?)TimeSpan.FromSeconds(remainingSize / donwloadSpeed) : null;
+            if (speedString.IsNullOrWhiteSpace() || !long.TryParse(speedString, out downloadSpeed))
+            {
+                _logger.Debug("Torrent {0} has invalid speed_download: {1}", torrent.Title, speedString);
+                downloadSpeed = 0;
+            }
+
+            if (downloadSpeed <= 0)
+            {
+                return null;
+            }
+
+            var remainingSize = GetRemainingSize(torrent);
+
+            return TimeSpan.FromSeconds(remainingSize / downloadSpeed);
         }
 
         protected string GetMessage(DownloadStationTorrent torrent)
