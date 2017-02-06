@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using NLog;
 using NzbDrone.Common.Extensions;
@@ -99,11 +100,11 @@ namespace NzbDrone.Core.Download.Clients.DownloadStation.Proxies
                 var response = ProcessRequest<Dictionary<string, object>>(DiskStationApi.DownloadStationInfo, arguments, settings);
                 return response.Data;
             }
-            catch (DownloadClientException e)
+            catch (Exception ex)
             {
-                _logger.Debug("Failed to get config from Download Station");
+                _logger.Error(ex, "Failed to get config from Download Station");
 
-                throw e;
+                throw;
             }
         }
 

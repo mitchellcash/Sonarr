@@ -47,20 +47,8 @@ namespace NzbDrone.Core.Download.Clients.DownloadStation
 
         public override IEnumerable<DownloadClientItem> GetItems()
         {
-            IEnumerable<DownloadStationTorrent> torrents;
-            string serialNumber;
-
-            try
-            {
-                torrents = _proxy.GetTorrents(Settings);
-
-                serialNumber = _serialNumberProvider.GetSerialNumber(Settings);
-            }
-            catch (DownloadClientException ex)
-            {
-                _logger.Error(ex);
-                return Enumerable.Empty<DownloadClientItem>();
-            }
+            var torrents = _proxy.GetTorrents(Settings);
+            var serialNumber = _serialNumberProvider.GetSerialNumber(Settings);
 
             var items = new List<DownloadClientItem>();
 
@@ -91,6 +79,8 @@ namespace NzbDrone.Core.Download.Clients.DownloadStation
                     DownloadId = CreateDownloadId(torrent.Id, serialNumber),
                     Title = torrent.Title,
                     TotalSize = torrent.Size,
+                    RemainingSize = GetRemainingSize(torrent),
+                    RemainingTime = GetRemainingTime(torrent),
                     Status = GetTorrentStatus(torrent.Status),
                     Message = GetMessage(torrent)
                 };
@@ -107,15 +97,6 @@ namespace NzbDrone.Core.Download.Clients.DownloadStation
                     continue;
                 }
 
-                try
-                {
-                    item.RemainingSize = GetRemainingSize(torrent);
-                    item.RemainingTime = GetRemainingTime(torrent);
-                }
-                catch (Exception x)
-                {
-                    _logger.Warn(x, "Unknown error importing {0}", torrent.Title);
-                }
 
                 items.Add(item);
             }

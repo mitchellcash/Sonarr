@@ -313,29 +313,29 @@ namespace NzbDrone.Core.Test.Download.DownloadClientTests.DownloadStationTests
         }
 
         [Test]
-        public void DownloadStation_Should_log_error_and_return_empty_list_when_cannot_get_serial_number()
+        public void GetItems_should_throw_if_serial_number_unavailable()
         {
             Mocker.GetMock<ISerialNumberProvider>()
-                 .Setup(s => s.GetSerialNumber(_settings))
-                 .Throws(new DownloadClientException("Some Syno error"));
+                  .Setup(s => s.GetSerialNumber(_settings))
+                  .Throws(new ApplicationException("Some unknown exception, HttpException or DownloadClientException"));
 
             GivenSharedFolder();
             GivenAllKindOfTasks();
 
-            Subject.GetItems().Should().BeEmpty();
-            ExceptionVerification.ExpectedErrors(1);
+            Assert.Throws(Is.InstanceOf<Exception>(), () => Subject.GetItems());
+            ExceptionVerification.ExpectedErrors(0);
         }
 
         [Test]
-        public void DownloadStation_Should_throw_and_not_add_torrent_if_cannot_get_serial_number()
+        public void Download_should_throw_and_not_add_torrent_if_cannot_get_serial_number()
         {
             var remoteEpisode = CreateRemoteEpisode();
 
             Mocker.GetMock<ISerialNumberProvider>()
-               .Setup(s => s.GetSerialNumber(_settings))
-               .Throws(new DownloadClientException("Some Syno error"));
+                  .Setup(s => s.GetSerialNumber(_settings))
+                  .Throws(new ApplicationException("Some unknown exception, HttpException or DownloadClientException"));
 
-            Assert.Throws<DownloadClientException>(() => Subject.Download(remoteEpisode));
+            Assert.Throws(Is.InstanceOf<Exception>(), () => Subject.Download(remoteEpisode));
 
             Mocker.GetMock<IDownloadStationProxy>()
                   .Verify(v => v.AddTorrentFromUrl(It.IsAny<string>(), null, _settings), Times.Never());
