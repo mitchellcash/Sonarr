@@ -91,7 +91,7 @@ namespace NzbDrone.Core.Download.Clients.DownloadStation.Proxies
                  { "session", "DownloadStation" },
              };
 
-            var authLoginRequest = BuildRequest(settings, SynologyApi.Auth, arguments, HttpMethod.GET).Build();
+            var authLoginRequest = BuildRequest(settings, SynologyApi.Auth, arguments, HttpMethod.GET);
             authLoginRequest.StoreResponseCookie = true;
 
             var response = _httpClient.Execute(authLoginRequest);
