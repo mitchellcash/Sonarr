@@ -42,8 +42,8 @@ namespace NzbDrone.Core.Download.Clients.DownloadStation.Proxies
         protected DiskStationResponse<T> ProcessRequest<T>(SynologyApi api,
                                                                Dictionary<string, object> arguments,
                                                                DownloadStationSettings settings,
-                                                               HttpMethod method = HttpMethod.GET,                                                              
-                                                               int retries = 0 ) where T : new()
+                                                               HttpMethod method = HttpMethod.GET,
+                                                               int retries = 0) where T : new()
         {
             if (retries == 5)
             {
@@ -55,7 +55,7 @@ namespace NzbDrone.Core.Download.Clients.DownloadStation.Proxies
                 AuthenticateClient(settings);
             }
 
-            var request = BuildRequest(settings, api, arguments, method).Build();
+            var request = BuildRequest(settings, api, arguments, method);
             var response = _httpClient.Execute(request);
 
             if (response.StatusCode == HttpStatusCode.OK)
@@ -108,7 +108,7 @@ namespace NzbDrone.Core.Download.Clients.DownloadStation.Proxies
             }
         }
 
-        private HttpRequestBuilder BuildRequest(DownloadStationSettings settings, SynologyApi api, Dictionary<string, object> arguments, HttpMethod method)
+        private HttpRequest BuildRequest(DownloadStationSettings settings, SynologyApi api, Dictionary<string, object> arguments, HttpMethod method)
         {
             if (!Resources.ContainsKey(api))
             {
@@ -139,19 +139,21 @@ namespace NzbDrone.Core.Download.Clients.DownloadStation.Proxies
                             requestBuilder.AddFormParameter(arg.Key, arg.Value);
                         }
                     }
-
-                    return requestBuilder;
                 }
-
-                requestBuilder.Headers.ContentType = "application/json";
+                else
+                {
+                    requestBuilder.Headers.ContentType = "application/json";
+                }
             }
-
-            foreach (var arg in arguments)
+            else
             {
-                requestBuilder.AddQueryParam(arg.Key, arg.Value);
+                foreach (var arg in arguments)
+                {
+                    requestBuilder.AddQueryParam(arg.Key, arg.Value);
+                }
             }
 
-            return requestBuilder;
+            return requestBuilder.Build();
         }
 
         protected IEnumerable<int> GetApiVersion(DownloadStationSettings settings, SynologyApi api)
