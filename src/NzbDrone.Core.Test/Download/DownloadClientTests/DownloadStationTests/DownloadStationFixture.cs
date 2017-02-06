@@ -10,7 +10,6 @@ using NzbDrone.Core.Download.Clients.DownloadStation.Proxies;
 using NzbDrone.Core.MediaFiles.TorrentInfo;
 using NzbDrone.Core.Parser.Model;
 using NzbDrone.Test.Common;
-using NzbDrone.Core.Download.Clients;
 
 namespace NzbDrone.Core.Test.Download.DownloadClientTests.DownloadStationTests
 {
@@ -27,7 +26,7 @@ namespace NzbDrone.Core.Test.Download.DownloadClientTests.DownloadStationTests
         protected string _serialNumber = "SERIALNUMBER";
         protected string _category = "sonarr";
         protected string _tvDirectory = @"video/Series";
-        protected string _defaulDestination = "somepath";
+        protected string _defaultDestination = "somepath";
 
         protected Dictionary<string, object> _downloadStationConfigItems;
 
@@ -149,7 +148,7 @@ namespace NzbDrone.Core.Test.Download.DownloadClientTests.DownloadStationTests
 
             _downloadStationConfigItems = new Dictionary<string, object>
             {
-                { "default_destination", _defaulDestination },
+                { "default_destination", _defaultDestination },
             };
 
             Mocker.GetMock<IDownloadStationProxy>()
@@ -239,7 +238,7 @@ namespace NzbDrone.Core.Test.Download.DownloadClientTests.DownloadStationTests
         }
 
         [Test]
-        public void DownloadStation_Download_with_TvDirectory_should_force_directory()
+        public void Download_with_TvDirectory_should_force_directory()
         {
             GivenSerialNumber();
             GivenTvDirectory();
@@ -256,7 +255,7 @@ namespace NzbDrone.Core.Test.Download.DownloadClientTests.DownloadStationTests
         }
 
         [Test]
-        public void DownloadStation_Download_with_category_should_force_directory()
+        public void Download_with_category_should_force_directory()
         {
             GivenSerialNumber();
             GivenTvCategory();
@@ -269,11 +268,11 @@ namespace NzbDrone.Core.Test.Download.DownloadClientTests.DownloadStationTests
             id.Should().NotBeNullOrEmpty();
 
             Mocker.GetMock<IDownloadStationProxy>()
-                  .Verify(v => v.AddTorrentFromUrl(It.IsAny<string>(), $"{_defaulDestination}/{_category}", It.IsAny<DownloadStationSettings>()), Times.Once());
+                  .Verify(v => v.AddTorrentFromUrl(It.IsAny<string>(), $"{_defaultDestination}/{_category}", It.IsAny<DownloadStationSettings>()), Times.Once());
         }
 
         [Test]
-        public void DownloadStation_Download_without_TvDirectory_and_Category_should_use_default()
+        public void Download_without_TvDirectory_and_Category_should_use_default()
         {
             GivenSerialNumber();
             GivenSuccessfulDownload();
@@ -289,6 +288,17 @@ namespace NzbDrone.Core.Test.Download.DownloadClientTests.DownloadStationTests
         }
 
         [Test]
+        public void GetItems_should_ignore_downloads_in_wrong_folder()
+        {
+            _settings.TvDirectory = @"/shared/folder/sub";
+
+            GivenSerialNumber();
+            GivenSharedFolder();
+            GivenTorrents(new List<DownloadStationTorrent> { _completed });
+
+            Subject.GetItems().Should().BeEmpty();
+        }
+
         public void DownloadStation_Should_log_error_and_return_empty_list_when_cannot_resolve_shared_folder()
         {
             Mocker.GetMock<ISharedFolderResolver>()

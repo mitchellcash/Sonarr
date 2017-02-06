@@ -70,7 +70,7 @@ namespace NzbDrone.Core.Download.Clients.DownloadStation
 
                 if (Settings.TvDirectory.IsNotNullOrWhiteSpace())
                 {
-                    if (!outputPath.Contains(new OsPath($"/{Settings.TvDirectory}")))
+                    if (!new OsPath($"/{Settings.TvDirectory}").Contains(outputPath))
                     {
                         continue;
                     }
