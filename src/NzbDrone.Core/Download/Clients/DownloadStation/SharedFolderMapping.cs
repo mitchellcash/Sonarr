@@ -3,14 +3,14 @@
 namespace NzbDrone.Core.Download.Clients.DownloadStation
 {
     public class SharedFolderMapping
-    {        
+    {
         public OsPath PhysicalPath { get; private set; }
         public OsPath SharedFolder { get; private set; }
 
-        public SharedFolderMapping(string physicalPath, string sharedFolder)
+        public SharedFolderMapping(string sharedFolder, string physicalPath)
         {
-            PhysicalPath = new OsPath(physicalPath);
             SharedFolder = new OsPath(sharedFolder);
+            PhysicalPath = new OsPath(physicalPath);
         }
 
         public override string ToString()

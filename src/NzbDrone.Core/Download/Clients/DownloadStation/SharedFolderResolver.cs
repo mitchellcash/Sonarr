@@ -1,13 +1,14 @@
 ﻿using System;
 using NLog;
 using NzbDrone.Common.Cache;
+using NzbDrone.Common.Disk;
 using NzbDrone.Core.Download.Clients.DownloadStation.Proxies;
 
 namespace NzbDrone.Core.Download.Clients.DownloadStation
 {
     public interface ISharedFolderResolver
     {
-        SharedFolderMapping ResolvePhysicalPath(string sharedFolder, DownloadStationSettings settings, string serialNumber);
+        OsPath RemapToFullPath(OsPath sharedFolderPath, DownloadStationSettings settings, string serialNumber);
     }
 
     public class SharedFolderResolver : ISharedFolderResolver
@@ -25,24 +26,30 @@ namespace NzbDrone.Core.Download.Clients.DownloadStation
             _logger = logger;
         }
 
-        private SharedFolderMapping GetPhysicalPath(string sharedFolder, DownloadStationSettings settings)
-        {
-            return new SharedFolderMapping(_proxy.GetPhysicalPath(sharedFolder, settings), sharedFolder);
-        }
-
-        public SharedFolderMapping ResolvePhysicalPath(string sharedFolder, DownloadStationSettings settings, string serialNumber)
+        private SharedFolderMapping GetPhysicalPath(OsPath sharedFolder, DownloadStationSettings settings)
         {
             try
             {
-                return _cache.Get($"{serialNumber}:{sharedFolder}",
-                                             () => GetPhysicalPath(sharedFolder, settings),
-                                             TimeSpan.FromHours(1));
+                return _proxy.GetSharedFolderMapping(sharedFolder.FullPath, settings);
             }
-            catch (EntryPointNotFoundException e)
+            catch (Exception ex)
             {
-                _logger.Error(e, "The shared folder {0} couldn't be resolved at {1}:{2}", sharedFolder, settings.Host, settings.Port);
-                throw e;
+                _logger.Warn(ex, "Failed to get shared folder {0} from Disk Station {1}:{2}", sharedFolder, settings.Host, settings.Port);
+
+                throw;
             }
+        }
+
+        public OsPath RemapToFullPath(OsPath sharedFolderPath, DownloadStationSettings settings, string serialNumber)
+        {
+            var index = sharedFolderPath.FullPath.IndexOf('/', 1);
+            var sharedFolder = index == -1 ? sharedFolderPath : new OsPath(sharedFolderPath.FullPath.Substring(0, index));
+
+            var mapping = _cache.Get($"{serialNumber}:{sharedFolder}", () => GetPhysicalPath(sharedFolder, settings), TimeSpan.FromHours(1));
+
+            var fullPath = mapping.PhysicalPath + (sharedFolderPath - mapping.SharedFolder);
+
+            return fullPath;
         }
     }
 }

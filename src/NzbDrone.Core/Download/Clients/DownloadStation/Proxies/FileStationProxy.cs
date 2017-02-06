@@ -10,7 +10,7 @@ namespace NzbDrone.Core.Download.Clients.DownloadStation.Proxies
 {
     public interface IFileStationProxy
     {
-        string GetPhysicalPath(string sharedFolder, DownloadStationSettings settings);
+        SharedFolderMapping GetSharedFolderMapping(string sharedFolder, DownloadStationSettings settings);
         IEnumerable<int> GetApiVersion(DownloadStationSettings settings);
     }
 
@@ -26,7 +26,7 @@ namespace NzbDrone.Core.Download.Clients.DownloadStation.Proxies
             return base.GetApiVersion(settings, DiskStationApi.FileStationList);
         }
 
-        public string GetPhysicalPath(string sharedFolder, DownloadStationSettings settings)
+        public SharedFolderMapping GetSharedFolderMapping(string sharedFolder, DownloadStationSettings settings)
         {
             var arguments = new Dictionary<string, object>
             {
@@ -37,23 +37,16 @@ namespace NzbDrone.Core.Download.Clients.DownloadStation.Proxies
                 { "additional", $"[\"real_path\"]" }
             };
 
-            try
-            {
-                var response = ProcessRequest<FileStationListResponse>(DiskStationApi.FileStationList, arguments, settings);
+            var response = ProcessRequest<FileStationListResponse>(DiskStationApi.FileStationList, arguments, settings);
 
-                if (response.Success == true)
-                {
-                    return response.Data.Files.First().Additional["real_path"].ToString();
-                }
-                _logger.Debug("Failed to get shared folder {0}", sharedFolder);
-                throw new EntryPointNotFoundException($"There is no shared folder: { sharedFolder }");
-            }
-            catch (DownloadClientException e)
+            if (response.Success == true)
             {
-                _logger.Debug("Failed to get config from Download Station");
+                var physicalPath = response.Data.Files.First().Additional["real_path"].ToString();
 
-                throw e;
+                return new SharedFolderMapping(sharedFolder, physicalPath);
             }
+
+            throw new DownloadClientException($"Failed to get shared folder {0}", sharedFolder);
         }
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using FluentAssertions;
 using Moq;
 using NUnit.Framework;
+using NzbDrone.Common.Disk;
 using NzbDrone.Common.Http;
 using NzbDrone.Core.Download;
 using NzbDrone.Core.Download.Clients.DownloadStation;
@@ -159,8 +160,8 @@ namespace NzbDrone.Core.Test.Download.DownloadClientTests.DownloadStationTests
         protected void GivenSharedFolder()
         {
             Mocker.GetMock<ISharedFolderResolver>()
-                  .Setup(s => s.ResolvePhysicalPath(It.IsAny<string>(), _settings, It.IsAny<string>()))
-                  .Returns(new SharedFolderMapping(It.IsAny<string>(), It.IsAny<string>()));
+                  .Setup(s => s.RemapToFullPath(It.IsAny<OsPath>(), It.IsAny<DownloadStationSettings>(), It.IsAny<string>()))
+                  .Returns<OsPath, DownloadStationSettings, string>((path, setttings, serial) => new OsPath("/mnt/sdb1/mydata"));
         }
 
         protected void GivenSerialNumber()
@@ -299,17 +300,18 @@ namespace NzbDrone.Core.Test.Download.DownloadClientTests.DownloadStationTests
             Subject.GetItems().Should().BeEmpty();
         }
 
-        public void DownloadStation_Should_log_error_and_return_empty_list_when_cannot_resolve_shared_folder()
+        [Test]
+        public void GetItems_should_throw_if_shared_folder_resolve_fails()
         {
             Mocker.GetMock<ISharedFolderResolver>()
-                  .Setup(s => s.ResolvePhysicalPath(It.IsAny<string>(), _settings, It.IsAny<string>()))
-                  .Throws(new EntryPointNotFoundException());
+                  .Setup(s => s.RemapToFullPath(It.IsAny<OsPath>(), It.IsAny<DownloadStationSettings>(), It.IsAny<string>()))
+                  .Throws(new ApplicationException("Some unknown exception, HttpException or DownloadClientException"));
 
             GivenSerialNumber();
-            var quantity = GivenAllKindOfTasks();
+            GivenAllKindOfTasks();
 
-            Subject.GetItems().Should().BeEmpty();
-            ExceptionVerification.ExpectedErrors(quantity);
+            Assert.Throws(Is.InstanceOf<Exception>(), () => Subject.GetItems());
+            ExceptionVerification.ExpectedErrors(0);
         }
 
         [Test]
@@ -339,6 +341,40 @@ namespace NzbDrone.Core.Test.Download.DownloadClientTests.DownloadStationTests
 
             Mocker.GetMock<IDownloadStationProxy>()
                   .Verify(v => v.AddTorrentFromUrl(It.IsAny<string>(), null, _settings), Times.Never());
+        }
+
+        [Test]
+        public void GetItems_should_not_map_outputpath_for_queued_or_downloading_torrents()
+        {
+            GivenSerialNumber();
+            GivenSharedFolder();
+
+            GivenTorrents(new List<DownloadStationTorrent>
+            {
+                _queued, _downloading
+            });
+
+            var items = Subject.GetItems();
+
+            items.Should().HaveCount(2);
+            items.Should().OnlyContain(v => v.OutputPath.IsEmpty);
+        }
+
+        [Test]
+        public void GetItems_should_map_outputpath_for_completed_or_failed_torrents()
+        {
+            GivenSerialNumber();
+            GivenSharedFolder();
+
+            GivenTorrents(new List<DownloadStationTorrent>
+            {
+                _completed, _failed
+            });
+
+            var items = Subject.GetItems();
+
+            items.Should().HaveCount(2);
+            items.Should().OnlyContain(v => !v.OutputPath.IsEmpty);
         }
     }
 }

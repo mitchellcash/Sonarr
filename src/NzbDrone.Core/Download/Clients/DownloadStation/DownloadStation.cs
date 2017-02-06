@@ -6,7 +6,6 @@ using System.Net;
 using FluentValidation.Results;
 using NLog;
 using NzbDrone.Common.Cache;
-using NzbDrone.Common.Crypto;
 using NzbDrone.Common.Disk;
 using NzbDrone.Common.Extensions;
 using NzbDrone.Common.Http;
@@ -85,18 +84,10 @@ namespace NzbDrone.Core.Download.Clients.DownloadStation
                     Message = GetMessage(torrent)
                 };
 
-                try
+                if (item.Status == DownloadItemStatus.Completed || item.Status == DownloadItemStatus.Failed)
                 {
-                    var sharedFolderMapping = _sharedFolderResolver.ResolvePhysicalPath(outputPath.FullPath, Settings, serialNumber);
-
-                    item.OutputPath = GetOutputPath(outputPath, torrent, sharedFolderMapping.PhysicalPath);
+                    item.OutputPath = GetOutputPath(outputPath, torrent, serialNumber);
                 }
-                catch (EntryPointNotFoundException e)
-                {
-                    _logger.Error(e, "{0} could not be imported.", torrent.Title);
-                    continue;
-                }
-
 
                 items.Add(item);
             }
@@ -135,9 +126,11 @@ namespace NzbDrone.Core.Download.Clients.DownloadStation
             _logger.Error("Failed to remove {0}", downloadId);
         }
 
-        protected OsPath GetOutputPath(OsPath outputPath, DownloadStationTorrent torrent, OsPath physicalPath)
+        protected OsPath GetOutputPath(OsPath outputPath, DownloadStationTorrent torrent, string serialNumber)
         {
-            outputPath = _remotePathMappingService.RemapRemoteToLocal(Settings.Host, physicalPath);
+            outputPath = _sharedFolderResolver.RemapToFullPath(outputPath, Settings, serialNumber);
+
+            outputPath = _remotePathMappingService.RemapRemoteToLocal(Settings.Host, outputPath);
 
             return outputPath + torrent.Title;
         }
