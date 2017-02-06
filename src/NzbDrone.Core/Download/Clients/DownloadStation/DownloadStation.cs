@@ -56,6 +56,17 @@ namespace NzbDrone.Core.Download.Clients.DownloadStation
         public override IEnumerable<DownloadClientItem> GetItems()
         {
             IEnumerable<DownloadStationTorrent> torrents;
+            string hashedSerialNumber = null;
+
+            try
+            {
+                hashedSerialNumber = GetHashedSerialNumber();
+            }
+            catch (SerialNumberException s)
+            {
+                _logger.Error(s, "Cannot get Items.");
+                return Enumerable.Empty<DownloadClientItem>();
+            }
 
             try
             {
@@ -92,26 +103,14 @@ namespace NzbDrone.Core.Download.Clients.DownloadStation
                 var item = new DownloadClientItem()
                 {
                     Category = Settings.TvCategory,
+                    DownloadId = GetID(torrent.Id, hashedSerialNumber),
                     DownloadClient = Definition.Name,
                     Title = torrent.Title,
                     TotalSize = torrent.Size,
                     Status = GetTorrentStatus(torrent.Status),
                     Message = GetMessage(torrent)
                 };
-
-                string hashedSerialNumber = null;
-
-                try
-                {
-                    hashedSerialNumber = GetHashedSerialNumber();
-                    item.DownloadId = GetID(torrent.Id, hashedSerialNumber);
-                }
-                catch (SerialNumberException s)
-                {
-                    _logger.Error(s, "{0} could not be imported.", torrent.Title);
-                    continue;
-                }
-
+                
                 try
                 {
                     var sharedFolderMapping = _sharedFolderResolver.ResolvePhysicalPath(outputPath.FullPath, Settings, hashedSerialNumber);

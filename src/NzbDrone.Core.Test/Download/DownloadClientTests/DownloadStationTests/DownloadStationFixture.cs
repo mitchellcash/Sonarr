@@ -311,10 +311,10 @@ namespace NzbDrone.Core.Test.Download.DownloadClientTests.DownloadStationTests
                  .Throws(new SerialNumberException());
 
             GivenSharedFolder();
-            var quantity = GivenAllKindOfTasks();
+            GivenAllKindOfTasks();
 
             Subject.GetItems().Should().BeEmpty();
-            ExceptionVerification.ExpectedErrors(quantity);
+            ExceptionVerification.ExpectedErrors(1);
         }
 
         [Test]
