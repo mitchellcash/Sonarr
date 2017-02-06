@@ -20,8 +20,25 @@ class AddNewSeries extends Component {
     this._seriesLookupTimeout = null;
 
     this.state = {
-      term: ''
+      term: props.term || ''
     };
+  }
+
+  componentDidMount() {
+    const term = this.state.term;
+
+    if (term) {
+      this.props.onSeriesLookupChange(term);
+    }
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const nextTerm = nextProps.term;
+
+    if (nextTerm && nextTerm !== this.props.term) {
+      this.setState({ term: nextTerm });
+      this.props.onSeriesLookupChange(nextTerm);
+    }
   }
 
   // Don't reset the search input after adding a new series,
@@ -152,6 +169,7 @@ class AddNewSeries extends Component {
 }
 
 AddNewSeries.propTypes = {
+  term: PropTypes.string,
   isFetching: PropTypes.bool.isRequired,
   error: PropTypes.object,
   isAdding: PropTypes.bool.isRequired,

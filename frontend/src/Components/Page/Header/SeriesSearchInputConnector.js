@@ -20,6 +20,10 @@ function createMapDispatchToProps(dispatch, props) {
   return {
     onGoToSeries(titleSlug) {
       dispatch(push(`${window.Sonarr.urlBase}/series/${titleSlug}`));
+    },
+
+    onGoToAddNewSeries(query) {
+      dispatch(push(`${window.Sonarr.urlBase}/add/new?term=${encodeURIComponent(query)}`));
     }
   };
 }

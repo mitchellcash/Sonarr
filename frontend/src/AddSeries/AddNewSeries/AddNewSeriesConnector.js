@@ -66,9 +66,15 @@ class AddNewSeriesConnector extends Component {
   // Render
 
   render() {
+    const {
+      location,
+      ...otherProps
+    } = this.props;
+
     return (
       <AddNewSeries
-        {...this.props}
+        term={location.query.term}
+        {...otherProps}
         onSeriesLookupChange={this.onSeriesLookupChange}
         onClearSeriesLookup={this.onClearSeriesLookup}
       />
@@ -77,6 +83,7 @@ class AddNewSeriesConnector extends Component {
 }
 
 AddNewSeriesConnector.propTypes = {
+  location: PropTypes.object.isRequired,
   lookupSeries: PropTypes.func.isRequired,
   clearAddSeries: PropTypes.func.isRequired,
   fetchRootFolders: PropTypes.func.isRequired

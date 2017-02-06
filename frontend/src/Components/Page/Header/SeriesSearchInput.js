@@ -6,6 +6,8 @@ import Icon from 'Components/Icon';
 import SeriesSearchResult from './SeriesSearchResult';
 import styles from './SeriesSearchInput.css';
 
+const ADD_NEW_TYPE = 'addNew';
+
 class SeriesSearchInput extends Component {
 
   //
@@ -23,15 +25,35 @@ class SeriesSearchInput extends Component {
   //
   // Control
 
+  getSectionSuggestions(section) {
+    return section.suggestions;
+  }
+
+  renderSectionTitle(section) {
+    return (
+      <div className={styles.sectionTitle}>
+        {section.title}
+      </div>
+    );
+  }
+
   getSuggestionValue({ title }) {
     return title;
   }
 
-  renderSuggestion(series, { query }) {
+  renderSuggestion(item, { query }) {
+    if (item.type === ADD_NEW_TYPE) {
+      return (
+        <div className={styles.addNewSeriesSuggestion}>
+          Search for new series
+        </div>
+      );
+    }
+
     return (
       <SeriesSearchResult
         query={query}
-        {...series}
+        {...item}
       />
     );
   }
@@ -90,8 +112,12 @@ class SeriesSearchInput extends Component {
     this.reset();
   }
 
-  onSuggestionSelected = (event, { suggestion }) => {
-    this.goToSeries(suggestion);
+  onSuggestionSelected = (event, { suggestion, sectionIndex }) => {
+    if (suggestion.type === ADD_NEW_TYPE) {
+      this.props.onGoToAddNewSeries(this.state.value);
+    } else {
+      this.goToSeries(suggestion);
+    }
   }
 
   //
@@ -102,6 +128,27 @@ class SeriesSearchInput extends Component {
       value,
       suggestions
     } = this.state;
+
+    const suggestionGroups = [];
+
+    if (suggestions.length) {
+      suggestionGroups.push({
+        title: 'Existing Series',
+        suggestions
+      });
+    }
+
+    if (suggestions.length <= 3) {
+      suggestionGroups.push({
+        title: 'Add New Series',
+        suggestions: [
+          {
+            type: ADD_NEW_TYPE,
+            title: value
+          }
+        ]
+      });
+    }
 
     const inputProps = {
       className: styles.input,
@@ -136,7 +183,10 @@ class SeriesSearchInput extends Component {
           id={name}
           inputProps={inputProps}
           theme={theme}
-          suggestions={suggestions}
+          multiSection={true}
+          suggestions={suggestionGroups}
+          getSectionSuggestions={this.getSectionSuggestions}
+          renderSectionTitle={this.renderSectionTitle}
           getSuggestionValue={this.getSuggestionValue}
           renderSuggestion={this.renderSuggestion}
           onSuggestionSelected={this.onSuggestionSelected}
@@ -150,7 +200,8 @@ class SeriesSearchInput extends Component {
 
 SeriesSearchInput.propTypes = {
   series: PropTypes.arrayOf(PropTypes.object).isRequired,
-  onGoToSeries: PropTypes.func.isRequired
+  onGoToSeries: PropTypes.func.isRequired,
+  onGoToAddNewSeries: PropTypes.func.isRequired
 };
 
 export default SeriesSearchInput;

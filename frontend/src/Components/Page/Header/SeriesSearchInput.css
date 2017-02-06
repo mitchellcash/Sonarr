@@ -91,6 +91,15 @@
   background-color: $themeLightColor;
 }
 
+.sectionTitle {
+  padding: 5px 8px;
+  color: $disabledColor;
+}
+
+.addNewSeriesSuggestion {
+  padding: 0 3px;
+}
+
 @media only screen and (max-width: $breakpointSmall) {
   .input {
     width: 170px;
