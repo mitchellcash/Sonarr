@@ -11,7 +11,6 @@ using NzbDrone.Common.Disk;
 using NzbDrone.Common.Extensions;
 using NzbDrone.Common.Http;
 using NzbDrone.Core.Configuration;
-using NzbDrone.Core.Download.Clients.DownloadStation.Exceptions;
 using NzbDrone.Core.Download.Clients.DownloadStation.Proxies;
 using NzbDrone.Core.MediaFiles.TorrentInfo;
 using NzbDrone.Core.Parser.Model;
@@ -46,31 +45,16 @@ namespace NzbDrone.Core.Download.Clients.DownloadStation
 
         public override string Name => "Download Station";
 
-        private string GetHashedSerialNumber()
-        {
-            var serialNumber = _serialNumberProvider.GetSerialNumber(Settings);
-
-            return HashConverter.GetHash(serialNumber).ToHexString();
-        }
-
         public override IEnumerable<DownloadClientItem> GetItems()
         {
             IEnumerable<DownloadStationTorrent> torrents;
-            string hashedSerialNumber = null;
-
-            try
-            {
-                hashedSerialNumber = GetHashedSerialNumber();
-            }
-            catch (SerialNumberException s)
-            {
-                _logger.Error(s, "Cannot get Items.");
-                return Enumerable.Empty<DownloadClientItem>();
-            }
+            string serialNumber;
 
             try
             {
                 torrents = _proxy.GetTorrents(Settings);
+
+                serialNumber = _serialNumberProvider.GetSerialNumber(Settings);
             }
             catch (DownloadClientException ex)
             {
@@ -78,7 +62,7 @@ namespace NzbDrone.Core.Download.Clients.DownloadStation
                 return Enumerable.Empty<DownloadClientItem>();
             }
 
-            var items = new List<DownloadClientItem>();           
+            var items = new List<DownloadClientItem>();
 
             foreach (var torrent in torrents)
             {
@@ -103,17 +87,17 @@ namespace NzbDrone.Core.Download.Clients.DownloadStation
                 var item = new DownloadClientItem()
                 {
                     Category = Settings.TvCategory,
-                    DownloadId = GetID(torrent.Id, hashedSerialNumber),
                     DownloadClient = Definition.Name,
+                    DownloadId = CreateDownloadId(torrent.Id, serialNumber),
                     Title = torrent.Title,
                     TotalSize = torrent.Size,
                     Status = GetTorrentStatus(torrent.Status),
                     Message = GetMessage(torrent)
                 };
-                
+
                 try
                 {
-                    var sharedFolderMapping = _sharedFolderResolver.ResolvePhysicalPath(outputPath.FullPath, Settings, hashedSerialNumber);
+                    var sharedFolderMapping = _sharedFolderResolver.ResolvePhysicalPath(outputPath.FullPath, Settings, serialNumber);
 
                     item.OutputPath = GetOutputPath(outputPath, torrent, sharedFolderMapping.PhysicalPath);
                 }
@@ -126,7 +110,7 @@ namespace NzbDrone.Core.Download.Clients.DownloadStation
                 try
                 {
                     item.RemainingSize = GetRemainingSize(torrent);
-                    item.RemainingTime = GetRemainingTime(torrent);                                                    
+                    item.RemainingTime = GetRemainingTime(torrent);
                 }
                 catch (Exception x)
                 {
@@ -135,7 +119,7 @@ namespace NzbDrone.Core.Download.Clients.DownloadStation
 
                 items.Add(item);
             }
-            
+
             return items;
         }
 
@@ -161,7 +145,7 @@ namespace NzbDrone.Core.Download.Clients.DownloadStation
 
         public override void RemoveItem(string downloadId, bool deleteData)
         {
-            if (_proxy.RemoveTorrent(ParseID(downloadId), deleteData, Settings))
+            if (_proxy.RemoveTorrent(ParseDownloadId(downloadId), deleteData, Settings))
             {
                 _logger.Debug("{0} removed correctly", downloadId);
                 return;
@@ -179,49 +163,42 @@ namespace NzbDrone.Core.Download.Clients.DownloadStation
 
         protected override string AddFromMagnetLink(RemoteEpisode remoteEpisode, string hash, string magnetLink)
         {
-            try
+            var hashedSerialNumber = _serialNumberProvider.GetSerialNumber(Settings);
+
+            if (_proxy.AddTorrentFromUrl(magnetLink, GetDownloadDirectory(), Settings))
             {
-                var hashedSerialNumber = GetHashedSerialNumber();
+                var item = _proxy.GetTorrents(Settings).Where(t => t.Additional.Detail["uri"] == magnetLink).SingleOrDefault();
 
-                if (_proxy.AddTorrentFromUrl(magnetLink, GetDownloadDirectory(), Settings))
+                if (item != null)
                 {
-                    var item = _proxy.GetTorrents(Settings).Where(t => t.Additional.Detail["uri"] == magnetLink).SingleOrDefault();
-
-                    if (item != null)
-                    {
-                        _logger.Debug("{0} added correctly", remoteEpisode);
-                        return GetID(item.Id, hashedSerialNumber);
-                    }
-
-                    _logger.Debug("No such task {0} in Download Station", magnetLink);
+                    _logger.Debug("{0} added correctly", remoteEpisode);
+                    return CreateDownloadId(item.Id, hashedSerialNumber);
                 }
-            } catch (SerialNumberException) { }
-            
+
+                _logger.Debug("No such task {0} in Download Station", magnetLink);
+            }
+
             throw new DownloadClientException("Failed to add magnet task to Download Station");
         }
 
         protected override string AddFromTorrentFile(RemoteEpisode remoteEpisode, string hash, string filename, byte[] fileContent)
         {
-            try
+            var hashedSerialNumber = _serialNumberProvider.GetSerialNumber(Settings);
+
+            if (_proxy.AddTorrentFromData(fileContent, filename, GetDownloadDirectory(), Settings))
             {
-                var hashedSerialNumber = GetHashedSerialNumber();
+                var items = _proxy.GetTorrents(Settings).Where(t => t.Additional.Detail["uri"] == Path.GetFileNameWithoutExtension(filename));
 
-                if (_proxy.AddTorrentFromData(fileContent, filename, GetDownloadDirectory(), Settings))
+                var item = items.SingleOrDefault();
+
+                if (item != null)
                 {
-                    var items = _proxy.GetTorrents(Settings).Where(t => t.Additional.Detail["uri"] == Path.GetFileNameWithoutExtension(filename));
-
-                    var item = items.SingleOrDefault();
-
-                    if (item != null)
-                    {
-                        _logger.Debug("{0} added correctly", remoteEpisode);
-                        return GetID(item.Id, hashedSerialNumber);
-                    }
-
-                    _logger.Debug("No such task {0} in Download Station", filename);
+                    _logger.Debug("{0} added correctly", remoteEpisode);
+                    return CreateDownloadId(item.Id, hashedSerialNumber);
                 }
+
+                _logger.Debug("No such task {0} in Download Station", filename);
             }
-            catch (SerialNumberException) { }
 
             throw new DownloadClientException("Failed to add torrent task to Download Station");
         }
@@ -285,7 +262,7 @@ namespace NzbDrone.Core.Download.Clients.DownloadStation
         {
             return torrent.Size - Math.Max(Convert.ToInt64(torrent.Additional.Transfer["size_downloaded"] ?? "0"), 0);
         }
-        
+
         protected TimeSpan? GetRemainingTime(DownloadStationTorrent torrent)
         {
             var remainingSize = GetRemainingSize(torrent);
@@ -341,12 +318,12 @@ namespace NzbDrone.Core.Download.Clients.DownloadStation
             }
         }
 
-        protected string ParseID(string id)
+        protected string ParseDownloadId(string id)
         {
             return id.Split(':')[1];
         }
 
-        protected string GetID(string id, string hashedSerialNumber)
+        protected string CreateDownloadId(string id, string hashedSerialNumber)
         {
             return $"{hashedSerialNumber}:{id}";
         }

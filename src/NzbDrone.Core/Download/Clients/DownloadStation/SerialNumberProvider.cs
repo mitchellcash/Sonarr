@@ -1,7 +1,8 @@
 ﻿using System;
 using NLog;
 using NzbDrone.Common.Cache;
-using NzbDrone.Core.Download.Clients.DownloadStation.Exceptions;
+using NzbDrone.Common.Crypto;
+using NzbDrone.Common.Extensions;
 using NzbDrone.Core.Download.Clients.DownloadStation.Proxies;
 
 namespace NzbDrone.Core.Download.Clients.DownloadStation
@@ -18,8 +19,8 @@ namespace NzbDrone.Core.Download.Clients.DownloadStation
         private readonly ILogger _logger;
 
         public SerialNumberProvider(ICacheManager cacheManager,
-                                   IDSMInfoProxy proxy,
-                                   Logger logger)
+                                    IDSMInfoProxy proxy,
+                                    Logger logger)
         {
             _proxy = proxy;
             _cache = cacheManager.GetCache<string>(GetType());
@@ -30,15 +31,19 @@ namespace NzbDrone.Core.Download.Clients.DownloadStation
         {
             try
             {
-                return _cache.Get(settings.Host,
-                                             () =>  _proxy.GetSerialNumber(settings),
-                                             TimeSpan.FromMinutes(5));
+                return _cache.Get(settings.Host, () => GetHashedSerialNumber(settings), TimeSpan.FromMinutes(5));
             }
-            catch (SerialNumberException e)
+            catch (Exception ex)
             {
-                _logger.Error(e, "Could not get the serial number from {0}:{1}", settings.Host, settings.Port);
-                throw e;
+                _logger.Warn(ex, "Could not get the serial number from Download Station {0}:{1}", settings.Host, settings.Port);
+                throw;
             }
+        }
+
+        private string GetHashedSerialNumber(DownloadStationSettings settings)
+        {
+            var serialNumber = _proxy.GetSerialNumber(settings);
+            return HashConverter.GetHash(serialNumber).ToHexString();
         }
     }
 }

@@ -1,7 +1,9 @@
-﻿using Moq;
+﻿using System;
+using FluentAssertions;
+using Moq;
 using NUnit.Framework;
+using NzbDrone.Core.Download.Clients;
 using NzbDrone.Core.Download.Clients.DownloadStation;
-using NzbDrone.Core.Download.Clients.DownloadStation.Exceptions;
 using NzbDrone.Core.Download.Clients.DownloadStation.Proxies;
 using NzbDrone.Core.Test.Framework;
 using NzbDrone.Test.Common;
@@ -17,17 +19,56 @@ namespace NzbDrone.Core.Test.Download.DownloadClientTests.DownloadStationTests
         protected void Setup()
         {
             _settings = new DownloadStationSettings();
+        }
 
+        private void GivenValidResponse()
+        {
             Mocker.GetMock<IDSMInfoProxy>()
                   .Setup(d => d.GetSerialNumber(It.IsAny<DownloadStationSettings>()))
-                  .Throws(new SerialNumberException("Failed to get Download Station serial number"));
+                  .Returns("serial");
+        }
+
+        private void GivenInvalidResponse()
+        {
+            Mocker.GetMock<IDSMInfoProxy>()
+                  .Setup(d => d.GetSerialNumber(It.IsAny<DownloadStationSettings>()))
+                  .Throws(new DownloadClientException("Serial response invalid"));
         }
 
         [Test]
-        public void GetSerialNumber_should_log_error_and_throw_when_cannot_provide_serial_number()
+        public void should_return_hashedserialnumber()
         {
-            Assert.Throws<SerialNumberException>(() => Subject.GetSerialNumber(_settings));
-            ExceptionVerification.ExpectedErrors(1);
+            GivenValidResponse();
+
+            var serial = Subject.GetSerialNumber(_settings);
+
+            // This hash should remain the same for 'serial', so don't update the test if you change HashConverter, fix the code instead.
+            serial.Should().Be("50DE66B735D30738618568294742FCF1DFA52A47");
+
+            Mocker.GetMock<IDSMInfoProxy>()
+                  .Verify(d => d.GetSerialNumber(It.IsAny<DownloadStationSettings>()), Times.Once());
+        }
+
+        [Test]
+        public void should_cache_serialnumber()
+        {
+            GivenValidResponse();
+
+            var serial1 = Subject.GetSerialNumber(_settings);
+            var serial2 = Subject.GetSerialNumber(_settings);
+
+            serial2.Should().Be(serial1);
+
+            Mocker.GetMock<IDSMInfoProxy>()
+                  .Verify(d => d.GetSerialNumber(It.IsAny<DownloadStationSettings>()), Times.Once());
+        }
+
+        [Test]
+        public void should_throw_if_serial_number_unavailable()
+        {
+            Assert.Throws(Is.InstanceOf<Exception>(), () => Subject.GetSerialNumber(_settings));
+
+            ExceptionVerification.ExpectedWarns(1);
         }
     }
 }

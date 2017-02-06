@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using NLog;
 using NzbDrone.Common.Http;
-using NzbDrone.Core.Download.Clients.DownloadStation.Exceptions;
 using NzbDrone.Core.Download.Clients.DownloadStation.Responses;
 
 namespace NzbDrone.Core.Download.Clients.DownloadStation.Proxies
@@ -34,7 +33,7 @@ namespace NzbDrone.Core.Download.Clients.DownloadStation.Proxies
                 return response.Data.SerialNumber;
             }
             _logger.Debug("Failed to get Download Station serial number");
-            throw new SerialNumberException("Failed to get Download Station serial number");
+            throw new DownloadClientException("Failed to get Download Station serial number");
         }
     }
 }

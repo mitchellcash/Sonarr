@@ -6,7 +6,6 @@ using NUnit.Framework;
 using NzbDrone.Common.Http;
 using NzbDrone.Core.Download;
 using NzbDrone.Core.Download.Clients.DownloadStation;
-using NzbDrone.Core.Download.Clients.DownloadStation.Exceptions;
 using NzbDrone.Core.Download.Clients.DownloadStation.Proxies;
 using NzbDrone.Core.MediaFiles.TorrentInfo;
 using NzbDrone.Core.Parser.Model;
@@ -139,7 +138,7 @@ namespace NzbDrone.Core.Test.Download.DownloadClientTests.DownloadStationTests
                     }
                 }
             };
-          
+
             Mocker.GetMock<ITorrentFileInfoReader>()
                   .Setup(s => s.GetHashFromTorrentFile(It.IsAny<byte[]>()))
                   .Returns("CBC2F069FE8BB2F544EAE707D75BCD3DE9DCF951");
@@ -298,7 +297,7 @@ namespace NzbDrone.Core.Test.Download.DownloadClientTests.DownloadStationTests
 
             GivenSerialNumber();
             var quantity = GivenAllKindOfTasks();
-            
+
             Subject.GetItems().Should().BeEmpty();
             ExceptionVerification.ExpectedErrors(quantity);
         }
@@ -308,7 +307,7 @@ namespace NzbDrone.Core.Test.Download.DownloadClientTests.DownloadStationTests
         {
             Mocker.GetMock<ISerialNumberProvider>()
                  .Setup(s => s.GetSerialNumber(_settings))
-                 .Throws(new SerialNumberException());
+                 .Throws(new DownloadClientException("Some Syno error"));
 
             GivenSharedFolder();
             GivenAllKindOfTasks();
@@ -324,7 +323,7 @@ namespace NzbDrone.Core.Test.Download.DownloadClientTests.DownloadStationTests
 
             Mocker.GetMock<ISerialNumberProvider>()
                .Setup(s => s.GetSerialNumber(_settings))
-               .Throws(new SerialNumberException());
+               .Throws(new DownloadClientException("Some Syno error"));
 
             Assert.Throws<DownloadClientException>(() => Subject.Download(remoteEpisode));
 
