@@ -36,7 +36,15 @@ namespace Sonarr.Api.V3.SeasonPass
 
                 if (s.Seasons != null && s.Seasons.Any())
                 {
-                    series.Seasons = s.Seasons.ToModel();
+                    foreach (var seriesSeason in series.Seasons)
+                    {
+                        var season = s.Seasons.FirstOrDefault(c => c.SeasonNumber == seriesSeason.SeasonNumber);
+
+                        if (season != null)
+                        {
+                            seriesSeason.Monitored = season.Monitored;
+                        }
+                    }
                 }
 
                 _episodeMonitoredService.SetEpisodeMonitoredStatus(series, request.MonitoringOptions);

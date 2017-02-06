@@ -47,7 +47,12 @@ function getMonitoringOptions(seasons, monitor) {
   }
 
   return {
-    seasons,
+    seasons: _.map(seasons, (season) => {
+      return _.pick(season, [
+        'seasonNumber',
+        'monitored'
+      ]);
+    }),
     options: monitoringOptions
   };
 }
