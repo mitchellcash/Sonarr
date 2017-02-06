@@ -212,13 +212,13 @@ class InteractiveImportRow extends Component {
 
         <SelectSeriesModal
           isOpen={isSelectSeriesModalOpen}
-          id={id}
+          ids={[id]}
           onModalClose={this.onSelectSeriesModalClose}
         />
 
         <SelectSeasonModal
           isOpen={isSelectSeasonModalOpen}
-          id={id}
+          ids={[id]}
           seriesId={series && series.id}
           onModalClose={this.onSelectSeasonModalClose}
         />

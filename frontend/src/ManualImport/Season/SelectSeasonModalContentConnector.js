@@ -26,10 +26,12 @@ class SelectSeasonModalContentConnector extends Component {
   // Listeners
 
   onSeasonSelect = (seasonNumber) => {
-    this.props.updateManualImportItem({
-      id: this.props.id,
-      seasonNumber,
-      episodes: []
+    this.props.ids.forEach((id) => {
+      this.props.updateManualImportItem({
+        id,
+        seasonNumber,
+        episodes: []
+      });
     });
 
     this.props.onModalClose(true);
@@ -49,7 +51,7 @@ class SelectSeasonModalContentConnector extends Component {
 }
 
 SelectSeasonModalContentConnector.propTypes = {
-  id: PropTypes.number.isRequired,
+  ids: PropTypes.arrayOf(PropTypes.number).isRequired,
   seriesId: PropTypes.number.isRequired,
   items: PropTypes.arrayOf(PropTypes.object).isRequired,
   updateManualImportItem: PropTypes.func.isRequired,

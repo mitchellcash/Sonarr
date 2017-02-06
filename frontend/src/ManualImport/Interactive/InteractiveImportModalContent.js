@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import React, { Component, PropTypes } from 'react';
 import getSelectedIds from 'Utilities/Table/getSelectedIds';
 import selectAll from 'Utilities/Table/selectAll';
@@ -13,6 +14,8 @@ import ModalBody from 'Components/Modal/ModalBody';
 import ModalFooter from 'Components/Modal/ModalFooter';
 import Table from 'Components/Table/Table';
 import TableBody from 'Components/Table/TableBody';
+import SelectSeriesModal from 'ManualImport/Series/SelectSeriesModal';
+import SelectSeasonModal from 'ManualImport/Season/SelectSeasonModal';
 import InteractiveImportRow from './InteractiveImportRow';
 import styles from './InteractiveImportModalContent.css';
 
@@ -66,7 +69,9 @@ class InteractiveImportModalContent extends Component {
       allUnselected: false,
       lastToggled: null,
       selectedState: {},
-      importMode: props.importMode
+      importMode: props.importMode,
+      isSelectSeriesModalOpen: false,
+      isSelectSeasonModalOpen: false
     };
   }
 
@@ -100,6 +105,22 @@ class InteractiveImportModalContent extends Component {
     this.setState({ importMode: value });
   }
 
+  onSelectSeriesPress = () => {
+    this.setState({ isSelectSeriesModalOpen: true });
+  }
+
+  onSelectSeasonPress = () => {
+    this.setState({ isSelectSeasonModalOpen: true });
+  }
+
+  onSelectSeriesModalClose = () => {
+    this.setState({ isSelectSeriesModalOpen: false });
+  }
+
+  onSelectSeasonModalClose = () => {
+    this.setState({ isSelectSeasonModalOpen: false });
+  }
+
   //
   // Render
 
@@ -122,9 +143,13 @@ class InteractiveImportModalContent extends Component {
       allSelected,
       allUnselected,
       selectedState,
-      importMode
+      importMode,
+      isSelectSeriesModalOpen,
+      isSelectSeasonModalOpen
     } = this.state;
 
+    const selectedIds = this.getSelectedIds();
+    const selectedItem = selectedIds.length ? _.find(items, { id: selectedIds[0] }) : null;
     const errorMessage = error && error.message || 'Unable to load manual import items';
 
     const importModeOptions = [
@@ -184,32 +209,59 @@ class InteractiveImportModalContent extends Component {
           }
         </ModalBody>
 
-        <ModalFooter>
-          <SelectInput
-            className={styles.importMode}
-            name="importMode"
-            value={importMode}
-            values={importModeOptions}
-            onChange={this.onImportModeChange}
-          />
+        <ModalFooter className={styles.footer}>
+          <div>
+            <SelectInput
+              className={styles.importMode}
+              name="importMode"
+              value={importMode}
+              values={importModeOptions}
+              onChange={this.onImportModeChange}
+            />
+          </div>
 
-          {
-            manualImportErrorMessage &&
-              <span className={styles.errorMessage}>{manualImportErrorMessage}</span>
-          }
+          <div>
+            <Button onPress={this.onSelectSeriesPress}>
+              Select Series
+            </Button>
 
-          <Button onPress={onModalClose}>
-            Cancel
-          </Button>
+            <Button onPress={this.onSelectSeasonPress}>
+              Select Season
+            </Button>
+          </div>
 
-          <Button
-            kind={kinds.SUCCESS}
-            isDisabled={!this.getSelectedIds().length}
-            onPress={this.onImportSelectedPress}
-          >
-            Import
-          </Button>
+          <div>
+            <Button onPress={onModalClose}>
+              Cancel
+            </Button>
+
+            {
+              manualImportErrorMessage &&
+                <span className={styles.errorMessage}>{manualImportErrorMessage}</span>
+            }
+
+            <Button
+              kind={kinds.SUCCESS}
+              isDisabled={!this.getSelectedIds().length}
+              onPress={this.onImportSelectedPress}
+            >
+              Import
+            </Button>
+          </div>
         </ModalFooter>
+
+        <SelectSeriesModal
+          isOpen={isSelectSeriesModalOpen}
+          ids={selectedIds}
+          onModalClose={this.onSelectSeriesModalClose}
+        />
+
+        <SelectSeasonModal
+          isOpen={isSelectSeasonModalOpen}
+          ids={selectedIds}
+          seriesId={selectedItem && selectedItem.series && selectedItem.series.id}
+          onModalClose={this.onSelectSeasonModalClose}
+        />
       </ModalContent>
     );
   }
