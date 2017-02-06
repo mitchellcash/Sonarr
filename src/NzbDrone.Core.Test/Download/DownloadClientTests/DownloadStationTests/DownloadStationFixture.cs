@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using FluentAssertions;
 using Moq;
 using NUnit.Framework;
@@ -22,6 +23,7 @@ namespace NzbDrone.Core.Test.Download.DownloadClientTests.DownloadStationTests
         protected DownloadStationTorrent _downloading;
         protected DownloadStationTorrent _failed;
         protected DownloadStationTorrent _completed;
+        protected DownloadStationTorrent _seeding;
         protected DownloadStationTorrent _magnet;
 
         protected string _serialNumber = "SERIALNUMBER";
@@ -75,6 +77,29 @@ namespace NzbDrone.Core.Test.Download.DownloadClientTests.DownloadStationTests
                 Id = "id2",
                 Size = 1000,
                 Status = DownloadStationTorrent.DownloadStationTaskStatus.Finished,
+                Type = DownloadStationTorrent.DownloadStationTaskType.BT,
+                Username = "admin",
+                Title = "title",
+                Additional = new DownloadStationTorrentAdditional
+                {
+                    Detail = new Dictionary<string, string>
+                    {
+                        { "destination","shared/folder" },
+                        { "uri", DownloadURL }
+                    },
+                    Transfer = new Dictionary<string, string>
+                    {
+                        { "size_downloaded", "1000"},
+                        { "speed_download", "0" }
+                    }
+                }
+            };
+
+            _seeding = new DownloadStationTorrent()
+            {
+                Id = "id2",
+                Size = 1000,
+                Status = DownloadStationTorrent.DownloadStationTaskStatus.Seeding,
                 Type = DownloadStationTorrent.DownloadStationTaskType.BT,
                 Username = "admin",
                 Title = "title",
@@ -368,13 +393,43 @@ namespace NzbDrone.Core.Test.Download.DownloadClientTests.DownloadStationTests
 
             GivenTorrents(new List<DownloadStationTorrent>
             {
-                _completed, _failed
+                _completed, _failed, _seeding
             });
 
             var items = Subject.GetItems();
 
-            items.Should().HaveCount(2);
+            items.Should().HaveCount(3);
             items.Should().OnlyContain(v => !v.OutputPath.IsEmpty);
+        }
+
+        [Test]
+        public void seeding_item_should_be_readonly()
+        {
+            GivenSerialNumber();
+            GivenSharedFolder();
+
+            GivenTorrents(new List<DownloadStationTorrent> { _seeding });
+
+            var items = Subject.GetItems();
+
+            items.Should().HaveCount(1);
+            items.First().IsReadOnly.Should().BeTrue();
+        }
+
+        [Test]
+        public void finished_seeding_item_should_not_be_readonly()
+        {
+            GivenSerialNumber();
+            GivenSharedFolder();
+
+            GivenTorrents(new List<DownloadStationTorrent> { _completed });
+
+            var items = Subject.GetItems();
+
+            items.Should().HaveCount(1);
+            items.First().IsReadOnly.Should().BeFalse();
+
+            Assert.Inconclusive("Is there a state that designates that a torrent reached ratio limits and stopped seeding?");
         }
     }
 }

@@ -81,7 +81,8 @@ namespace NzbDrone.Core.Download.Clients.DownloadStation
                     RemainingSize = GetRemainingSize(torrent),
                     RemainingTime = GetRemainingTime(torrent),
                     Status = GetTorrentStatus(torrent.Status),
-                    Message = GetMessage(torrent)
+                    Message = GetMessage(torrent),
+                    IsReadOnly = true
                 };
 
                 if (item.Status == DownloadItemStatus.Completed || item.Status == DownloadItemStatus.Failed)
