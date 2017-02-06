@@ -8,6 +8,12 @@ using NzbDrone.Core.Download.Clients.DownloadStation.Responses;
 
 namespace NzbDrone.Core.Download.Clients.DownloadStation.Proxies
 {
+    public interface IFileStationProxy
+    {
+        string GetPhysicalPath(string sharedFolder, DownloadStationSettings settings);
+        IEnumerable<int> GetApiVersion(DownloadStationSettings settings);
+    }
+
     public class FileStationProxy : DiskStationProxyBase, IFileStationProxy
     {
         public FileStationProxy(IHttpClient httpClient, Logger logger)
@@ -17,7 +23,7 @@ namespace NzbDrone.Core.Download.Clients.DownloadStation.Proxies
 
         public IEnumerable<int> GetApiVersion(DownloadStationSettings settings)
         {
-            return base.GetApiVersion(settings, SynologyApi.FileStationList);
+            return base.GetApiVersion(settings, DiskStationApi.FileStationList);
         }
 
         public string GetPhysicalPath(string sharedFolder, DownloadStationSettings settings)
@@ -33,7 +39,7 @@ namespace NzbDrone.Core.Download.Clients.DownloadStation.Proxies
 
             try
             {
-                var response = ProcessRequest<FileStationListResponse>(SynologyApi.FileStationList, arguments, settings);
+                var response = ProcessRequest<FileStationListResponse>(DiskStationApi.FileStationList, arguments, settings);
 
                 if (response.Success == true)
                 {

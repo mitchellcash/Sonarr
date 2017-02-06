@@ -10,7 +10,7 @@ namespace NzbDrone.Core.Download.Clients.DownloadStation.Proxies
 {
     public abstract class DiskStationProxyBase
     {
-        private static readonly Dictionary<SynologyApi, string> Resources;
+        private static readonly Dictionary<DiskStationApi, string> Resources;
 
         private readonly IHttpClient _httpClient;
         protected readonly Logger _logger;
@@ -18,9 +18,9 @@ namespace NzbDrone.Core.Download.Clients.DownloadStation.Proxies
 
         static DiskStationProxyBase()
         {
-            Resources = new Dictionary<SynologyApi, string>
+            Resources = new Dictionary<DiskStationApi, string>
             {
-                { SynologyApi.Info, "query.cgi" }
+                { DiskStationApi.Info, "query.cgi" }
             };
         }
 
@@ -31,7 +31,7 @@ namespace NzbDrone.Core.Download.Clients.DownloadStation.Proxies
         }
 
 
-        protected DiskStationResponse<object> ProcessRequest(SynologyApi api,
+        protected DiskStationResponse<object> ProcessRequest(DiskStationApi api,
                                                                  Dictionary<string, object> arguments,
                                                                  DownloadStationSettings settings,
                                                                  HttpMethod method = HttpMethod.GET)
@@ -39,7 +39,7 @@ namespace NzbDrone.Core.Download.Clients.DownloadStation.Proxies
             return ProcessRequest<object>(api, arguments, settings, method);
         }
 
-        protected DiskStationResponse<T> ProcessRequest<T>(SynologyApi api,
+        protected DiskStationResponse<T> ProcessRequest<T>(DiskStationApi api,
                                                                Dictionary<string, object> arguments,
                                                                DownloadStationSettings settings,
                                                                HttpMethod method = HttpMethod.GET,
@@ -50,7 +50,7 @@ namespace NzbDrone.Core.Download.Clients.DownloadStation.Proxies
                 throw new DownloadClientException("Try to process same request more than 5 times");
             }
 
-            if (!_authenticated && api != SynologyApi.Info && api != SynologyApi.DSMInfo)
+            if (!_authenticated && api != DiskStationApi.Info && api != DiskStationApi.DSMInfo)
             {
                 AuthenticateClient(settings);
             }
@@ -91,7 +91,7 @@ namespace NzbDrone.Core.Download.Clients.DownloadStation.Proxies
                  { "session", "DownloadStation" },
              };
 
-            var authLoginRequest = BuildRequest(settings, SynologyApi.Auth, arguments, HttpMethod.GET);
+            var authLoginRequest = BuildRequest(settings, DiskStationApi.Auth, arguments, HttpMethod.GET);
             authLoginRequest.StoreResponseCookie = true;
 
             var response = _httpClient.Execute(authLoginRequest);
@@ -104,11 +104,11 @@ namespace NzbDrone.Core.Download.Clients.DownloadStation.Proxies
 
             if (!_authenticated)
             {
-                throw new DownloadClientAuthenticationException(downloadStationResponse.Error.GetMessage(SynologyApi.Auth));
+                throw new DownloadClientAuthenticationException(downloadStationResponse.Error.GetMessage(DiskStationApi.Auth));
             }
         }
 
-        private HttpRequest BuildRequest(DownloadStationSettings settings, SynologyApi api, Dictionary<string, object> arguments, HttpMethod method)
+        private HttpRequest BuildRequest(DownloadStationSettings settings, DiskStationApi api, Dictionary<string, object> arguments, HttpMethod method)
         {
             if (!Resources.ContainsKey(api))
             {
@@ -123,7 +123,7 @@ namespace NzbDrone.Core.Download.Clients.DownloadStation.Proxies
 
             if (requestBuilder.Method == HttpMethod.POST)
             {
-                if (api == SynologyApi.DownloadStationTask && arguments.ContainsKey("file"))
+                if (api == DiskStationApi.DownloadStationTask && arguments.ContainsKey("file"))
                 {
                     requestBuilder.Headers.ContentType = "multipart/form-data";
 
@@ -156,7 +156,7 @@ namespace NzbDrone.Core.Download.Clients.DownloadStation.Proxies
             return requestBuilder.Build();
         }
 
-        protected IEnumerable<int> GetApiVersion(DownloadStationSettings settings, SynologyApi api)
+        protected IEnumerable<int> GetApiVersion(DownloadStationSettings settings, DiskStationApi api)
         {
             var arguments = new Dictionary<string, object>
             {
@@ -166,7 +166,7 @@ namespace NzbDrone.Core.Download.Clients.DownloadStation.Proxies
                  { "query", "SYNO.API.Auth, SYNO.DownloadStation.Info, SYNO.DownloadStation.Task, SYNO.FileStation.List, SYNO.DSM.Info" },
              };
 
-            var infoResponse = ProcessRequest<DiskStationApiInfoResponse>(SynologyApi.Info, arguments, settings);
+            var infoResponse = ProcessRequest<DiskStationApiInfoResponse>(DiskStationApi.Info, arguments, settings);
 
             if (infoResponse.Success == true)
             {
@@ -177,23 +177,23 @@ namespace NzbDrone.Core.Download.Clients.DownloadStation.Proxies
                 var infoResponseFSList = infoResponse.Data["SYNO.FileStation.List"];
                 var infoResponseDSMInfo = infoResponse.Data["SYNO.DSM.Info"];
 
-                Resources[SynologyApi.Auth] = infoResponeDSAuth.Path;
-                Resources[SynologyApi.DownloadStationInfo] = infoResponeDSInfo.Path;
-                Resources[SynologyApi.DownloadStationTask] = infoResponeDSTask.Path;
-                Resources[SynologyApi.FileStationList] = infoResponseFSList.Path;
-                Resources[SynologyApi.DSMInfo] = infoResponseDSMInfo.Path;
+                Resources[DiskStationApi.Auth] = infoResponeDSAuth.Path;
+                Resources[DiskStationApi.DownloadStationInfo] = infoResponeDSInfo.Path;
+                Resources[DiskStationApi.DownloadStationTask] = infoResponeDSTask.Path;
+                Resources[DiskStationApi.FileStationList] = infoResponseFSList.Path;
+                Resources[DiskStationApi.DSMInfo] = infoResponseDSMInfo.Path;
 
                 switch (api)
                 {
-                    case SynologyApi.Auth:
+                    case DiskStationApi.Auth:
                         return Enumerable.Range(infoResponeDSAuth.MinVersion, infoResponeDSAuth.MaxVersion - infoResponeDSAuth.MinVersion + 1);
-                    case SynologyApi.DownloadStationInfo:
+                    case DiskStationApi.DownloadStationInfo:
                         return Enumerable.Range(infoResponeDSInfo.MinVersion, infoResponeDSInfo.MaxVersion - infoResponeDSInfo.MinVersion + 1);
-                    case SynologyApi.DownloadStationTask:
+                    case DiskStationApi.DownloadStationTask:
                         return Enumerable.Range(infoResponeDSTask.MinVersion, infoResponeDSTask.MaxVersion - infoResponeDSTask.MinVersion + 1);
-                    case SynologyApi.FileStationList:
+                    case DiskStationApi.FileStationList:
                         return Enumerable.Range(infoResponseFSList.MinVersion, infoResponseFSList.MaxVersion - infoResponseFSList.MinVersion + 1);
-                    case SynologyApi.DSMInfo:
+                    case DiskStationApi.DSMInfo:
                         return Enumerable.Range(infoResponseDSMInfo.MinVersion, infoResponseDSMInfo.MaxVersion - infoResponseDSMInfo.MinVersion + 1);
                     default:
                         throw new DownloadClientException("Api not implemented");
@@ -201,7 +201,7 @@ namespace NzbDrone.Core.Download.Clients.DownloadStation.Proxies
             }
             else
             {
-                throw new DownloadClientException(infoResponse.Error.GetMessage(SynologyApi.Info));
+                throw new DownloadClientException(infoResponse.Error.GetMessage(DiskStationApi.Info));
             }
         }
     }

@@ -7,6 +7,11 @@ using NzbDrone.Core.Download.Clients.DownloadStation.Responses;
 
 namespace NzbDrone.Core.Download.Clients.DownloadStation.Proxies
 {
+    public interface IDSMInfoProxy
+    {
+        string GetSerialNumber(DownloadStationSettings settings);
+    }
+
     public class DSMInfoProxy : DiskStationProxyBase, IDSMInfoProxy
     {
         public DSMInfoProxy(IHttpClient httpClient, Logger logger) :
@@ -22,7 +27,7 @@ namespace NzbDrone.Core.Download.Clients.DownloadStation.Proxies
                 { "method", "getinfo" }
             };
 
-            var response = ProcessRequest<DSMInfoResponse>(SynologyApi.DSMInfo, arguments, settings);
+            var response = ProcessRequest<DSMInfoResponse>(DiskStationApi.DSMInfo, arguments, settings);
 
             if (response.Success == true)
             {
@@ -31,5 +36,5 @@ namespace NzbDrone.Core.Download.Clients.DownloadStation.Proxies
             _logger.Debug("Failed to get Download Station serial number");
             throw new SerialNumberException("Failed to get Download Station serial number");
         }
-    }   
+    }
 }

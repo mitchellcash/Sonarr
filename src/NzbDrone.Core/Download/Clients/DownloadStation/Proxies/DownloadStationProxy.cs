@@ -7,9 +7,19 @@ using NzbDrone.Core.Download.Clients.DownloadStation.Responses;
 
 namespace NzbDrone.Core.Download.Clients.DownloadStation.Proxies
 {
+    public interface IDownloadStationProxy
+    {
+        IEnumerable<DownloadStationTorrent> GetTorrents(DownloadStationSettings settings);
+        Dictionary<string, object> GetConfig(DownloadStationSettings settings);
+        bool RemoveTorrent(string downloadId, bool deleteData, DownloadStationSettings settings);
+        bool AddTorrentFromUrl(string url, string downloadDirectory, DownloadStationSettings settings);
+        bool AddTorrentFromData(byte[] torrentData, string filename, string downloadDirectory, DownloadStationSettings settings);
+        IEnumerable<int> GetApiVersion(DownloadStationSettings settings);
+    }
+
     public class DownloadStationProxy : DiskStationProxyBase, IDownloadStationProxy
     {
-        public DownloadStationProxy(IHttpClient httpClient, Logger logger) 
+        public DownloadStationProxy(IHttpClient httpClient, Logger logger)
             : base(httpClient, logger)
         {
         }
@@ -20,7 +30,7 @@ namespace NzbDrone.Core.Download.Clients.DownloadStation.Proxies
             {
                 { "api", "SYNO.DownloadStation.Task" },
                 { "version", "2" },
-                { "method", "create" }                
+                { "method", "create" }
             };
 
             if (downloadDirectory.IsNotNullOrWhiteSpace())
@@ -30,7 +40,7 @@ namespace NzbDrone.Core.Download.Clients.DownloadStation.Proxies
 
             arguments.Add("file", new Dictionary<string, object>() { { "name", filename }, { "data", torrentData } });
 
-            var response = ProcessRequest(SynologyApi.DownloadStationTask, arguments, settings, HttpMethod.POST);
+            var response = ProcessRequest(DiskStationApi.DownloadStationTask, arguments, settings, HttpMethod.POST);
 
             return response.Success;
         }
@@ -50,7 +60,7 @@ namespace NzbDrone.Core.Download.Clients.DownloadStation.Proxies
                 arguments.Add("destination", downloadDirectory);
             }
 
-            var response = ProcessRequest(SynologyApi.DownloadStationTask, arguments, settings, HttpMethod.GET);
+            var response = ProcessRequest(DiskStationApi.DownloadStationTask, arguments, settings, HttpMethod.GET);
 
             return response.Success;
         }
@@ -65,7 +75,7 @@ namespace NzbDrone.Core.Download.Clients.DownloadStation.Proxies
                  { "additional", "detail,transfer" }
             };
 
-            var response = ProcessRequest<DownloadStationTaskInfoResponse>(SynologyApi.DownloadStationTask, arguments, settings);
+            var response = ProcessRequest<DownloadStationTaskInfoResponse>(DiskStationApi.DownloadStationTask, arguments, settings);
 
             if (response.Success)
             {
@@ -86,7 +96,7 @@ namespace NzbDrone.Core.Download.Clients.DownloadStation.Proxies
 
             try
             {
-                var response = ProcessRequest<Dictionary<string, object>>(SynologyApi.DownloadStationInfo, arguments, settings);
+                var response = ProcessRequest<Dictionary<string, object>>(DiskStationApi.DownloadStationInfo, arguments, settings);
                 return response.Data;
             }
             catch (DownloadClientException e)
@@ -110,7 +120,7 @@ namespace NzbDrone.Core.Download.Clients.DownloadStation.Proxies
 
             try
             {
-                var response = ProcessRequest(SynologyApi.DownloadStationTask, arguments, settings);
+                var response = ProcessRequest(DiskStationApi.DownloadStationTask, arguments, settings);
 
                 if (response.Success)
                 {
@@ -129,7 +139,7 @@ namespace NzbDrone.Core.Download.Clients.DownloadStation.Proxies
 
         public IEnumerable<int> GetApiVersion(DownloadStationSettings settings)
         {
-            return base.GetApiVersion(settings, SynologyApi.DownloadStationInfo);
+            return base.GetApiVersion(settings, DiskStationApi.DownloadStationInfo);
         }
     }
 }

@@ -6,6 +6,11 @@ using NzbDrone.Core.Download.Clients.DownloadStation.Proxies;
 
 namespace NzbDrone.Core.Download.Clients.DownloadStation
 {
+    public interface ISerialNumberProvider
+    {
+        string GetSerialNumber(DownloadStationSettings settings);
+    }
+
     public class SerialNumberProvider : ISerialNumberProvider
     {
         private readonly IDSMInfoProxy _proxy;

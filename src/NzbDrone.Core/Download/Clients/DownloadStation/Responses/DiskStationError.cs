@@ -77,17 +77,17 @@ namespace NzbDrone.Core.Download.Clients.DownloadStation.Responses
 
         public bool SessionError => Code == 105 || Code == 106 || Code == 107;
 
-        public string GetMessage(SynologyApi api)
+        public string GetMessage(DiskStationApi api)
         {
-            if (api == SynologyApi.Auth && AuthMessages.ContainsKey(Code))
+            if (api == DiskStationApi.Auth && AuthMessages.ContainsKey(Code))
             {
                 return AuthMessages[Code];
             }
-            if (api == SynologyApi.DownloadStationTask && DownloadStationTaskMessages.ContainsKey(Code))
+            if (api == DiskStationApi.DownloadStationTask && DownloadStationTaskMessages.ContainsKey(Code))
             {
                 return DownloadStationTaskMessages[Code];
             }
-            if (api == SynologyApi.FileStationList && FileStationMessages.ContainsKey(Code))
+            if (api == DiskStationApi.FileStationList && FileStationMessages.ContainsKey(Code))
             {
                 return FileStationMessages[Code];
             }
