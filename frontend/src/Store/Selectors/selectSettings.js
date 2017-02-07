@@ -11,21 +11,27 @@ function getValidationFailures(saveError, isWarning) {
 function selectSettings(item, pendingChanges, saveError) {
   const validationFailures = getValidationFailures(saveError);
 
-  const settings = _.reduce(Object.assign({}, item, pendingChanges), (result, value, key) => {
+  const settings = _.reduce(item, (result, value, key) => {
     if (key === 'fields') {
       return result;
     }
 
     const setting = {
       value,
-      pending: pendingChanges.hasOwnProperty(key),
       errors: _.map(_.remove(validationFailures, (failure) => {
         return failure.propertyName.toLowerCase() === key.toLowerCase() && !failure.isWarning;
       }), (failure) => failure.errorMessage),
+
       warnings: _.map(_.remove(validationFailures, (failure) => {
         return failure.propertyName.toLowerCase() === key.toLowerCase() && failure.isWarning;
       }), (failure) => failure.errorMessage)
     };
+
+    if (pendingChanges.hasOwnProperty(key)) {
+      setting.previousValue = setting.value;
+      setting.value = pendingChanges[key];
+      setting.pending = true;
+    }
 
     result[key] = setting;
     return result;
@@ -36,6 +42,7 @@ function selectSettings(item, pendingChanges, saveError) {
     const hasPendingFieldChange = pendingChanges.fields && pendingChanges.fields.hasOwnProperty(field.name);
 
     if (hasPendingFieldChange) {
+      field.previousValue = field.value;
       field.value = pendingChanges.fields[field.name];
       field.pending = true;
     }

@@ -6,6 +6,7 @@ import createCommandsSelector from 'Store/Selectors/createCommandsSelector';
 import createSystemStatusSelector from 'Store/Selectors/createSystemStatusSelector';
 import { setGeneralSettingsValue, saveGeneralSettings, fetchGeneralSettings } from 'Store/Actions/settingsActions';
 import { executeCommand } from 'Store/Actions/commandActions';
+import { restart } from 'Store/Actions/systemActions';
 import connectSection from 'Store/connectSection';
 import * as commandNames from 'Commands/commandNames';
 import GeneralSettings from './GeneralSettings';
@@ -35,7 +36,8 @@ const mapDispatchToProps = {
   setGeneralSettingsValue,
   saveGeneralSettings,
   fetchGeneralSettings,
-  executeCommand
+  executeCommand,
+  restart
 };
 
 class GeneralSettingsConnector extends Component {
@@ -68,6 +70,10 @@ class GeneralSettingsConnector extends Component {
     this.props.executeCommand({ name: commandNames.RESET_API_KEY });
   }
 
+  onConfirmRestart = () => {
+    this.props.restart();
+  }
+
   //
   // Render
 
@@ -77,6 +83,7 @@ class GeneralSettingsConnector extends Component {
         onInputChange={this.onInputChange}
         onSavePress={this.onSavePress}
         onConfirmResetApiKey={this.onConfirmResetApiKey}
+        onConfirmRestart={this.onConfirmRestart}
         {...this.props}
       />
     );
@@ -88,7 +95,8 @@ GeneralSettingsConnector.propTypes = {
   setGeneralSettingsValue: PropTypes.func.isRequired,
   saveGeneralSettings: PropTypes.func.isRequired,
   fetchGeneralSettings: PropTypes.func.isRequired,
-  executeCommand: PropTypes.func.isRequired
+  executeCommand: PropTypes.func.isRequired,
+  restart: PropTypes.func.isRequired
 };
 
 export default connectSection(

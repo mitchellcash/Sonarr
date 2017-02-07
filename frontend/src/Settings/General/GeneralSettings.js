@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import React, { Component, PropTypes } from 'react';
 import { icons, inputTypes, kinds } from 'Helpers/Props';
 import LoadingIndicator from 'Components/Loading/LoadingIndicator';
@@ -22,8 +23,40 @@ class GeneralSettings extends Component {
     super(props, context);
 
     this.state = {
-      isConfirmApiKeyResetModalOpen: false
+      isConfirmApiKeyResetModalOpen: false,
+      isRestartRequiredModalOpen: false
     };
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.isSaving || nextProps.saveError || !this.props.isSaving) {
+      return false;
+    }
+
+    const settings = this.props.settings;
+    const nextSettings = nextProps.settings;
+
+    const keys = [
+      'bindAddress',
+      'port',
+      'urlBase',
+      'enableSsl',
+      'sslPort',
+      'sslCertHash',
+      'authenticationMethod',
+      'username',
+      'password',
+      'apiKey'
+    ];
+
+    const pendingRestart = _.some(keys, (key) => {
+      const previousValue = settings[key].previousValue;
+      const nextValue = nextSettings[key].value;
+
+      return previousValue != null && previousValue !== nextValue;
+    });
+
+    this.setState({ isRestartRequiredModalOpen: pendingRestart });
   }
 
   //
@@ -40,6 +73,15 @@ class GeneralSettings extends Component {
 
   onCloseResetApiKeyModal = () => {
     this.setState({ isConfirmApiKeyResetModalOpen: false });
+  }
+
+  onConfirmRestart = () => {
+    this.setState({ isRestartRequiredModalOpen: false });
+    this.props.onConfirmRestart();
+  }
+
+  onCloseRestartRequiredModalOpen = () => {
+    this.setState({ isRestartRequiredModalOpen: false });
   }
 
   //
@@ -60,6 +102,11 @@ class GeneralSettings extends Component {
       onInputChange,
       ...otherProps
     } = this.props;
+
+    const {
+      isConfirmApiKeyResetModalOpen,
+      isRestartRequiredModalOpen
+    } = this.state;
 
     const {
       bindAddress,
@@ -535,13 +582,23 @@ class GeneralSettings extends Component {
         </PageContentBody>
 
         <ConfirmModal
-          isOpen={this.state.isConfirmApiKeyResetModalOpen}
+          isOpen={isConfirmApiKeyResetModalOpen}
           kind={kinds.DANGER}
           title="Reset API Key"
           message="Are you sure you want to reset your API Key?"
           confirmLabel="Reset"
           onConfirm={this.onConfirmResetApiKey}
           onCancel={this.onCloseResetApiKeyModal}
+        />
+
+        <ConfirmModal
+          isOpen={isRestartRequiredModalOpen}
+          kind={kinds.DANGER}
+          title="Restart Sonarr"
+          message="Sonarr requires a restart to apply changes, do you want to restart now?"
+          confirmLabel="Restart"
+          onConfirm={this.onConfirmRestart}
+          onCancel={this.onCloseRestartRequiredModalOpen}
         />
       </PageContent>
     );
@@ -554,6 +611,8 @@ GeneralSettings.propTypes = {
   isFetching: PropTypes.bool.isRequired,
   isPopulated: PropTypes.bool.isRequired,
   error: PropTypes.object,
+  isSaving: PropTypes.bool.isRequired,
+  saveError: PropTypes.object,
   settings: PropTypes.object.isRequired,
   isResettingApiKey: PropTypes.bool.isRequired,
   hasSettings: PropTypes.bool.isRequired,
@@ -561,7 +620,8 @@ GeneralSettings.propTypes = {
   isWindows: PropTypes.bool.isRequired,
   mode: PropTypes.string.isRequired,
   onInputChange: PropTypes.func.isRequired,
-  onConfirmResetApiKey: PropTypes.func.isRequired
+  onConfirmResetApiKey: PropTypes.func.isRequired,
+  onConfirmRestart: PropTypes.func.isRequired
 };
 
 export default GeneralSettings;
