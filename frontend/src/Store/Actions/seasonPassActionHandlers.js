@@ -1,5 +1,6 @@
 import _ from 'lodash';
 import $ from 'jquery';
+import { batchActions } from 'redux-batched-actions';
 import getMonitoringOptions from 'Utilities/Series/getMonitoringOptions';
 import * as types from './actionTypes';
 import { set, updateItem } from './baseActions';
@@ -59,19 +60,21 @@ const seasonPassActionHandlers = {
       });
 
       promise.done((data) => {
-        dispatch(set({
-          section,
-          isSaving: false,
-          saveError: null
-        }));
+        dispatch(batchActions([
+          ...series.map((s) => {
+            return updateItem({
+              id: s.id,
+              section: 'series',
+              ...s
+            });
+          }),
 
-        series.forEach((s) => {
-          dispatch(updateItem({
-            id: s.id,
-            section: 'series',
-            ...s
-          }));
-        });
+          set({
+            section,
+            isSaving: false,
+            saveError: null
+          })
+        ]));
       });
 
       promise.fail((xhr) => {

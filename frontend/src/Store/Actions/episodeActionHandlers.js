@@ -1,5 +1,6 @@
 import _ from 'lodash';
 import $ from 'jquery';
+import { batchActions } from 'redux-batched-actions';
 import episodeEntities from 'Episode/episodeEntities';
 import createFetchHandler from './Creators/createFetchHandler';
 import * as types from './actionTypes';
@@ -62,13 +63,15 @@ const episodeActionHandlers = {
 
       const episodeSection = _.last(episodeEntity.split('.'));
 
-      episodeIds.forEach((episodeId) => {
-        dispatch(updateItem({
-          id: episodeId,
-          section: episodeSection,
-          isSaving: true
-        }));
-      });
+      dispatch(batchActions([
+        episodeIds.map((episodeId) => {
+          return updateItem({
+            id: episodeId,
+            section: episodeSection,
+            isSaving: true
+          });
+        })
+      ]));
 
       const promise = $.ajax({
         url: '/episode/monitor',
@@ -78,24 +81,28 @@ const episodeActionHandlers = {
       });
 
       promise.done((data) => {
-        episodeIds.forEach((episodeId) => {
-          dispatch(updateItem({
-            id: episodeId,
-            section: episodeSection,
-            isSaving: false,
-            monitored
-          }));
-        });
+        dispatch(batchActions([
+          episodeIds.map((episodeId) => {
+            return updateItem({
+              id: episodeId,
+              section: episodeSection,
+              isSaving: false,
+              monitored
+            });
+          })
+        ]));
       });
 
       promise.fail((xhr) => {
-        episodeIds.forEach((episodeId) => {
-          dispatch(updateItem({
-            id: episodeId,
-            section: episodeSection,
-            isSaving: false
-          }));
-        });
+        dispatch(batchActions([
+          episodeIds.map((episodeId) => {
+            return updateItem({
+              id: episodeId,
+              section: episodeSection,
+              isSaving: false
+            });
+          })
+        ]));
       });
     };
   }

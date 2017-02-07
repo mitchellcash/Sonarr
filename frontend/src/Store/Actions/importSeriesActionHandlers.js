@@ -1,5 +1,6 @@
 import _ from 'lodash';
 import $ from 'jquery';
+import { batchActions } from 'redux-batched-actions';
 import getNewSeries from 'Utilities/Series/getNewSeries';
 import * as types from './actionTypes';
 import { set, updateItem, removeItem } from './baseActions';
@@ -123,8 +124,10 @@ const importSeriesActionHandlers = {
           });
 
           promise.done((data) => {
-            dispatch(updateItem({ section: 'series', ...data }));
-            dispatch(removeItem({ section, id }));
+            dispatch(batchActions([
+              updateItem({ section: 'series', ...data }),
+              removeItem({ section, id })
+            ]));
           });
 
           promise.fail((xhr) => {

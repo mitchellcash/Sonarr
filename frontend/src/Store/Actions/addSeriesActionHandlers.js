@@ -1,5 +1,6 @@
 import _ from 'lodash';
 import $ from 'jquery';
+import { batchActions } from 'redux-batched-actions';
 import getNewSeries from 'Utilities/Series/getNewSeries';
 import * as types from './actionTypes';
 import { set, update, updateItem } from './baseActions';
@@ -19,14 +20,16 @@ const addSeriesActionHandlers = {
       });
 
       promise.done((data) => {
-        dispatch(update({ section, data }));
+        dispatch(batchActions([
+          update({ section, data }),
 
-        dispatch(set({
-          section,
-          isFetching: false,
-          isPopulated: true,
-          error: null
-        }));
+          set({
+            section,
+            isFetching: false,
+            isPopulated: true,
+            error: null
+          })
+        ]));
       });
 
       promise.fail((xhr) => {
@@ -56,14 +59,16 @@ const addSeriesActionHandlers = {
       });
 
       promise.done((data) => {
-        dispatch(updateItem({ section: 'series', ...data }));
+        dispatch(batchActions([
+          updateItem({ section: 'series', ...data }),
 
-        dispatch(set({
-          section,
-          isAdding: false,
-          isAdded: true,
-          addError: null
-        }));
+          set({
+            section,
+            isAdding: false,
+            isAdded: true,
+            addError: null
+          })
+        ]));
       });
 
       promise.fail((xhr) => {

@@ -1,6 +1,7 @@
 import _ from 'lodash';
 import $ from 'jquery';
 import moment from 'moment';
+import { batchActions } from 'redux-batched-actions';
 import * as calendarViews from 'Calendar/calendarViews';
 import * as types from './actionTypes';
 import { set, update } from './baseActions';
@@ -85,14 +86,16 @@ const calendarActionHandlers = {
       });
 
       promise.done((data) => {
-        dispatch(update({ section, data }));
+        dispatch(batchActions([
+          update({ section, data }),
 
-        dispatch(set({
-          section,
-          isFetching: false,
-          isPopulated: true,
-          error: null
-        }));
+          set({
+            section,
+            isFetching: false,
+            isPopulated: true,
+            error: null
+          })
+        ]));
       });
 
       promise.fail((xhr) => {

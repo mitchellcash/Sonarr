@@ -1,5 +1,6 @@
 import _ from 'lodash';
 import $ from 'jquery';
+import { batchActions } from 'redux-batched-actions';
 import * as types from './actionTypes';
 import createFetchHandler from './Creators/createFetchHandler';
 import createSaveProviderHandler from './Creators/createSaveProviderHandler';
@@ -96,21 +97,23 @@ const seriesActionHandlers = {
       });
 
       promise.done((data) => {
-        dispatch(updateItem({
-          id,
-          section,
-          ...data
-        }));
-
         const episodes = _.filter(getState().episodes.items, { seriesId: id, seasonNumber });
 
-        episodes.forEach((episode) => {
-          dispatch(updateItem({
-            id: episode.id,
-            section: 'episodes',
-            monitored
-          }));
-        });
+        dispatch(batchActions([
+          updateItem({
+            id,
+            section,
+            ...data
+          }),
+
+          ...episodes.map((episode) => {
+            return updateItem({
+              id: episode.id,
+              section: 'episodes',
+              monitored
+            });
+          })
+        ]));
       });
 
       promise.fail((xhr) => {

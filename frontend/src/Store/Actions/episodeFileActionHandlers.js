@@ -1,4 +1,5 @@
 import $ from 'jquery';
+import { batchActions } from 'redux-batched-actions';
 import createFetchHandler from './Creators/createFetchHandler';
 import createRemoveItemHandler from './Creators/createRemoveItemHandler';
 import * as types from './actionTypes';
@@ -26,15 +27,17 @@ const episodeFileActionHandlers = {
       });
 
       promise.done(() => {
-        episodeFileIds.forEach((id) => {
-          dispatch(removeItem({ section, id }));
-        });
+        dispatch(batchActions([
+          ...episodeFileIds.map((id) => {
+            return removeItem({ section, id });
+          }),
 
-        dispatch(set({
-          section,
-          isDeleting: false,
-          deleteError: null
-        }));
+          set({
+            section,
+            isDeleting: false,
+            deleteError: null
+          })
+        ]));
       });
 
       promise.fail((xhr) => {
@@ -64,15 +67,17 @@ const episodeFileActionHandlers = {
       });
 
       promise.done(() => {
-        episodeFileIds.forEach((id) => {
-          dispatch(updateItem({ section, id, quality }));
-        });
+        dispatch(batchActions([
+          ...episodeFileIds.map((id) => {
+            return updateItem({ section, id, quality });
+          }),
 
-        dispatch(set({
-          section,
-          isSaving: false,
-          saveError: null
-        }));
+          set({
+            section,
+            isSaving: false,
+            saveError: null
+          })
+        ]));
       });
 
       promise.fail((xhr) => {

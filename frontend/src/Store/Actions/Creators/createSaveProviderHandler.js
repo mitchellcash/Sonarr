@@ -1,4 +1,5 @@
 import $ from 'jquery';
+import { batchActions } from 'redux-batched-actions';
 import getProviderState from 'Utilities/State/getProviderState';
 import { set, updateItem } from '../baseActions';
 
@@ -26,14 +27,16 @@ function createSaveProviderHandler(section, url, getFromState) {
       const promise = $.ajax(ajaxOptions);
 
       promise.done((data) => {
-        dispatch(updateItem({ section, ...data }));
+        dispatch(batchActions([
+          updateItem({ section, ...data }),
 
-        dispatch(set({
-          section,
-          isSaving: false,
-          saveError: null,
-          pendingChanges: {}
-        }));
+          set({
+            section,
+            isSaving: false,
+            saveError: null,
+            pendingChanges: {}
+          })
+        ]));
       });
 
       promise.fail((xhr) => {

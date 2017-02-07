@@ -1,5 +1,6 @@
 import _ from 'lodash';
 import $ from 'jquery';
+import { batchActions } from 'redux-batched-actions';
 import { set, updateServerSideCollection } from '../baseActions';
 
 function createFetchServerSideCollectionHandler(section, url, getFromState) {
@@ -26,14 +27,16 @@ function createFetchServerSideCollectionHandler(section, url, getFromState) {
       });
 
       promise.done((response) => {
-        dispatch(updateServerSideCollection({ section, data: response }));
+        dispatch(batchActions([
+          updateServerSideCollection({ section, data: response }),
 
-        dispatch(set({
-          section,
-          isFetching: false,
-          isPopulated: true,
-          error: null
-        }));
+          set({
+            section,
+            isFetching: false,
+            isPopulated: true,
+            error: null
+          })
+        ]));
       });
 
       promise.fail((xhr) => {

@@ -1,4 +1,5 @@
 import $ from 'jquery';
+import { batchActions } from 'redux-batched-actions';
 import { set, update } from '../baseActions';
 
 function createFetchHandler(section, url) {
@@ -13,14 +14,16 @@ function createFetchHandler(section, url) {
       });
 
       promise.done((data) => {
-        dispatch(update({ section, data }));
+        dispatch(batchActions([
+          update({ section, data }),
 
-        dispatch(set({
-          section,
-          isFetching: false,
-          isPopulated: true,
-          error: null
-        }));
+          set({
+            section,
+            isFetching: false,
+            isPopulated: true,
+            error: null
+          })
+        ]));
       });
 
       promise.fail((xhr) => {

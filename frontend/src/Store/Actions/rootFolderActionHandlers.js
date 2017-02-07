@@ -1,4 +1,5 @@
 import $ from 'jquery';
+import { batchActions } from 'redux-batched-actions';
 import * as types from './actionTypes';
 import createFetchHandler from './Creators/createFetchHandler';
 import createRemoveItemHandler from './Creators/createRemoveItemHandler';
@@ -30,16 +31,18 @@ const rootFolderActionHandlers = {
       });
 
       promise.done((data) => {
-        dispatch(set({
-          section,
-          isSaving: false,
-          saveError: null
-        }));
+        dispatch(batchActions([
+          updateItem({
+            section,
+            ...data
+          }),
 
-        dispatch(updateItem({
-          section,
-          ...data
-        }));
+          set({
+            section,
+            isSaving: false,
+            saveError: null
+          })
+        ]));
       });
 
       promise.fail((xhr) => {
