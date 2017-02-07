@@ -1,4 +1,5 @@
 import $ from 'jquery';
+import { batchActions } from 'redux-batched-actions';
 import { set, update } from '../baseActions';
 
 function createSaveHandler(section, url, getFromState) {
@@ -17,14 +18,16 @@ function createSaveHandler(section, url, getFromState) {
       });
 
       promise.done((data) => {
-        dispatch(update({ section, data }));
+        dispatch(batchActions([
+          update({ section, data }),
 
-        dispatch(set({
-          section,
-          isSaving: false,
-          saveError: null,
-          pendingChanges: {}
-        }));
+          set({
+            section,
+            isSaving: false,
+            saveError: null,
+            pendingChanges: {}
+          })
+        ]));
       });
 
       promise.fail((xhr) => {

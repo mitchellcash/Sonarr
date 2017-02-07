@@ -3778,6 +3778,11 @@
       "from": "redux-actions@1.2.0",
       "resolved": "https://registry.npmjs.org/redux-actions/-/redux-actions-1.2.0.tgz"
     },
+    "redux-batched-actions": {
+      "version": "0.1.5",
+      "from": "redux-batched-actions@latest",
+      "resolved": "https://registry.npmjs.org/redux-batched-actions/-/redux-batched-actions-0.1.5.tgz"
+    },
     "redux-localstorage": {
       "version": "0.4.1",
       "from": "redux-localstorage@0.4.1",

@@ -1,4 +1,5 @@
 import { combineReducers } from 'redux';
+import { enableBatching } from 'redux-batched-actions';
 import { routerReducer } from 'react-router-redux';
 import app, { defaultState as defaultappState } from './appReducers';
 import addSeries, { defaultState as defaultAddSeriesState } from './addSeriesReducers';
@@ -58,7 +59,7 @@ export const defaultState = {
   organizePreview: defaultOrganizePreviewState
 };
 
-export default combineReducers({
+export default enableBatching(combineReducers({
   app,
   addSeries,
   importSeries,
@@ -87,4 +88,4 @@ export default combineReducers({
   rootFolders,
   organizePreview,
   routing: routerReducer
-});
+}));
