@@ -55,9 +55,9 @@ class GeneralSettings extends Component {
       hasSettings,
       isResettingApiKey,
       isMono,
+      isWindows,
       mode,
       onInputChange,
-      onSavePress,
       ...otherProps
     } = this.props;
 
@@ -118,7 +118,6 @@ class GeneralSettings extends Component {
       <PageContent title="General Settings">
         <SettingsToolbarConnector
           {...otherProps}
-          onSavePress={onSavePress}
         />
 
         <PageContentBody>
@@ -216,12 +215,12 @@ class GeneralSettings extends Component {
                   }
 
                   {
-                    enableSsl.value &&
+                    isWindows && enableSsl.value &&
                       <FormGroup
                         advancedSettings={advancedSettings}
                         isAdvanced={true}
                       >
-                        <FormLabel>SSL Cert Hash (Windows Only)</FormLabel>
+                        <FormLabel>SSL Cert Hash</FormLabel>
 
                         <FormInputGroup
                           type={inputTypes.TEXT}
@@ -559,8 +558,8 @@ GeneralSettings.propTypes = {
   isResettingApiKey: PropTypes.bool.isRequired,
   hasSettings: PropTypes.bool.isRequired,
   isMono: PropTypes.bool.isRequired,
+  isWindows: PropTypes.bool.isRequired,
   mode: PropTypes.string.isRequired,
-  onSavePress: PropTypes.func.isRequired,
   onInputChange: PropTypes.func.isRequired,
   onConfirmResetApiKey: PropTypes.func.isRequired
 };
