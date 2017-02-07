@@ -288,7 +288,7 @@ class GeneralSettings extends Component {
                         <FormLabel>Password</FormLabel>
 
                         <FormInputGroup
-                          type={inputTypes.TEXT}
+                          type={inputTypes.PASSWORD}
                           name="password"
                           helpTextWarning="Requires restart to take effect"
                           onChange={onInputChange}
