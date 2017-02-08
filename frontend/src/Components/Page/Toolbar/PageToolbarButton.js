@@ -10,8 +10,6 @@ function PageToolbarButton(props) {
     ...otherProps
   } = props;
 
-  var test = styles.toolbarButtonIcon;
-
   return (
     <SpinnerIconButton
       className={classNames(
@@ -21,6 +19,7 @@ function PageToolbarButton(props) {
       iconClassName={styles.toolbarButtonIcon}
       name={iconName}
       size={22}
+      isDisabled={isDisabled}
       {...otherProps}
     />
   );
