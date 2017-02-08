@@ -1508,6 +1508,11 @@
       "from": "filename-regex@>=2.0.0 <3.0.0",
       "resolved": "https://registry.npmjs.org/filename-regex/-/filename-regex-2.0.0.tgz"
     },
+    "filesize": {
+      "version": "3.5.4",
+      "from": "filesize@latest",
+      "resolved": "https://registry.npmjs.org/filesize/-/filesize-3.5.4.tgz"
+    },
     "fill-range": {
       "version": "2.2.3",
       "from": "fill-range@>=2.1.0 <3.0.0",
@@ -2903,6 +2908,11 @@
           "resolved": "https://registry.npmjs.org/supports-color/-/supports-color-1.2.0.tgz"
         }
       }
+    },
+    "moment": {
+      "version": "2.17.1",
+      "from": "moment@latest",
+      "resolved": "https://registry.npmjs.org/moment/-/moment-2.17.1.tgz"
     },
     "mout": {
       "version": "1.0.0",
