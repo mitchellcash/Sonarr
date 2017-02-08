@@ -45,7 +45,8 @@ class CalendarPage extends Component {
 
   render() {
     const {
-      unmonitored
+      unmonitored,
+      colorImpairedMode
     } = this.props;
 
     return (
@@ -88,7 +89,7 @@ class CalendarPage extends Component {
 
         <PageContentBody>
           <CalendarConnector />
-          <Legend />
+          <Legend colorImpairedMode={colorImpairedMode} />
         </PageContentBody>
 
         <CalendarLinkModal
@@ -102,6 +103,7 @@ class CalendarPage extends Component {
 
 CalendarPage.propTypes = {
   unmonitored: PropTypes.bool.isRequired,
+  colorImpairedMode: PropTypes.bool.isRequired,
   onUnmonitoredChange: PropTypes.func.isRequired
 };
 

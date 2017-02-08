@@ -2,15 +2,18 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
 import { setCalendarIncludeUnmonitored } from 'Store/Actions/calendarActions';
+import createUISettingsSelector from 'Store/Selectors/createUISettingsSelector';
 import CalendarPage from './CalendarPage';
 
 function createMapStateToProps() {
   return createSelector(
     (state) => state.calendar,
-    (calendar) => {
+    createUISettingsSelector(),
+    (calendar, uiSettings) => {
       return {
         unmonitored: calendar.unmonitored,
-        showUpcoming: calendar.showUpcoming
+        showUpcoming: calendar.showUpcoming,
+        colorImpairedMode: uiSettings.enableColorImpairedMode
       };
     }
   );

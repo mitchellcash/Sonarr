@@ -39,10 +39,18 @@
 
 .downloaded {
   border-left-color: $successColor;
+
+  &:global(.colorImpaired) {
+    background: repeating-linear-gradient(45deg, transparent, transparent 5px, #eee 5px, #eee 10px);
+  }
 }
 
 .downloading {
   border-left-color: $purple;
+
+  &:global(.colorImpaired) {
+    background: repeating-linear-gradient(90deg, transparent, transparent 5px, #eee 5px, #eee 10px);
+  }
 }
 
 .unmonitored {
@@ -59,8 +67,16 @@
 
 .premiere {
   border-left-color: $sonarrBlue;
+
+  &:global(.colorImpaired) {
+    background: repeating-linear-gradient(45deg, transparent, transparent 5px, #eee 5px, #eee 10px);
+  }
 }
 
 .unaired {
   border-left-color: $primaryColor;
+
+  &:global(.colorImpaired) {
+    background: repeating-linear-gradient(90deg, transparent, transparent 5px, #eee 5px, #eee 10px);
+  }
 }

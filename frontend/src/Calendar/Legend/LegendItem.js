@@ -3,12 +3,20 @@ import classNames from 'classnames';
 import titleCase from 'Utilities/String/titleCase';
 import styles from './LegendItem.css';
 
-function LegendItem({ name, status, tooltip }) {
+function LegendItem(props) {
+  const {
+    name,
+    status,
+    tooltip,
+    colorImpairedMode
+  } = props;
+
   return (
     <div
       className={classNames(
         styles.legendItem,
-        styles[status]
+        styles[status],
+        colorImpairedMode && 'colorImpaired'
       )}
       title={tooltip}
     >
@@ -20,7 +28,8 @@ function LegendItem({ name, status, tooltip }) {
 LegendItem.propTypes = {
   name: PropTypes.string,
   status: PropTypes.string.isRequired,
-  tooltip: PropTypes.string.isRequired
+  tooltip: PropTypes.string.isRequired,
+  colorImpairedMode: PropTypes.bool.isRequired
 };
 
 export default LegendItem;

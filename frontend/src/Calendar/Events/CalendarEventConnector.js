@@ -11,7 +11,8 @@ function createMapStateToProps() {
     (queueItem, uiSettings) => {
       return {
         queueItem,
-        timeFormat: uiSettings.timeFormat
+        timeFormat: uiSettings.timeFormat,
+        colorImpairedMode: uiSettings.enableColorImpairedMode
       };
     }
   );

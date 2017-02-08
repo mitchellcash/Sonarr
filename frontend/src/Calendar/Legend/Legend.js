@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import LegendItem from './LegendItem';
 import styles from './Legend.css';
 
-function Legend() {
+function Legend({ colorImpairedMode }) {
   return (
     <div className={styles.legend}>
       <div>
@@ -10,11 +10,27 @@ function Legend() {
           name="Unaired Premiere"
           status="premiere"
           tooltip="Premiere episode hasn't aired yet"
+          colorImpairedMode={colorImpairedMode}
         />
 
         <LegendItem
           status="unaired"
           tooltip="Episode hasn't aired yet"
+          colorImpairedMode={colorImpairedMode}
+        />
+      </div>
+
+      <div>
+        <LegendItem
+          status="downloading"
+          tooltip="Episode is currently downloading"
+          colorImpairedMode={colorImpairedMode}
+        />
+
+        <LegendItem
+          status="downloaded"
+          tooltip="Episode was downloaded and sorted"
+          colorImpairedMode={colorImpairedMode}
         />
       </div>
 
@@ -23,23 +39,13 @@ function Legend() {
           name="On Air"
           status="onAir"
           tooltip="Episode is currently airing"
+          colorImpairedMode={colorImpairedMode}
         />
 
-        <LegendItem
-          status="downloading"
-          tooltip="Episode is currently downloading"
-        />
-      </div>
-
-      <div>
         <LegendItem
           status="missing"
           tooltip="Episode file has not been found"
-        />
-
-        <LegendItem
-          status="downloaded"
-          tooltip="Episode was downloaded and sorted"
+          colorImpairedMode={colorImpairedMode}
         />
       </div>
 
@@ -47,10 +53,15 @@ function Legend() {
         <LegendItem
           status="unmonitored"
           tooltip="Episode is unmonitored"
+          colorImpairedMode={colorImpairedMode}
         />
       </div>
     </div>
   );
 }
+
+Legend.propTypes = {
+  colorImpairedMode: PropTypes.bool.isRequired
+};
 
 export default Legend;

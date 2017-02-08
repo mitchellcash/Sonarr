@@ -52,7 +52,8 @@ class CalendarEvent extends Component {
       hasFile,
       grabbed,
       queueItem,
-      timeFormat
+      timeFormat,
+      colorImpairedMode
     } = this.props;
 
     const startTime = moment(airDateUtc);
@@ -67,7 +68,8 @@ class CalendarEvent extends Component {
         <Link
           className={classNames(
             styles.event,
-            styles[statusStyle]
+            styles[statusStyle],
+            colorImpairedMode && 'colorImpaired'
           )}
           component="div"
           onPress={this.onPress}
@@ -150,7 +152,8 @@ CalendarEvent.propTypes = {
   hasFile: PropTypes.bool.isRequired,
   grabbed: PropTypes.bool,
   queueItem: PropTypes.object,
-  timeFormat: PropTypes.string.isRequired
+  timeFormat: PropTypes.string.isRequired,
+  colorImpairedMode: PropTypes.bool.isRequired
 };
 
 export default CalendarEvent;
