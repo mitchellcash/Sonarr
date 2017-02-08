@@ -25,19 +25,6 @@ export function virtualTableSelectCellRenderer(cellProps) {
 class VirtualTableSelectCell extends Component {
 
   //
-  // Lifecycle
-
-  componentWillMount() {
-    const {
-      id,
-      isSelected,
-      onSelectedChange
-    } = this.props;
-
-    onSelectedChange({ id, value: isSelected });
-  }
-
-  //
   // Listeners
 
   onChange = ({ value, shiftKey }) => {
