@@ -29,6 +29,7 @@
   color: $white;
   text-align: center;
   line-height: 20px;
+  cursor: pointer;
 }
 
 .checkbox:focus + .input {

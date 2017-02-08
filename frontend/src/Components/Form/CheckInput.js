@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import classNames from 'classnames';
 import { icons, kinds } from 'Helpers/Props';
 import Icon from 'Components/Icon';
+import Link from 'Components/Link/Link';
 import FormInputHelpText from './FormInputHelpText';
 import styles from './CheckInput.css';
 
@@ -41,14 +42,7 @@ class CheckInput extends Component {
     this._checkbox.indeterminate = value !== uncheckedValue && value !== checkedValue;
   }
 
-  //
-  // Listeners
-
-  setRef = (ref) => {
-    this._checkbox = ref;
-  }
-
-  onChange = (event) => {
+  toggleChecked = (checked, shiftKey) => {
     const {
       name,
       value,
@@ -56,8 +50,6 @@ class CheckInput extends Component {
       uncheckedValue
     } = this.props;
 
-    const shiftKey = event.nativeEvent.shiftKey;
-    const checked = event.target.checked;
     const newValue = checked ? checkedValue : uncheckedValue;
 
     if (value !== newValue) {
@@ -67,6 +59,27 @@ class CheckInput extends Component {
         shiftKey
       });
     }
+  }
+
+  //
+  // Listeners
+
+  setRef = (ref) => {
+    this._checkbox = ref;
+  }
+
+  onPress = (event) => {
+    const checked = !this._checkbox.checked;
+    const shiftKey = event.nativeEvent.shiftKey;
+
+    this.toggleChecked(checked, shiftKey);
+  }
+
+  onChange = (event) => {
+    const checked = event.target.checked;
+    const shiftKey = event.nativeEvent.shiftKey;
+
+    this.toggleChecked(checked, shiftKey);
   }
 
   //
@@ -93,8 +106,9 @@ class CheckInput extends Component {
 
     return (
       <div className={containerClassName}>
-        <label
+        <Link
           className={styles.label}
+          onPress={this.onPress}
         >
           <input
             ref={this.setRef}
@@ -141,7 +155,7 @@ class CheckInput extends Component {
                 isWarning={true}
               />
           }
-        </label>
+        </Link>
       </div>
     );
   }
