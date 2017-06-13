@@ -1,12 +1,12 @@
 @import "../Bootstrap/variables";
 @import "../Bootstrap/mixins";
 
-.toggle {
+.switch-toggle {
   height: 34px;
   box-sizing: border-box;
   font-weight: normal;
 
-  .slide-button {
+  a {
     .button-variant(@btn-danger-color, @btn-danger-bg, @btn-danger-border);
 
     &.btn-danger, &.btn-warning {
@@ -15,7 +15,7 @@
     }
   }
 
-  input:first-of-type:checked ~ .slide-button {
+  input:first-of-type:checked ~ a {
     .button-variant(@btn-primary-color, @btn-primary-bg, @btn-primary-border);
 
     &.btn-danger {
@@ -27,7 +27,7 @@
     }
   }
 
-  input:first-of-type:disabled ~ .slide-button {
+  input:first-of-type:disabled ~ a {
     opacity: 0.5;
   }
 }
